@@ -1,35 +1,34 @@
-
 import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { ArrowRight, DownloadIcon } from 'lucide-react';
-
 const Resume = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [activeSection, setActiveSection] = useState('education');
-
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 1000);
-
     return () => clearTimeout(timer);
   }, []);
-
   if (isLoading) {
     return <LoadingSpinner />;
   }
-
-  const navItems = [
-    { id: 'education', label: 'Bildung' },
-    { id: 'experience', label: 'Erfahrung' },
-    { id: 'projects', label: 'Projekte' },
-    { id: 'skills', label: 'Fähigkeiten' },
-  ];
-
-  return (
-    <div className="min-h-screen flex flex-col">
+  const navItems = [{
+    id: 'education',
+    label: 'Bildung'
+  }, {
+    id: 'experience',
+    label: 'Erfahrung'
+  }, {
+    id: 'projects',
+    label: 'Projekte'
+  }, {
+    id: 'skills',
+    label: 'Fähigkeiten'
+  }];
+  return <div className="min-h-screen flex flex-col">
       <Navbar />
       
       <div className="pt-24 pb-20 flex-grow">
@@ -41,11 +40,7 @@ const Resume = () => {
                 <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
                   <div className="flex flex-col items-center mb-6">
                     <div className="w-40 h-40 rounded-full overflow-hidden mb-4 border-4 border-gray-200">
-                      <img 
-                        src="/lovable-uploads/c0d5dc91-7451-4e20-a60d-82c907cfd8b6.png" 
-                        alt="Maxim Keibel" 
-                        className="w-full h-full object-cover"
-                      />
+                      <img alt="Maxim Keibel" className="w-full h-full object-cover" src="/lovable-uploads/7c16e384-680f-43a0-8341-43bfb6b519e5.jpg" />
                     </div>
                     <h2 className="text-2xl font-bold">Maxim Keibel</h2>
                     <p className="text-gray-600">Software Developer / Schüler</p>
@@ -86,7 +81,9 @@ const Resume = () => {
                         <span>Muttersprache</span>
                       </div>
                       <div className="w-full h-2 bg-gray-200 rounded-full">
-                        <div className="h-full bg-black rounded-full" style={{ width: '100%' }}></div>
+                        <div className="h-full bg-black rounded-full" style={{
+                        width: '100%'
+                      }}></div>
                       </div>
                     </div>
                     
@@ -96,7 +93,9 @@ const Resume = () => {
                         <span>Verhandlungsfähig</span>
                       </div>
                       <div className="w-full h-2 bg-gray-200 rounded-full">
-                        <div className="h-full bg-black rounded-full" style={{ width: '90%' }}></div>
+                        <div className="h-full bg-black rounded-full" style={{
+                        width: '90%'
+                      }}></div>
                       </div>
                     </div>
                     
@@ -106,7 +105,9 @@ const Resume = () => {
                         <span>B1 Niveau</span>
                       </div>
                       <div className="w-full h-2 bg-gray-200 rounded-full">
-                        <div className="h-full bg-black rounded-full" style={{ width: '60%' }}></div>
+                        <div className="h-full bg-black rounded-full" style={{
+                        width: '60%'
+                      }}></div>
                       </div>
                     </div>
                     
@@ -116,7 +117,9 @@ const Resume = () => {
                         <span>Grundlagen</span>
                       </div>
                       <div className="w-full h-2 bg-gray-200 rounded-full">
-                        <div className="h-full bg-black rounded-full" style={{ width: '30%' }}></div>
+                        <div className="h-full bg-black rounded-full" style={{
+                        width: '30%'
+                      }}></div>
                       </div>
                     </div>
                   </div>
@@ -133,19 +136,9 @@ const Resume = () => {
               
               <div className="mb-10 border-b border-gray-200">
                 <nav className="flex space-x-8 overflow-x-auto no-scrollbar">
-                  {navItems.map((item) => (
-                    <button
-                      key={item.id}
-                      className={`py-3 border-b-2 font-medium transition-colors whitespace-nowrap ${
-                        activeSection === item.id
-                          ? 'border-black text-black'
-                          : 'border-transparent text-gray-500 hover:text-black'
-                      }`}
-                      onClick={() => setActiveSection(item.id)}
-                    >
+                  {navItems.map(item => <button key={item.id} className={`py-3 border-b-2 font-medium transition-colors whitespace-nowrap ${activeSection === item.id ? 'border-black text-black' : 'border-transparent text-gray-500 hover:text-black'}`} onClick={() => setActiveSection(item.id)}>
                       {item.label}
-                    </button>
-                  ))}
+                    </button>)}
                 </nav>
               </div>
               
@@ -406,7 +399,9 @@ const Resume = () => {
                           <span>90%</span>
                         </div>
                         <div className="w-full h-2 bg-gray-200 rounded-full">
-                          <div className="h-full bg-black rounded-full" style={{ width: '90%' }}></div>
+                          <div className="h-full bg-black rounded-full" style={{
+                          width: '90%'
+                        }}></div>
                         </div>
                       </div>
                       
@@ -416,7 +411,9 @@ const Resume = () => {
                           <span>85%</span>
                         </div>
                         <div className="w-full h-2 bg-gray-200 rounded-full">
-                          <div className="h-full bg-black rounded-full" style={{ width: '85%' }}></div>
+                          <div className="h-full bg-black rounded-full" style={{
+                          width: '85%'
+                        }}></div>
                         </div>
                       </div>
                       
@@ -426,7 +423,9 @@ const Resume = () => {
                           <span>75%</span>
                         </div>
                         <div className="w-full h-2 bg-gray-200 rounded-full">
-                          <div className="h-full bg-black rounded-full" style={{ width: '75%' }}></div>
+                          <div className="h-full bg-black rounded-full" style={{
+                          width: '75%'
+                        }}></div>
                         </div>
                       </div>
                       
@@ -436,7 +435,9 @@ const Resume = () => {
                           <span>70%</span>
                         </div>
                         <div className="w-full h-2 bg-gray-200 rounded-full">
-                          <div className="h-full bg-black rounded-full" style={{ width: '70%' }}></div>
+                          <div className="h-full bg-black rounded-full" style={{
+                          width: '70%'
+                        }}></div>
                         </div>
                       </div>
                       
@@ -446,7 +447,9 @@ const Resume = () => {
                           <span>65%</span>
                         </div>
                         <div className="w-full h-2 bg-gray-200 rounded-full">
-                          <div className="h-full bg-black rounded-full" style={{ width: '65%' }}></div>
+                          <div className="h-full bg-black rounded-full" style={{
+                          width: '65%'
+                        }}></div>
                         </div>
                       </div>
                     </div>
@@ -461,7 +464,9 @@ const Resume = () => {
                           <span>95%</span>
                         </div>
                         <div className="w-full h-2 bg-gray-200 rounded-full">
-                          <div className="h-full bg-black rounded-full" style={{ width: '95%' }}></div>
+                          <div className="h-full bg-black rounded-full" style={{
+                          width: '95%'
+                        }}></div>
                         </div>
                       </div>
                       
@@ -471,7 +476,9 @@ const Resume = () => {
                           <span>80%</span>
                         </div>
                         <div className="w-full h-2 bg-gray-200 rounded-full">
-                          <div className="h-full bg-black rounded-full" style={{ width: '80%' }}></div>
+                          <div className="h-full bg-black rounded-full" style={{
+                          width: '80%'
+                        }}></div>
                         </div>
                       </div>
                       
@@ -481,7 +488,9 @@ const Resume = () => {
                           <span>75%</span>
                         </div>
                         <div className="w-full h-2 bg-gray-200 rounded-full">
-                          <div className="h-full bg-black rounded-full" style={{ width: '75%' }}></div>
+                          <div className="h-full bg-black rounded-full" style={{
+                          width: '75%'
+                        }}></div>
                         </div>
                       </div>
                       
@@ -491,7 +500,9 @@ const Resume = () => {
                           <span>70%</span>
                         </div>
                         <div className="w-full h-2 bg-gray-200 rounded-full">
-                          <div className="h-full bg-black rounded-full" style={{ width: '70%' }}></div>
+                          <div className="h-full bg-black rounded-full" style={{
+                          width: '70%'
+                        }}></div>
                         </div>
                       </div>
                       
@@ -501,7 +512,9 @@ const Resume = () => {
                           <span>85%</span>
                         </div>
                         <div className="w-full h-2 bg-gray-200 rounded-full">
-                          <div className="h-full bg-black rounded-full" style={{ width: '85%' }}></div>
+                          <div className="h-full bg-black rounded-full" style={{
+                          width: '85%'
+                        }}></div>
                         </div>
                       </div>
                     </div>
@@ -516,7 +529,9 @@ const Resume = () => {
                           <span>95%</span>
                         </div>
                         <div className="w-full h-2 bg-gray-200 rounded-full">
-                          <div className="h-full bg-black rounded-full" style={{ width: '95%' }}></div>
+                          <div className="h-full bg-black rounded-full" style={{
+                          width: '95%'
+                        }}></div>
                         </div>
                       </div>
                       
@@ -526,7 +541,9 @@ const Resume = () => {
                           <span>90%</span>
                         </div>
                         <div className="w-full h-2 bg-gray-200 rounded-full">
-                          <div className="h-full bg-black rounded-full" style={{ width: '90%' }}></div>
+                          <div className="h-full bg-black rounded-full" style={{
+                          width: '90%'
+                        }}></div>
                         </div>
                       </div>
                       
@@ -536,7 +553,9 @@ const Resume = () => {
                           <span>85%</span>
                         </div>
                         <div className="w-full h-2 bg-gray-200 rounded-full">
-                          <div className="h-full bg-black rounded-full" style={{ width: '85%' }}></div>
+                          <div className="h-full bg-black rounded-full" style={{
+                          width: '85%'
+                        }}></div>
                         </div>
                       </div>
                       
@@ -546,7 +565,9 @@ const Resume = () => {
                           <span>80%</span>
                         </div>
                         <div className="w-full h-2 bg-gray-200 rounded-full">
-                          <div className="h-full bg-black rounded-full" style={{ width: '80%' }}></div>
+                          <div className="h-full bg-black rounded-full" style={{
+                          width: '80%'
+                        }}></div>
                         </div>
                       </div>
                     </div>
@@ -561,7 +582,9 @@ const Resume = () => {
                           <span>90%</span>
                         </div>
                         <div className="w-full h-2 bg-gray-200 rounded-full">
-                          <div className="h-full bg-black rounded-full" style={{ width: '90%' }}></div>
+                          <div className="h-full bg-black rounded-full" style={{
+                          width: '90%'
+                        }}></div>
                         </div>
                       </div>
                       
@@ -571,7 +594,9 @@ const Resume = () => {
                           <span>85%</span>
                         </div>
                         <div className="w-full h-2 bg-gray-200 rounded-full">
-                          <div className="h-full bg-black rounded-full" style={{ width: '85%' }}></div>
+                          <div className="h-full bg-black rounded-full" style={{
+                          width: '85%'
+                        }}></div>
                         </div>
                       </div>
                       
@@ -581,7 +606,9 @@ const Resume = () => {
                           <span>75%</span>
                         </div>
                         <div className="w-full h-2 bg-gray-200 rounded-full">
-                          <div className="h-full bg-black rounded-full" style={{ width: '75%' }}></div>
+                          <div className="h-full bg-black rounded-full" style={{
+                          width: '75%'
+                        }}></div>
                         </div>
                       </div>
                       
@@ -591,7 +618,9 @@ const Resume = () => {
                           <span>80%</span>
                         </div>
                         <div className="w-full h-2 bg-gray-200 rounded-full">
-                          <div className="h-full bg-black rounded-full" style={{ width: '80%' }}></div>
+                          <div className="h-full bg-black rounded-full" style={{
+                          width: '80%'
+                        }}></div>
                         </div>
                       </div>
                       
@@ -601,7 +630,9 @@ const Resume = () => {
                           <span>70%</span>
                         </div>
                         <div className="w-full h-2 bg-gray-200 rounded-full">
-                          <div className="h-full bg-black rounded-full" style={{ width: '70%' }}></div>
+                          <div className="h-full bg-black rounded-full" style={{
+                          width: '70%'
+                        }}></div>
                         </div>
                       </div>
                     </div>
@@ -614,8 +645,6 @@ const Resume = () => {
       </div>
       
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Resume;
