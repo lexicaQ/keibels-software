@@ -51,9 +51,9 @@ const ProjectsSection: React.FC = () => {
   return (
     <section id="projects" className="py-20 bg-gray-50">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">MY PROJECTS</h2>
+        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">MEINE PROJEKTE</h2>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="space-y-16">
           {projects.map((project, index) => (
             <ProjectCard
               key={index}
@@ -62,7 +62,8 @@ const ProjectsSection: React.FC = () => {
               slogan={project.slogan}
               year={project.year}
               platform={project.platform}
-              delay={index * 100}
+              delay={index * 150}
+              isLeft={index % 2 === 0}
             />
           ))}
         </div>

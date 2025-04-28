@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -110,6 +109,38 @@
 }
 
 @layer utilities {
+  .animate-float-in-left {
+    animation: floatInLeft 1s ease-out forwards;
+    opacity: 0;
+  }
+
+  .animate-float-in-right {
+    animation: floatInRight 1s ease-out forwards;
+    opacity: 0;
+  }
+
+  @keyframes floatInLeft {
+    from {
+      opacity: 0;
+      transform: translate(-50px, -50px);
+    }
+    to {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+  }
+
+  @keyframes floatInRight {
+    from {
+      opacity: 0;
+      transform: translate(50px, -50px);
+    }
+    to {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+  }
+
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
