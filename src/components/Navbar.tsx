@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Github } from 'lucide-react';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -26,22 +26,20 @@ const Navbar: React.FC = () => {
   };
 
   const navItems = [
-    { title: 'Home', path: '/' },
-    { title: 'Projects', path: '/projects' },
-    { title: 'Resume', path: '/resume' },
-    { title: 'About', path: '/about' },
-    { title: 'Contact', path: '/contact' },
+    { title: 'Start', path: '/' },
+    { title: 'Projekte', path: '/projects' },
+    { title: 'Lebenslauf', path: '/resume' },
+    { title: 'Über mich', path: '/about' },
+    { title: 'Kontakt', path: '/contact' },
   ];
 
   return (
     <nav 
-      className={`fixed top-0 left-0 w-full z-40 transition-all duration-300 ${
-        scrolled ? 'bg-white/80 backdrop-blur-md shadow-md' : 'bg-transparent'
-      }`}
+      className={`fixed top-0 left-0 w-full z-40 transition-all duration-300 bg-black/80 backdrop-blur-md border-b border-white/10`}
     >
       <div className="container mx-auto px-4 md:px-6 py-4 flex justify-between items-center">
-        <Link to="/" className="text-xl font-bold tracking-tight">
-          MAXIM<span className="text-gray-500">.KEIBEL</span>
+        <Link to="/" className="text-xl font-bold tracking-tight text-white">
+          MK<span className="text-gray-400">.DEV</span>
         </Link>
 
         {/* Desktop Menu */}
@@ -50,32 +48,42 @@ const Navbar: React.FC = () => {
             <li key={index} className="relative group">
               <Link 
                 to={item.path} 
-                className="text-black font-medium transition-colors duration-300 hover:text-gray-600"
+                className="text-white/90 font-medium transition-colors duration-300 hover:text-white"
               >
                 {item.title}
-                <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-black transition-all duration-300 group-hover:w-full"></span>
+                <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-white transition-all duration-300 group-hover:w-full"></span>
               </Link>
             </li>
           ))}
         </ul>
+
+        {/* Replace TaskForce with GitHub */}
+        <a 
+          href="https://github.com/maximkeibel" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="hidden md:flex items-center text-white/90 hover:text-white transition-colors"
+        >
+          <Github size={20} />
+        </a>
 
         {/* Mobile Menu Button */}
         <button 
           className="md:hidden flex flex-col space-y-1.5 w-6 focus:outline-none"
           onClick={toggleMenu}
         >
-          <div className={`hamburger-line origin-top-left transition-transform duration-300 ${isOpen ? 'rotate-45' : ''}`}></div>
-          <div className={`hamburger-line transition-opacity duration-300 ${isOpen ? 'opacity-0' : ''}`}></div>
-          <div className={`hamburger-line origin-bottom-left transition-transform duration-300 ${isOpen ? '-rotate-45' : ''}`}></div>
+          <div className={`hamburger-line bg-white ${isOpen ? 'rotate-45' : ''}`}></div>
+          <div className={`hamburger-line bg-white ${isOpen ? 'opacity-0' : ''}`}></div>
+          <div className={`hamburger-line bg-white ${isOpen ? '-rotate-45' : ''}`}></div>
         </button>
       </div>
 
       {/* Mobile Menu */}
-      <div className={`fixed inset-0 bg-white z-50 transform transition-transform duration-300 ease-in-out ${
+      <div className={`fixed inset-0 bg-black/95 backdrop-blur-lg z-50 transform transition-transform duration-300 ease-in-out ${
         isOpen ? 'translate-x-0' : 'translate-x-full'
       } md:hidden`}>
         <div className="flex justify-end p-4">
-          <button onClick={toggleMenu} className="p-2">
+          <button onClick={toggleMenu} className="p-2 text-white">
             <X size={24} />
           </button>
         </div>
@@ -84,7 +92,7 @@ const Navbar: React.FC = () => {
             <li key={index}>
               <Link 
                 to={item.path} 
-                className="text-2xl font-medium tracking-wide"
+                className="text-2xl font-medium tracking-wide text-white"
                 onClick={toggleMenu}
               >
                 {item.title}
