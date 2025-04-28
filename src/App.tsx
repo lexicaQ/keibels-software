@@ -10,6 +10,8 @@ import Resume from "./pages/Resume";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import ProjectDetail from "./components/ProjectDetail";
+import projectsData from "./data/projectsData";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +24,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/projects" element={<Projects />} />
+          <Route path="/projects/:projectId" element={<ProjectDetail projects={projectsData} />} />
           <Route path="/resume" element={<Resume />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />

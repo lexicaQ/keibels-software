@@ -4,6 +4,7 @@ import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 interface ProjectCardProps {
+  id: string;
   title: string;
   description: string;
   slogan?: string;
@@ -14,6 +15,7 @@ interface ProjectCardProps {
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ 
+  id,
   title, 
   description, 
   slogan,
@@ -58,7 +60,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           </p>
           
           <Link 
-            to={`/projects/${title.toLowerCase()}`}
+            to={`/projects/${id}`}
             className="inline-flex items-center px-6 py-3 bg-black text-white rounded-lg transition-all duration-300 hover:translate-y-[-2px] hover:shadow-lg"
           >
             Mehr Details
