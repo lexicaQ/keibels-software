@@ -30,38 +30,40 @@ const HeroSection: React.FC = () => {
 
   return (
     <section className="relative h-screen flex items-center justify-center bg-black text-white overflow-hidden">
-      <div className="absolute inset-0 opacity-40">
-        <img 
-          src="/lovable-uploads/e36821f6-318f-46d5-9644-7d65d6ba2cc9.png" 
-          alt="Maxim Keibel" 
-          className="w-full h-full object-cover"
-        />
-      </div>
-      
-      <div className="absolute inset-0 bg-gradient-to-b from-black/70 to-black/30"></div>
-      
-      <div ref={containerRef} className="container mx-auto px-4 relative z-10 transition-transform duration-300 ease-out">
-        <div className="max-w-3xl mx-auto text-center">
+      <div className="relative w-full max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
+        <div className="relative z-10">
           <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in">
             MAXIM KEIBEL
           </h1>
           <p className="text-xl md:text-2xl mb-8 text-gray-300 animate-fade-in-delayed">
             Software Developer | UI/UX Designer | App Creator
           </p>
-          <div className="flex flex-wrap justify-center gap-4 animate-fade-in-delayed">
-            <a href="#projects" className="bg-white text-black px-8 py-3 rounded-full font-semibold hover:bg-gray-200 transition-colors duration-300">
+          <div className="flex flex-wrap gap-4 animate-fade-in-delayed">
+            <a 
+              href="#projects" 
+              className="bg-white text-black px-8 py-3 rounded-lg font-semibold transition-all duration-300 hover:shadow-lg hover:translate-y-[-2px]"
+            >
               View Projects
             </a>
-            <a href="/contact" className="border-2 border-white px-8 py-3 rounded-full font-semibold hover:bg-white/10 transition-colors duration-300">
+            <a 
+              href="/contact" 
+              className="border-2 border-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 hover:bg-white hover:text-black"
+            >
               Contact Me
             </a>
           </div>
         </div>
-      </div>
-      
-      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <div className="w-6 h-10 rounded-full border-2 border-white flex justify-center items-start p-1">
-          <div className="w-1 h-2 bg-white rounded-full animate-float"></div>
+
+        <div className="relative">
+          <div className="absolute inset-0 transform translate-x-4 translate-y-4 border-2 border-white/20 rounded-lg"></div>
+          <div className="absolute inset-0 transform translate-x-2 translate-y-2 border-2 border-white/10 rounded-lg"></div>
+          <div className="relative bg-white/5 backdrop-blur-sm rounded-lg shadow-xl overflow-hidden">
+            <img 
+              src="/lovable-uploads/e36821f6-318f-46d5-9644-7d65d6ba2cc9.png" 
+              alt="Maxim Keibel" 
+              className="w-full h-auto object-cover aspect-[4/3]"
+            />
+          </div>
         </div>
       </div>
     </section>
