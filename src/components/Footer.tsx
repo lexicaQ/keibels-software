@@ -8,7 +8,7 @@ const Footer: React.FC = () => {
 
   return (
     <footer ref={footerRef} className="relative bg-black text-white py-16 overflow-hidden">
-      {/* Blurry background elements similar to hero section */}
+      {/* Blurry background elements */}
       <div className="absolute inset-0 overflow-hidden">
         {[...Array(5)].map((_, i) => (
           <div
@@ -31,8 +31,8 @@ const Footer: React.FC = () => {
           {/* Logo in circle */}
           <div className="w-16 h-16 bg-white/5 backdrop-blur-sm rounded-full mb-6 p-1 border border-white/10">
             <img 
-              src="/lovable-uploads/8284c56f-16e0-4dd6-b3a6-353a106bc9cf.png"
-              alt="MK Logo" 
+              src="/lovable-uploads/d125fca8-54df-4c60-8508-951b68ecde5d.png"
+              alt="Keibel Software Logo" 
               className="w-full h-full object-contain"
             />
           </div>
@@ -80,7 +80,7 @@ const Footer: React.FC = () => {
           </div>
           
           <div className="text-center md:text-right">
-            <p className="text-sm text-gray-500">&copy; {new Date().getFullYear()} Maxim Keibel.</p>
+            <p className="text-sm text-gray-500">&copy; {new Date().getFullYear()} Keibel Software.</p>
             <p className="text-sm text-gray-500">All rights reserved.</p>
           </div>
         </div>

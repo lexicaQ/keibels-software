@@ -29,8 +29,8 @@ const Index = () => {
       {/* Logo positioned above navbar */}
       <div className="fixed top-0 left-0 w-full z-50 flex justify-center bg-black py-2">
         <img 
-          src="/lovable-uploads/8284c56f-16e0-4dd6-b3a6-353a106bc9cf.png" 
-          alt="Maxim Keibel Logo" 
+          src="/lovable-uploads/d125fca8-54df-4c60-8508-951b68ecde5d.png" 
+          alt="Keibel Software Logo" 
           className="h-12 object-contain" 
         />
       </div>
