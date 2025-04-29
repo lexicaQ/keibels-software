@@ -1,72 +1,51 @@
 
-import React, { useEffect, useRef } from 'react';
-import { Linkedin } from 'lucide-react';
+import React, { useRef } from 'react';
+import { Github, Linkedin } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Footer: React.FC = () => {
   const footerRef = useRef<HTMLElement>(null);
 
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!footerRef.current) return;
-      
-      const { left, top, width, height } = footerRef.current.getBoundingClientRect();
-      const x = (e.clientX - left) / width - 0.5;
-      const y = (e.clientY - top) / height - 0.5;
-      
-      const elements = footerRef.current.querySelectorAll('.animate-on-mouse');
-      elements.forEach((el) => {
-        if (el instanceof HTMLElement) {
-          el.style.transform = `translate(${x * 20}px, ${y * 20}px)`;
-        }
-      });
-    };
-
-    const footer = footerRef.current;
-    if (footer) {
-      footer.addEventListener('mousemove', handleMouseMove);
-      return () => {
-        footer.removeEventListener('mousemove', handleMouseMove);
-      };
-    }
-  }, []);
-
   return (
     <footer ref={footerRef} className="relative bg-black text-white py-16 overflow-hidden">
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 opacity-30">
-          {Array.from({ length: 50 }).map((_, i) => (
-            <div
-              key={i}
-              className="animate-on-mouse absolute bg-white/10"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                width: `${Math.random() * 100 + 50}px`,
-                height: '1px',
-                transform: 'rotate(45deg)',
-                transition: 'transform 0.3s ease-out'
-              }}
-            />
-          ))}
-        </div>
+      {/* Blurry background elements similar to hero section */}
+      <div className="absolute inset-0 overflow-hidden">
+        {[...Array(5)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute rounded-full blur-3xl bg-white/5"
+            style={{
+              width: `${200 + i * 100}px`,
+              height: `${200 + i * 100}px`,
+              left: `${20 + i * 15}%`,
+              top: `${30 + i * 10}%`,
+              opacity: 0.03 + i * 0.01,
+              animation: `footerPulse${i} ${8 + i}s infinite ease-in-out`
+            }}
+          />
+        ))}
       </div>
 
-      <div className="container mx-auto px-4 relative">
+      <div className="container mx-auto px-4 relative z-10">
         <div className="flex flex-col items-center mb-12">
-          <div className="w-12 h-12 bg-white rounded-full mb-6 animate-on-mouse transition-transform duration-300">
-            <div className="w-full h-full flex items-center justify-center text-black font-bold text-xl">
-              MK
-            </div>
+          {/* Logo in circle */}
+          <div className="w-16 h-16 bg-white/5 backdrop-blur-sm rounded-full mb-6 p-1 border border-white/10">
+            <img 
+              src="/lovable-uploads/8284c56f-16e0-4dd6-b3a6-353a106bc9cf.png"
+              alt="MK Logo" 
+              className="w-full h-full object-contain"
+            />
           </div>
         </div>
 
+        {/* Navigation */}
         <nav className="flex justify-center mb-12">
-          <ul className="flex space-x-8 text-sm">
-            <li><a href="/" className="hover:text-gray-400 transition-colors">HOME</a></li>
-            <li><a href="/projects" className="hover:text-gray-400 transition-colors">PROJEKTE</a></li>
-            <li><a href="/resume" className="hover:text-gray-400 transition-colors">LEBENSLAUF</a></li>
-            <li><a href="/about" className="hover:text-gray-400 transition-colors">ÜBER MICH</a></li>
-            <li><a href="/contact" className="hover:text-gray-400 transition-colors">KONTAKT</a></li>
+          <ul className="flex flex-wrap justify-center gap-x-8 gap-y-4 text-sm">
+            <li><Link to="/" className="hover:text-gray-400 transition-colors">HOME</Link></li>
+            <li><Link to="/projects" className="hover:text-gray-400 transition-colors">PROJEKTE</Link></li>
+            <li><Link to="/resume" className="hover:text-gray-400 transition-colors">LEBENSLAUF</Link></li>
+            <li><Link to="/about" className="hover:text-gray-400 transition-colors">ÜBER MICH</Link></li>
+            <li><Link to="/contact" className="hover:text-gray-400 transition-colors">KONTAKT</Link></li>
           </ul>
         </nav>
 
@@ -82,7 +61,7 @@ const Footer: React.FC = () => {
             <h3 className="text-lg font-bold mb-4">Connect</h3>
             <div className="flex justify-center space-x-4">
               <a 
-                href="https://www.linkedin.com/in/olav-keibel-5035b352/?originalSubdomain=de" 
+                href="https://www.linkedin.com/in/maxim-keibel/" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="hover:text-gray-400 transition-colors p-2"
@@ -90,12 +69,12 @@ const Footer: React.FC = () => {
                 <Linkedin size={24} />
               </a>
               <a 
-                href="https://www.taskforce.net/de/manager/interim-executives/manager/47-olav-keibel" 
+                href="https://github.com/max1m-d3v" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-white hover:text-gray-400 transition-colors p-2"
+                className="hover:text-gray-400 transition-colors p-2"
               >
-                <span className="font-bold">TF</span>
+                <Github size={24} />
               </a>
             </div>
           </div>
@@ -106,6 +85,32 @@ const Footer: React.FC = () => {
           </div>
         </div>
       </div>
+      
+      {/* Animation styles for footer blurs */}
+      <style>
+        {`
+          @keyframes footerPulse0 {
+            0%, 100% { transform: scale(1); opacity: 0.03; }
+            50% { transform: scale(1.1); opacity: 0.05; }
+          }
+          @keyframes footerPulse1 {
+            0%, 100% { transform: scale(1); opacity: 0.04; }
+            50% { transform: scale(1.05); opacity: 0.06; }
+          }
+          @keyframes footerPulse2 {
+            0%, 100% { transform: scale(1); opacity: 0.03; }
+            50% { transform: scale(1.08); opacity: 0.05; }
+          }
+          @keyframes footerPulse3 {
+            0%, 100% { transform: scale(1); opacity: 0.04; }
+            50% { transform: scale(1.12); opacity: 0.07; }
+          }
+          @keyframes footerPulse4 {
+            0%, 100% { transform: scale(1); opacity: 0.03; }
+            50% { transform: scale(1.06); opacity: 0.05; }
+          }
+        `}
+      </style>
     </footer>
   );
 };

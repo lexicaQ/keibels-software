@@ -26,6 +26,14 @@ const Index = () => {
 
   return (
     <div className="min-h-screen">
+      {/* Logo positioned above navbar */}
+      <div className="fixed top-0 left-0 w-full z-50 flex justify-center bg-black py-2">
+        <img 
+          src="/lovable-uploads/8284c56f-16e0-4dd6-b3a6-353a106bc9cf.png" 
+          alt="Maxim Keibel Logo" 
+          className="h-12 object-contain" 
+        />
+      </div>
       <Navbar />
       <HeroSection />
       <AboutSection />
