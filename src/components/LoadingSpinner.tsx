@@ -46,21 +46,22 @@ const LoadingSpinner: React.FC = () => {
         </div>
       </div>
 
-      {/* Add keyframes for floating animations */}
-      <style jsx>{`
-        @keyframes float1 {
-          0%, 100% { transform: translate(0, 0) rotate(0deg); }
-          25% { transform: translate(20px, -20px) rotate(5deg); }
-          50% { transform: translate(0, -40px) rotate(0deg); }
-          75% { transform: translate(-20px, -20px) rotate(-5deg); }
-        }
-        @keyframes float2 {
-          0%, 100% { transform: translate(0, 0) rotate(0deg); }
-          25% { transform: translate(-20px, -10px) rotate(-5deg); }
-          50% { transform: translate(0, -30px) rotate(0deg); }
-          75% { transform: translate(20px, -10px) rotate(5deg); }
-        }
-      `}</style>
+      <style>
+        {`
+          @keyframes float1 {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(20px, -20px) rotate(5deg); }
+            50% { transform: translate(0, -40px) rotate(0deg); }
+            75% { transform: translate(-20px, -20px) rotate(-5deg); }
+          }
+          @keyframes float2 {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(-20px, -10px) rotate(-5deg); }
+            50% { transform: translate(0, -30px) rotate(0deg); }
+            75% { transform: translate(20px, -10px) rotate(5deg); }
+          }
+        `}
+      </style>
     </div>
   );
 };

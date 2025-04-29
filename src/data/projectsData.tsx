@@ -2,7 +2,7 @@
 import React from 'react';
 
 // App content components
-const CopyClipCloudContent = ({ isAnimating }: { isAnimating: boolean }) => (
+const CopyClipCloudContent = (isAnimating: boolean) => (
   <div className="bg-black h-full w-full text-white p-4">
     <div className="flex justify-between items-center mb-4">
       <div className="text-xl font-bold">CopyClipCloud</div>
@@ -40,7 +40,7 @@ const CopyClipCloudContent = ({ isAnimating }: { isAnimating: boolean }) => (
   </div>
 );
 
-const AppTimerContent = ({ isAnimating }: { isAnimating: boolean }) => (
+const AppTimerContent = (isAnimating: boolean) => (
   <div className="bg-gradient-to-b from-gray-900 to-black h-full w-full flex flex-col items-center justify-center p-4 text-white">
     <div className="text-2xl font-bold mb-6">App Timer</div>
     
@@ -84,7 +84,7 @@ const AppTimerContent = ({ isAnimating }: { isAnimating: boolean }) => (
   </div>
 );
 
-const ZentroContent = ({ isAnimating }: { isAnimating: boolean }) => (
+const ZentroContent = (isAnimating: boolean) => (
   <div className="bg-gray-100 h-full w-full flex flex-col">
     <div className="bg-black text-white p-4 flex items-center justify-between">
       <div className="font-bold">Zentro</div>
@@ -142,7 +142,7 @@ const ZentroContent = ({ isAnimating }: { isAnimating: boolean }) => (
   </div>
 );
 
-const NightManagerContent = ({ isAnimating }: { isAnimating: boolean }) => (
+const NightManagerContent = (isAnimating: boolean) => (
   <div className="bg-gradient-to-b from-gray-900 via-gray-800 to-black h-full w-full flex flex-col p-4 text-white">
     <div className="text-center mb-6">
       <div className="text-xl font-bold">Night Manager</div>
@@ -194,7 +194,7 @@ const NightManagerContent = ({ isAnimating }: { isAnimating: boolean }) => (
   </div>
 );
 
-const ToDoManagerContent = ({ isAnimating }: { isAnimating: boolean }) => (
+const ToDoManagerContent = (isAnimating: boolean) => (
   <div className="bg-white h-full w-full flex flex-col">
     <div className="p-4 border-b border-gray-200">
       <div className="text-xl font-bold">ToDoManager</div>
@@ -266,7 +266,7 @@ const ToDoManagerContent = ({ isAnimating }: { isAnimating: boolean }) => (
   </div>
 );
 
-const CopyCheckerContent = ({ isAnimating }: { isAnimating: boolean }) => (
+const CopyCheckerContent = (isAnimating: boolean) => (
   <div className="bg-gray-100 h-full w-full flex flex-col">
     <div className="flex-grow p-4 flex flex-col items-center justify-center">
       {isAnimating ? (
