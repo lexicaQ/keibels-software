@@ -10,13 +10,13 @@ const LoadingSpinner: React.FC = () => {
       setShowElements(true);
     }, 300);
     
-    // Simulate progress with a smoother animation
+    // Simulate progress
     const progressInterval = setInterval(() => {
       setProgress(prev => {
-        const newProgress = prev + Math.random() * 10;
+        const newProgress = prev + Math.random() * 15;
         return newProgress >= 100 ? 100 : newProgress;
       });
-    }, 150);
+    }, 200);
     
     return () => {
       clearTimeout(timer);
@@ -29,36 +29,32 @@ const LoadingSpinner: React.FC = () => {
       <div className="relative w-full max-w-md px-8">
         {/* Logo */}
         <div className={`text-center mb-10 transition-all duration-1000 ${showElements ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-          <img 
-            src="/lovable-uploads/d125fca8-54df-4c60-8508-951b68ecde5d.png" 
-            alt="Keibel Software Logo" 
-            className="h-16 mx-auto" 
-          />
+          <h2 className="text-white text-3xl font-bold">
+            MK<span className="text-gray-400">.DEV</span>
+          </h2>
         </div>
         
-        {/* Progress bar - thinner, more elegant design */}
-        <div className="relative w-full h-[1px] bg-white/10 overflow-hidden rounded-full">
+        {/* Progress bar */}
+        <div className="relative w-full h-[2px] bg-white/10 overflow-hidden rounded-full">
           <div 
             className="absolute top-0 left-0 h-full bg-white transition-all duration-300 ease-out"
             style={{ width: `${progress}%` }}
           />
         </div>
         
-        {/* Modern animated elements */}
-        <div className="absolute inset-0 overflow-hidden -z-10">
-          {[...Array(5)].map((_, i) => (
+        {/* Moving elements */}
+        <div className="absolute inset-0 overflow-hidden -z-10 opacity-20">
+          {[...Array(3)].map((_, i) => (
             <div
               key={i}
-              className="absolute rounded-full blur-3xl bg-white/5"
+              className="absolute rounded-full blur-3xl bg-white/10"
               style={{
-                width: `${150 + i * 50}px`,
-                height: `${150 + i * 50}px`,
-                left: `${20 + i * 15}%`,
-                top: `${30 + i * 10}%`,
-                opacity: 0.03 + i * 0.01,
-                transform: 'scale(1)',
-                transition: 'transform 1.5s ease-in-out, opacity 1.5s ease-in-out',
-                animation: `pulse${i} ${6 + i}s infinite ease-in-out`
+                width: `${300 + i * 100}px`,
+                height: `${300 + i * 100}px`,
+                left: `${-150 - i * 50 + Math.sin(i) * 30}px`,
+                top: `${-150 - i * 50 + Math.cos(i) * 30}px`,
+                animation: `floatAnim${i + 1} ${8 + i * 2}s infinite ease-in-out`,
+                opacity: 0.1 + i * 0.05
               }}
             />
           ))}
@@ -71,28 +67,20 @@ const LoadingSpinner: React.FC = () => {
         )}
       </div>
       
-      {/* Custom keyframes for subtler pulse animations */}
+      {/* Custom keyframes for the floating animations */}
       <style>
         {`
-          @keyframes pulse0 {
-            0%, 100% { transform: scale(1); opacity: 0.03; }
-            50% { transform: scale(1.1); opacity: 0.05; }
+          @keyframes floatAnim1 {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(30px, -20px) rotate(5deg); }
           }
-          @keyframes pulse1 {
-            0%, 100% { transform: scale(1); opacity: 0.04; }
-            50% { transform: scale(1.15); opacity: 0.07; }
+          @keyframes floatAnim2 {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(-20px, -30px) rotate(-5deg); }
           }
-          @keyframes pulse2 {
-            0%, 100% { transform: scale(1); opacity: 0.05; }
-            50% { transform: scale(1.1); opacity: 0.08; }
-          }
-          @keyframes pulse3 {
-            0%, 100% { transform: scale(1); opacity: 0.06; }
-            50% { transform: scale(1.2); opacity: 0.1; }
-          }
-          @keyframes pulse4 {
-            0%, 100% { transform: scale(1); opacity: 0.05; }
-            50% { transform: scale(1.15); opacity: 0.09; }
+          @keyframes floatAnim3 {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(10px, -40px) rotate(3deg); }
           }
         `}
       </style>
