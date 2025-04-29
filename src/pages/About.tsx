@@ -200,7 +200,7 @@ const About = () => {
                   <section 
                     ref={el => sectionRefs.current['profile'] = el} 
                     id="profile" 
-                    className="scroll-mt-32"
+                    className="scroll-mt-32 text-left"
                   >
                     <h2 className="text-3xl font-bold mb-6">Über mich</h2>
                     <div className="prose max-w-none">
@@ -230,7 +230,7 @@ const About = () => {
                   <section 
                     ref={el => sectionRefs.current['education'] = el} 
                     id="education"
-                    className="scroll-mt-32"
+                    className="scroll-mt-32 text-left"
                   >
                     <h2 className="text-3xl font-bold mb-8">Ausbildung</h2>
                     
@@ -273,7 +273,7 @@ const About = () => {
                   <section 
                     ref={el => sectionRefs.current['experience'] = el} 
                     id="experience"
-                    className="scroll-mt-32"
+                    className="scroll-mt-32 text-left"
                   >
                     <h2 className="text-3xl font-bold mb-8">Erfahrung</h2>
                     
@@ -322,7 +322,7 @@ const About = () => {
                   <section 
                     ref={el => sectionRefs.current['values'] = el} 
                     id="values"
-                    className="scroll-mt-32"
+                    className="scroll-mt-32 text-left"
                   >
                     <h2 className="text-3xl font-bold mb-8">Meine Werte</h2>
                     
@@ -366,7 +366,7 @@ const About = () => {
                   <section 
                     ref={el => sectionRefs.current['passions'] = el} 
                     id="passions"
-                    className="scroll-mt-32"
+                    className="scroll-mt-32 text-left"
                   >
                     <h2 className="text-3xl font-bold mb-8">Meine Leidenschaften</h2>
                     
@@ -439,3 +439,4 @@ const About = () => {
 };
 
 export default About;
+
