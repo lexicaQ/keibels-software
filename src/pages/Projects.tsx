@@ -116,7 +116,7 @@ const Projects = () => {
                   
                   <div className="flex items-center justify-center lg:justify-end">
                     <div className={`transform transition-all duration-500 ${index % 2 === 0 ? 'hover:rotate-2' : 'hover:-rotate-2'} hover:scale-105`}>
-                      {project.appContent && <project.appContent isAnimating={true} />}
+                      {project.appContent && project.appContent(true)}
                     </div>
                   </div>
                 </div>
