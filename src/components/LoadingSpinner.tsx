@@ -29,9 +29,11 @@ const LoadingSpinner: React.FC = () => {
       <div className="relative w-full max-w-md px-8">
         {/* Logo */}
         <div className={`text-center mb-10 transition-all duration-1000 ${showElements ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-          <h2 className="text-white text-3xl font-bold">
-            MK<span className="text-gray-400">.DEV</span>
-          </h2>
+          <img 
+            src="/lovable-uploads/c0d5dc91-7451-4e20-a60d-82c907cfd8b6.png" 
+            alt="MK Logo" 
+            className="h-20 mx-auto"
+          />
         </div>
         
         {/* Progress bar */}

@@ -1,6 +1,6 @@
 
 import React, { useEffect, useRef } from 'react';
-import { Linkedin } from 'lucide-react';
+import { Linkedin, Github } from 'lucide-react';
 
 const Footer: React.FC = () => {
   const footerRef = useRef<HTMLElement>(null);
@@ -32,31 +32,21 @@ const Footer: React.FC = () => {
 
   return (
     <footer ref={footerRef} className="relative bg-black text-white py-16 overflow-hidden">
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 opacity-30">
-          {Array.from({ length: 50 }).map((_, i) => (
-            <div
-              key={i}
-              className="animate-on-mouse absolute bg-white/10"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                width: `${Math.random() * 100 + 50}px`,
-                height: '1px',
-                transform: 'rotate(45deg)',
-                transition: 'transform 0.3s ease-out'
-              }}
-            />
-          ))}
-        </div>
+      {/* Blurry background elements ähnlich wie in der Hero Section */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute w-[500px] h-[500px] rounded-full bg-white/5 filter blur-[80px] top-1/2 left-1/4 transform -translate-x-1/2 -translate-y-1/2"></div>
+        <div className="absolute w-[400px] h-[400px] rounded-full bg-white/3 filter blur-[60px] top-1/3 right-1/4 transform translate-x-1/2 -translate-y-1/3"></div>
+        <div className="absolute w-[300px] h-[300px] rounded-full bg-white/2 filter blur-[100px] bottom-0 left-1/2 transform -translate-x-1/2"></div>
       </div>
 
       <div className="container mx-auto px-4 relative">
         <div className="flex flex-col items-center mb-12">
-          <div className="w-12 h-12 bg-white rounded-full mb-6 animate-on-mouse transition-transform duration-300">
-            <div className="w-full h-full flex items-center justify-center text-black font-bold text-xl">
-              MK
-            </div>
+          <div className="w-16 h-16 mb-6 animate-on-mouse transition-transform duration-300">
+            <img 
+              src="/lovable-uploads/c0d5dc91-7451-4e20-a60d-82c907cfd8b6.png" 
+              alt="MK Logo" 
+              className="w-full h-full object-contain"
+            />
           </div>
         </div>
 
@@ -80,22 +70,24 @@ const Footer: React.FC = () => {
           
           <div className="text-center">
             <h3 className="text-lg font-bold mb-4">Connect</h3>
-            <div className="flex justify-center space-x-4">
+            <div className="flex justify-center space-x-6">
               <a 
-                href="https://www.linkedin.com/in/olav-keibel-5035b352/?originalSubdomain=de" 
+                href="https://www.linkedin.com/in/maxim-keibel/" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="hover:text-gray-400 transition-colors p-2"
+                className="hover:text-gray-400 transition-colors p-2 flex flex-col items-center"
               >
                 <Linkedin size={24} />
+                <span className="text-xs mt-1">LinkedIn</span>
               </a>
               <a 
-                href="https://www.taskforce.net/de/manager/interim-executives/manager/47-olav-keibel" 
+                href="https://github.com/max1m-d3v" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-white hover:text-gray-400 transition-colors p-2"
+                className="hover:text-gray-400 transition-colors p-2 flex flex-col items-center"
               >
-                <span className="font-bold">TF</span>
+                <Github size={24} />
+                <span className="text-xs mt-1">GitHub</span>
               </a>
             </div>
           </div>
