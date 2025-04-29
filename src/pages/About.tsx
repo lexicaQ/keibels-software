@@ -198,7 +198,7 @@ const About = () => {
                 <div className="md:col-span-3 space-y-24">
                   {/* Profile Section */}
                   <section 
-                    ref={el => sectionRefs.current['profile'] = el} 
+                    ref={(el) => sectionRefs.current['profile'] = el} 
                     id="profile" 
                     className="scroll-mt-32 text-left"
                   >
@@ -228,7 +228,7 @@ const About = () => {
                   
                   {/* Education Section */}
                   <section 
-                    ref={el => sectionRefs.current['education'] = el} 
+                    ref={(el) => sectionRefs.current['education'] = el} 
                     id="education"
                     className="scroll-mt-32 text-left"
                   >
@@ -271,7 +271,7 @@ const About = () => {
                   
                   {/* Experience Section */}
                   <section 
-                    ref={el => sectionRefs.current['experience'] = el} 
+                    ref={(el) => sectionRefs.current['experience'] = el} 
                     id="experience"
                     className="scroll-mt-32 text-left"
                   >
@@ -320,7 +320,7 @@ const About = () => {
                   
                   {/* Values Section */}
                   <section 
-                    ref={el => sectionRefs.current['values'] = el} 
+                    ref={(el) => sectionRefs.current['values'] = el} 
                     id="values"
                     className="scroll-mt-32 text-left"
                   >
@@ -364,7 +364,7 @@ const About = () => {
                   
                   {/* Passions Section */}
                   <section 
-                    ref={el => sectionRefs.current['passions'] = el} 
+                    ref={(el) => sectionRefs.current['passions'] = el} 
                     id="passions"
                     className="scroll-mt-32 text-left"
                   >
@@ -439,4 +439,3 @@ const About = () => {
 };
 
 export default About;
-
