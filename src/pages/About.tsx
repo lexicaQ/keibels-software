@@ -13,8 +13,8 @@ const About = () => {
   const [activeSection, setActiveSection] = useState('');
   const timelineRef = useRef<HTMLDivElement>(null);
   
-  // Fix: Use a more specific type for sectionRefs
-  const sectionRefs = useRef<{[key: string]: HTMLDivElement | null}>({});
+  // Use a more specific type for sectionRefs to avoid type errors
+  const sectionRefs = useRef<{[key: string]: HTMLElement | null}>({});
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -201,7 +201,7 @@ const About = () => {
                   {/* Profile Section */}
                   <section 
                     ref={(el) => {
-                      if (el) sectionRefs.current['profile'] = el;
+                      sectionRefs.current['profile'] = el;
                     }}
                     id="profile" 
                     className="scroll-mt-32 text-left"
@@ -233,7 +233,7 @@ const About = () => {
                   {/* Education Section */}
                   <section 
                     ref={(el) => {
-                      if (el) sectionRefs.current['education'] = el;
+                      sectionRefs.current['education'] = el;
                     }}
                     id="education"
                     className="scroll-mt-32 text-left"
@@ -278,7 +278,7 @@ const About = () => {
                   {/* Experience Section */}
                   <section 
                     ref={(el) => {
-                      if (el) sectionRefs.current['experience'] = el;
+                      sectionRefs.current['experience'] = el;
                     }}
                     id="experience"
                     className="scroll-mt-32 text-left"
@@ -329,7 +329,7 @@ const About = () => {
                   {/* Values Section */}
                   <section 
                     ref={(el) => {
-                      if (el) sectionRefs.current['values'] = el;
+                      sectionRefs.current['values'] = el;
                     }}
                     id="values"
                     className="scroll-mt-32 text-left"
@@ -375,7 +375,7 @@ const About = () => {
                   {/* Passions Section */}
                   <section 
                     ref={(el) => {
-                      if (el) sectionRefs.current['passions'] = el;
+                      sectionRefs.current['passions'] = el;
                     }}
                     id="passions"
                     className="scroll-mt-32 text-left"
