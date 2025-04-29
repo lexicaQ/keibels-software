@@ -1,5 +1,6 @@
 
 import React, { useRef, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 const HeroSection: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -12,12 +13,17 @@ const HeroSection: React.FC = () => {
       const { clientX, clientY } = e;
       const { left, top, width, height } = containerRef.current.getBoundingClientRect();
       
+      // Reduzierte Bewegungsintensität für ein subtileres Erlebnis
       const x = (clientX - left) / width - 0.5;
       const y = (clientY - top) / height - 0.5;
       
       blurElementsRef.current.forEach((element, index) => {
-        const speed = 1 + index * 0.5;
-        element.style.transform = `translate(${x * 50 * speed}px, ${y * 50 * speed}px)`;
+        if (!element) return;
+        const speed = 0.5 + index * 0.2; // Reduzierte Geschwindigkeit
+        // Sanftere, weniger intensive Bewegung
+        const moveX = x * 20 * speed;
+        const moveY = y * 20 * speed;
+        element.style.transform = `translate(${moveX}px, ${moveY}px)`;
       });
     };
     
@@ -30,7 +36,7 @@ const HeroSection: React.FC = () => {
 
   return (
     <section className="relative h-screen flex items-center justify-center bg-black text-white overflow-hidden">
-      {/* Animated blur elements */}
+      {/* Statische Hintergrundeffekte - nicht mehr zufällige Positionierung */}
       {[...Array(5)].map((_, i) => (
         <div
           key={i}
@@ -39,9 +45,9 @@ const HeroSection: React.FC = () => {
           style={{
             width: `${200 + i * 100}px`,
             height: `${200 + i * 100}px`,
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
-            transition: 'transform 0.3s ease-out',
+            left: `${20 + i * 15}%`, // Feste Position statt zufällig
+            top: `${30 + i * 10}%`, // Feste Position statt zufällig
+            transition: 'transform 1s ease-out', // Langsamere Transition für Stabilität
           }}
         />
       ))}
@@ -58,24 +64,25 @@ const HeroSection: React.FC = () => {
             Kreative Lösungen für moderne Herausforderungen
           </p>
           <div className="flex flex-wrap gap-4 animate-fade-in-delayed">
-            <a 
-              href="#projects" 
+            <Link 
+              to="#projects" 
               className="group relative px-8 py-3 bg-white/10 backdrop-blur-sm rounded-lg font-semibold transition-all duration-300 hover:bg-white/20"
             >
               Projekte ansehen
               <span className="absolute inset-0 border border-white/20 rounded-lg group-hover:scale-95 transition-transform duration-300"></span>
-            </a>
-            <a 
-              href="/contact" 
+            </Link>
+            <Link 
+              to="/contact" 
               className="group relative px-8 py-3 border border-white/20 rounded-lg font-semibold transition-all duration-300 hover:bg-white/5"
             >
               Kontakt
               <span className="absolute inset-0 border border-white/20 rounded-lg group-hover:scale-95 transition-transform duration-300"></span>
-            </a>
+            </Link>
           </div>
         </div>
 
         <div className="relative">
+          {/* Stabilere Rahmen ohne Wackeleffekte */}
           <div className="absolute inset-0 transform translate-x-4 translate-y-4 border border-white/20 rounded-lg"></div>
           <div className="absolute inset-0 transform translate-x-2 translate-y-2 border border-white/10 rounded-lg"></div>
           <div className="relative bg-white/5 backdrop-blur-sm rounded-lg shadow-xl overflow-hidden">

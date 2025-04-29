@@ -12,10 +12,10 @@ const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate loading time
+    // Reduzierte Ladezeit für eine bessere Benutzererfahrung
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 1500);
+    }, 1200);
 
     return () => clearTimeout(timer);
   }, []);

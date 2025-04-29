@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 
 const LoadingSpinner: React.FC = () => {
+  const [progress, setProgress] = useState(0);
   const [showElements, setShowElements] = useState(false);
   
   useEffect(() => {
@@ -9,56 +10,77 @@ const LoadingSpinner: React.FC = () => {
       setShowElements(true);
     }, 300);
     
-    return () => clearTimeout(timer);
+    // Simulate progress
+    const progressInterval = setInterval(() => {
+      setProgress(prev => {
+        const newProgress = prev + Math.random() * 15;
+        return newProgress >= 100 ? 100 : newProgress;
+      });
+    }, 200);
+    
+    return () => {
+      clearTimeout(timer);
+      clearInterval(progressInterval);
+    };
   }, []);
   
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black z-50">
-      <div className="relative">
-        {/* Moving blur elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          {[...Array(5)].map((_, i) => (
+    <div className="fixed inset-0 flex flex-col items-center justify-center bg-black z-50">
+      <div className="relative w-full max-w-md px-8">
+        {/* Logo */}
+        <div className={`text-center mb-10 transition-all duration-1000 ${showElements ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+          <h2 className="text-white text-3xl font-bold">
+            MK<span className="text-gray-400">.DEV</span>
+          </h2>
+        </div>
+        
+        {/* Progress bar */}
+        <div className="relative w-full h-[2px] bg-white/10 overflow-hidden rounded-full">
+          <div 
+            className="absolute top-0 left-0 h-full bg-white transition-all duration-300 ease-out"
+            style={{ width: `${progress}%` }}
+          />
+        </div>
+        
+        {/* Moving elements */}
+        <div className="absolute inset-0 overflow-hidden -z-10 opacity-20">
+          {[...Array(3)].map((_, i) => (
             <div
               key={i}
-              className={`absolute rounded-full blur-3xl bg-white/10 transition-all duration-1000 ${showElements ? 'opacity-100' : 'opacity-0'}`}
+              className="absolute rounded-full blur-3xl bg-white/10"
               style={{
-                width: `${200 + i * 50}px`,
-                height: `${200 + i * 50}px`,
-                left: `${-100 - i * 25 + Math.sin(i * 0.5) * 50}px`,
-                top: `${-100 - i * 25 + Math.cos(i * 0.5) * 50}px`,
-                animationDelay: `${i * 0.2}s`,
-                transform: `translate(${Math.sin(i) * 10}px, ${Math.cos(i) * 10}px)`,
-                animation: `float${i % 2 === 0 ? '1' : '2'} ${5 + i * 2}s infinite ease-in-out`
+                width: `${300 + i * 100}px`,
+                height: `${300 + i * 100}px`,
+                left: `${-150 - i * 50 + Math.sin(i) * 30}px`,
+                top: `${-150 - i * 50 + Math.cos(i) * 30}px`,
+                animation: `floatAnim${i + 1} ${8 + i * 2}s infinite ease-in-out`,
+                opacity: 0.1 + i * 0.05
               }}
             />
           ))}
         </div>
         
-        <div className="relative z-10 flex flex-col items-center">
-          <span className="loader"></span>
-          
-          {showElements && (
-            <div className="mt-8 text-white text-center animate-fade-in">
-              <p className="text-lg mb-1">Lade Inhalte...</p>
-              <p className="text-sm text-gray-400">Bitte warten</p>
-            </div>
-          )}
-        </div>
+        {showElements && (
+          <div className="mt-6 text-white/80 text-center animate-fade-in flex flex-col items-center">
+            <p className="text-sm font-light">{progress < 100 ? 'Lade Inhalte...' : 'Bereit'}</p>
+          </div>
+        )}
       </div>
-
+      
+      {/* Custom keyframes for the floating animations */}
       <style>
         {`
-          @keyframes float1 {
+          @keyframes floatAnim1 {
             0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            25% { transform: translate(20px, -20px) rotate(5deg); }
-            50% { transform: translate(0, -40px) rotate(0deg); }
-            75% { transform: translate(-20px, -20px) rotate(-5deg); }
+            50% { transform: translate(30px, -20px) rotate(5deg); }
           }
-          @keyframes float2 {
+          @keyframes floatAnim2 {
             0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            25% { transform: translate(-20px, -10px) rotate(-5deg); }
-            50% { transform: translate(0, -30px) rotate(0deg); }
-            75% { transform: translate(20px, -10px) rotate(5deg); }
+            50% { transform: translate(-20px, -30px) rotate(-5deg); }
+          }
+          @keyframes floatAnim3 {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(10px, -40px) rotate(3deg); }
           }
         `}
       </style>
