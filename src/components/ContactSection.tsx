@@ -1,10 +1,7 @@
-
 import React from 'react';
 import { Phone, Mail, MapPin, Linkedin } from 'lucide-react';
-
 const ContactSection: React.FC = () => {
-  return (
-    <section id="contact" className="py-20 bg-white">
+  return <section id="contact" className="py-20 bg-white">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">CONTACT ME</h2>
         
@@ -18,10 +15,7 @@ const ContactSection: React.FC = () => {
                 </p>
                 
                 <div className="space-y-6">
-                  <a 
-                    href="tel:+491734429624" 
-                    className="flex items-start group hover:text-gray-600 transition-colors"
-                  >
+                  <a href="tel:+491734429624" className="flex items-start group hover:text-gray-600 transition-colors">
                     <Phone size={24} className="mr-4 mt-1" />
                     <div>
                       <h4 className="font-semibold mb-1 group-hover:text-black">Telefon</h4>
@@ -29,10 +23,7 @@ const ContactSection: React.FC = () => {
                     </div>
                   </a>
                   
-                  <a 
-                    href="mailto:maxim.keibel@icloud.com" 
-                    className="flex items-start group hover:text-gray-600 transition-colors"
-                  >
+                  <a href="mailto:maxim.keibel@icloud.com" className="flex items-start group hover:text-gray-600 transition-colors">
                     <Mail size={24} className="mr-4 mt-1" />
                     <div>
                       <h4 className="font-semibold mb-1 group-hover:text-black">E-Mail</h4>
@@ -48,34 +39,23 @@ const ContactSection: React.FC = () => {
                     </div>
                   </div>
 
-                  <a 
-                    href="https://www.linkedin.com/in/olav-keibel-5035b352/?originalSubdomain=de" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="flex items-start group hover:text-gray-600 transition-colors"
-                  >
+                  <a href="https://www.linkedin.com/in/olav-keibel-5035b352/?originalSubdomain=de" target="_blank" rel="noopener noreferrer" className="flex items-start group hover:text-gray-600 transition-colors">
                     <Linkedin size={24} className="mr-4 mt-1" />
                     <div>
                       <h4 className="font-semibold mb-1 group-hover:text-black">LinkedIn</h4>
-                      <p>Connect with me</p>
+                      <p>Profil ansehen</p>
                     </div>
                   </a>
                 </div>
               </div>
               
               <div className="relative">
-                <img 
-                  src="/lovable-uploads/c0d5dc91-7451-4e20-a60d-82c907cfd8b6.png" 
-                  alt="Contact visual" 
-                  className="w-full h-auto rounded-lg shadow-lg"
-                />
+                <img src="/lovable-uploads/c0d5dc91-7451-4e20-a60d-82c907cfd8b6.png" alt="Contact visual" className="w-full h-auto rounded-lg shadow-lg" />
               </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default ContactSection;
