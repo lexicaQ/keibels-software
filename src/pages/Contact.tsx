@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import LoadingSpinner from '../components/LoadingSpinner';
-import { Phone, Mail, MapPin } from 'lucide-react';
+import { Phone, Mail, MapPin, Linkedin } from 'lucide-react';
 
 const Contact = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -32,14 +32,16 @@ const Contact = () => {
             Ich freue mich darauf, von Ihnen zu hören.
           </p>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div>
-              <div className="bg-white rounded-xl shadow-lg p-8 mb-8 border border-black">
+          <div className="bg-white rounded-xl shadow-lg p-8 mb-12 border border-black">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="md:col-span-2">
                 <h2 className="text-2xl font-bold mb-6">Kontaktinformationen</h2>
                 
-                <div className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-y-8 gap-x-4">
                   <a href="tel:+491734429624" className="flex items-start group hover:text-gray-600 transition-colors">
-                    <Phone className="w-6 h-6 mr-4 mt-1" />
+                    <div className="w-12 h-12 bg-black rounded-full flex items-center justify-center mr-4 group-hover:bg-gray-800 transition-colors">
+                      <Phone className="w-5 h-5 text-white" />
+                    </div>
                     <div>
                       <h3 className="font-semibold mb-1 group-hover:text-black">Telefon</h3>
                       <p className="text-gray-700">+49 1734429624</p>
@@ -47,7 +49,9 @@ const Contact = () => {
                   </a>
                   
                   <a href="mailto:maxim.keibel@icloud.com" className="flex items-start group hover:text-gray-600 transition-colors">
-                    <Mail className="w-6 h-6 mr-4 mt-1" />
+                    <div className="w-12 h-12 bg-black rounded-full flex items-center justify-center mr-4 group-hover:bg-gray-800 transition-colors">
+                      <Mail className="w-5 h-5 text-white" />
+                    </div>
                     <div>
                       <h3 className="font-semibold mb-1 group-hover:text-black">E-Mail</h3>
                       <p className="text-gray-700">maxim.keibel@icloud.com</p>
@@ -55,56 +59,73 @@ const Contact = () => {
                   </a>
                   
                   <div className="flex items-start">
-                    <MapPin className="w-6 h-6 mr-4 mt-1" />
+                    <div className="w-12 h-12 bg-black rounded-full flex items-center justify-center mr-4">
+                      <MapPin className="w-5 h-5 text-white" />
+                    </div>
                     <div>
                       <h3 className="font-semibold mb-1">Adresse</h3>
                       <p className="text-gray-700">Am Ring 3, Ismaning</p>
                     </div>
                   </div>
+                  
+                  <a href="https://www.linkedin.com/in/olav-keibel-5035b352/?originalSubdomain=de" target="_blank" rel="noopener noreferrer" className="flex items-start group hover:text-gray-600 transition-colors">
+                    <div className="w-12 h-12 bg-black rounded-full flex items-center justify-center mr-4 group-hover:bg-gray-800 transition-colors">
+                      <Linkedin className="w-5 h-5 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold mb-1 group-hover:text-black">LinkedIn</h3>
+                      <p className="text-gray-700">Profil ansehen</p>
+                    </div>
+                  </a>
+                </div>
+                
+                <div className="mt-12 pt-6 border-t border-gray-200">
+                  <h3 className="text-xl font-bold mb-6">Verfügbarkeit</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8">
+                    <ul className="space-y-3">
+                      <li className="flex items-center justify-between">
+                        <span className="font-medium">Montag - Freitag:</span>
+                        <span>9:00 - 18:00 Uhr</span>
+                      </li>
+                      <li className="flex items-center justify-between">
+                        <span className="font-medium">Wochenende:</span>
+                        <span>Nach Vereinbarung</span>
+                      </li>
+                    </ul>
+                    <div>
+                      <h4 className="font-semibold mb-3">Bevorzugte Kontaktmethode:</h4>
+                      <p>E-Mail oder Telefon</p>
+                    </div>
+                  </div>
                 </div>
               </div>
               
-              <div className="bg-white text-black rounded-xl shadow-lg p-8 border border-black">
-                <h2 className="text-2xl font-bold mb-6">Verfügbarkeit</h2>
-                <p className="mb-4">
-                  Ich bin derzeit für neue Projekte und Zusammenarbeit verfügbar. 
-                  Meine üblichen Antwortzeiten:
-                </p>
-                
-                <ul className="space-y-3">
-                  <li className="flex items-center justify-between">
-                    <span>Montag - Freitag:</span>
-                    <span>9:00 - 18:00 Uhr</span>
-                  </li>
-                  <li className="flex items-center justify-between">
-                    <span>Wochenende:</span>
-                    <span>Nach Vereinbarung</span>
-                  </li>
-                </ul>
-                
-                <div className="mt-8 pt-6 border-t border-gray-200">
-                  <h3 className="font-semibold mb-3">Bevorzugte Kontaktmethode:</h3>
-                  <p>E-Mail oder Telefon</p>
+              <div className="flex flex-col space-y-6">
+                <div className="bg-white rounded-xl overflow-hidden shadow-lg border border-black h-full flex items-center justify-center">
+                  <img 
+                    src="/lovable-uploads/8284c56f-16e0-4dd6-b3a6-353a106bc9cf.png" 
+                    alt="Maxim Keibel" 
+                    className="w-full h-auto object-cover aspect-square"
+                  />
                 </div>
               </div>
             </div>
-            
-            <div className="flex flex-col space-y-6">
-              <div className="bg-white rounded-xl overflow-hidden shadow-lg border border-black">
-                <img 
-                  src="/lovable-uploads/8284c56f-16e0-4dd6-b3a6-353a106bc9cf.png" 
-                  alt="Maxim Keibel" 
-                  className="w-full h-auto object-cover aspect-square"
-                />
-              </div>
-              
-              <div className="bg-white rounded-xl p-8 shadow-lg border border-black">
-                <h2 className="text-2xl font-bold mb-4">Lass uns zusammenarbeiten!</h2>
-                <p className="text-gray-700">
-                  Ich freue mich auf spannende Projekte und neue Herausforderungen. 
-                  Kontaktieren Sie mich für eine unverbindliche Beratung oder um Ihr Projekt zu besprechen.
-                </p>
-              </div>
+          </div>
+          
+          <div className="bg-white rounded-xl p-8 shadow-lg border border-black">
+            <h2 className="text-2xl font-bold mb-4">Lass uns zusammenarbeiten!</h2>
+            <p className="text-gray-700 mb-4">
+              Ich freue mich auf spannende Projekte und neue Herausforderungen. 
+              Kontaktieren Sie mich für eine unverbindliche Beratung oder um Ihr Projekt zu besprechen.
+            </p>
+            <div className="flex justify-center md:justify-start">
+              <a 
+                href="mailto:maxim.keibel@icloud.com" 
+                className="inline-flex items-center px-6 py-3 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors"
+              >
+                <Mail className="mr-2 h-4 w-4" />
+                E-Mail schreiben
+              </a>
             </div>
           </div>
         </div>

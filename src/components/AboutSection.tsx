@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { User } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const AboutSection: React.FC = () => {
   return (
@@ -11,7 +12,8 @@ const AboutSection: React.FC = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div className="relative">
-              <div className="relative w-80 h-80 mx-auto overflow-hidden rounded-full border-4 border-black shadow-xl transform hover:scale-105 transition-transform duration-300">
+              <div className="absolute inset-0 bg-black/10 blur-xl -z-10 rounded-full transform -translate-x-4 translate-y-4"></div>
+              <div className="relative w-96 h-96 mx-auto overflow-hidden rounded-full border-4 border-black shadow-xl transform hover:scale-105 transition-transform duration-300">
                 <img 
                   src="/lovable-uploads/8284c56f-16e0-4dd6-b3a6-353a106bc9cf.png" 
                   alt="Maxim Keibel" 
@@ -74,6 +76,15 @@ const AboutSection: React.FC = () => {
                       <span>Französisch (B1 Niveau)</span>
                     </li>
                   </ul>
+                </div>
+                
+                <div className="mt-8">
+                  <Link 
+                    to="/about" 
+                    className="inline-flex items-center px-6 py-3 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors"
+                  >
+                    Mehr über mich
+                  </Link>
                 </div>
               </div>
             </div>

@@ -4,13 +4,13 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { Mail, Phone, MapPin, User, Calendar, Briefcase, BookOpen } from 'lucide-react';
+import { Mail, Phone, MapPin, User, Calendar, Briefcase, BookOpen, Heart } from 'lucide-react';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
 import { Card } from '@/components/ui/card';
 
 const About = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [activeSection, setActiveSection] = useState('');
+  const [activeSection, setActiveSection] = useState('profile');
   const timelineRef = useRef<HTMLDivElement>(null);
   
   // Use a more specific type for sectionRefs to avoid type errors
@@ -50,6 +50,18 @@ const About = () => {
     }
   }, [isLoading]);
 
+  // Function to scroll to section when timeline item is clicked
+  const scrollToSection = (id: string) => {
+    const section = sectionRefs.current[id];
+    if (section) {
+      section.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+      setActiveSection(id);
+    }
+  };
+
   if (isLoading) {
     return <LoadingSpinner />;
   }
@@ -58,31 +70,31 @@ const About = () => {
     {
       id: 'profile',
       title: 'Profil',
-      icon: <User size={20} className="text-black" />,
+      icon: <User size={20} className={activeSection === 'profile' ? 'text-white' : 'text-black'} />,
       year: '',
     },
     {
       id: 'education',
       title: 'Ausbildung',
-      icon: <BookOpen size={20} className="text-black" />,
+      icon: <BookOpen size={20} className={activeSection === 'education' ? 'text-white' : 'text-black'} />,
       year: '2019 - Heute',
     },
     {
       id: 'experience',
       title: 'Erfahrung',
-      icon: <Briefcase size={20} className="text-black" />,
+      icon: <Briefcase size={20} className={activeSection === 'experience' ? 'text-white' : 'text-black'} />,
       year: '2020 - Heute',
     },
     {
       id: 'values',
       title: 'Werte',
-      icon: <Calendar size={20} className="text-black" />,
+      icon: <Heart size={20} className={activeSection === 'values' ? 'text-white' : 'text-black'} />,
       year: '',
     },
     {
       id: 'passions',
       title: 'Leidenschaften',
-      icon: <Briefcase size={20} className="text-black" />,
+      icon: <Calendar size={20} className={activeSection === 'passions' ? 'text-white' : 'text-black'} />,
       year: '',
     },
   ];
@@ -167,7 +179,7 @@ const About = () => {
             {/* Right side - Timeline and content */}
             <div className="lg:col-span-2">
               <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-                {/* Timeline */}
+                {/* Timeline - Updated with click functionality */}
                 <div className="md:col-span-1">
                   <div ref={timelineRef} className="md:sticky md:top-32 space-y-6">
                     <h2 className="text-2xl font-bold mb-6">Mein Weg</h2>
@@ -176,8 +188,12 @@ const About = () => {
                       <div className="absolute left-4 top-0 h-full w-0.5 bg-black/10"></div>
                       
                       {timelineItems.map((item, index) => (
-                        <div key={index} className="relative mb-8">
-                          <div className={`z-10 flex mb-1 cursor-pointer ${activeSection === item.id ? 'transform translate-x-1' : ''}`}>
+                        <div 
+                          key={index} 
+                          className="relative mb-8 cursor-pointer"
+                          onClick={() => scrollToSection(item.id)}
+                        >
+                          <div className={`z-10 flex mb-1 ${activeSection === item.id ? 'transform translate-x-1' : ''}`}>
                             <div 
                               className={`flex items-center justify-center w-8 h-8 rounded-full border-2 mr-3 transition-all duration-300 ${
                                 activeSection === item.id ? 'border-black bg-black text-white' : 'border-black bg-white'
@@ -185,9 +201,11 @@ const About = () => {
                             >
                               {item.icon}
                             </div>
-                            <div>
-                              <p className={`font-bold ${activeSection === item.id ? 'text-black' : 'text-gray-600'}`}>{item.title}</p>
-                              {item.year && <p className="text-xs text-gray-500">{item.year}</p>}
+                            <div className="flex items-center">
+                              <p className={`font-bold ${activeSection === item.id ? 'text-black' : 'text-gray-600'}`}>
+                                {item.title}
+                              </p>
+                              {item.year && <p className="text-xs text-gray-500 ml-2">{item.year}</p>}
                             </div>
                           </div>
                         </div>
@@ -196,7 +214,7 @@ const About = () => {
                   </div>
                 </div>
                 
-                {/* Content */}
+                {/* Content - Modified for better layout and alignment */}
                 <div className="md:col-span-3 space-y-24">
                   {/* Profile Section */}
                   <section 
@@ -326,7 +344,7 @@ const About = () => {
                     </div>
                   </section>
                   
-                  {/* Values Section */}
+                  {/* Values Section - Improved layout with consistent containers */}
                   <section 
                     ref={(el) => {
                       sectionRefs.current['values'] = el;
@@ -337,33 +355,39 @@ const About = () => {
                     <h2 className="text-3xl font-bold mb-8">Meine Werte</h2>
                     
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                      <div className="bg-white rounded-xl shadow-lg p-6 text-center transition-transform duration-300 hover:transform hover:-translate-y-2">
-                        <div className="w-16 h-16 mx-auto mb-6 bg-black rounded-full flex items-center justify-center">
-                          <span className="text-white font-bold text-xl">1</span>
+                      <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-100 transition-transform duration-300 hover:-translate-y-2 h-full">
+                        <div className="flex items-center mb-4">
+                          <div className="w-12 h-12 bg-black rounded-full flex items-center justify-center mr-4">
+                            <span className="text-white font-bold text-xl">1</span>
+                          </div>
+                          <h3 className="text-xl font-bold">Ehrlichkeit</h3>
                         </div>
-                        <h3 className="text-xl font-bold mb-4">Ehrlichkeit</h3>
                         <p className="text-gray-700">
                           Transparenz und Aufrichtigkeit bilden die Grundlage meiner Arbeit und meiner Beziehungen. 
                           Ich kommuniziere klar und direkt, um Vertrauen aufzubauen und langfristige Zusammenarbeit zu ermöglichen.
                         </p>
                       </div>
                       
-                      <div className="bg-white rounded-xl shadow-lg p-6 text-center transition-transform duration-300 hover:transform hover:-translate-y-2">
-                        <div className="w-16 h-16 mx-auto mb-6 bg-black rounded-full flex items-center justify-center">
-                          <span className="text-white font-bold text-xl">2</span>
+                      <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-100 transition-transform duration-300 hover:-translate-y-2 h-full">
+                        <div className="flex items-center mb-4">
+                          <div className="w-12 h-12 bg-black rounded-full flex items-center justify-center mr-4">
+                            <span className="text-white font-bold text-xl">2</span>
+                          </div>
+                          <h3 className="text-xl font-bold">Hilfsbereitschaft</h3>
                         </div>
-                        <h3 className="text-xl font-bold mb-4">Hilfsbereitschaft</h3>
                         <p className="text-gray-700">
                           Ich glaube daran, mein Wissen zu teilen und anderen zu helfen, ihre Ziele zu erreichen. 
                           Gemeinsam können wir mehr erreichen als allein, und die Unterstützung anderer bereichert auch meine eigene Erfahrung.
                         </p>
                       </div>
                       
-                      <div className="bg-white rounded-xl shadow-lg p-6 text-center transition-transform duration-300 hover:transform hover:-translate-y-2">
-                        <div className="w-16 h-16 mx-auto mb-6 bg-black rounded-full flex items-center justify-center">
-                          <span className="text-white font-bold text-xl">3</span>
+                      <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-100 transition-transform duration-300 hover:-translate-y-2 h-full">
+                        <div className="flex items-center mb-4">
+                          <div className="w-12 h-12 bg-black rounded-full flex items-center justify-center mr-4">
+                            <span className="text-white font-bold text-xl">3</span>
+                          </div>
+                          <h3 className="text-xl font-bold">Einsatzbereitschaft</h3>
                         </div>
-                        <h3 className="text-xl font-bold mb-4">Einsatzbereitschaft</h3>
                         <p className="text-gray-700">
                           Wenn ich von einer Idee überzeugt bin, setze ich mich mit vollem Einsatz dafür ein. 
                           Ich scheue keine Herausforderungen und arbeite beharrlich, um nachhaltige und messbare Ergebnisse zu erzielen.
@@ -383,8 +407,13 @@ const About = () => {
                     <h2 className="text-3xl font-bold mb-8">Meine Leidenschaften</h2>
                     
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                      <div className="bg-black text-white rounded-xl shadow-lg p-8">
-                        <h3 className="text-xl font-bold mb-4">Software Development</h3>
+                      <div className="bg-black text-white rounded-xl shadow-lg p-8 h-full">
+                        <div className="flex items-center mb-4">
+                          <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mr-4">
+                            <Briefcase className="h-6 w-6 text-black" />
+                          </div>
+                          <h3 className="text-xl font-bold">Software Development</h3>
+                        </div>
                         <p className="mb-6">
                           Meine Leidenschaft für die Entwicklung von Software geht über das reine Programmieren hinaus. 
                           Es ist die Kunst, komplexe Probleme in elegante Lösungen zu verwandeln und Anwendungen zu schaffen, 
@@ -397,8 +426,13 @@ const About = () => {
                         </p>
                       </div>
                       
-                      <div className="bg-white rounded-xl shadow-lg p-8 border border-black">
-                        <h3 className="text-xl font-bold mb-4">UI/UX Design</h3>
+                      <div className="bg-white rounded-xl shadow-lg p-8 border border-black h-full">
+                        <div className="flex items-center mb-4">
+                          <div className="w-12 h-12 bg-black rounded-full flex items-center justify-center mr-4">
+                            <User className="h-6 w-6 text-white" />
+                          </div>
+                          <h3 className="text-xl font-bold">UI/UX Design</h3>
+                        </div>
                         <p className="mb-6">
                           Das Design von Benutzeroberflächen ist für mich eine perfekte Kombination aus Kreativität und 
                           Funktionalität. Ich strebe danach, Interfaces zu erschaffen, die nicht nur ästhetisch ansprechend, 
@@ -411,8 +445,13 @@ const About = () => {
                         </p>
                       </div>
                       
-                      <div className="bg-white rounded-xl shadow-lg p-8 border border-black">
-                        <h3 className="text-xl font-bold mb-4">Fitness & Sport</h3>
+                      <div className="bg-white rounded-xl shadow-lg p-8 border border-black h-full">
+                        <div className="flex items-center mb-4">
+                          <div className="w-12 h-12 bg-black rounded-full flex items-center justify-center mr-4">
+                            <Heart className="h-6 w-6 text-white" />
+                          </div>
+                          <h3 className="text-xl font-bold">Fitness & Sport</h3>
+                        </div>
                         <p className="mb-6">
                           Sport und körperliche Fitness sind wesentliche Teile meines Lebens. Als langjähriges Mitglied 
                           im Tennisclub habe ich nicht nur sportliche Erfolge erzielt, sondern auch wertvolle Lektionen 
@@ -424,8 +463,13 @@ const About = () => {
                         </p>
                       </div>
                       
-                      <div className="bg-black text-white rounded-xl shadow-lg p-8">
-                        <h3 className="text-xl font-bold mb-4">Künstliche Intelligenz</h3>
+                      <div className="bg-black text-white rounded-xl shadow-lg p-8 h-full">
+                        <div className="flex items-center mb-4">
+                          <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mr-4">
+                            <BookOpen className="h-6 w-6 text-black" />
+                          </div>
+                          <h3 className="text-xl font-bold">Künstliche Intelligenz</h3>
+                        </div>
                         <p className="mb-6">
                           Die Entwicklung und Anwendung von KI-Technologien begeistert mich besonders im Kontext 
                           der Softwareentwicklung. Ich sehe enormes Potenzial in der Integration intelligenter 
