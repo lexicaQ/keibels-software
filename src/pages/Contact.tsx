@@ -61,27 +61,27 @@ const Contact = () => {
             Ich freue mich darauf, von Ihnen zu hören.
           </p>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+          <div className="grid grid-cols-1 gap-12 items-start">
             <div>
               <div className="bg-white rounded-xl shadow-lg p-8 mb-8">
                 <h2 className="text-2xl font-bold mb-6">Kontaktinformationen</h2>
                 
                 <div className="space-y-6">
-                  <div className="flex items-start">
+                  <a href="tel:+491734429624" className="flex items-start group hover:text-gray-600 transition-colors">
                     <Phone className="w-6 h-6 mr-4 mt-1" />
                     <div>
-                      <h3 className="font-semibold mb-1">Telefon</h3>
+                      <h3 className="font-semibold mb-1 group-hover:text-black">Telefon</h3>
                       <p className="text-gray-700">+49 1734429624</p>
                     </div>
-                  </div>
+                  </a>
                   
-                  <div className="flex items-start">
+                  <a href="mailto:maxim.keibel@icloud.com" className="flex items-start group hover:text-gray-600 transition-colors">
                     <Mail className="w-6 h-6 mr-4 mt-1" />
                     <div>
-                      <h3 className="font-semibold mb-1">E-Mail</h3>
+                      <h3 className="font-semibold mb-1 group-hover:text-black">E-Mail</h3>
                       <p className="text-gray-700">maxim.keibel@icloud.com</p>
                     </div>
-                  </div>
+                  </a>
                   
                   <div className="flex items-start">
                     <MapPin className="w-6 h-6 mr-4 mt-1" />
@@ -93,7 +93,7 @@ const Contact = () => {
                 </div>
               </div>
               
-              <div className="bg-black text-white rounded-xl shadow-lg p-8">
+              <div className="bg-white text-black rounded-xl shadow-lg p-8">
                 <h2 className="text-2xl font-bold mb-6">Verfügbarkeit</h2>
                 <p className="mb-4">
                   Ich bin derzeit für neue Projekte und Zusammenarbeit verfügbar. 
@@ -111,96 +111,14 @@ const Contact = () => {
                   </li>
                 </ul>
                 
-                <div className="mt-8 pt-6 border-t border-gray-700">
+                <div className="mt-8 pt-6 border-t border-gray-200">
                   <h3 className="font-semibold mb-3">Bevorzugte Kontaktmethode:</h3>
                   <p>E-Mail oder Telefon</p>
                 </div>
               </div>
             </div>
             
-            <div className="bg-white rounded-xl shadow-lg p-8">
-              <h2 className="text-2xl font-bold mb-6">Nachricht senden</h2>
-              
-              {formSubmitted ? (
-                <div className="bg-green-50 border border-green-200 rounded-lg p-6 text-center">
-                  <h3 className="text-lg font-medium text-green-800 mb-2">Nachricht gesendet!</h3>
-                  <p className="text-green-700">
-                    Vielen Dank für Ihre Nachricht. Ich werde mich so schnell wie möglich bei Ihnen melden.
-                  </p>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <div>
-                      <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-                        Name
-                      </label>
-                      <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-black"
-                        required
-                      />
-                    </div>
-                    
-                    <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                        E-Mail
-                      </label>
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-black"
-                        required
-                      />
-                    </div>
-                  </div>
-                  
-                  <div>
-                    <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">
-                      Betreff
-                    </label>
-                    <input
-                      type="text"
-                      id="subject"
-                      name="subject"
-                      value={formData.subject}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-black"
-                      required
-                    />
-                  </div>
-                  
-                  <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
-                      Nachricht
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      rows={6}
-                      value={formData.message}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-black"
-                      required
-                    ></textarea>
-                  </div>
-                  
-                  <button
-                    type="submit"
-                    className="w-full bg-black text-white font-medium py-3 rounded-lg hover:bg-gray-800 transition-colors"
-                  >
-                    Nachricht senden
-                  </button>
-                </form>
-              )}
-            </div>
+            {/* Removed the message form container as requested */}
           </div>
         </div>
       </div>

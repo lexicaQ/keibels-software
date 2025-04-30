@@ -5,15 +5,19 @@ interface IOSSimulatorProps {
   appContent: React.ReactNode;
   color?: string;
   isAnimated?: boolean;
+  isInteractive?: boolean;
 }
 
 const IOSSimulator: React.FC<IOSSimulatorProps> = ({ 
   appContent, 
   color = 'black', 
-  isAnimated = true 
+  isAnimated = true,
+  isInteractive = true
 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [currentScreen, setCurrentScreen] = useState('home');
+  const [isExpanded, setIsExpanded] = useState(false);
   
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -30,6 +34,18 @@ const IOSSimulator: React.FC<IOSSimulatorProps> = ({
     };
   }, []);
 
+  const handleScreenChange = (screen: string) => {
+    if (isInteractive) {
+      setCurrentScreen(screen);
+    }
+  };
+
+  const toggleExpand = () => {
+    if (isInteractive) {
+      setIsExpanded(!isExpanded);
+    }
+  };
+
   return (
     <div 
       className={`relative ${isAnimated ? 'transition-all duration-1000 transform' : ''}`}
@@ -40,7 +56,7 @@ const IOSSimulator: React.FC<IOSSimulatorProps> = ({
     >
       {/* Phone frame */}
       <div 
-        className="relative w-[280px] h-[570px] rounded-[40px] overflow-hidden shadow-xl"
+        className={`relative ${isExpanded ? 'w-[350px] h-[700px]' : 'w-[280px] h-[570px]'} rounded-[40px] overflow-hidden shadow-xl transition-all duration-300`}
         style={{ backgroundColor: color }}
       >
         {/* Notch */}
@@ -65,7 +81,62 @@ const IOSSimulator: React.FC<IOSSimulatorProps> = ({
                 <div className="w-12 h-12 border-4 border-t-black border-r-transparent border-b-transparent border-l-transparent rounded-full animate-spin"></div>
               </div>
             ) : (
-              <div className="w-full h-full">{appContent}</div>
+              <div className="w-full h-full">
+                {currentScreen === 'home' && appContent}
+                {currentScreen === 'settings' && (
+                  <div className="p-4">
+                    <h3 className="text-lg font-semibold mb-4">Einstellungen</h3>
+                    <ul className="space-y-2">
+                      <li className="p-3 bg-gray-50 rounded-lg">Profil</li>
+                      <li className="p-3 bg-gray-50 rounded-lg">Benachrichtigungen</li>
+                      <li className="p-3 bg-gray-50 rounded-lg">Datenschutz</li>
+                      <li className="p-3 bg-gray-50 rounded-lg">Hilfe & Support</li>
+                    </ul>
+                  </div>
+                )}
+                {currentScreen === 'profile' && (
+                  <div className="p-4">
+                    <h3 className="text-lg font-semibold mb-4">Profil</h3>
+                    <div className="flex flex-col items-center mb-6">
+                      <div className="w-20 h-20 rounded-full bg-gray-300 mb-2"></div>
+                      <p className="font-medium">Max Mustermann</p>
+                      <p className="text-sm text-gray-500">Benutzer</p>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Bottom app bar if interactive */}
+            {isInteractive && isLoaded && (
+              <div className="absolute bottom-0 left-0 right-0 h-16 border-t border-gray-200 bg-white flex justify-around items-center">
+                <button 
+                  onClick={() => handleScreenChange('home')}
+                  className={`p-2 rounded-full ${currentScreen === 'home' ? 'bg-gray-100' : ''}`}
+                >
+                  <div className="w-6 h-6 bg-black rounded-sm"></div>
+                </button>
+                <button 
+                  onClick={() => handleScreenChange('settings')}
+                  className={`p-2 rounded-full ${currentScreen === 'settings' ? 'bg-gray-100' : ''}`}
+                >
+                  <div className="w-6 h-6 border-2 border-black rounded-full"></div>
+                </button>
+                <button 
+                  onClick={() => handleScreenChange('profile')}
+                  className={`p-2 rounded-full ${currentScreen === 'profile' ? 'bg-gray-100' : ''}`}
+                >
+                  <div className="w-6 h-6 bg-black rounded-md"></div>
+                </button>
+                <button 
+                  onClick={toggleExpand}
+                  className="p-2 rounded-full"
+                >
+                  <div className="w-6 h-6 flex items-center justify-center border-2 border-black">
+                    {isExpanded ? '-' : '+'}
+                  </div>
+                </button>
+              </div>
             )}
           </div>
         </div>
