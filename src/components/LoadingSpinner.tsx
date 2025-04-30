@@ -1,22 +1,32 @@
 
 import React, { useEffect, useState } from 'react';
+import { Progress } from "@/components/ui/progress";
 
 const LoadingSpinner: React.FC = () => {
   const [progress, setProgress] = useState(0);
   const [showElements, setShowElements] = useState(false);
+  const [isComplete, setIsComplete] = useState(false);
   
   useEffect(() => {
+    // Zeige Elemente nach kurzer Verzögerung
     const timer = setTimeout(() => {
       setShowElements(true);
-    }, 300);
+    }, 100);
     
-    // Simulate progress
+    // Simuliere schnelleren Ladefortschritt
     const progressInterval = setInterval(() => {
       setProgress(prev => {
-        const newProgress = prev + Math.random() * 15;
-        return newProgress >= 100 ? 100 : newProgress;
+        const increment = (100 - prev) * 0.2; // Schnellere Progression am Ende
+        const newProgress = prev + increment;
+        
+        if (newProgress >= 99) {
+          clearInterval(progressInterval);
+          setTimeout(() => setIsComplete(true), 400); // Kurze Pause bevor Animation beendet
+          return 100;
+        }
+        return newProgress;
       });
-    }, 200);
+    }, 100);
     
     return () => {
       clearTimeout(timer);
@@ -25,67 +35,35 @@ const LoadingSpinner: React.FC = () => {
   }, []);
   
   return (
-    <div className="fixed inset-0 flex flex-col items-center justify-center bg-black z-50">
-      <div className="relative w-full max-w-md px-8">
-        {/* Logo */}
-        <div className={`text-center mb-10 transition-all duration-1000 ${showElements ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+    <div className={`fixed inset-0 flex flex-col items-center justify-center bg-black z-50 transition-opacity duration-500 ${isComplete ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+      <div className="relative w-full max-w-sm px-8">
+        {/* Logo mit Fade-In Animation */}
+        <div className={`text-center mb-12 transition-all duration-1000 ${showElements ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
           <img 
-            src="/lovable-uploads/c0d5dc91-7451-4e20-a60d-82c907cfd8b6.png" 
-            alt="MK Logo" 
-            className="h-20 mx-auto"
+            src="/lovable-uploads/40fa92db-30b5-4792-8cc6-583ca4e26aa0.png" 
+            alt="KEIBEL SOFTWARE Logo" 
+            className="h-24 mx-auto"
           />
         </div>
         
-        {/* Progress bar */}
-        <div className="relative w-full h-[2px] bg-white/10 overflow-hidden rounded-full">
-          <div 
-            className="absolute top-0 left-0 h-full bg-white transition-all duration-300 ease-out"
-            style={{ width: `${progress}%` }}
-          />
+        {/* Moderner Ladebalken */}
+        <div className="relative w-full mb-4">
+          <Progress value={progress} className="h-[2px] bg-white/10" />
         </div>
         
-        {/* Moving elements */}
-        <div className="absolute inset-0 overflow-hidden -z-10 opacity-20">
-          {[...Array(3)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute rounded-full blur-3xl bg-white/10"
-              style={{
-                width: `${300 + i * 100}px`,
-                height: `${300 + i * 100}px`,
-                left: `${-150 - i * 50 + Math.sin(i) * 30}px`,
-                top: `${-150 - i * 50 + Math.cos(i) * 30}px`,
-                animation: `floatAnim${i + 1} ${8 + i * 2}s infinite ease-in-out`,
-                opacity: 0.1 + i * 0.05
-              }}
-            />
-          ))}
-        </div>
-        
+        {/* Status Text */}
         {showElements && (
-          <div className="mt-6 text-white/80 text-center animate-fade-in flex flex-col items-center">
-            <p className="text-sm font-light">{progress < 100 ? 'Lade Inhalte...' : 'Bereit'}</p>
+          <div className="text-white/70 text-center animate-fade-in text-sm font-light tracking-wider">
+            <p>{progress < 100 ? 'LÄDT...' : 'BEREIT'}</p>
           </div>
         )}
       </div>
       
-      {/* Custom keyframes for the floating animations */}
-      <style>
-        {`
-          @keyframes floatAnim1 {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            50% { transform: translate(30px, -20px) rotate(5deg); }
-          }
-          @keyframes floatAnim2 {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            50% { transform: translate(-20px, -30px) rotate(-5deg); }
-          }
-          @keyframes floatAnim3 {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            50% { transform: translate(10px, -40px) rotate(3deg); }
-          }
-        `}
-      </style>
+      {/* Hintergrund-Elemente */}
+      <div className="absolute inset-0 overflow-hidden -z-10">
+        <div className="absolute w-[500px] h-[500px] rounded-full bg-white/3 filter blur-[80px] top-1/2 left-1/4 transform -translate-x-1/2 -translate-y-1/2"></div>
+        <div className="absolute w-[400px] h-[400px] rounded-full bg-white/2 filter blur-[100px] top-1/3 right-1/4 transform translate-x-1/2 -translate-y-1/3"></div>
+      </div>
     </div>
   );
 };

@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, X, Github } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { Separator } from "@/components/ui/separator";
 
 const Navbar: React.FC = () => {
@@ -36,30 +36,30 @@ const Navbar: React.FC = () => {
 
   return (
     <>
-      {/* Logo über der Navbar */}
-      <div className="w-full flex justify-center pt-6 pb-2">
+      {/* Logo über der Navbar - zentriert und größer */}
+      <div className="w-full flex justify-center bg-black pt-10 pb-6">
         <Link to="/">
           <img 
-            src="/lovable-uploads/c0d5dc91-7451-4e20-a60d-82c907cfd8b6.png" 
-            alt="MK Logo" 
-            className="h-16 w-auto"
+            src="/lovable-uploads/40fa92db-30b5-4792-8cc6-583ca4e26aa0.png" 
+            alt="KEIBEL SOFTWARE Logo" 
+            className="h-24 w-auto transition-all duration-300 hover:opacity-80"
           />
         </Link>
       </div>
       
       {/* Navbar mit schwarzem Hintergrund */}
-      <nav className="w-full bg-black shadow-md sticky top-0 z-40">
-        <div className="container mx-auto px-4 md:px-6 py-3 flex justify-center">
+      <nav className="w-full bg-black shadow-lg shadow-black/10 sticky top-0 z-40 border-b border-white/5">
+        <div className="container mx-auto px-4 md:px-6 py-4 flex justify-center">
           {/* Desktop Menu - zentriert */}
-          <ul className="hidden md:flex space-x-12">
+          <ul className="hidden md:flex space-x-16">
             {navItems.map((item, index) => (
               <li key={index} className="relative group">
                 <Link 
                   to={item.path} 
-                  className="text-white/90 font-medium transition-colors duration-300 hover:text-white"
+                  className="text-white/90 font-medium text-sm uppercase tracking-wider transition-colors duration-300 hover:text-white"
                 >
                   {item.title}
-                  <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-white transition-all duration-300 group-hover:w-full"></span>
+                  <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
                 </Link>
               </li>
             ))}
@@ -67,18 +67,17 @@ const Navbar: React.FC = () => {
 
           {/* Mobile Menu Button */}
           <button 
-            className="md:hidden flex flex-col space-y-1.5 w-6 focus:outline-none"
+            className="md:hidden flex items-center text-white"
             onClick={toggleMenu}
+            aria-label="Toggle Menu"
           >
-            <div className={`hamburger-line bg-white ${isOpen ? 'rotate-45' : ''}`}></div>
-            <div className={`hamburger-line bg-white ${isOpen ? 'opacity-0' : ''}`}></div>
-            <div className={`hamburger-line bg-white ${isOpen ? '-rotate-45' : ''}`}></div>
+            {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
       </nav>
 
       {/* Mobile Menu */}
-      <div className={`fixed inset-0 bg-black/95 backdrop-blur-lg z-50 transform transition-transform duration-300 ease-in-out ${
+      <div className={`fixed inset-0 bg-black backdrop-blur-lg z-50 transform transition-transform duration-300 ease-in-out ${
         isOpen ? 'translate-x-0' : 'translate-x-full'
       } md:hidden`}>
         <div className="flex justify-end p-4">
@@ -88,9 +87,9 @@ const Navbar: React.FC = () => {
         </div>
         <div className="flex justify-center mb-8">
           <img 
-            src="/lovable-uploads/c0d5dc91-7451-4e20-a60d-82c907cfd8b6.png" 
-            alt="MK Logo" 
-            className="h-16 w-auto"
+            src="/lovable-uploads/40fa92db-30b5-4792-8cc6-583ca4e26aa0.png" 
+            alt="KEIBEL SOFTWARE Logo" 
+            className="h-20 w-auto"
           />
         </div>
         <ul className="flex flex-col items-center space-y-8 p-8">
@@ -98,7 +97,7 @@ const Navbar: React.FC = () => {
             <li key={index}>
               <Link 
                 to={item.path} 
-                className="text-2xl font-medium tracking-wide text-white"
+                className="text-xl font-medium tracking-wide text-white uppercase"
                 onClick={toggleMenu}
               >
                 {item.title}
