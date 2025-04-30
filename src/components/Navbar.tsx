@@ -27,7 +27,7 @@ const Navbar: React.FC = () => {
   };
 
   const navItems = [
-    { title: 'Start', path: '/' },
+    { title: 'Startseite', path: '/' },
     { title: 'Projekte', path: '/projects' },
     { title: 'Lebenslauf', path: '/resume' },
     { title: 'Über mich', path: '/about' },

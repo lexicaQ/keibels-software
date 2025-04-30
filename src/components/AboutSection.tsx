@@ -1,17 +1,17 @@
 
 import React from 'react';
-import { User, Mail, Phone, MapPin } from 'lucide-react';
+import { User } from 'lucide-react';
 
 const AboutSection: React.FC = () => {
   return (
     <section id="about" className="py-20 bg-white">
       <div className="container mx-auto px-4">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">ABOUT ME</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">ÜBER MICH</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div className="relative">
-              <div className="relative w-64 h-64 mx-auto overflow-hidden rounded-full border-4 border-black shadow-xl transform hover:scale-105 transition-transform duration-300">
+              <div className="relative w-80 h-80 mx-auto overflow-hidden rounded-full border-4 border-black shadow-xl transform hover:scale-105 transition-transform duration-300">
                 <img 
                   src="/lovable-uploads/8284c56f-16e0-4dd6-b3a6-353a106bc9cf.png" 
                   alt="Maxim Keibel" 
@@ -21,7 +21,7 @@ const AboutSection: React.FC = () => {
             </div>
             
             <div>
-              <div className="bg-white rounded-lg shadow-lg p-8">
+              <div className="bg-white rounded-lg shadow-lg p-8 border border-black">
                 <p className="text-lg mb-6">
                   Ich bin ein sehr ehrlicher, hilfsbereiter und empathischer Mensch. Ich interessiere mich unter anderem für Fitness/Sport, Künstliche Intelligenz und ihren Nutzen/Anwendungsmöglichkeiten besonders im Bereich Software Development.
                 </p>

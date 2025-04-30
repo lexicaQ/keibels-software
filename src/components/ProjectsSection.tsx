@@ -1,53 +1,48 @@
 
 import React from 'react';
-import ProjectCard from './ProjectCard';
+import { Link } from 'react-router-dom';
+import { ArrowRight, Laptop, Smartphone } from 'lucide-react';
 
 const projects = [
   {
     id: "copyclipcloud",
     title: "CopyClipCloud",
-    slogan: "Dein smarter Clipboard-Manager – überall, organisiert, grenzenlos.",
-    description: "CopyClipCloud ist die neue Generation der intelligenten Clipboard-Manager für macOS. Entwickelt für maximale Effizienz, Übersichtlichkeit und Stil, erfasst CopyClipCloud automatisch alle kopierten Inhalte und stellt sie in einer modern designten, hochgradig interaktiven Liste dar.",
+    slogan: "Dein smarter Clipboard-Manager",
     platform: "macOS App",
     year: "2025"
   },
   {
     id: "apptimer",
     title: "AppTimer",
-    slogan: "Lokale Kontrolle. Klare Übersicht. Sicher testen.",
-    description: "AppTimer ist die ideale Lösung für Entwickler:innen und Tester:innen, die ihre lokal signierten Apps auf iOS-Geräten unter Echtzeitbedingungen testen. Die App zeigt auf einen Blick, wie lange das installierte Zertifikat noch gültig ist.",
+    slogan: "Lokale Kontrolle. Sicher testen.",
     platform: "iOS App",
     year: "2023"
   },
   {
     id: "zentro",
     title: "Zentro",
-    slogan: "Dein Lieferfokus – punktgenau und auf den Meter genau.",
-    description: "Zentro ist die smarte Navigations- und Zonen-App für Lieferdienste wie Lieferando – speziell entwickelt für Fahrer:innen, die in urbanen Gebieten wie München effizient und zonenbasiert arbeiten müssen.",
+    slogan: "Dein Lieferfokus – punktgenau",
     platform: "iOS App",
     year: "2023"
   },
   {
     id: "nightmanager",
     title: "NightManager",
-    slogan: "Einschlafen mit Klang – aufwachen in Stille.",
-    description: "NightManager ist der intelligente Timer für nächtliche Entspannung, sanftes Einschlafen mit Musik und kontrollierte Lautstärkeregelung auf deinem iPhone.",
+    slogan: "Einschlafen mit Klang",
     platform: "iOS App",
     year: "2024"
   },
   {
     id: "todomanager",
     title: "ToDoManager",
-    slogan: "Deine Aufgaben. Klar organisiert. Schnell erledigt.",
-    description: "ToDoManager ist eine moderne, minimalistische Aufgabenverwaltungs-App, die dir hilft, deine To-Dos einfach, strukturiert und effizient zu organisieren.",
+    slogan: "Klar organisiert. Schnell erledigt.",
     platform: "macOS App",
     year: "2025"
   },
   {
     id: "copychecker",
     title: "CopyChecker",
-    slogan: "Immer wissen, was du kopiert hast.",
-    description: "CopyChecker ist die smarte Overlay-App für iOS, die dir in Echtzeit anzeigt, was du zuletzt kopiert hast – ob Text, Bild, Link, Code oder Dokument.",
+    slogan: "Wissen, was du kopiert hast",
     platform: "iOS App",
     year: "2024"
   },
@@ -59,20 +54,47 @@ const ProjectsSection: React.FC = () => {
       <div className="container mx-auto px-4">
         <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">MEINE PROJEKTE</h2>
         
-        <div className="space-y-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.map((project, index) => (
-            <ProjectCard
-              key={index}
-              id={project.id}
-              title={project.title}
-              description={project.description}
-              slogan={project.slogan}
-              year={project.year}
-              platform={project.platform}
-              delay={index * 150}
-              isLeft={index % 2 === 0}
-            />
+            <Link 
+              key={index} 
+              to={`/projects/${project.id}`}
+              className="group"
+            >
+              <div className="h-full bg-white rounded-xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                <div className="p-6 flex flex-col h-full">
+                  <div className="flex justify-between items-center mb-3">
+                    <span className="flex items-center text-xs font-medium text-black bg-gray-100 px-2.5 py-1 rounded-full">
+                      {project.platform === 'iOS App' ? 
+                        <Smartphone size={14} className="mr-1" /> : 
+                        <Laptop size={14} className="mr-1" />
+                      }
+                      {project.platform}
+                    </span>
+                    <span className="text-xs text-gray-500">{project.year}</span>
+                  </div>
+                  
+                  <h3 className="text-lg font-bold mb-1">{project.title}</h3>
+                  <p className="text-sm text-gray-600 mb-4">{project.slogan}</p>
+                  
+                  <div className="mt-auto flex items-center text-sm font-medium">
+                    Details
+                    <ArrowRight size={16} className="ml-1 transition-transform duration-300 group-hover:translate-x-1" />
+                  </div>
+                </div>
+              </div>
+            </Link>
           ))}
+        </div>
+        
+        <div className="mt-12 text-center">
+          <Link 
+            to="/projects" 
+            className="inline-flex items-center px-6 py-3 bg-black text-white rounded-lg transition-all duration-300 hover:translate-y-[-2px] hover:shadow-lg"
+          >
+            Alle Projekte ansehen
+            <ArrowRight size={18} className="ml-2" />
+          </Link>
         </div>
       </div>
     </section>

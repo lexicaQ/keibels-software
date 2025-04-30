@@ -1,27 +1,66 @@
 
-import React from 'react';
-import { Linkedin, Github } from 'lucide-react';
+import React, { useRef, useEffect } from 'react';
+import { Linkedin, Github, Mail, Phone, MapPin } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Footer: React.FC = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const blurElementsRef = useRef<HTMLDivElement[]>([]);
+  
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!containerRef.current) return;
+      
+      const { clientX, clientY } = e;
+      const { left, top, width, height } = containerRef.current.getBoundingClientRect();
+
+      // Calculate mouse position relative to container
+      const x = (clientX - left) / width - 0.5;
+      const y = (clientY - top) / height - 0.5;
+      
+      blurElementsRef.current.forEach((element, index) => {
+        if (!element) return;
+        const speed = 0.7 + index * 0.15;
+        const moveX = x * 30 * speed;
+        const moveY = y * 30 * speed;
+        element.style.transform = `translate(${moveX}px, ${moveY}px)`;
+      });
+    };
+    
+    const container = containerRef.current;
+    if (container) {
+      container.addEventListener('mousemove', handleMouseMove);
+      return () => container.removeEventListener('mousemove', handleMouseMove);
+    }
+  }, []);
+
   return (
-    <footer className="relative bg-black text-white py-20 overflow-hidden">
-      {/* Moderne Blur-Hintergrundelemente */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute w-[600px] h-[600px] rounded-full bg-white/5 filter blur-[120px] top-1/4 left-1/4 transform -translate-x-1/2 -translate-y-1/2"></div>
-        <div className="absolute w-[500px] h-[500px] rounded-full bg-white/3 filter blur-[100px] top-1/3 right-1/4 transform translate-x-1/2 -translate-y-1/3"></div>
-        <div className="absolute w-[400px] h-[400px] rounded-full bg-white/2 filter blur-[80px] bottom-0 left-1/2 transform -translate-x-1/2"></div>
-      </div>
+    <footer ref={containerRef} className="relative bg-black text-white py-20 overflow-hidden">
+      {/* Enhanced blur background elements */}
+      {[...Array(8)].map((_, i) => (
+        <div 
+          key={i} 
+          ref={el => el && (blurElementsRef.current[i] = el)} 
+          className="absolute rounded-full bg-white/5 filter blur-[100px]"
+          style={{
+            width: `${400 + i * 100}px`,
+            height: `${400 + i * 100}px`,
+            left: `${10 + (i % 4) * 20}%`,
+            top: `${15 + Math.floor(i/4) * 30}%`,
+            transition: 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)'
+          }}
+        />
+      ))}
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-5xl mx-auto">
-          {/* Logo & Social Links */}
+          {/* Logo & Social Links - Larger Logo */}
           <div className="flex flex-col items-center mb-16">
             <Link to="/" className="mb-10 transition-transform hover:scale-105 duration-300">
               <img 
                 src="/lovable-uploads/40fa92db-30b5-4792-8cc6-583ca4e26aa0.png" 
                 alt="KEIBEL SOFTWARE Logo" 
-                className="h-16 w-auto"
+                className="h-24 w-auto" // Increased size from h-16 to h-24
               />
             </Link>
             
@@ -53,7 +92,7 @@ const Footer: React.FC = () => {
             <div className="text-center md:text-left">
               <h3 className="text-lg font-bold mb-6 uppercase tracking-wider">Navigation</h3>
               <ul className="space-y-3">
-                <li><Link to="/" className="text-white/70 hover:text-white transition-colors">Home</Link></li>
+                <li><Link to="/" className="text-white/70 hover:text-white transition-colors">Startseite</Link></li>
                 <li><Link to="/projects" className="text-white/70 hover:text-white transition-colors">Projekte</Link></li>
                 <li><Link to="/resume" className="text-white/70 hover:text-white transition-colors">Lebenslauf</Link></li>
                 <li><Link to="/about" className="text-white/70 hover:text-white transition-colors">Über mich</Link></li>
@@ -63,9 +102,22 @@ const Footer: React.FC = () => {
             
             <div className="text-center">
               <h3 className="text-lg font-bold mb-6 uppercase tracking-wider">Kontakt</h3>
-              <p className="text-white/70 mb-2">+49 1734429624</p>
-              <p className="text-white/70 mb-2">maxim.keibel@icloud.com</p>
-              <p className="text-white/70">Am Ring 3, Ismaning</p>
+              <a href="tel:+491734429624" className="text-white/70 hover:text-white block mb-2 transition-colors">
+                <div className="flex justify-center items-center">
+                  <Phone size={16} className="mr-2" />
+                  +49 1734429624
+                </div>
+              </a>
+              <a href="mailto:maxim.keibel@icloud.com" className="text-white/70 hover:text-white block mb-2 transition-colors">
+                <div className="flex justify-center items-center">
+                  <Mail size={16} className="mr-2" />
+                  maxim.keibel@icloud.com
+                </div>
+              </a>
+              <div className="flex justify-center items-center text-white/70">
+                <MapPin size={16} className="mr-2" />
+                Am Ring 3, Ismaning
+              </div>
             </div>
             
             <div className="text-center md:text-right">

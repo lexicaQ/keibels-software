@@ -7,13 +7,6 @@ import { Phone, Mail, MapPin } from 'lucide-react';
 
 const Contact = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: '',
-  });
-  const [formSubmitted, setFormSubmitted] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -22,28 +15,6 @@ const Contact = () => {
 
     return () => clearTimeout(timer);
   }, []);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log('Form submitted:', formData);
-    setFormSubmitted(true);
-    
-    // Reset form after submission
-    setTimeout(() => {
-      setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        message: '',
-      });
-      setFormSubmitted(false);
-    }, 5000);
-  };
 
   if (isLoading) {
     return <LoadingSpinner />;
@@ -61,9 +32,9 @@ const Contact = () => {
             Ich freue mich darauf, von Ihnen zu hören.
           </p>
           
-          <div className="grid grid-cols-1 gap-12 items-start">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div>
-              <div className="bg-white rounded-xl shadow-lg p-8 mb-8">
+              <div className="bg-white rounded-xl shadow-lg p-8 mb-8 border border-black">
                 <h2 className="text-2xl font-bold mb-6">Kontaktinformationen</h2>
                 
                 <div className="space-y-6">
@@ -93,7 +64,7 @@ const Contact = () => {
                 </div>
               </div>
               
-              <div className="bg-white text-black rounded-xl shadow-lg p-8">
+              <div className="bg-white text-black rounded-xl shadow-lg p-8 border border-black">
                 <h2 className="text-2xl font-bold mb-6">Verfügbarkeit</h2>
                 <p className="mb-4">
                   Ich bin derzeit für neue Projekte und Zusammenarbeit verfügbar. 
@@ -118,7 +89,23 @@ const Contact = () => {
               </div>
             </div>
             
-            {/* Removed the message form container as requested */}
+            <div className="flex flex-col space-y-6">
+              <div className="bg-white rounded-xl overflow-hidden shadow-lg border border-black">
+                <img 
+                  src="/lovable-uploads/8284c56f-16e0-4dd6-b3a6-353a106bc9cf.png" 
+                  alt="Maxim Keibel" 
+                  className="w-full h-auto object-cover aspect-square"
+                />
+              </div>
+              
+              <div className="bg-white rounded-xl p-8 shadow-lg border border-black">
+                <h2 className="text-2xl font-bold mb-4">Lass uns zusammenarbeiten!</h2>
+                <p className="text-gray-700">
+                  Ich freue mich auf spannende Projekte und neue Herausforderungen. 
+                  Kontaktieren Sie mich für eine unverbindliche Beratung oder um Ihr Projekt zu besprechen.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
