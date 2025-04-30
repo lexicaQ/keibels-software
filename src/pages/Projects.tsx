@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
@@ -7,19 +6,15 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import { ArrowRight } from 'lucide-react';
 import projectsData from '../data/projectsData';
 import { motion } from 'framer-motion';
-
 const Projects = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [hoveredProject, setHoveredProject] = useState<string | null>(null);
-
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 1000);
-
     return () => clearTimeout(timer);
   }, []);
-
   if (isLoading) {
     return <LoadingSpinner />;
   }
@@ -36,12 +31,20 @@ const Projects = () => {
 
   // Animation variants for item animations
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+    hidden: {
+      opacity: 0,
+      y: 20
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    }
   };
-
-  return (
-    <div className="min-h-screen flex flex-col">
+  return <div className="min-h-screen flex flex-col">
       <Navbar />
       
       <div className="pt-24 pb-20 flex-grow">
@@ -53,30 +56,14 @@ const Projects = () => {
             </p>
 
             <div className="mt-6 relative h-1 bg-gray-200 w-full max-w-md">
-              <div className="absolute top-0 left-0 h-1 bg-black rounded-r-full" style={{width: '60%'}}></div>
+              
             </div>
           </header>
           
-          <motion.div 
-            className="grid grid-cols-1 lg:grid-cols-2 gap-12"
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-          >
-            {projectsData.map((project, index) => (
-              <motion.div 
-                key={index}
-                variants={itemVariants}
-                className="relative"
-                onMouseEnter={() => setHoveredProject(project.id)}
-                onMouseLeave={() => setHoveredProject(null)}
-              >
+          <motion.div className="grid grid-cols-1 lg:grid-cols-2 gap-12" variants={containerVariants} initial="hidden" animate="visible">
+            {projectsData.map((project, index) => <motion.div key={index} variants={itemVariants} className="relative" onMouseEnter={() => setHoveredProject(project.id)} onMouseLeave={() => setHoveredProject(null)}>
                 <Link to={`/projects/${project.id}`}>
-                  <div 
-                    className={`bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-lg transition-all duration-500 hover:shadow-2xl ${
-                      hoveredProject === project.id ? 'transform scale-[1.02]' : ''
-                    }`}
-                  >
+                  <div className={`bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-lg transition-all duration-500 hover:shadow-2xl ${hoveredProject === project.id ? 'transform scale-[1.02]' : ''}`}>
                     <div className="relative p-8 md:p-10">
                       {/* Decorative elements */}
                       <div className="absolute -top-20 -right-20 w-64 h-64 bg-gray-50 rounded-full opacity-20 blur-3xl"></div>
@@ -118,41 +105,30 @@ const Projects = () => {
                         <div className="mb-8">
                           <h3 className="text-xl font-semibold mb-4">Highlights</h3>
                           <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                            {project.highlights.slice(0, 4).map((highlight, idx) => (
-                              <li key={idx} className="flex items-start">
+                            {project.highlights.slice(0, 4).map((highlight, idx) => <li key={idx} className="flex items-start">
                                 <span className="w-2 h-2 bg-black rounded-full mr-3 mt-2 flex-shrink-0"></span>
                                 <span className="text-sm">{highlight}</span>
-                              </li>
-                            ))}
+                              </li>)}
                           </ul>
                         </div>
                         
                         {/* View details button */}
                         <div className="flex justify-end">
-                          <div 
-                            className={`flex items-center px-6 py-3 bg-black text-white rounded-lg transition-all duration-300 group ${
-                              hoveredProject === project.id ? 'translate-y-[-2px] shadow-lg' : ''
-                            }`}
-                          >
+                          <div className={`flex items-center px-6 py-3 bg-black text-white rounded-lg transition-all duration-300 group ${hoveredProject === project.id ? 'translate-y-[-2px] shadow-lg' : ''}`}>
                             Mehr Details
-                            <ArrowRight size={18} className={`ml-2 transition-transform duration-300 ${
-                              hoveredProject === project.id ? 'translate-x-1' : ''
-                            }`} />
+                            <ArrowRight size={18} className={`ml-2 transition-transform duration-300 ${hoveredProject === project.id ? 'translate-x-1' : ''}`} />
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </Link>
-              </motion.div>
-            ))}
+              </motion.div>)}
           </motion.div>
         </div>
       </div>
       
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Projects;
