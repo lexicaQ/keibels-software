@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Phone, Mail, MapPin, Linkedin, Clock } from 'lucide-react';
+import { Phone, Mail, MapPin, Linkedin } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const ContactSection: React.FC = () => {
@@ -47,16 +47,6 @@ const ContactSection: React.FC = () => {
                     <div>
                       <h4 className="font-semibold mb-1">Adresse</h4>
                       <p>Am Ring 3, Ismaning</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center">
-                    <div className="w-12 h-12 bg-black rounded-full flex items-center justify-center mr-4">
-                      <Clock className="w-5 h-5 text-white" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold mb-1">Verfügbarkeit</h4>
-                      <p>Montag - Sonntag, 15:00 - 22:00 Uhr</p>
                     </div>
                   </div>
 

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import LoadingSpinner from '../components/LoadingSpinner';
-import { Phone, Mail, MapPin, Linkedin, Clock } from 'lucide-react';
+import { Phone, Mail, MapPin, Linkedin } from 'lucide-react';
 
 const Contact = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -81,27 +81,21 @@ const Contact = () => {
                 
                 <div className="mt-12 pt-6 border-t border-gray-200">
                   <h3 className="text-xl font-bold mb-6">Verfügbarkeit</h3>
-                  <div className="flex items-start mb-4">
-                    <div className="w-12 h-12 bg-black rounded-full flex items-center justify-center mr-4">
-                      <Clock className="w-5 h-5 text-white" />
-                    </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8">
+                    <ul className="space-y-3">
+                      <li className="flex items-center justify-between">
+                        <span className="font-medium">Montag - Freitag:</span>
+                        <span>9:00 - 18:00 Uhr</span>
+                      </li>
+                      <li className="flex items-center justify-between">
+                        <span className="font-medium">Wochenende:</span>
+                        <span>Nach Vereinbarung</span>
+                      </li>
+                    </ul>
                     <div>
-                      <h3 className="font-semibold mb-3">Täglich erreichbar</h3>
-                      <div className="grid grid-cols-1 gap-2">
-                        <div className="flex justify-between items-center bg-gray-50 p-3 rounded-lg">
-                          <span className="font-medium">Montag - Sonntag:</span>
-                          <span>15:00 - 22:00 Uhr</span>
-                        </div>
-                      </div>
-                      <p className="text-sm text-gray-600 mt-3">
-                        Bei dringenden Angelegenheiten können Sie mich gerne auch außerhalb dieser Zeiten kontaktieren.
-                      </p>
+                      <h4 className="font-semibold mb-3">Bevorzugte Kontaktmethode:</h4>
+                      <p>E-Mail oder Telefon</p>
                     </div>
-                  </div>
-                  
-                  <div className="mt-6">
-                    <h4 className="font-semibold mb-3">Bevorzugte Kontaktmethode:</h4>
-                    <p>E-Mail oder Telefon</p>
                   </div>
                 </div>
               </div>
