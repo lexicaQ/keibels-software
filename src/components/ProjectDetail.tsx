@@ -246,10 +246,16 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects }) => {
               </div>
               
               <div className="flex-shrink-0">
-                <IOSSimulator 
-                  appContent={project.appContent(isAnimating)} 
-                  color={project.backgroundColor || 'black'}
-                />
+                {project.appContent ? (
+                  <IOSSimulator 
+                    appContent={project.appContent(isAnimating)} 
+                    color={project.backgroundColor || 'black'}
+                  />
+                ) : (
+                  <div className="w-[300px] h-[600px] bg-gray-100 rounded-[40px] flex items-center justify-center">
+                    <p className="text-gray-500 text-center p-4">App-Vorschau nicht verfügbar</p>
+                  </div>
+                )}
               </div>
             </div>
           </header>
