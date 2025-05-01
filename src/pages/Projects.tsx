@@ -102,7 +102,7 @@ const Projects = () => {
                         <div className="mt-3 flex flex-wrap gap-2">
                           {project.highlights.slice(0, 2).map((highlight, idx) => (
                             <span key={idx} className="inline-block text-xs bg-gray-100 px-2 py-1 rounded-full">
-                              {highlight}
+                              {highlight.length > 30 ? highlight.substring(0, 30) + '...' : highlight}
                             </span>
                           ))}
                         </div>
