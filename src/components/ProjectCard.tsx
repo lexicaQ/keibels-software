@@ -1,8 +1,9 @@
 
-import React from 'react';
+import React, { useRef } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import DeviceFrame from './DeviceFrame';
+import { useIsMobile } from '../hooks/use-mobile';
 
 interface ProjectCardProps {
   id: string;
@@ -28,10 +29,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   appImage
 }) => {
   const deviceType = platform?.toLowerCase().includes('ios') ? 'ios' : 'macos';
+  const isMobile = useIsMobile();
+  const cardRef = useRef<HTMLDivElement>(null);
 
   return (
     <div 
-      className={`group bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden transition-all duration-500 animate-fade-in hover:shadow-2xl`}
+      ref={cardRef}
+      className="group bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden transition-all duration-500 animate-fade-in hover:shadow-2xl"
       style={{ 
         animationDelay: `${delay}ms`,
         opacity: 0 
@@ -67,6 +71,15 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           <Link 
             to={`/projects/${id}`}
             className="inline-flex items-center px-6 py-3 bg-black text-white rounded-lg transition-all duration-300 hover:translate-y-[-2px] hover:shadow-lg"
+            onClick={(e) => {
+              // This prevents the page from reloading
+              // and uses client-side routing instead
+              if (isMobile) {
+                e.preventDefault();
+                window.history.pushState({}, '', `/projects/${id}`);
+                window.dispatchEvent(new PopStateEvent('popstate'));
+              }
+            }}
           >
             Mehr Details
             <ArrowRight size={18} className="ml-2 transition-transform duration-300 group-hover:translate-x-1" />
@@ -74,7 +87,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         </div>
 
         <div className={`relative w-full h-[400px] overflow-hidden bg-gray-100 flex items-center justify-center ${isLeft ? 'lg:order-last' : 'lg:order-first'}`}>
-          <div className={`transform ${isLeft ? 'rotate-[-10deg]' : 'rotate-[10deg]'} transition-all duration-500 group-hover:rotate-0`}>
+          <div className={`transform ${isLeft ? 'rotate-[-10deg]' : 'rotate-[10deg]'} transition-all duration-500 group-hover:rotate-0 ${isMobile ? 'scale-75' : ''}`}>
             <DeviceFrame 
               type={deviceType} 
               imageUrl={appImage}
