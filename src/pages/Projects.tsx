@@ -8,6 +8,7 @@ import { ArrowRight, Laptop, Smartphone, ExternalLink } from 'lucide-react';
 import projectsData from '../data/projectsData';
 import { motion } from 'framer-motion';
 import { Badge } from '@/components/ui/badge';
+import DeviceFrame from '../components/DeviceFrame';
 
 const Projects = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -97,10 +98,10 @@ const Projects = () => {
                       
                       <div className="mb-4 flex-grow">
                         <p className="text-sm text-gray-700 line-clamp-2 mb-2">
-                          {project.description.substring(0, 80)}...
+                          {project.description?.substring(0, 80)}...
                         </p>
                         <div className="mt-3 flex flex-wrap gap-2">
-                          {project.highlights.slice(0, 2).map((highlight, idx) => (
+                          {project.highlights?.slice(0, 2).map((highlight, idx) => (
                             <span key={idx} className="inline-block text-xs bg-gray-100 px-2 py-1 rounded-full">
                               {highlight}
                             </span>

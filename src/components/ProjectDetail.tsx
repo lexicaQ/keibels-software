@@ -4,7 +4,7 @@ import { useParams, Link } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import LoadingSpinner from './LoadingSpinner';
-import IOSSimulator from './IOSSimulator';
+import DeviceFrame from './DeviceFrame';
 import { ArrowLeft } from 'lucide-react';
 
 interface Feature {
@@ -22,7 +22,7 @@ interface Project {
   features?: Feature[];
   platform: string;
   year: string;
-  appContent: (isAnimating: boolean) => React.ReactNode;
+  appImage?: string;
   backgroundColor?: string;
   textColor?: string;
   techStack?: string[];
@@ -34,7 +34,6 @@ interface ProjectDetailProps {
 
 const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects }) => {
   const [isLoading, setIsLoading] = useState(true);
-  const [isAnimating, setIsAnimating] = useState(false);
   const { projectId } = useParams<{ projectId: string }>();
   
   const project = projects.find(p => p.id.toLowerCase() === projectId?.toLowerCase());
@@ -43,14 +42,9 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects }) => {
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 1000);
-
-    const animationTimer = setTimeout(() => {
-      setIsAnimating(true);
-    }, 1500);
     
     return () => {
       clearTimeout(timer);
-      clearTimeout(animationTimer);
     };
   }, []);
 
@@ -75,6 +69,8 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects }) => {
       </div>
     );
   }
+
+  const deviceType = project.platform.toLowerCase().includes('ios') ? 'ios' : 'macos';
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -103,10 +99,11 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects }) => {
                 <p className="text-lg text-gray-700">{project.description}</p>
               </div>
               
-              <div className="flex-shrink-0">
-                <IOSSimulator 
-                  appContent={project.appContent(isAnimating)} 
-                  color={project.backgroundColor || 'black'}
+              <div className="flex-shrink-0 flex justify-center items-center">
+                <DeviceFrame 
+                  type={deviceType} 
+                  imageUrl={project.appImage}
+                  className="transform rotate-[-5deg] shadow-2xl"
                 />
               </div>
             </div>

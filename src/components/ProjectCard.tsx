@@ -2,6 +2,7 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import DeviceFrame from './DeviceFrame';
 
 interface ProjectCardProps {
   id: string;
@@ -12,6 +13,7 @@ interface ProjectCardProps {
   platform?: string;
   delay?: number;
   isLeft?: boolean;
+  appImage?: string;
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ 
@@ -22,8 +24,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   year,
   platform,
   delay = 0,
-  isLeft = true
+  isLeft = true,
+  appImage
 }) => {
+  const deviceType = platform?.toLowerCase().includes('ios') ? 'ios' : 'macos';
+
   return (
     <div 
       className={`group bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden transition-all duration-500 animate-fade-in hover:shadow-2xl`}
@@ -68,12 +73,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           </Link>
         </div>
 
-        <div className={`relative w-full h-[400px] overflow-hidden bg-gray-100 ${isLeft ? 'lg:order-last' : 'lg:order-first'}`}>
-          <div className={`absolute ${isLeft ? '-right-20' : '-left-20'} -top-20 w-[320px] h-[650px] border-8 border-black rounded-[60px] bg-white transform rotate-[-10deg] transition-all duration-500 group-hover:rotate-[-5deg] shadow-2xl`}>
-            <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-[40%] h-[20px] bg-black rounded-b-[20px]"></div>
-            <div className="absolute inset-2 rounded-[48px] bg-gray-100 overflow-hidden">
-              {/* App preview would go here */}
-            </div>
+        <div className={`relative w-full h-[400px] overflow-hidden bg-gray-100 flex items-center justify-center ${isLeft ? 'lg:order-last' : 'lg:order-first'}`}>
+          <div className={`transform ${isLeft ? 'rotate-[-10deg]' : 'rotate-[10deg]'} transition-all duration-500 group-hover:rotate-0`}>
+            <DeviceFrame 
+              type={deviceType} 
+              imageUrl={appImage}
+              className="shadow-2xl"
+            />
           </div>
         </div>
       </div>

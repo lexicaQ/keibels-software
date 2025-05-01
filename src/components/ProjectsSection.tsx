@@ -2,6 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Laptop, Smartphone } from 'lucide-react';
+import DeviceFrame from './DeviceFrame';
 
 const projects = [
   {
@@ -64,7 +65,7 @@ const ProjectsSection: React.FC = () => {
               <div className="h-full bg-white rounded-xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
                 <div className="p-6 flex flex-col h-full">
                   <div className="flex justify-between items-center mb-3">
-                    <span className="flex items-center text-xs font-medium text-black bg-gray-100 px-2.5 py-1 rounded-full">
+                    <span className="flex items-center text-xs font-medium text-white bg-black px-2.5 py-1 rounded-full">
                       {project.platform === 'iOS App' ? 
                         <Smartphone size={14} className="mr-1" /> : 
                         <Laptop size={14} className="mr-1" />
@@ -80,6 +81,18 @@ const ProjectsSection: React.FC = () => {
                   <div className="mt-auto flex items-center text-sm font-medium">
                     Details
                     <ArrowRight size={16} className="ml-1 transition-transform duration-300 group-hover:translate-x-1" />
+                  </div>
+                </div>
+                
+                <div className="h-40 bg-gray-100 relative overflow-hidden">
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className={`transform ${index % 2 === 0 ? 'rotate-[-5deg]' : 'rotate-[5deg]'} scale-75 opacity-80 group-hover:scale-80 group-hover:opacity-100 group-hover:rotate-0 transition-all duration-500`}>
+                      <DeviceFrame
+                        type={project.platform === 'iOS App' ? 'ios' : 'macos'}
+                        aspectRatio={project.platform === 'iOS App' ? 'portrait' : 'landscape'}
+                        className="shadow-lg"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>

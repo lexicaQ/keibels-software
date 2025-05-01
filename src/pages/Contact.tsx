@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import LoadingSpinner from '../components/LoadingSpinner';
-import { Phone, Mail, MapPin, Linkedin } from 'lucide-react';
+import { Phone, Mail, MapPin, Linkedin, Clock } from 'lucide-react';
 
 const Contact = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -80,22 +80,20 @@ const Contact = () => {
                 </div>
                 
                 <div className="mt-12 pt-6 border-t border-gray-200">
-                  <h3 className="text-xl font-bold mb-6">Verfügbarkeit</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8">
+                  <h3 className="text-xl font-bold mb-6 flex items-center">
+                    <Clock className="mr-2 h-5 w-5" /> Verfügbarkeit
+                  </h3>
+                  <div className="bg-gray-50 p-6 rounded-lg shadow-inner">
+                    <p className="font-medium text-lg mb-3">Ich bin täglich für Sie erreichbar:</p>
                     <ul className="space-y-3">
                       <li className="flex items-center justify-between">
-                        <span className="font-medium">Montag - Freitag:</span>
-                        <span>9:00 - 18:00 Uhr</span>
-                      </li>
-                      <li className="flex items-center justify-between">
-                        <span className="font-medium">Wochenende:</span>
-                        <span>Nach Vereinbarung</span>
+                        <span className="font-medium">Montag - Sonntag:</span>
+                        <span className="bg-black text-white px-3 py-1 rounded-full text-sm">15:00 - 22:00 Uhr</span>
                       </li>
                     </ul>
-                    <div>
-                      <h4 className="font-semibold mb-3">Bevorzugte Kontaktmethode:</h4>
-                      <p>E-Mail oder Telefon</p>
-                    </div>
+                    <p className="mt-4 text-gray-600 text-sm italic">
+                      Außerhalb dieser Zeiten erreichen Sie mich per E-Mail. Ich melde mich schnellstmöglich bei Ihnen zurück.
+                    </p>
                   </div>
                 </div>
               </div>
