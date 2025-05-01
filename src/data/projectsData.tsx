@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 
 interface Project {
@@ -28,6 +29,7 @@ interface Project {
   problem?: string;
   solution?: string;
   techStack?: string[];
+  appContent?: (isAnimating: boolean) => React.ReactNode;
 }
 
 const projectsData: Project[] = [
@@ -209,7 +211,6 @@ export const useAudio = (isAnimating: boolean) => {
   useEffect(() => {
     if (isAnimating) {
       audioElement = document.createElement('audio');
-      // Fix the unterminated string by properly closing it with a quote
       audioElement.src = 'data:audio/mp3;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4Ljc2LjEwMAAAAAAAAAAAAAAA/+M4wAAAAAAAAAAAAEluZm8AAAAPAAAAAwAAAbAAkJCQkJCQkJCQkJCQkJCQwMDAwMDAwMDAwMDAwMDAwMDg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4P//////////////////////////AAAAAExhdmM1OC4xMwAAAAAAAAAAAAAAACQCkAAAAAAAAAGwhYzJKgAAAAAAAAAAAAAAAAAAAP/jOMAAAAAAAAAAAABJbmZvAAAADwAAAAMAAAGwAJCQkJCQkJCQkJCQkJCQkMDAwMDAwMDAwMDAwMDAwMDA4ODg4ODg4ODg4ODg4ODg4OD//////////////////////////wAAAABMYXZjNTguMTMAAAAAAAAAAAAAACQCkAAAAAAAAAGwhYzJKgAAAAAAAAAAAAAAAAAA';
     }
 

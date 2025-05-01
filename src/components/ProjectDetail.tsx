@@ -21,11 +21,24 @@ interface Project {
   highlights: string[];
   features?: Feature[];
   platform: string;
-  year: string;
-  appContent: (isAnimating: boolean) => React.ReactNode;
+  year: number | string;
+  image?: string;
   backgroundColor?: string;
   textColor?: string;
   techStack?: string[];
+  mockups?: {
+    desktop?: string[];
+    mobile?: string[];
+  };
+  testimonial?: {
+    author: string;
+    role: string;
+    text: string;
+    image: string;
+  };
+  problem?: string;
+  solution?: string;
+  appContent?: (isAnimating: boolean) => React.ReactNode;
 }
 
 interface ProjectDetailProps {
