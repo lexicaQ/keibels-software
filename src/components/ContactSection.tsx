@@ -1,106 +1,234 @@
 
-import React from 'react';
-import { Phone, Mail, MapPin, Linkedin, Clock } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Send, Mail, Phone, MapPin } from 'lucide-react';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { useToast } from "@/hooks/use-toast";
+
+const formSchema = z.object({
+  name: z.string().min(2, { message: "Name muss mindestens 2 Zeichen lang sein" }),
+  email: z.string().email({ message: "Ungültige E-Mail-Adresse" }),
+  message: z.string().min(10, { message: "Nachricht muss mindestens 10 Zeichen lang sein" }),
+});
+
+type FormValues = z.infer<typeof formSchema>;
 
 const ContactSection: React.FC = () => {
-  return (
-    <section id="contact" className="py-20 bg-white">
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">KONTAKT</h2>
-        
-        <div className="max-w-5xl mx-auto">
-          <div className="bg-white backdrop-blur-md rounded-lg shadow-xl p-8 border border-gray-200">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-              <div>
-                <h3 className="text-2xl font-bold mb-6 bg-gradient-to-r from-black to-gray-700 bg-clip-text text-transparent">Nehmen Sie Kontakt auf</h3>
-                <p className="text-lg mb-8">
-                  Haben Sie Interesse an einer Zusammenarbeit oder möchten Sie mehr über meine Projekte erfahren? 
-                  Ich freue mich auf Ihre Nachricht!
-                </p>
-                
-                <div className="space-y-6">
-                  <a href="tel:+491734429624" className="flex items-center group hover:text-gray-600 transition-colors">
-                    <div className="w-12 h-12 bg-gradient-to-br from-black to-gray-800 rounded-full flex items-center justify-center mr-4 group-hover:shadow-md transition-all">
-                      <Phone className="w-5 h-5 text-white" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold mb-1 group-hover:text-black">Telefon</h4>
-                      <p>+49 1734429624</p>
-                    </div>
-                  </a>
-                  
-                  <a href="mailto:maxim.keibel@icloud.com" className="flex items-center group hover:text-gray-600 transition-colors">
-                    <div className="w-12 h-12 bg-gradient-to-br from-black to-gray-800 rounded-full flex items-center justify-center mr-4 group-hover:shadow-md transition-all">
-                      <Mail className="w-5 h-5 text-white" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold mb-1 group-hover:text-black">E-Mail</h4>
-                      <p>maxim.keibel@icloud.com</p>
-                    </div>
-                  </a>
-                  
-                  <div className="flex items-center">
-                    <div className="w-12 h-12 bg-gradient-to-br from-black to-gray-800 rounded-full flex items-center justify-center mr-4">
-                      <MapPin className="w-5 h-5 text-white" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold mb-1">Adresse</h4>
-                      <p>Am Ring 3, Ismaning</p>
-                    </div>
-                  </div>
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { toast } = useToast();
+  
+  const form = useForm<FormValues>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      message: "",
+    },
+  });
 
-                  <a href="https://www.linkedin.com/in/olav-keibel-5035b352/?originalSubdomain=de" target="_blank" rel="noopener noreferrer" className="flex items-center group hover:text-gray-600 transition-colors">
-                    <div className="w-12 h-12 bg-gradient-to-br from-black to-gray-800 rounded-full flex items-center justify-center mr-4 group-hover:shadow-md transition-all">
-                      <Linkedin className="w-5 h-5 text-white" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold mb-1 group-hover:text-black">LinkedIn</h4>
-                      <p>Profil ansehen</p>
-                    </div>
-                  </a>
-                  
-                  <div className="flex items-center">
-                    <div className="w-12 h-12 bg-gradient-to-br from-black to-gray-800 rounded-full flex items-center justify-center mr-4">
-                      <Clock className="w-5 h-5 text-white" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold mb-1">Verfügbarkeit</h4>
-                      <p>Montag - Sonntag: 15:00 - 22:00 Uhr</p>
-                    </div>
-                  </div>
-                </div>
+  const onSubmit = async (data: FormValues) => {
+    setIsSubmitting(true);
+    // Simulate form submission
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    
+    toast({
+      title: "Nachricht gesendet",
+      description: "Vielen Dank für Ihre Nachricht. Ich werde mich so schnell wie möglich bei Ihnen melden.",
+    });
+    
+    form.reset();
+    setIsSubmitting(false);
+  };
+
+  return (
+    <section id="contact" className="py-24 bg-black text-white relative overflow-hidden">
+      {/* Background effects */}
+      <div className="absolute top-0 left-0 w-full h-full">
+        <div className="absolute top-1/3 right-1/3 w-80 h-80 bg-white/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-1/4 left-1/4 w-60 h-60 bg-white/3 rounded-full blur-3xl"></div>
+      </div>
+      
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">KONTAKT</h2>
+          <div className="w-20 h-1 bg-white mx-auto mb-6"></div>
+          <p className="text-gray-400 max-w-2xl mx-auto">
+            Haben Sie Fragen oder möchten Sie über ein Projekt sprechen? Kontaktieren Sie mich gerne über das Formular oder direkt per E-Mail.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 max-w-5xl mx-auto">
+          {/* Contact Form */}
+          <div className="backdrop-blur-lg bg-white/5 border border-white/10 rounded-xl p-8 h-fit">
+            <h3 className="text-xl font-bold mb-6">Senden Sie mir eine Nachricht</h3>
+            
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-gray-300">Name</FormLabel>
+                      <FormControl>
+                        <Input 
+                          placeholder="Ihr Name" 
+                          {...field} 
+                          className={cn(
+                            "bg-white/5 border-white/10 text-white placeholder:text-gray-500",
+                            "focus:border-white/30 focus:ring-0 focus:ring-offset-0"
+                          )}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
                 
-                <div className="mt-8">
-                  <Link 
-                    to="/contact" 
-                    className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-black to-gray-800 text-white rounded-lg hover:shadow-lg transition-all"
-                  >
-                    Mehr Informationen
-                  </Link>
-                </div>
-              </div>
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-gray-300">E-Mail</FormLabel>
+                      <FormControl>
+                        <Input 
+                          placeholder="Ihre E-Mail-Adresse" 
+                          type="email" 
+                          {...field} 
+                          className={cn(
+                            "bg-white/5 border-white/10 text-white placeholder:text-gray-500",
+                            "focus:border-white/30 focus:ring-0 focus:ring-offset-0"
+                          )}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <FormField
+                  control={form.control}
+                  name="message"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-gray-300">Nachricht</FormLabel>
+                      <FormControl>
+                        <Textarea 
+                          placeholder="Ihre Nachricht" 
+                          {...field} 
+                          className={cn(
+                            "bg-white/5 border-white/10 text-white placeholder:text-gray-500 min-h-[150px]",
+                            "focus:border-white/30 focus:ring-0 focus:ring-offset-0"
+                          )}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <Button 
+                  type="submit" 
+                  disabled={isSubmitting}
+                  className="w-full bg-white text-black hover:bg-gray-200 transition-colors"
+                >
+                  {isSubmitting ? (
+                    <span className="flex items-center">
+                      <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      Wird gesendet...
+                    </span>
+                  ) : (
+                    <span className="flex items-center">
+                      Nachricht senden
+                      <Send size={16} className="ml-2" />
+                    </span>
+                  )}
+                </Button>
+              </form>
+            </Form>
+          </div>
+          
+          {/* Contact Info */}
+          <div className="space-y-10">
+            <div className="backdrop-blur-lg bg-white/5 border border-white/10 rounded-xl p-8">
+              <h3 className="text-xl font-bold mb-6">Kontaktinformationen</h3>
               
-              <div className="relative flex justify-center">
-                <div className="w-full max-w-md backdrop-filter backdrop-blur-sm bg-gradient-to-br from-gray-50 to-gray-100 p-8 rounded-xl shadow-xl border border-gray-200">
-                  <h4 className="text-xl font-bold mb-4 text-center">Kontaktzeiten</h4>
-                  
-                  <div className="space-y-4 mb-6">
-                    {['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag'].map((day, index) => (
-                      <div key={index} className="flex justify-between items-center border-b border-gray-200 pb-2">
-                        <span className="font-medium">{day}:</span>
-                        <span>15:00 - 22:00 Uhr</span>
-                      </div>
-                    ))}
+              <div className="space-y-6">
+                <div className="flex items-start">
+                  <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center mr-4 mt-1">
+                    <Mail size={18} className="text-white" />
                   </div>
-                  
-                  <div className="text-center text-sm text-gray-600 mt-4">
-                    <p>Bevorzugen Sie eine Terminvereinbarung?</p>
-                    <a href="mailto:maxim.keibel@icloud.com" className="text-black font-medium hover:underline">
-                      Schreiben Sie mir eine E-Mail
+                  <div>
+                    <p className="text-gray-400 text-sm mb-1">E-Mail</p>
+                    <a href="mailto:info@maxim-keibel.com" className="text-white hover:text-gray-300 transition-colors">
+                      info@maxim-keibel.com
                     </a>
                   </div>
                 </div>
+                
+                <div className="flex items-start">
+                  <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center mr-4 mt-1">
+                    <Phone size={18} className="text-white" />
+                  </div>
+                  <div>
+                    <p className="text-gray-400 text-sm mb-1">Telefon</p>
+                    <a href="tel:+49123456789" className="text-white hover:text-gray-300 transition-colors">
+                      +49 (0) 123 456789
+                    </a>
+                  </div>
+                </div>
+                
+                <div className="flex items-start">
+                  <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center mr-4 mt-1">
+                    <MapPin size={18} className="text-white" />
+                  </div>
+                  <div>
+                    <p className="text-gray-400 text-sm mb-1">Standort</p>
+                    <p className="text-white">München, Deutschland</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="backdrop-blur-lg bg-white/5 border border-white/10 rounded-xl p-8">
+              <h3 className="text-xl font-bold mb-4">Folgen Sie mir</h3>
+              <p className="text-gray-400 mb-6">Bleiben Sie über meine Projekte auf dem Laufenden.</p>
+              
+              <div className="flex space-x-4">
+                <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
+                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                    <rect x="2" y="9" width="4" height="12"></rect>
+                    <circle cx="4" cy="4" r="2"></circle>
+                  </svg>
+                </a>
+                <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
+                    <path d="M22 4.01c-1 .49-1.98.689-3 .99-1.121-1.265-2.783-1.335-4.38-.737S11.977 6.323 12 8v1c-3.245.083-6.135-1.395-8-4 0 0-4.182 7.433 4 11-1.872 1.247-3.739 2.088-6 2 3.308 1.803 6.913 2.423 10.034 1.517 3.58-1.04 6.522-3.723 7.651-7.742a13.84 13.84 0 0 0 .497-3.753C20.18 7.773 21.692 5.25 22 4.009z"></path>
+                  </svg>
+                </a>
+                <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                  </svg>
+                </a>
+                <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
+                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                  </svg>
+                </a>
               </div>
             </div>
           </div>

@@ -1,35 +1,15 @@
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 const LoadingSpinner = () => {
-  const [progress, setProgress] = useState(0);
-  
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setProgress(prev => {
-        const newProgress = prev + (100 - prev) * 0.2;
-        return newProgress > 99 ? 100 : newProgress;
-      });
-    }, 50);
-    
-    return () => clearInterval(interval);
-  }, []);
-  
   return (
-    <div className="fixed inset-0 flex flex-col items-center justify-center bg-white z-50">
-      <div className="relative w-24 h-24">
-        <div className="absolute inset-0 border-4 border-t-black border-r-transparent border-b-transparent border-l-transparent rounded-full animate-spin"></div>
-        <div className="absolute inset-0 flex items-center justify-center">
-          <span className="text-sm font-medium">{Math.round(progress)}%</span>
+    <div className="fixed inset-0 flex items-center justify-center bg-black z-50">
+      <div className="relative">
+        <div className="w-16 h-16 border-4 border-white/20 border-t-white rounded-full animate-spin"></div>
+        <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
+          <div className="w-14 h-14 border-4 border-t-white border-r-transparent border-b-transparent border-l-transparent rounded-full animate-spin" style={{ animationDirection: 'reverse', animationDuration: '0.8s' }}></div>
         </div>
       </div>
-      <div className="mt-6 w-64 h-1 bg-gray-200 rounded-full overflow-hidden">
-        <div 
-          className="h-full bg-black rounded-full transition-all duration-300 ease-out" 
-          style={{ width: `${progress}%` }}
-        ></div>
-      </div>
-      <p className="mt-4 text-sm text-gray-600">Wird geladen...</p>
     </div>
   );
 };
