@@ -1,27 +1,30 @@
-
 import React, { useRef, useEffect } from 'react';
 import { Linkedin, Github, Mail, Phone, MapPin } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useIsMobile } from '../hooks/use-mobile';
-
 const Footer: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const blurElementsRef = useRef<HTMLDivElement[]>([]);
   const isMobile = useIsMobile();
   const navigate = useNavigate();
-  
   useEffect(() => {
     if (!isMobile) {
       const handleMouseMove = (e: MouseEvent) => {
         if (!containerRef.current) return;
-        
-        const { clientX, clientY } = e;
-        const { left, top, width, height } = containerRef.current.getBoundingClientRect();
+        const {
+          clientX,
+          clientY
+        } = e;
+        const {
+          left,
+          top,
+          width,
+          height
+        } = containerRef.current.getBoundingClientRect();
 
         // Calculate mouse position relative to container
         const x = (clientX - left) / width - 0.5;
         const y = (clientY - top) / height - 0.5;
-        
         blurElementsRef.current.forEach((element, index) => {
           if (!element) return;
           const speed = 0.7 + index * 0.15;
@@ -30,7 +33,6 @@ const Footer: React.FC = () => {
           element.style.transform = `translate(${moveX}px, ${moveY}px)`;
         });
       };
-      
       const container = containerRef.current;
       if (container) {
         container.addEventListener('mousemove', handleMouseMove);
@@ -38,63 +40,38 @@ const Footer: React.FC = () => {
       }
     }
   }, [isMobile]);
-
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, path: string) => {
     if (isMobile) {
       e.preventDefault();
       navigate(path);
     }
   };
-
-  return (
-    <footer ref={containerRef} className="relative bg-black text-white py-20 overflow-hidden">
+  return <footer ref={containerRef} className="relative bg-black text-white py-20 overflow-hidden">
       {/* Enhanced blur background elements - use fewer on mobile for better performance */}
-      {[...Array(isMobile ? 4 : 8)].map((_, i) => (
-        <div 
-          key={i} 
-          ref={el => el && (blurElementsRef.current[i] = el)} 
-          className="absolute rounded-full bg-white/5 filter blur-[100px]"
-          style={{
-            width: `${400 + i * 100}px`,
-            height: `${400 + i * 100}px`,
-            left: `${10 + (i % 4) * 20}%`,
-            top: `${15 + Math.floor(i/4) * 30}%`,
-            transform: 'translate(0px, 0px)', // Initial position
-            transition: 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)'
-          }}
-        />
-      ))}
+      {[...Array(isMobile ? 4 : 8)].map((_, i) => <div key={i} ref={el => el && (blurElementsRef.current[i] = el)} className="absolute rounded-full bg-white/5 filter blur-[100px]" style={{
+      width: `${400 + i * 100}px`,
+      height: `${400 + i * 100}px`,
+      left: `${10 + i % 4 * 20}%`,
+      top: `${15 + Math.floor(i / 4) * 30}%`,
+      transform: 'translate(0px, 0px)',
+      // Initial position
+      transition: 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)'
+    }} />)}
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-5xl mx-auto">
           {/* Logo & Social Links */}
           <div className="flex flex-col items-center mb-16">
             <Link to="/" className="mb-10 transition-transform hover:scale-105 duration-300">
-              <img 
-                src="/lovable-uploads/40fa92db-30b5-4792-8cc6-583ca4e26aa0.png" 
-                alt="KEIBEL SOFTWARE Logo" 
-                className="h-24 w-auto" 
-              />
+              <img alt="KEIBEL SOFTWARE Logo" className="h-24 w-auto" src="/lovable-uploads/ac1ecae5-610b-48f0-8d7e-3799fd748ceb.png" />
             </Link>
             
             <div className="flex space-x-8">
-              <a 
-                href="https://www.linkedin.com/in/maxim-keibel/" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="glass-effect p-4 rounded-full transition-all duration-300 hover:bg-white/10 group"
-                aria-label="LinkedIn"
-              >
+              <a href="https://www.linkedin.com/in/maxim-keibel/" target="_blank" rel="noopener noreferrer" className="glass-effect p-4 rounded-full transition-all duration-300 hover:bg-white/10 group" aria-label="LinkedIn">
                 <Linkedin size={24} className="text-white group-hover:scale-110 transition-transform duration-300" />
               </a>
               
-              <a 
-                href="https://github.com/max1m-d3v" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="glass-effect p-4 rounded-full transition-all duration-300 hover:bg-white/10 group"
-                aria-label="GitHub"
-              >
+              <a href="https://github.com/max1m-d3v" target="_blank" rel="noopener noreferrer" className="glass-effect p-4 rounded-full transition-all duration-300 hover:bg-white/10 group" aria-label="GitHub">
                 <Github size={24} className="text-white group-hover:scale-110 transition-transform duration-300" />
               </a>
             </div>
@@ -106,27 +83,27 @@ const Footer: React.FC = () => {
               <h3 className="text-lg font-bold mb-6 uppercase tracking-wider">Navigation</h3>
               <ul className="space-y-3">
                 <li>
-                  <a href="/" onClick={(e) => handleNavClick(e, '/')} className="text-white/70 hover:text-white transition-colors">
+                  <a href="/" onClick={e => handleNavClick(e, '/')} className="text-white/70 hover:text-white transition-colors">
                     Startseite
                   </a>
                 </li>
                 <li>
-                  <a href="/projects" onClick={(e) => handleNavClick(e, '/projects')} className="text-white/70 hover:text-white transition-colors">
+                  <a href="/projects" onClick={e => handleNavClick(e, '/projects')} className="text-white/70 hover:text-white transition-colors">
                     Projekte
                   </a>
                 </li>
                 <li>
-                  <a href="/resume" onClick={(e) => handleNavClick(e, '/resume')} className="text-white/70 hover:text-white transition-colors">
+                  <a href="/resume" onClick={e => handleNavClick(e, '/resume')} className="text-white/70 hover:text-white transition-colors">
                     Lebenslauf
                   </a>
                 </li>
                 <li>
-                  <a href="/about" onClick={(e) => handleNavClick(e, '/about')} className="text-white/70 hover:text-white transition-colors">
+                  <a href="/about" onClick={e => handleNavClick(e, '/about')} className="text-white/70 hover:text-white transition-colors">
                     Über mich
                   </a>
                 </li>
                 <li>
-                  <a href="/contact" onClick={(e) => handleNavClick(e, '/contact')} className="text-white/70 hover:text-white transition-colors">
+                  <a href="/contact" onClick={e => handleNavClick(e, '/contact')} className="text-white/70 hover:text-white transition-colors">
                     Kontakt
                   </a>
                 </li>
@@ -166,10 +143,10 @@ const Footer: React.FC = () => {
             <div className="flex flex-col md:flex-row justify-between items-center">
               <p className="text-sm text-white/50">&copy; {new Date().getFullYear()} KEIBEL SOFTWARE. Alle Rechte vorbehalten.</p>
               <div className="flex space-x-6 mt-4 md:mt-0">
-                <a href="/privacy" onClick={(e) => handleNavClick(e, '/privacy')} className="text-sm text-white/50 hover:text-white transition-colors">
+                <a href="/privacy" onClick={e => handleNavClick(e, '/privacy')} className="text-sm text-white/50 hover:text-white transition-colors">
                   Datenschutz
                 </a>
-                <a href="/imprint" onClick={(e) => handleNavClick(e, '/imprint')} className="text-sm text-white/50 hover:text-white transition-colors">
+                <a href="/imprint" onClick={e => handleNavClick(e, '/imprint')} className="text-sm text-white/50 hover:text-white transition-colors">
                   Impressum
                 </a>
               </div>
@@ -177,8 +154,6 @@ const Footer: React.FC = () => {
           </div>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 };
-
 export default Footer;
