@@ -1,20 +1,61 @@
-
 import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { ArrowRight, DownloadIcon } from 'lucide-react';
+import { toast } from '@/components/ui/use-toast';
+import { supabase } from '@/integrations/supabase/client';
 
 const Resume = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [activeSection, setActiveSection] = useState('education');
+  const [isDownloading, setIsDownloading] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 1000);
+    }, 400); // Reduced loading time
     return () => clearTimeout(timer);
   }, []);
+
+  const handleDownloadResume = async () => {
+    try {
+      setIsDownloading(true);
+      
+      // Assuming there's a file named 'lebenslauf.pdf' in the 'resumes' bucket
+      const { data, error } = await supabase
+        .storage
+        .from('resumes')
+        .download('lebenslauf.pdf');
+      
+      if (error) {
+        throw error;
+      }
+      
+      // Create a download link for the file
+      const url = URL.createObjectURL(data);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'Lebenslauf_Maxim_Keibel.pdf';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      
+      toast({
+        title: "Erfolg!",
+        description: "Lebenslauf wurde heruntergeladen.",
+      });
+    } catch (error) {
+      console.error('Error downloading resume:', error);
+      toast({
+        title: "Fehler",
+        description: "Beim Herunterladen des Lebenslaufs ist ein Fehler aufgetreten.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsDownloading(false);
+    }
+  };
 
   if (isLoading) {
     return <LoadingSpinner />;
@@ -37,7 +78,7 @@ const Resume = () => {
             {/* Left Side - Personal Info */}
             <div className="md:w-1/3 lg:w-1/4">
               <div className="sticky top-28">
-                <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
+                <div className="bg-white/90 backdrop-blur-md rounded-xl shadow-lg p-6 mb-8 border border-gray-200">
                   <div className="flex flex-col items-center mb-6">
                     <div className="w-40 h-40 rounded-full overflow-hidden mb-4 border-4 border-gray-200">
                       <img alt="Maxim Keibel" className="w-full h-full object-cover" src="/lovable-uploads/7c16e384-680f-43a0-8341-43bfb6b519e5.jpg" />
@@ -64,14 +105,18 @@ const Resume = () => {
                   </div>
                   
                   <div className="mt-8">
-                    <button className="flex items-center justify-center w-full bg-black text-white py-3 rounded-lg hover:bg-gray-800 transition-colors">
-                      <DownloadIcon size={18} className="mr-2" />
-                      Lebenslauf herunterladen
+                    <button 
+                      className={`flex items-center justify-center w-full bg-black text-white py-3 rounded-lg transition-colors ${isDownloading ? 'opacity-75 cursor-wait' : 'hover:bg-gray-800'}`}
+                      onClick={handleDownloadResume}
+                      disabled={isDownloading}
+                    >
+                      <DownloadIcon size={18} className={`mr-2 ${isDownloading ? 'animate-bounce' : ''}`} />
+                      {isDownloading ? 'Wird heruntergeladen...' : 'Lebenslauf herunterladen'}
                     </button>
                   </div>
                 </div>
                 
-                <div className="bg-white rounded-xl shadow-lg p-6">
+                <div className="bg-white/90 backdrop-blur-md rounded-xl shadow-lg p-6 border border-gray-200">
                   <h3 className="font-bold text-lg mb-4">Sprachen</h3>
                   
                   <div className="space-y-4">

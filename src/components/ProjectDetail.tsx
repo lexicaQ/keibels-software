@@ -4,7 +4,6 @@ import { useParams, Link } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import LoadingSpinner from './LoadingSpinner';
-import DeviceFrame from './DeviceFrame';
 import { ArrowLeft, Star, Check, Link as LinkIcon, ExternalLink } from 'lucide-react';
 
 interface Feature {
@@ -41,7 +40,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 800); // Reduced loading time
+    }, 400); // Reduced loading time even further
     
     return () => {
       clearTimeout(timer);
@@ -70,8 +69,6 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects }) => {
     );
   }
 
-  const deviceType = project.platform.toLowerCase().includes('ios') ? 'ios' : 'macos';
-
   // Custom icon mapping function
   const getFeatureIcon = (iconName: string) => {
     switch(iconName) {
@@ -83,7 +80,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects }) => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-white">
       <Navbar />
       
       <div className="pt-24 pb-20 flex-grow">
@@ -98,35 +95,35 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects }) => {
           
           {/* Header - Modern glassmorphism design */}
           <header className="mb-16">
-            <div className="flex flex-wrap items-start justify-between gap-8 md:gap-12">
-              <div className="max-w-2xl">
-                <div className="mb-2 flex items-center">
-                  <span className="px-3 py-1 bg-black text-white text-sm rounded-full mr-3">{project.platform}</span>
-                  <span className="text-gray-500">{project.year}</span>
+            <div className="bg-white/70 backdrop-blur-md border border-gray-200 rounded-2xl shadow-lg p-8">
+              <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
+                <div className="w-full md:w-3/5">
+                  <div className="mb-2 flex items-center">
+                    <span className="px-3 py-1 bg-black text-white text-sm rounded-full mr-3">{project.platform}</span>
+                    <span className="text-gray-500">{project.year}</span>
+                  </div>
+                  <h1 className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-br from-black to-gray-600 bg-clip-text text-transparent">{project.title}</h1>
+                  <p className="text-xl text-gray-600 italic mb-6">{project.slogan}</p>
+                  <p className="text-lg text-gray-700">{project.description}</p>
                 </div>
-                <h1 className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-br from-black to-gray-600 bg-clip-text text-transparent">{project.title}</h1>
-                <p className="text-xl text-gray-600 italic mb-6">{project.slogan}</p>
-                <p className="text-lg text-gray-700">{project.description}</p>
-              </div>
-              
-              <div className="flex-shrink-0 flex justify-center items-center">
-                <DeviceFrame 
-                  type={deviceType} 
-                  imageUrl={project.appImage}
-                  className="shadow-2xl"
-                />
+                
+                <div className="w-full md:w-2/5">
+                  {project.appImage && (
+                    <div className="aspect-square overflow-hidden rounded-xl shadow-lg border border-gray-200">
+                      <img 
+                        src={project.appImage} 
+                        alt={project.title}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </header>
           
           {/* Highlights with modern glassmorphism */}
-          <section 
-            className="mb-20 backdrop-blur-sm rounded-2xl p-8 md:p-12 shadow-lg border border-gray-200"
-            style={{ 
-              backgroundColor: project.backgroundColor ? `${project.backgroundColor}10` : 'rgba(255, 255, 255, 0.5)',
-              color: project.textColor || 'inherit'
-            }}
-          >
+          <section className="mb-20">
             <h2 className="text-3xl font-bold mb-8 flex items-center">
               <Star className="mr-3 text-black" size={24} />
               Highlights
@@ -135,7 +132,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects }) => {
               {project.highlights.map((highlight, index) => (
                 <div 
                   key={index} 
-                  className="p-6 rounded-xl bg-white/80 backdrop-blur-sm shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-300"
+                  className="p-6 rounded-xl bg-white/80 backdrop-blur-md shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
                 >
                   <div className="w-10 h-10 rounded-full bg-black flex items-center justify-center mb-4">
                     <span className="text-white font-medium">{index + 1}</span>
@@ -157,7 +154,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects }) => {
                 {project.features.map((feature, index) => (
                   <div 
                     key={index} 
-                    className="flex gap-6 p-6 rounded-xl bg-white shadow-lg border border-gray-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                    className="flex gap-6 p-6 rounded-xl bg-white/90 backdrop-blur-md shadow-lg border border-gray-200 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
                   >
                     <div className="flex-shrink-0">
                       <div className="w-12 h-12 rounded-full bg-black flex items-center justify-center">
@@ -185,7 +182,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects }) => {
                 {project.techStack.map((tech, index) => (
                   <span 
                     key={index} 
-                    className="px-4 py-2 bg-gradient-to-br from-gray-100 to-gray-200 rounded-full text-sm font-medium shadow-sm hover:shadow transition-shadow duration-300"
+                    className="px-4 py-2 bg-gradient-to-br from-white to-gray-100 border border-gray-200 rounded-full text-sm font-medium shadow-md hover:shadow-lg transition-all duration-300"
                   >
                     {tech}
                   </span>

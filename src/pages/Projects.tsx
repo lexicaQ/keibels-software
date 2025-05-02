@@ -8,7 +8,6 @@ import { ArrowRight, Laptop, Smartphone, ExternalLink } from 'lucide-react';
 import projectsData from '../data/projectsData';
 import { motion } from 'framer-motion';
 import { Badge } from '@/components/ui/badge';
-import DeviceFrame from '../components/DeviceFrame';
 
 const Projects = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -17,7 +16,7 @@ const Projects = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 800); // Reduced loading time
+    }, 400); // Reduced loading time even further
     return () => clearTimeout(timer);
   }, []);
   
@@ -83,7 +82,18 @@ const Projects = () => {
                 onMouseLeave={() => setHoveredProject(null)}
               >
                 <Link to={`/projects/${project.id}`} className="block h-full">
-                  <div className={`bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm transition-all duration-300 h-full flex flex-col hover:shadow-md ${hoveredProject === project.id ? 'transform scale-[1.02]' : ''}`}>
+                  <div className={`bg-white/80 backdrop-blur-md border border-gray-200 rounded-xl overflow-hidden shadow-md transition-all duration-300 h-full flex flex-col hover:shadow-xl ${hoveredProject === project.id ? 'transform scale-[1.02]' : ''}`}>
+                    {project.appImage && (
+                      <div className="relative h-48 overflow-hidden">
+                        <img 
+                          src={project.appImage} 
+                          alt={project.title}
+                          className="w-full h-full object-cover"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-white to-transparent"></div>
+                      </div>
+                    )}
+                    
                     <div className="p-6 flex flex-col h-full relative z-10">
                       <div className="flex justify-between items-center mb-3">
                         <Badge variant="outline" className={`${project.platform === 'iOS App' ? 'bg-black' : 'bg-gray-800'} text-white border-none`}>
