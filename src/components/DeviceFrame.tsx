@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import { useIsMobile } from '../hooks/use-mobile';
+import { Image, Upload, Plus } from 'lucide-react';
 
 interface DeviceFrameProps {
   type?: 'ios' | 'macos';
@@ -8,6 +9,7 @@ interface DeviceFrameProps {
   aspectRatio?: 'portrait' | 'landscape';
   altText?: string;
   className?: string;
+  onImageSelect?: (file: File) => void;
 }
 
 const DeviceFrame: React.FC<DeviceFrameProps> = ({
@@ -15,7 +17,8 @@ const DeviceFrame: React.FC<DeviceFrameProps> = ({
   imageUrl,
   aspectRatio = 'portrait',
   altText = 'Device screenshot',
-  className = ''
+  className = '',
+  onImageSelect
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const isMobile = useIsMobile();
@@ -37,7 +40,7 @@ const DeviceFrame: React.FC<DeviceFrameProps> = ({
           overflow-hidden
           transition-all 
           duration-300
-          ${isHovered ? 'shadow-2xl transform scale-[1.02]' : ''}
+          ${isHovered ? 'shadow-2xl' : ''}
         `}>
           {/* Dynamic notch for newer iOS devices */}
           <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-[120px] h-[34px] bg-black rounded-b-[14px] z-20"></div>
@@ -65,7 +68,7 @@ const DeviceFrame: React.FC<DeviceFrameProps> = ({
             </div>
             
             {/* Image Content */}
-            <div className="h-[calc(100%-44px)] overflow-hidden bg-gradient-to-br from-pink-300 via-purple-200 to-blue-400 relative">
+            <div className="h-[calc(100%-44px)] overflow-hidden bg-gradient-to-br from-gray-800 via-gray-900 to-black relative">
               {imageUrl ? (
                 <img 
                   src={imageUrl} 
@@ -73,49 +76,32 @@ const DeviceFrame: React.FC<DeviceFrameProps> = ({
                   className="w-full h-full object-cover"
                 />
               ) : (
-                <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center">
-                  <div className="grid grid-cols-4 gap-4 mb-12 px-8 pt-14">
-                    <div className="flex flex-col items-center">
-                      <div className="w-14 h-14 bg-gray-800/20 backdrop-blur-sm rounded-xl flex items-center justify-center mb-1">
-                        <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                        </svg>
+                <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center bg-gray-900">
+                  <div className="w-20 h-20 rounded-full bg-black/30 backdrop-blur-lg flex items-center justify-center mb-4 border border-white/10">
+                    <Image size={32} className="text-white/70" />
+                  </div>
+                  <p className="text-white/80 text-sm mb-2">Bildbereich</p>
+                  <p className="text-white/50 text-xs mb-6">Hier wird Ihre App-Vorschau angezeigt</p>
+                  
+                  <div className="grid grid-cols-4 gap-3 w-full px-5 mt-8">
+                    {Array(8).fill(0).map((_, i) => (
+                      <div key={i} className="aspect-square rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center">
+                        <div className="w-6 h-6 bg-white/20 rounded-md"></div>
                       </div>
-                      <span className="text-white/80 text-xs">Settings</span>
-                    </div>
-                    <div className="flex flex-col items-center">
-                      <div className="w-14 h-14 bg-white/70 backdrop-blur-sm rounded-xl flex items-center justify-center mb-1">
-                        <svg className="w-8 h-8 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
-                        </svg>
-                      </div>
-                      <span className="text-white/80 text-xs">Files</span>
-                    </div>
-                    <div className="flex flex-col items-center">
-                      <div className="w-14 h-14 bg-blue-500/70 backdrop-blur-sm rounded-xl flex items-center justify-center mb-1">
-                        <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-                        </svg>
-                      </div>
-                      <span className="text-white/80 text-xs">Safari</span>
-                    </div>
-                    <div className="flex flex-col items-center">
-                      <div className="w-14 h-14 bg-black/70 backdrop-blur-sm rounded-xl flex items-center justify-center mb-1">
-                        <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
-                        </svg>
-                      </div>
-                      <span className="text-white/80 text-xs">StarLog</span>
-                    </div>
+                    ))}
                   </div>
                   
-                  <div className="absolute bottom-10 left-0 right-0 flex justify-center">
-                    <div className="w-[140px] h-[40px] bg-black/20 backdrop-blur-lg rounded-full flex items-center justify-center">
-                      <svg className="w-4 h-4 text-white/70 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                      </svg>
-                      <span className="text-white/70 text-sm">Search</span>
+                  <div className="absolute bottom-10 w-full flex justify-center">
+                    <div className="flex items-center space-x-3">
+                      <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-lg flex items-center justify-center">
+                        <div className="w-5 h-5 rounded-md bg-white/50"></div>
+                      </div>
+                      <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-lg flex items-center justify-center">
+                        <div className="w-5 h-1 rounded-md bg-white/50"></div>
+                      </div>
+                      <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-lg flex items-center justify-center">
+                        <div className="w-1 h-5 rounded-md bg-white/50"></div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -137,7 +123,7 @@ const DeviceFrame: React.FC<DeviceFrameProps> = ({
           shadow-xl 
           transition-all 
           duration-300
-          ${isHovered ? 'shadow-2xl transform scale-[1.02]' : ''}
+          ${isHovered ? 'shadow-2xl' : ''}
         `}>
           {/* Menu Bar */}
           <div className="h-[28px] w-full bg-gradient-to-b from-gray-800 to-gray-700 rounded-t-lg flex items-center px-2">
@@ -161,14 +147,12 @@ const DeviceFrame: React.FC<DeviceFrameProps> = ({
                 className="w-full h-full object-cover"
               />
             ) : (
-              <div className="absolute inset-0 mt-[28px] flex flex-col items-center justify-center p-6 text-center">
-                <div className="w-16 h-16 border-2 border-dashed border-black/20 rounded-lg mb-4 flex items-center justify-center">
-                  <svg className="w-8 h-8 text-black/40" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                  </svg>
+              <div className="absolute inset-0 mt-[28px] flex flex-col items-center justify-center p-6 text-center bg-gradient-to-br from-gray-100 to-gray-200">
+                <div className="w-16 h-16 border-2 border-gray-400/30 rounded-lg mb-4 flex items-center justify-center">
+                  <Plus className="w-8 h-8 text-gray-400/70" />
                 </div>
-                <p className="text-black/60 text-sm">Bild hier einfügen</p>
-                <p className="text-black/40 text-xs mt-2">Klicken Sie, um ein Bild hochzuladen</p>
+                <p className="text-gray-600 text-sm">Bild hier einfügen</p>
+                <p className="text-gray-400 text-xs mt-2">Klicken Sie, um ein Bild hochzuladen</p>
               </div>
             )}
           </div>

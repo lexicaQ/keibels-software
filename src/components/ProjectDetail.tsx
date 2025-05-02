@@ -5,7 +5,7 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import LoadingSpinner from './LoadingSpinner';
 import DeviceFrame from './DeviceFrame';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Star, Check, Link as LinkIcon, ExternalLink } from 'lucide-react';
 
 interface Feature {
   icon: string;
@@ -41,7 +41,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 1000);
+    }, 800); // Reduced loading time
     
     return () => {
       clearTimeout(timer);
@@ -72,6 +72,16 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects }) => {
 
   const deviceType = project.platform.toLowerCase().includes('ios') ? 'ios' : 'macos';
 
+  // Custom icon mapping function
+  const getFeatureIcon = (iconName: string) => {
+    switch(iconName) {
+      case '⭐️': return <Star className="text-white" size={20} />;
+      case '✓': return <Check className="text-white" size={20} />;
+      case '🔗': return <LinkIcon className="text-white" size={20} />;
+      default: return <Star className="text-white" size={20} />;
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
@@ -86,15 +96,15 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects }) => {
             </Link>
           </div>
           
-          {/* Header */}
+          {/* Header - Modern glassmorphism design */}
           <header className="mb-16">
-            <div className="flex flex-wrap items-start justify-between gap-8">
+            <div className="flex flex-wrap items-start justify-between gap-8 md:gap-12">
               <div className="max-w-2xl">
                 <div className="mb-2 flex items-center">
                   <span className="px-3 py-1 bg-black text-white text-sm rounded-full mr-3">{project.platform}</span>
                   <span className="text-gray-500">{project.year}</span>
                 </div>
-                <h1 className="text-5xl md:text-6xl font-bold mb-4">{project.title}</h1>
+                <h1 className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-br from-black to-gray-600 bg-clip-text text-transparent">{project.title}</h1>
                 <p className="text-xl text-gray-600 italic mb-6">{project.slogan}</p>
                 <p className="text-lg text-gray-700">{project.description}</p>
               </div>
@@ -103,53 +113,55 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects }) => {
                 <DeviceFrame 
                   type={deviceType} 
                   imageUrl={project.appImage}
-                  className="transform rotate-[-5deg] shadow-2xl"
+                  className="shadow-2xl"
                 />
               </div>
             </div>
           </header>
           
-          {/* Highlights */}
+          {/* Highlights with modern glassmorphism */}
           <section 
-            className="mb-20 bg-white rounded-2xl p-8 md:p-12 shadow-lg border border-gray-100"
+            className="mb-20 backdrop-blur-sm rounded-2xl p-8 md:p-12 shadow-lg border border-gray-200"
             style={{ 
-              backgroundColor: project.backgroundColor ? `${project.backgroundColor}10` : 'white',
+              backgroundColor: project.backgroundColor ? `${project.backgroundColor}10` : 'rgba(255, 255, 255, 0.5)',
               color: project.textColor || 'inherit'
             }}
           >
-            <h2 className="text-3xl font-bold mb-8">Highlights</h2>
+            <h2 className="text-3xl font-bold mb-8 flex items-center">
+              <Star className="mr-3 text-black" size={24} />
+              Highlights
+            </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {project.highlights.map((highlight, index) => (
                 <div 
                   key={index} 
-                  className="p-6 rounded-xl bg-white/80 backdrop-blur-sm shadow-sm border border-gray-100"
+                  className="p-6 rounded-xl bg-white/80 backdrop-blur-sm shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-300"
                 >
-                  <div className="w-8 h-8 rounded-full bg-black flex items-center justify-center mb-4">
+                  <div className="w-10 h-10 rounded-full bg-black flex items-center justify-center mb-4">
                     <span className="text-white font-medium">{index + 1}</span>
                   </div>
-                  <p>{highlight}</p>
+                  <p className="text-gray-800">{highlight}</p>
                 </div>
               ))}
             </div>
           </section>
           
-          {/* Features */}
+          {/* Features with custom icons */}
           {project.features && (
             <section className="mb-20">
-              <h2 className="text-3xl font-bold mb-8">Funktionen</h2>
+              <h2 className="text-3xl font-bold mb-8 flex items-center">
+                <Check className="mr-3 text-black" size={24} />
+                Funktionen
+              </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {project.features.map((feature, index) => (
                   <div 
                     key={index} 
-                    className={`flex gap-6 p-6 rounded-xl bg-white shadow-lg border border-gray-100 transition-transform duration-300 hover:-translate-y-1 ${
-                      index % 3 === 0 ? "hover:shadow-black/10" : 
-                      index % 3 === 1 ? "hover:shadow-gray-400/20" : 
-                      "hover:shadow-gray-500/10"
-                    }`}
+                    className="flex gap-6 p-6 rounded-xl bg-white shadow-lg border border-gray-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
                   >
                     <div className="flex-shrink-0">
                       <div className="w-12 h-12 rounded-full bg-black flex items-center justify-center">
-                        <span className="text-white text-2xl">{feature.icon}</span>
+                        {getFeatureIcon(feature.icon)}
                       </div>
                     </div>
                     <div>
@@ -162,15 +174,18 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects }) => {
             </section>
           )}
           
-          {/* Tech Stack */}
+          {/* Tech Stack with modern glassmorphism */}
           {project.techStack && (
             <section className="mb-16">
-              <h2 className="text-3xl font-bold mb-6">Technologien</h2>
+              <h2 className="text-3xl font-bold mb-6 flex items-center">
+                <ExternalLink className="mr-3 text-black" size={24} />
+                Technologien
+              </h2>
               <div className="flex flex-wrap gap-3">
                 {project.techStack.map((tech, index) => (
                   <span 
                     key={index} 
-                    className="px-4 py-2 bg-gray-100 rounded-full text-sm font-medium"
+                    className="px-4 py-2 bg-gradient-to-br from-gray-100 to-gray-200 rounded-full text-sm font-medium shadow-sm hover:shadow transition-shadow duration-300"
                   >
                     {tech}
                   </span>

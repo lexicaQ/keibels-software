@@ -17,7 +17,7 @@ const Projects = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 1000);
+    }, 800); // Reduced loading time
     return () => clearTimeout(timer);
   }, []);
   
@@ -58,13 +58,13 @@ const Projects = () => {
       <div className="pt-24 pb-20 flex-grow">
         <div className="container mx-auto px-4">
           <header className="mb-16">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Meine Projekte</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-black to-gray-700 bg-clip-text text-transparent">Meine Projekte</h1>
             <p className="text-lg text-gray-700 max-w-3xl">
               Eine Sammlung meiner App-Entwicklungen für verschiedene Plattformen. Jedes Projekt wurde mit Fokus auf Benutzererfahrung, modernes Design und Funktionalität entwickelt.
             </p>
 
-            <div className="mt-6 relative h-1 bg-gray-200 w-full max-w-md">
-              <div className="absolute -top-12 -right-12 w-32 h-32 bg-blue-50 rounded-full opacity-30 blur-3xl"></div>
+            <div className="mt-6 relative h-1 bg-gradient-to-r from-gray-300 to-gray-100 w-full max-w-md rounded-full">
+              <div className="absolute -top-12 -right-12 w-32 h-32 bg-gray-100 rounded-full opacity-30 blur-3xl"></div>
             </div>
           </header>
           
@@ -110,7 +110,7 @@ const Projects = () => {
                       </div>
                       
                       <div className="mt-auto">
-                        <div className={`flex items-center justify-center w-full px-4 py-2 bg-black text-white text-sm rounded-lg transition-all duration-300 ${hoveredProject === project.id ? 'shadow-md' : ''}`}>
+                        <div className={`flex items-center justify-center w-full px-4 py-2 bg-gradient-to-r from-black to-gray-800 text-white text-sm rounded-lg transition-all duration-300 ${hoveredProject === project.id ? 'shadow-md' : ''}`}>
                           Details ansehen
                           <ArrowRight size={14} className={`ml-2 transition-transform duration-300 ${hoveredProject === project.id ? 'translate-x-1' : ''}`} />
                         </div>

@@ -16,9 +16,10 @@ const Index = () => {
 
   useEffect(() => {
     // Ensure all images and resources are fully loaded before removing loading spinner
+    // Reduced loading time
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 1000);
+    }, 800);
 
     return () => clearTimeout(timer);
   }, []);
@@ -50,13 +51,23 @@ const Index = () => {
   // Fix for mobile scroll issues
   useEffect(() => {
     if (isMobile) {
-      // Prevent scroll-triggered page reloads
-      const handleScroll = () => {
-        // No-op to capture scroll events without doing anything harmful
+      // Prevent scroll-triggered page reloads by using passive listeners
+      document.body.style.overscrollBehavior = 'none';
+      
+      // Add event listeners with passive: true to improve performance
+      const handleScroll = (e: TouchEvent) => {
+        // If at the top of the page and trying to scroll up, prevent default
+        if (window.scrollY === 0 && e.touches[0].clientY > 0) {
+          e.preventDefault();
+        }
       };
       
-      window.addEventListener('scroll', handleScroll, { passive: true });
-      return () => window.removeEventListener('scroll', handleScroll);
+      document.addEventListener('touchmove', handleScroll, { passive: false });
+      
+      return () => {
+        document.body.style.overscrollBehavior = '';
+        document.removeEventListener('touchmove', handleScroll);
+      };
     }
   }, [isMobile]);
 
@@ -65,7 +76,7 @@ const Index = () => {
   }
 
   return (
-    <div className="min-h-screen overflow-x-hidden" ref={contentRef}>
+    <div className="min-h-screen overflow-x-hidden bg-white" ref={contentRef}>
       <Navbar />
       <HeroSection />
       <AboutSection />
