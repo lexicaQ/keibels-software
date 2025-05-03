@@ -169,12 +169,12 @@ const Footer: React.FC = () => {
             <div className="flex flex-col md:flex-row justify-between items-center">
               <p className="text-sm text-white/50">&copy; {new Date().getFullYear()} KEIBEL SOFTWARE. Alle Rechte vorbehalten.</p>
               <div className="flex space-x-6 mt-4 md:mt-0">
-                <a href="/privacy" onClick={e => handleNavClick(e, '/privacy')} className="text-sm text-white/50 hover:text-white transition-colors">
+                <Link to="/privacy" className="text-sm text-white/50 hover:text-white transition-colors">
                   Datenschutz
-                </a>
-                <a href="/imprint" onClick={e => handleNavClick(e, '/imprint')} className="text-sm text-white/50 hover:text-white transition-colors">
+                </Link>
+                <Link to="/imprint" className="text-sm text-white/50 hover:text-white transition-colors">
                   Impressum
-                </a>
+                </Link>
               </div>
             </div>
           </div>

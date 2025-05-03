@@ -45,14 +45,16 @@ const projects = [
     title: "ToDoManager",
     slogan: "Klar organisiert. Schnell erledigt.",
     platform: "macOS App",
-    year: "2025"
+    year: "2025",
+    image: "/lovable-uploads/c0d5dc91-7451-4e20-a60d-82c907cfd8b6.png"
   },
   {
     id: "copychecker",
     title: "CopyChecker",
     slogan: "Wissen, was du kopiert hast",
     platform: "iOS App",
-    year: "2024"
+    year: "2024",
+    image: "/lovable-uploads/8284c56f-16e0-4dd6-b3a6-353a106bc9cf.png"
   },
 ];
 

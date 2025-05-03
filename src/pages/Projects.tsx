@@ -62,6 +62,10 @@ const Projects = () => {
         return "/lovable-uploads/f309b3f3-c5db-4782-8bbf-d76ed553e43b.png";
       case 'nightmanager':
         return "/lovable-uploads/4a2f84a9-773a-44d4-bd25-d6e9fd2679ad.png";
+      case 'todomanager':
+        return "/lovable-uploads/c0d5dc91-7451-4e20-a60d-82c907cfd8b6.png";
+      case 'copychecker':
+        return "/lovable-uploads/8284c56f-16e0-4dd6-b3a6-353a106bc9cf.png";
       default:
         return null;
     }
@@ -124,7 +128,7 @@ const Projects = () => {
                       
                       <div className="p-6 flex flex-col h-full relative z-10">
                         <div className="flex justify-between items-center mb-3">
-                          <Badge variant="outline" className={`${project.platform === 'iOS App' ? 'bg-white text-black' : 'bg-white text-black'} border-none`}>
+                          <Badge variant="outline" className={`bg-white text-black border-none`}>
                             {project.platform === 'iOS App' ? <Smartphone size={14} className="mr-1" /> : <Laptop size={14} className="mr-1" />}
                             {project.platform}
                           </Badge>
