@@ -6,6 +6,8 @@ import DeviceFrame from './DeviceFrame';
 import { useIsMobile } from '../hooks/use-mobile';
 import { motion } from 'framer-motion';
 import { Separator } from '@/components/ui/separator';
+import ProjectImage from './ProjectImage';
+import { getProjectImage } from '../utils/projectImages';
 
 const projects = [
   {
@@ -14,7 +16,7 @@ const projects = [
     slogan: "Dein smarter Clipboard-Manager",
     platform: "macOS App",
     year: "2025",
-    image: "/lovable-uploads/425434aa-0f1f-43b0-a36e-6667edfa2c9d.png"
+    image: getProjectImage("copyclipcloud")
   },
   {
     id: "apptimer",
@@ -22,7 +24,7 @@ const projects = [
     slogan: "Lokale Kontrolle. Sicher testen.",
     platform: "iOS App",
     year: "2023",
-    image: "/lovable-uploads/00c41542-7a3b-4c8a-9808-8a57caab29cd.png"
+    image: getProjectImage("apptimer")
   },
   {
     id: "zentro",
@@ -30,7 +32,7 @@ const projects = [
     slogan: "Dein Lieferfokus – punktgenau",
     platform: "iOS App",
     year: "2023",
-    image: "/lovable-uploads/f309b3f3-c5db-4782-8bbf-d76ed553e43b.png"
+    image: getProjectImage("zentro")
   },
   {
     id: "nightmanager",
@@ -38,21 +40,23 @@ const projects = [
     slogan: "Einschlafen mit Klang",
     platform: "iOS App",
     year: "2024",
-    image: "/lovable-uploads/4a2f84a9-773a-44d4-bd25-d6e9fd2679ad.png"
+    image: getProjectImage("nightmanager")
   },
   {
     id: "todomanager",
     title: "ToDoManager",
     slogan: "Klar organisiert. Schnell erledigt.",
     platform: "macOS App",
-    year: "2025"
+    year: "2025",
+    image: getProjectImage("todomanager")
   },
   {
     id: "copychecker",
     title: "CopyChecker",
     slogan: "Wissen, was du kopiert hast",
     platform: "iOS App",
-    year: "2024"
+    year: "2024",
+    image: getProjectImage("copychecker")
   },
 ];
 
@@ -89,10 +93,11 @@ const ProjectsSection: React.FC = () => {
 
   return (
     <section id="projects" className="py-24 bg-black text-white relative overflow-hidden">
-      {/* Background effects - smoother, more blurry */}
+      {/* Enhanced background effects with more white blur elements */}
       <div className="absolute top-0 left-0 w-full h-full">
-        <div className="absolute top-1/4 left-1/4 w-80 h-80 bg-white/3 rounded-full blur-[150px] opacity-40"></div>
-        <div className="absolute bottom-1/3 right-1/4 w-96 h-96 bg-white/2 rounded-full blur-[200px] opacity-40"></div>
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-white/4 rounded-full blur-[180px] opacity-50"></div>
+        <div className="absolute bottom-1/3 right-1/4 w-108 h-108 bg-white/3 rounded-full blur-[200px] opacity-50"></div>
+        <div className="absolute top-1/2 right-1/6 w-80 h-80 bg-white/4 rounded-full blur-[150px] opacity-40"></div>
       </div>
       
       <div className="container mx-auto px-4 relative z-10">
@@ -128,34 +133,20 @@ const ProjectsSection: React.FC = () => {
                 <div className={`backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl overflow-hidden transition-all duration-500 h-full flex flex-col hover:shadow-[0_10px_40px_rgba(255,255,255,0.1)] ${
                   hoveredProject === project.id ? 'transform scale-[1.03]' : ''
                 }`}>
-                  {project.image ? (
-                    <div className="relative h-48 overflow-hidden">
-                      <img 
-                        src={project.image} 
+                  {/* Updated image container with ProjectImage component */}
+                  <div className="relative aspect-video overflow-hidden bg-transparent">
+                    <div className="absolute inset-0 backdrop-blur-xl bg-white/5 -z-10"></div>
+                    <div className="w-full h-full p-3 flex items-center justify-center">
+                      <ProjectImage 
+                        imageUrl={project.image} 
                         alt={project.title}
-                        className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
+                        className="max-h-full transition-all duration-500 group-hover:scale-105"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
-                      <div className="absolute bottom-3 right-3 bg-white text-black p-1 rounded-full transform rotate-45 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                        <ArrowUpRight size={16} />
-                      </div>
                     </div>
-                  ) : (
-                    <div className="h-48 bg-gradient-to-br from-white/10 to-white/5 relative overflow-hidden">
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className={`transform ${index % 2 === 0 ? 'rotate-[-5deg]' : 'rotate-[5deg]'} scale-75 group-hover:scale-80 group-hover:rotate-0 transition-all duration-500`}>
-                          <DeviceFrame
-                            type={project.platform === 'iOS App' ? 'ios' : 'macos'}
-                            aspectRatio={project.platform === 'iOS App' ? 'portrait' : 'landscape'}
-                            className="shadow-lg"
-                          />
-                        </div>
-                      </div>
-                      <div className="absolute bottom-3 right-3 bg-white text-black p-1 rounded-full transform rotate-45 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                        <ArrowUpRight size={16} />
-                      </div>
+                    <div className="absolute bottom-3 right-3 bg-white text-black p-1 rounded-full transform rotate-45 opacity-0 group-hover:opacity-100 transition-all duration-300">
+                      <ArrowUpRight size={16} />
                     </div>
-                  )}
+                  </div>
                   
                   <div className="p-6 flex flex-col h-full">
                     <div className="flex justify-between items-center mb-3">

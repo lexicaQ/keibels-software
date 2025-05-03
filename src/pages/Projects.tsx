@@ -9,6 +9,8 @@ import projectsData from '../data/projectsData';
 import { motion } from 'framer-motion';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
+import ProjectImage from '../components/ProjectImage';
+import { getProjectImage } from '../utils/projectImages';
 
 const Projects = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -51,22 +53,6 @@ const Projects = () => {
     }
   };
 
-  // Get the correct screenshot based on project ID
-  const getProjectScreenshot = (id: string) => {
-    switch(id) {
-      case 'copyclipcloud':
-        return "/lovable-uploads/425434aa-0f1f-43b0-a36e-6667edfa2c9d.png";
-      case 'apptimer':
-        return "/lovable-uploads/00c41542-7a3b-4c8a-9808-8a57caab29cd.png";
-      case 'zentro':
-        return "/lovable-uploads/f309b3f3-c5db-4782-8bbf-d76ed553e43b.png";
-      case 'nightmanager':
-        return "/lovable-uploads/4a2f84a9-773a-44d4-bd25-d6e9fd2679ad.png";
-      default:
-        return null;
-    }
-  };
-
   return (
     <div className="min-h-screen flex flex-col bg-black text-white">
       <Navbar />
@@ -83,9 +69,9 @@ const Projects = () => {
               <div className="absolute -top-12 -right-12 w-32 h-32 bg-white/5 rounded-full blur-3xl"></div>
             </div>
             
-            {/* Decorative elements */}
-            <div className="absolute -top-10 -right-10 w-64 h-64 bg-white/5 rounded-full blur-[150px] opacity-40"></div>
-            <div className="absolute top-20 -left-10 w-40 h-40 bg-white/3 rounded-full blur-[100px] opacity-40"></div>
+            {/* Enhanced decorative elements */}
+            <div className="absolute -top-10 -right-10 w-80 h-80 bg-white/6 rounded-full blur-[180px] opacity-50"></div>
+            <div className="absolute top-20 -left-10 w-60 h-60 bg-white/5 rounded-full blur-[150px] opacity-50"></div>
           </header>
           
           <motion.div 
@@ -95,7 +81,7 @@ const Projects = () => {
             animate="visible"
           >
             {projectsData.map((project, index) => {
-              const screenshot = getProjectScreenshot(project.id);
+              const projectImage = getProjectImage(project.id);
               
               return (
                 <motion.div 
@@ -111,16 +97,17 @@ const Projects = () => {
                         hoveredProject === project.id ? 'transform scale-[1.03] shadow-lg' : ''
                       }`}
                     >
-                      {screenshot && (
-                        <div className="relative h-48 overflow-hidden">
-                          <img 
-                            src={screenshot} 
+                      {/* Updated image container with ProjectImage component */}
+                      <div className="relative aspect-video overflow-hidden backdrop-blur-sm bg-white/3">
+                        <div className="w-full h-full p-3 flex items-center justify-center">
+                          <ProjectImage 
+                            imageUrl={projectImage} 
                             alt={project.title}
-                            className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
+                            className="max-h-full transition-all duration-500 group-hover:scale-105"
                           />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
                         </div>
-                      )}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+                      </div>
                       
                       <div className="p-6 flex flex-col h-full relative z-10">
                         <div className="flex justify-between items-center mb-3">
