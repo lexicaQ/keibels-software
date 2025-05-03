@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 // App content components
@@ -325,8 +324,29 @@ const CopyCheckerContent = (isAnimating: boolean) => (
   </div>
 );
 
+export interface Feature {
+  icon: string;
+  title: string;
+  description: string;
+}
+
+export interface Project {
+  id: string;
+  title: string;
+  slogan: string;
+  description: string;
+  highlights: string[];
+  features?: Feature[];
+  platform: string;
+  year: string;
+  appContent?: (isAnimating: boolean) => React.ReactNode;
+  backgroundColor?: string;
+  textColor?: string;
+  techStack?: string[];
+}
+
 // Project data with all details
-export const projectsData = [
+export const projectsData: Project[] = [
   {
     id: "copyclipcloud",
     title: "CopyClipCloud",
