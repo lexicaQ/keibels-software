@@ -6,7 +6,7 @@ import Footer from './Footer';
 import LoadingSpinner from './LoadingSpinner';
 import { ArrowLeft, Star, Check, Link as LinkIcon, ExternalLink, Code, Laptop, Smartphone, Github } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { Separator } from '@/components/ui/separator';
+import { Progress } from '@/components/ui/progress';
 
 interface Feature {
   icon: string;
@@ -35,6 +35,7 @@ interface ProjectDetailProps {
 
 const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects }) => {
   const [isLoading, setIsLoading] = useState(true);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const { projectId } = useParams<{ projectId: string }>();
   const contentRef = useRef<HTMLDivElement>(null);
@@ -50,6 +51,19 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects }) => {
     return () => {
       clearTimeout(timer);
     };
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!contentRef.current) return;
+      
+      const totalHeight = contentRef.current.scrollHeight - window.innerHeight;
+      const progress = (window.scrollY / totalHeight) * 100;
+      setScrollProgress(progress);
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   if (isLoading) {
@@ -98,10 +112,8 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects }) => {
         return "/lovable-uploads/f309b3f3-c5db-4782-8bbf-d76ed553e43b.png";
       case 'nightmanager':
         return "/lovable-uploads/4a2f84a9-773a-44d4-bd25-d6e9fd2679ad.png";
-      case 'todomanager':
-        return "/lovable-uploads/c0d5dc91-7451-4e20-a60d-82c907cfd8b6.png";
-      case 'copychecker':
-        return "/lovable-uploads/8284c56f-16e0-4dd6-b3a6-353a106bc9cf.png";
+      case 'customimage':
+        return "/lovable-uploads/65a71f75-2c9e-49ce-ac3c-f1f814421a39.png";
       default:
         return null;
     }
@@ -132,12 +144,19 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects }) => {
     }
   };
 
+  const isMacOSApp = project.platform === 'macOS App';
+
   return (
     <div className="min-h-screen flex flex-col bg-black text-white overflow-x-hidden" ref={contentRef}>
       <Navbar />
       
-      {/* Subtle white line below navbar */}
-      <div className="w-full h-px bg-gradient-to-r from-white/5 via-white/20 to-white/5"></div>
+      {/* Scroll progress indicator */}
+      <div className="fixed top-0 left-0 right-0 z-50 h-1 bg-white/5">
+        <div 
+          className="h-full bg-white"
+          style={{ width: `${scrollProgress}%` }}
+        ></div>
+      </div>
       
       <div className="pt-24 pb-20 flex-grow">
         <div className="container mx-auto px-4">
@@ -171,7 +190,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects }) => {
             >
               <div className="w-full md:w-1/2 z-10">
                 <div className="flex items-center mb-4">
-                  <span className="px-3 py-1 bg-white text-black text-sm font-medium rounded-full mr-3">
+                  <span className={`px-3 py-1 ${isMacOSApp ? 'bg-white' : 'bg-white'} text-black text-sm font-medium rounded-full mr-3`}>
                     {project.platform === 'iOS App' ? (
                       <span className="flex items-center">
                         <Smartphone size={14} className="mr-1" />
@@ -200,14 +219,11 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects }) => {
                     animate={{ opacity: 1, scale: 1, rotateY: 0 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
                   >
-                    {/* Modern glass background effect - completely white and blurry */}
-                    <div className="absolute inset-0 bg-white/10 backdrop-blur-3xl rounded-3xl scale-105 transform -rotate-2"></div>
-                    <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-white/5 rounded-3xl"></div>
-                    
+                    <div className="absolute inset-0 bg-white/10 blur-2xl rounded-3xl transform scale-105"></div>
                     <img 
                       src={projectScreenshot} 
                       alt={project.title}
-                      className="relative z-10 max-w-full max-h-[500px] object-contain rounded-3xl shadow-[0_10px_40px_rgba(255,255,255,0.15)] transform rotate-2"
+                      className="relative z-10 max-w-full max-h-[500px] rounded-3xl shadow-[0_10px_40px_rgba(255,255,255,0.15)] transform rotate-2"
                     />
                   </motion.div>
                 ) : null}
@@ -215,72 +231,68 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects }) => {
             </motion.div>
           </section>
           
-          {/* Highlights section - more compact, elegant layout */}
+          {/* Highlights section */}
           <motion.section 
-            className="mb-16"
+            className="mb-20"
             variants={containerVariants}
             initial="hidden"
             animate="visible"
           >
             <motion.h2
               variants={itemVariants}
-              className="text-2xl font-bold mb-6 flex items-center"
+              className="text-3xl font-bold mb-8 flex items-center"
             >
-              <Star className="mr-3 text-white" size={22} />
+              <Star className="mr-3 text-white" size={24} />
               Highlights
             </motion.h2>
             
-            <motion.div 
-              variants={itemVariants}
-              className="grid grid-cols-1 md:grid-cols-3 gap-4"
-            >
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {project.highlights.map((highlight, index) => (
                 <motion.div 
                   key={index}
                   variants={itemVariants}
-                  className="group backdrop-blur-lg bg-white/5 border border-white/10 rounded-xl p-5 hover:bg-white/10 transition-all duration-300 hover:-translate-y-1"
+                  className="group backdrop-blur-lg bg-white/5 border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_10px_40px_rgba(255,255,255,0.1)]"
                 >
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="w-7 h-7 rounded-full bg-white/10 flex items-center justify-center text-white text-sm">
-                      {index + 1}
-                    </div>
-                    <div className="h-px flex-grow bg-white/10"></div>
+                  <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-black mb-4 transform transition-transform duration-500 group-hover:scale-110 group-hover:rotate-12">
+                    <span className="font-medium">{index + 1}</span>
                   </div>
-                  <p className="text-gray-300 text-sm">{highlight}</p>
+                  <p className="text-gray-300 group-hover:text-white transition-colors duration-300">{highlight}</p>
                 </motion.div>
               ))}
-            </motion.div>
+            </div>
           </motion.section>
           
-          {/* Features section - more elegant and informative layout */}
+          {/* Features section */}
           {project.features && (
             <motion.section
-              className="mb-16"
+              className="mb-20"
               variants={containerVariants}
               initial="hidden"
               animate="visible"
             >
               <motion.h2
                 variants={itemVariants}
-                className="text-2xl font-bold mb-6 flex items-center"
+                className="text-3xl font-bold mb-8 flex items-center"
               >
-                <Check className="mr-3 text-white" size={22} />
+                <Check className="mr-3 text-white" size={24} />
                 Funktionen
               </motion.h2>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {project.features.map((feature, index) => (
                   <motion.div 
                     key={index}
                     variants={itemVariants}  
-                    className="flex backdrop-blur-lg bg-white/5 border border-white/10 p-5 rounded-xl transition-all duration-300 hover:-translate-y-1 hover:bg-white/8"
+                    className="flex gap-6 backdrop-blur-lg bg-white/5 border border-white/10 p-6 rounded-xl transition-all duration-300 hover:-translate-y-1 hover:bg-white/10 hover:shadow-[0_10px_30px_rgba(255,255,255,0.1)]"
                   >
-                    <div className="w-10 h-10 rounded-full bg-white/10 flex-shrink-0 flex items-center justify-center mr-4">
-                      {getFeatureIcon(feature.icon)}
+                    <div className="flex-shrink-0">
+                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-white/20 to-white/5 flex items-center justify-center shadow-inner">
+                        {getFeatureIcon(feature.icon)}
+                      </div>
                     </div>
                     <div>
-                      <h3 className="text-base font-medium text-white mb-2">{feature.title}</h3>
-                      <p className="text-gray-400 text-sm">{feature.description}</p>
+                      <h3 className="text-xl font-bold mb-2 text-white">{feature.title}</h3>
+                      <p className="text-gray-400">{feature.description}</p>
                     </div>
                   </motion.div>
                 ))}
@@ -288,59 +300,102 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects }) => {
             </motion.section>
           )}
           
-          {/* Tech Stack section - cleaner, more informative design */}
+          {/* Tech Stack section */}
           {project.techStack && (
             <motion.section
-              className="mb-16"
+              className="mb-20"
               variants={containerVariants}
               initial="hidden"
               animate="visible"
             >
               <motion.h2
                 variants={itemVariants}
-                className="text-2xl font-bold mb-6 flex items-center"
+                className="text-3xl font-bold mb-8 flex items-center"
               >
-                <Code className="mr-3 text-white" size={22} />
+                <Code className="mr-3 text-white" size={24} />
                 Technologien
               </motion.h2>
               
               <motion.div
                 variants={itemVariants}
-                className="backdrop-blur-lg bg-white/5 border border-white/10 rounded-xl p-6"
+                className="backdrop-blur-lg bg-white/5 border border-white/10 rounded-xl p-8"
               >
-                <div className="flex flex-wrap gap-3 mb-6">
+                <div className="flex flex-wrap gap-3">
                   {project.techStack.map((tech, index) => (
                     <span 
                       key={index}
-                      className="px-4 py-2 backdrop-blur-md bg-white/10 border border-white/10 rounded-full text-sm font-medium hover:bg-white/15 transition-all duration-300 hover:-translate-y-1"
+                      className="px-4 py-2 backdrop-blur-md bg-white/10 border border-white/20 rounded-full text-sm font-medium hover:bg-white/15 transition-all duration-300 hover:-translate-y-1"
                     >
                       {tech}
                     </span>
                   ))}
                 </div>
                 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  <div className="bg-white/5 backdrop-blur-md rounded-lg p-4">
-                    <h3 className="text-base font-medium mb-2 text-white">Entwicklungszeit</h3>
-                    <p className="text-gray-400">4 Wochen</p>
+                <div className="mt-8 pt-8 border-t border-white/10">
+                  <h3 className="text-xl font-bold mb-4">Entwicklungsdetails</h3>
+                  <div className="space-y-4">
+                    <div>
+                      <p className="text-sm text-gray-400 mb-1">Codequalität</p>
+                      <Progress value={95} className="h-1.5 bg-white/10" indicatorClassName="bg-white" />
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-400 mb-1">Performance</p>
+                      <Progress value={90} className="h-1.5 bg-white/10" indicatorClassName="bg-white" />
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-400 mb-1">Benutzerfreundlichkeit</p>
+                      <Progress value={98} className="h-1.5 bg-white/10" indicatorClassName="bg-white" />
+                    </div>
                   </div>
-                  <div className="bg-white/5 backdrop-blur-md rounded-lg p-4">
-                    <h3 className="text-base font-medium mb-2 text-white">Updates</h3>
-                    <p className="text-gray-400">Regelmäßig</p>
-                  </div>
-                  <div className="bg-white/5 backdrop-blur-md rounded-lg p-4">
-                    <h3 className="text-base font-medium mb-2 text-white">Kompatibilität</h3>
-                    <p className="text-gray-400">
-                      {project.platform === 'iOS App' ? 'iOS 15.0+' : 'macOS 12.0+'}
-                    </p>
+                  
+                  <div className="mt-8 flex items-center">
+                    <div className="flex-1">
+                      <h4 className="text-lg font-medium mb-1">Entwicklungszeit</h4>
+                      <p className="text-sm text-gray-400">4 Wochen</p>
+                    </div>
+                    <div className="flex-1">
+                      <h4 className="text-lg font-medium mb-1">Updates</h4>
+                      <p className="text-sm text-gray-400">Regelmäßig</p>
+                    </div>
+                    {project.platform === 'iOS App' && (
+                      <div className="flex-1">
+                        <h4 className="text-lg font-medium mb-1">iOS Version</h4>
+                        <p className="text-sm text-gray-400">15.0+</p>
+                      </div>
+                    )}
+                    {project.platform === 'macOS App' && (
+                      <div className="flex-1">
+                        <h4 className="text-lg font-medium mb-1">macOS Version</h4>
+                        <p className="text-sm text-gray-400">12.0+</p>
+                      </div>
+                    )}
                   </div>
                 </div>
               </motion.div>
-              
-              {/* Add decorative blur element */}
-              <div className="absolute bottom-40 right-10 w-64 h-64 bg-white/5 rounded-full blur-[150px] opacity-30 z-0"></div>
             </motion.section>
           )}
+        </div>
+      </div>
+      
+      {/* Bottom glassy indicator - less white, more subtle */}
+      <div className="fixed bottom-0 left-0 right-0 h-16 backdrop-blur-xl bg-black/70 border-t border-white/5 z-40 flex items-center justify-between px-6">
+        <div className="flex items-center">
+          <div className="w-3 h-3 rounded-full bg-white/80 mr-3"></div>
+          <span className="text-sm">{project.title}</span>
+        </div>
+        
+        <div className="flex items-center space-x-2">
+          <div className="w-16 h-1 bg-white/10 rounded-full overflow-hidden">
+            <div className="h-full bg-white/80" style={{ width: `${scrollProgress}%` }}></div>
+          </div>
+          <span className="text-xs text-gray-400">{Math.min(Math.round(scrollProgress), 100)}%</span>
+        </div>
+        
+        <div>
+          <Link to="/projects" className="text-sm flex items-center text-gray-400 hover:text-white transition-colors">
+            <ArrowLeft size={14} className="mr-1" />
+            Zurück
+          </Link>
         </div>
       </div>
       

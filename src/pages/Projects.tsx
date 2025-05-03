@@ -62,10 +62,6 @@ const Projects = () => {
         return "/lovable-uploads/f309b3f3-c5db-4782-8bbf-d76ed553e43b.png";
       case 'nightmanager':
         return "/lovable-uploads/4a2f84a9-773a-44d4-bd25-d6e9fd2679ad.png";
-      case 'todomanager':
-        return "/lovable-uploads/c0d5dc91-7451-4e20-a60d-82c907cfd8b6.png";
-      case 'copychecker':
-        return "/lovable-uploads/8284c56f-16e0-4dd6-b3a6-353a106bc9cf.png";
       default:
         return null;
     }
@@ -74,9 +70,6 @@ const Projects = () => {
   return (
     <div className="min-h-screen flex flex-col bg-black text-white">
       <Navbar />
-      
-      {/* Subtle white line below navbar */}
-      <div className="w-full h-px bg-gradient-to-r from-white/5 via-white/20 to-white/5"></div>
       
       <div className="pt-24 pb-20 flex-grow">
         <div className="container mx-auto px-4">
@@ -120,19 +113,18 @@ const Projects = () => {
                     >
                       {screenshot && (
                         <div className="relative h-48 overflow-hidden">
-                          <div className="absolute inset-0 bg-white/5 backdrop-blur-sm"></div>
                           <img 
                             src={screenshot} 
                             alt={project.title}
-                            className="w-full h-full object-contain transition-all duration-500 group-hover:scale-105"
+                            className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
                           />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-50"></div>
+                          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
                         </div>
                       )}
                       
                       <div className="p-6 flex flex-col h-full relative z-10">
                         <div className="flex justify-between items-center mb-3">
-                          <Badge variant="outline" className={`bg-white text-black border-none`}>
+                          <Badge variant="outline" className={`${project.platform === 'iOS App' ? 'bg-white text-black' : 'bg-white text-black'} border-none`}>
                             {project.platform === 'iOS App' ? <Smartphone size={14} className="mr-1" /> : <Laptop size={14} className="mr-1" />}
                             {project.platform}
                           </Badge>
@@ -143,8 +135,8 @@ const Projects = () => {
                         <p className="text-gray-300 text-sm italic mb-3">{project.slogan}</p>
                         
                         <div className="mb-4 flex-grow">
-                          <p className="text-sm text-gray-400 mb-2">
-                            {project.description?.substring(0, 100)}...
+                          <p className="text-sm text-gray-400 line-clamp-2 mb-2">
+                            {project.description?.substring(0, 80)}...
                           </p>
                           <div className="mt-3 flex flex-wrap gap-2">
                             {project.highlights?.slice(0, 2).map((highlight, idx) => (
