@@ -5,6 +5,7 @@ import { ArrowRight, Laptop, Smartphone, ArrowUpRight } from 'lucide-react';
 import DeviceFrame from './DeviceFrame';
 import { useIsMobile } from '../hooks/use-mobile';
 import { motion } from 'framer-motion';
+import { Separator } from '@/components/ui/separator';
 
 const projects = [
   {
@@ -88,10 +89,10 @@ const ProjectsSection: React.FC = () => {
 
   return (
     <section id="projects" className="py-24 bg-black text-white relative overflow-hidden">
-      {/* Background effects */}
+      {/* Background effects - smoother, more blurry */}
       <div className="absolute top-0 left-0 w-full h-full">
-        <div className="absolute top-1/4 left-1/4 w-60 h-60 bg-white/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-white/3 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/4 left-1/4 w-80 h-80 bg-white/3 rounded-full blur-[150px] opacity-40"></div>
+        <div className="absolute bottom-1/3 right-1/4 w-96 h-96 bg-white/2 rounded-full blur-[200px] opacity-40"></div>
       </div>
       
       <div className="container mx-auto px-4 relative z-10">
@@ -124,7 +125,7 @@ const ProjectsSection: React.FC = () => {
                 onClick={(e) => handleProjectClick(e, project.id)}
                 className="cursor-pointer h-full"
               >
-                <div className={`backdrop-blur-lg bg-white/5 border border-white/10 rounded-xl overflow-hidden transition-all duration-500 h-full flex flex-col hover:shadow-[0_10px_40px_rgba(255,255,255,0.1)] ${
+                <div className={`backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl overflow-hidden transition-all duration-500 h-full flex flex-col hover:shadow-[0_10px_40px_rgba(255,255,255,0.1)] ${
                   hoveredProject === project.id ? 'transform scale-[1.03]' : ''
                 }`}>
                   {project.image ? (
@@ -132,9 +133,9 @@ const ProjectsSection: React.FC = () => {
                       <img 
                         src={project.image} 
                         alt={project.title}
-                        className="w-full h-full object-cover filter grayscale transition-all duration-500 group-hover:grayscale-0"
+                        className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
                       <div className="absolute bottom-3 right-3 bg-white text-black p-1 rounded-full transform rotate-45 opacity-0 group-hover:opacity-100 transition-all duration-300">
                         <ArrowUpRight size={16} />
                       </div>
@@ -171,6 +172,8 @@ const ProjectsSection: React.FC = () => {
                     <h3 className="text-lg font-bold mb-1">{project.title}</h3>
                     <p className="text-sm text-gray-400 mb-4">{project.slogan}</p>
                     
+                    <Separator className="my-4 bg-white/5" />
+                    
                     <div className="mt-auto flex items-center text-sm font-medium text-gray-300 group-hover:text-white transition-colors">
                       Details
                       <ArrowRight size={16} className={`ml-1 transition-transform duration-300 ${hoveredProject === project.id ? 'translate-x-1' : ''}`} />
@@ -185,7 +188,7 @@ const ProjectsSection: React.FC = () => {
         <div className="mt-16 text-center">
           <motion.button 
             onClick={() => navigate('/projects')}
-            className="relative px-8 py-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg overflow-hidden group"
+            className="relative px-8 py-3 bg-white/10 backdrop-blur-xl border border-white/20 rounded-lg overflow-hidden group"
             whileHover={{ y: -2, boxShadow: "0 10px 25px rgba(255,255,255,0.1)" }}
             transition={{ duration: 0.2 }}
           >

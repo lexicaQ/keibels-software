@@ -48,7 +48,7 @@ const Navbar: React.FC = () => {
       </div>
       
       {/* Navbar mit schwarzem Hintergrund */}
-      <nav className="w-full bg-black shadow-lg shadow-black/10 sticky top-0 z-40 border-b border-white/5">
+      <nav className="w-full bg-black shadow-lg shadow-black/10 sticky top-0 z-40 border-b border-white/10">
         <div className="container mx-auto px-4 md:px-6 py-4 flex justify-center">
           {/* Desktop Menu - zentriert */}
           <ul className="hidden md:flex space-x-16">
@@ -75,6 +75,9 @@ const Navbar: React.FC = () => {
           </button>
         </div>
       </nav>
+      
+      {/* Add subtle white/gray separator line */}
+      <Separator className="h-px bg-gradient-to-r from-white/5 via-white/10 to-white/5" />
 
       {/* Mobile Menu */}
       <div className={`fixed inset-0 bg-black backdrop-blur-lg z-50 transform transition-transform duration-300 ease-in-out ${

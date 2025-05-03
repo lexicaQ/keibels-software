@@ -8,6 +8,7 @@ import { ArrowRight, Laptop, Smartphone } from 'lucide-react';
 import projectsData from '../data/projectsData';
 import { motion } from 'framer-motion';
 import { Badge } from '@/components/ui/badge';
+import { Separator } from '@/components/ui/separator';
 
 const Projects = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -50,6 +51,22 @@ const Projects = () => {
     }
   };
 
+  // Get the correct screenshot based on project ID
+  const getProjectScreenshot = (id: string) => {
+    switch(id) {
+      case 'copyclipcloud':
+        return "/lovable-uploads/425434aa-0f1f-43b0-a36e-6667edfa2c9d.png";
+      case 'apptimer':
+        return "/lovable-uploads/00c41542-7a3b-4c8a-9808-8a57caab29cd.png";
+      case 'zentro':
+        return "/lovable-uploads/f309b3f3-c5db-4782-8bbf-d76ed553e43b.png";
+      case 'nightmanager':
+        return "/lovable-uploads/4a2f84a9-773a-44d4-bd25-d6e9fd2679ad.png";
+      default:
+        return null;
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-black text-white">
       <Navbar />
@@ -67,8 +84,8 @@ const Projects = () => {
             </div>
             
             {/* Decorative elements */}
-            <div className="absolute -top-10 -right-10 w-64 h-64 bg-white/5 rounded-full blur-3xl"></div>
-            <div className="absolute top-20 -left-10 w-40 h-40 bg-white/3 rounded-full blur-2xl"></div>
+            <div className="absolute -top-10 -right-10 w-64 h-64 bg-white/5 rounded-full blur-[150px] opacity-40"></div>
+            <div className="absolute top-20 -left-10 w-40 h-40 bg-white/3 rounded-full blur-[100px] opacity-40"></div>
           </header>
           
           <motion.div 
@@ -77,61 +94,77 @@ const Projects = () => {
             initial="hidden" 
             animate="visible"
           >
-            {projectsData.map((project, index) => (
-              <motion.div 
-                key={index} 
-                variants={itemVariants} 
-                className="relative" 
-                onMouseEnter={() => setHoveredProject(project.id)} 
-                onMouseLeave={() => setHoveredProject(null)}
-              >
-                <Link to={`/projects/${project.id}`} className="block h-full">
-                  <div 
-                    className={`backdrop-blur-lg bg-white/10 border border-white/20 rounded-xl overflow-hidden transition-all duration-500 h-full flex flex-col hover:shadow-[0_10px_40px_rgba(255,255,255,0.1)] ${
-                      hoveredProject === project.id ? 'transform scale-[1.03] shadow-lg' : ''
-                    }`}
-                  >
-                    <div className="p-6 flex flex-col h-full relative z-10">
-                      <div className="flex justify-between items-center mb-3">
-                        <Badge variant="outline" className={`${project.platform === 'iOS App' ? 'bg-white text-black' : 'bg-gray-800 text-white'} border-none`}>
-                          {project.platform === 'iOS App' ? <Smartphone size={14} className="mr-1" /> : <Laptop size={14} className="mr-1" />}
-                          {project.platform}
-                        </Badge>
-                        <span className="text-xs font-medium text-gray-400">{project.year}</span>
-                      </div>
-                      
-                      <h2 className="text-xl font-bold mb-1 text-white">{project.title}</h2>
-                      <p className="text-gray-300 text-sm italic mb-3">{project.slogan}</p>
-                      
-                      <div className="mb-4 flex-grow">
-                        <p className="text-sm text-gray-400 line-clamp-2 mb-2">
-                          {project.description?.substring(0, 80)}...
-                        </p>
-                        <div className="mt-3 flex flex-wrap gap-2">
-                          {project.highlights?.slice(0, 2).map((highlight, idx) => (
-                            <span key={idx} className="inline-block text-xs bg-white/10 px-2 py-1 rounded-full text-gray-300">
-                              {highlight.substring(0, 25)}{highlight.length > 25 ? '...' : ''}
-                            </span>
-                          ))}
+            {projectsData.map((project, index) => {
+              const screenshot = getProjectScreenshot(project.id);
+              
+              return (
+                <motion.div 
+                  key={index} 
+                  variants={itemVariants} 
+                  className="relative" 
+                  onMouseEnter={() => setHoveredProject(project.id)} 
+                  onMouseLeave={() => setHoveredProject(null)}
+                >
+                  <Link to={`/projects/${project.id}`} className="block h-full">
+                    <div 
+                      className={`backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl overflow-hidden transition-all duration-500 h-full flex flex-col hover:shadow-[0_10px_40px_rgba(255,255,255,0.1)] ${
+                        hoveredProject === project.id ? 'transform scale-[1.03] shadow-lg' : ''
+                      }`}
+                    >
+                      {screenshot && (
+                        <div className="relative h-48 overflow-hidden">
+                          <img 
+                            src={screenshot} 
+                            alt={project.title}
+                            className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
                         </div>
-                      </div>
+                      )}
                       
-                      <div className="mt-auto">
-                        <div className={`
-                          flex items-center justify-center w-full px-4 py-2 
-                          bg-gradient-to-r from-white/20 to-white/5 
-                          text-white text-sm rounded-lg transition-all duration-300 
-                          ${hoveredProject === project.id ? 'shadow-[0_5px_15px_rgba(255,255,255,0.15)]' : ''}`
-                        }>
-                          Details ansehen
-                          <ArrowRight size={14} className={`ml-2 transition-transform duration-300 ${hoveredProject === project.id ? 'translate-x-1' : ''}`} />
+                      <div className="p-6 flex flex-col h-full relative z-10">
+                        <div className="flex justify-between items-center mb-3">
+                          <Badge variant="outline" className={`${project.platform === 'iOS App' ? 'bg-white text-black' : 'bg-white text-black'} border-none`}>
+                            {project.platform === 'iOS App' ? <Smartphone size={14} className="mr-1" /> : <Laptop size={14} className="mr-1" />}
+                            {project.platform}
+                          </Badge>
+                          <span className="text-xs font-medium text-gray-400">{project.year}</span>
+                        </div>
+                        
+                        <h2 className="text-xl font-bold mb-1 text-white">{project.title}</h2>
+                        <p className="text-gray-300 text-sm italic mb-3">{project.slogan}</p>
+                        
+                        <div className="mb-4 flex-grow">
+                          <p className="text-sm text-gray-400 line-clamp-2 mb-2">
+                            {project.description?.substring(0, 80)}...
+                          </p>
+                          <div className="mt-3 flex flex-wrap gap-2">
+                            {project.highlights?.slice(0, 2).map((highlight, idx) => (
+                              <span key={idx} className="inline-block text-xs bg-white/10 px-2 py-1 rounded-full text-gray-300">
+                                {highlight.substring(0, 25)}{highlight.length > 25 ? '...' : ''}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                        
+                        <Separator className="my-4 bg-white/5" />
+                        
+                        <div className="mt-auto">
+                          <div className={`
+                            flex items-center justify-center w-full px-4 py-2 
+                            bg-white/10 hover:bg-white/15
+                            text-white text-sm rounded-lg transition-all duration-300`
+                          }>
+                            Details ansehen
+                            <ArrowRight size={14} className={`ml-2 transition-transform duration-300 ${hoveredProject === project.id ? 'translate-x-1' : ''}`} />
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
+                  </Link>
+                </motion.div>
+              );
+            })}
           </motion.div>
         </div>
       </div>

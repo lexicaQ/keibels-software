@@ -1,12 +1,16 @@
+
 import React, { useRef, useEffect } from 'react';
 import { Linkedin, Github, Mail, Phone, MapPin } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useIsMobile } from '../hooks/use-mobile';
+import { Separator } from '@/components/ui/separator';
+
 const Footer: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const blurElementsRef = useRef<HTMLDivElement[]>([]);
   const isMobile = useIsMobile();
   const navigate = useNavigate();
+
   useEffect(() => {
     if (!isMobile) {
       const handleMouseMove = (e: MouseEvent) => {
@@ -27,9 +31,9 @@ const Footer: React.FC = () => {
         const y = (clientY - top) / height - 0.5;
         blurElementsRef.current.forEach((element, index) => {
           if (!element) return;
-          const speed = 0.7 + index * 0.15;
-          const moveX = x * 30 * speed;
-          const moveY = y * 30 * speed;
+          const speed = 0.5 + index * 0.1; // Smoother, slower movement
+          const moveX = x * 25 * speed;
+          const moveY = y * 25 * speed;
           element.style.transform = `translate(${moveX}px, ${moveY}px)`;
         });
       };
@@ -40,23 +44,45 @@ const Footer: React.FC = () => {
       }
     }
   }, [isMobile]);
+
+  // Ensure elements are displayed immediately
+  useEffect(() => {
+    blurElementsRef.current.forEach(element => {
+      if (element) {
+        element.style.opacity = '1';
+        element.style.transition = 'transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease-in';
+      }
+    });
+  }, []);
+
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, path: string) => {
     if (isMobile) {
       e.preventDefault();
       navigate(path);
     }
   };
-  return <footer ref={containerRef} className="relative bg-black text-white py-20 overflow-hidden">
-      {/* Enhanced blur background elements - use fewer on mobile for better performance */}
-      {[...Array(isMobile ? 4 : 8)].map((_, i) => <div key={i} ref={el => el && (blurElementsRef.current[i] = el)} className="absolute rounded-full bg-white/5 filter blur-[100px]" style={{
-      width: `${400 + i * 100}px`,
-      height: `${400 + i * 100}px`,
-      left: `${10 + i % 4 * 20}%`,
-      top: `${15 + Math.floor(i / 4) * 30}%`,
-      transform: 'translate(0px, 0px)',
-      // Initial position
-      transition: 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)'
-    }} />)}
+
+  return (
+    <footer ref={containerRef} className="relative bg-black text-white py-20 overflow-hidden">
+      {/* Add subtle separator line */}
+      <Separator className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-white/5 via-white/15 to-white/5" />
+      
+      {/* Enhanced blur background elements - fewer, larger, more blurry */}
+      {[...Array(isMobile ? 3 : 5)].map((_, i) => (
+        <div 
+          key={i} 
+          ref={el => el && (blurElementsRef.current[i] = el)} 
+          className="absolute rounded-full filter blur-[150px] bg-white/3 opacity-0"
+          style={{
+            width: `${500 + i * 150}px`,
+            height: `${500 + i * 150}px`,
+            left: `${15 + i % 3 * 25}%`,
+            top: `${20 + Math.floor(i / 3) * 30}%`,
+            transform: 'translate(0px, 0px)',
+            transition: 'transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease-in'
+          }} 
+        />
+      ))}
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-5xl mx-auto">
@@ -154,6 +180,8 @@ const Footer: React.FC = () => {
           </div>
         </div>
       </div>
-    </footer>;
+    </footer>
+  );
 };
+
 export default Footer;

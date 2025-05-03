@@ -26,9 +26,9 @@ const HeroSection: React.FC = () => {
       const y = (clientY - top) / height - 0.5;
       blurElementsRef.current.forEach((element, index) => {
         if (!element) return;
-        const speed = 0.7 + index * 0.15; // More noticeable movement
-        const moveX = x * 40 * speed;
-        const moveY = y * 40 * speed;
+        const speed = 0.5 + index * 0.1; // Slower, smoother movement
+        const moveX = x * 30 * speed;
+        const moveY = y * 30 * speed;
         element.style.transform = `translate(${moveX}px, ${moveY}px)`;
       });
     };
@@ -39,31 +39,30 @@ const HeroSection: React.FC = () => {
     }
   }, []);
 
-  // Preload background elements
+  // Ensure all background elements are loaded immediately
   useEffect(() => {
-    // Make sure all background elements are loaded immediately
-    const preloadedElements = blurElementsRef.current.filter(el => el);
-    preloadedElements.forEach(element => {
+    blurElementsRef.current.forEach(element => {
       if (element) {
         element.style.opacity = '1';
+        element.style.transition = 'transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease-in';
       }
     });
   }, []);
 
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-black text-white overflow-hidden">
-      {/* Enhanced background effects - more elements with varied sizes and positions */}
-      {[...Array(8)].map((_, i) => (
+      {/* Fewer, larger, more blurry background elements */}
+      {[...Array(5)].map((_, i) => (
         <div 
           key={i} 
           ref={el => el && (blurElementsRef.current[i] = el)} 
-          className="absolute rounded-full blur-3xl bg-white/5 opacity-0 transition-opacity duration-500" 
+          className="absolute rounded-full blur-[150px] bg-white/3 opacity-0" 
           style={{
-            width: `${300 + i * 70}px`,
-            height: `${300 + i * 70}px`,
-            left: `${10 + i % 4 * 20}%`,
-            top: `${15 + Math.floor(i / 4) * 30}%`,
-            transition: 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease-in'
+            width: `${400 + i * 150}px`,
+            height: `${400 + i * 150}px`,
+            left: `${15 + i % 3 * 25}%`,
+            top: `${20 + Math.floor(i / 3) * 30}%`,
+            transition: 'transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease-in'
           }} 
         />
       ))}
