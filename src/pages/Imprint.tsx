@@ -25,6 +25,9 @@ const Imprint = () => {
     <div className="min-h-screen flex flex-col bg-black text-white">
       <Navbar />
       
+      {/* Subtle white line below navbar */}
+      <div className="w-full h-px bg-gradient-to-r from-white/5 via-white/20 to-white/5"></div>
+      
       <motion.div 
         className="pt-24 pb-20 flex-grow"
         initial={{ opacity: 0, y: 20 }}

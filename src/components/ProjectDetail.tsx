@@ -6,6 +6,7 @@ import Footer from './Footer';
 import LoadingSpinner from './LoadingSpinner';
 import { ArrowLeft, Star, Check, Link as LinkIcon, ExternalLink, Code, Laptop, Smartphone, Github } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { Separator } from '@/components/ui/separator';
 
 interface Feature {
   icon: string;
@@ -135,6 +136,9 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects }) => {
     <div className="min-h-screen flex flex-col bg-black text-white overflow-x-hidden" ref={contentRef}>
       <Navbar />
       
+      {/* Subtle white line below navbar */}
+      <div className="w-full h-px bg-gradient-to-r from-white/5 via-white/20 to-white/5"></div>
+      
       <div className="pt-24 pb-20 flex-grow">
         <div className="container mx-auto px-4">
           {/* Back button */}
@@ -196,11 +200,14 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects }) => {
                     animate={{ opacity: 1, scale: 1, rotateY: 0 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
                   >
-                    <div className="absolute inset-0 bg-white/20 blur-2xl rounded-3xl transform scale-105"></div>
+                    {/* Modern glass background effect - completely white and blurry */}
+                    <div className="absolute inset-0 bg-white/10 backdrop-blur-3xl rounded-3xl scale-105 transform -rotate-2"></div>
+                    <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-white/5 rounded-3xl"></div>
+                    
                     <img 
                       src={projectScreenshot} 
                       alt={project.title}
-                      className="relative z-10 max-w-full max-h-[500px] rounded-3xl shadow-[0_10px_40px_rgba(255,255,255,0.15)] transform rotate-2"
+                      className="relative z-10 max-w-full max-h-[500px] object-contain rounded-3xl shadow-[0_10px_40px_rgba(255,255,255,0.15)] transform rotate-2"
                     />
                   </motion.div>
                 ) : null}
@@ -208,33 +215,33 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects }) => {
             </motion.div>
           </section>
           
-          {/* Highlights section in a more compact, modern layout */}
+          {/* Highlights section - more compact, elegant layout */}
           <motion.section 
-            className="mb-20"
+            className="mb-16"
             variants={containerVariants}
             initial="hidden"
             animate="visible"
           >
             <motion.h2
               variants={itemVariants}
-              className="text-3xl font-bold mb-8 flex items-center"
+              className="text-2xl font-bold mb-6 flex items-center"
             >
-              <Star className="mr-3 text-white" size={24} />
+              <Star className="mr-3 text-white" size={22} />
               Highlights
             </motion.h2>
             
             <motion.div 
               variants={itemVariants}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"
+              className="grid grid-cols-1 md:grid-cols-3 gap-4"
             >
               {project.highlights.map((highlight, index) => (
                 <motion.div 
                   key={index}
                   variants={itemVariants}
-                  className="group backdrop-blur-lg bg-white/5 border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-all duration-300 hover:-translate-y-1"
+                  className="group backdrop-blur-lg bg-white/5 border border-white/10 rounded-xl p-5 hover:bg-white/10 transition-all duration-300 hover:-translate-y-1"
                 >
-                  <div className="flex items-center gap-4 mb-3">
-                    <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-7 h-7 rounded-full bg-white/10 flex items-center justify-center text-white text-sm">
                       {index + 1}
                     </div>
                     <div className="h-px flex-grow bg-white/10"></div>
@@ -245,90 +252,93 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects }) => {
             </motion.div>
           </motion.section>
           
-          {/* Features section in a more visually appealing layout */}
+          {/* Features section - more elegant and informative layout */}
           {project.features && (
             <motion.section
-              className="mb-20"
+              className="mb-16"
               variants={containerVariants}
               initial="hidden"
               animate="visible"
             >
               <motion.h2
                 variants={itemVariants}
-                className="text-3xl font-bold mb-8 flex items-center"
+                className="text-2xl font-bold mb-6 flex items-center"
               >
-                <Check className="mr-3 text-white" size={24} />
+                <Check className="mr-3 text-white" size={22} />
                 Funktionen
               </motion.h2>
               
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {project.features.map((feature, index) => (
                   <motion.div 
                     key={index}
                     variants={itemVariants}  
-                    className="flex flex-col backdrop-blur-lg bg-white/5 border border-white/10 p-6 rounded-xl transition-all duration-300 hover:-translate-y-1 hover:bg-white/10"
+                    className="flex backdrop-blur-lg bg-white/5 border border-white/10 p-5 rounded-xl transition-all duration-300 hover:-translate-y-1 hover:bg-white/8"
                   >
-                    <div className="flex items-center gap-4 mb-3">
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-white/20 to-white/5 flex items-center justify-center">
-                        {getFeatureIcon(feature.icon)}
-                      </div>
-                      <h3 className="text-lg font-medium text-white">{feature.title}</h3>
+                    <div className="w-10 h-10 rounded-full bg-white/10 flex-shrink-0 flex items-center justify-center mr-4">
+                      {getFeatureIcon(feature.icon)}
                     </div>
-                    <p className="text-gray-400 text-sm">{feature.description}</p>
+                    <div>
+                      <h3 className="text-base font-medium text-white mb-2">{feature.title}</h3>
+                      <p className="text-gray-400 text-sm">{feature.description}</p>
+                    </div>
                   </motion.div>
                 ))}
               </div>
             </motion.section>
           )}
           
-          {/* Tech Stack section with a cleaner design */}
+          {/* Tech Stack section - cleaner, more informative design */}
           {project.techStack && (
             <motion.section
-              className="mb-20"
+              className="mb-16"
               variants={containerVariants}
               initial="hidden"
               animate="visible"
             >
               <motion.h2
                 variants={itemVariants}
-                className="text-3xl font-bold mb-8 flex items-center"
+                className="text-2xl font-bold mb-6 flex items-center"
               >
-                <Code className="mr-3 text-white" size={24} />
+                <Code className="mr-3 text-white" size={22} />
                 Technologien
               </motion.h2>
               
               <motion.div
                 variants={itemVariants}
-                className="backdrop-blur-lg bg-white/5 border border-white/10 rounded-xl p-8"
+                className="backdrop-blur-lg bg-white/5 border border-white/10 rounded-xl p-6"
               >
-                <div className="flex flex-wrap gap-3 mb-8">
+                <div className="flex flex-wrap gap-3 mb-6">
                   {project.techStack.map((tech, index) => (
                     <span 
                       key={index}
-                      className="px-4 py-2 backdrop-blur-md bg-white/10 border border-white/20 rounded-full text-sm font-medium hover:bg-white/15 transition-all duration-300 hover:-translate-y-1"
+                      className="px-4 py-2 backdrop-blur-md bg-white/10 border border-white/10 rounded-full text-sm font-medium hover:bg-white/15 transition-all duration-300 hover:-translate-y-1"
                     >
                       {tech}
                     </span>
                   ))}
                 </div>
                 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                  <div>
-                    <h3 className="text-lg font-medium mb-3 text-white">Entwicklungszeit</h3>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div className="bg-white/5 backdrop-blur-md rounded-lg p-4">
+                    <h3 className="text-base font-medium mb-2 text-white">Entwicklungszeit</h3>
                     <p className="text-gray-400">4 Wochen</p>
                   </div>
-                  <div>
-                    <h3 className="text-lg font-medium mb-3 text-white">Updates</h3>
+                  <div className="bg-white/5 backdrop-blur-md rounded-lg p-4">
+                    <h3 className="text-base font-medium mb-2 text-white">Updates</h3>
                     <p className="text-gray-400">Regelmäßig</p>
                   </div>
-                  <div>
-                    <h3 className="text-lg font-medium mb-3 text-white">Kompatibilität</h3>
+                  <div className="bg-white/5 backdrop-blur-md rounded-lg p-4">
+                    <h3 className="text-base font-medium mb-2 text-white">Kompatibilität</h3>
                     <p className="text-gray-400">
                       {project.platform === 'iOS App' ? 'iOS 15.0+' : 'macOS 12.0+'}
                     </p>
                   </div>
                 </div>
               </motion.div>
+              
+              {/* Add decorative blur element */}
+              <div className="absolute bottom-40 right-10 w-64 h-64 bg-white/5 rounded-full blur-[150px] opacity-30 z-0"></div>
             </motion.section>
           )}
         </div>

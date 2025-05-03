@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowRight, Laptop, Smartphone, ArrowUpRight } from 'lucide-react';
-import DeviceFrame from './DeviceFrame';
 import { useIsMobile } from '../hooks/use-mobile';
 import { motion } from 'framer-motion';
 import { Separator } from '@/components/ui/separator';
@@ -132,32 +131,18 @@ const ProjectsSection: React.FC = () => {
                 }`}>
                   {project.image ? (
                     <div className="relative h-48 overflow-hidden">
+                      <div className="absolute inset-0 bg-white/5 backdrop-blur-sm"></div>
                       <img 
                         src={project.image} 
                         alt={project.title}
-                        className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
+                        className="w-full h-full object-contain transition-all duration-500 group-hover:scale-105"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-40"></div>
                       <div className="absolute bottom-3 right-3 bg-white text-black p-1 rounded-full transform rotate-45 opacity-0 group-hover:opacity-100 transition-all duration-300">
                         <ArrowUpRight size={16} />
                       </div>
                     </div>
-                  ) : (
-                    <div className="h-48 bg-gradient-to-br from-white/10 to-white/5 relative overflow-hidden">
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className={`transform ${index % 2 === 0 ? 'rotate-[-5deg]' : 'rotate-[5deg]'} scale-75 group-hover:scale-80 group-hover:rotate-0 transition-all duration-500`}>
-                          <DeviceFrame
-                            type={project.platform === 'iOS App' ? 'ios' : 'macos'}
-                            aspectRatio={project.platform === 'iOS App' ? 'portrait' : 'landscape'}
-                            className="shadow-lg"
-                          />
-                        </div>
-                      </div>
-                      <div className="absolute bottom-3 right-3 bg-white text-black p-1 rounded-full transform rotate-45 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                        <ArrowUpRight size={16} />
-                      </div>
-                    </div>
-                  )}
+                  ) : null}
                   
                   <div className="p-6 flex flex-col h-full">
                     <div className="flex justify-between items-center mb-3">
