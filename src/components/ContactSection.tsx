@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -13,7 +12,6 @@ import { useToast } from "@/hooks/use-toast";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
-
 const formSchema = z.object({
   name: z.string().min(2, {
     message: "Name muss mindestens 2 Zeichen lang sein"
@@ -25,13 +23,12 @@ const formSchema = z.object({
     message: "Nachricht muss mindestens 10 Zeichen lang sein"
   })
 });
-
 type FormValues = z.infer<typeof formSchema>;
-
 const ContactSection: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { toast } = useToast();
-
+  const {
+    toast
+  } = useToast();
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -40,7 +37,6 @@ const ContactSection: React.FC = () => {
       message: ""
     }
   });
-
   const onSubmit = async (data: FormValues) => {
     setIsSubmitting(true);
     // Simulate form submission
@@ -52,7 +48,6 @@ const ContactSection: React.FC = () => {
     form.reset();
     setIsSubmitting(false);
   };
-
   return <section id="contact" className="py-24 bg-black text-white relative overflow-hidden">
       {/* Enhanced background effects with more and brighter white blurry elements */}
       <div className="absolute top-0 left-0 w-full h-full">
@@ -75,79 +70,7 @@ const ContactSection: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 max-w-5xl mx-auto">
           {/* Contact Form */}
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-white">Name</FormLabel>
-                    <FormControl>
-                      <Input 
-                        placeholder="Ihr Name" 
-                        className="bg-white/5 border border-white/10 text-white placeholder:text-gray-500" 
-                        {...field} 
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-white">Email</FormLabel>
-                    <FormControl>
-                      <Input 
-                        placeholder="Ihre Email-Adresse" 
-                        className="bg-white/5 border border-white/10 text-white placeholder:text-gray-500" 
-                        {...field} 
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              
-              <FormField
-                control={form.control}
-                name="message"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-white">Nachricht</FormLabel>
-                    <FormControl>
-                      <Textarea 
-                        placeholder="Ihre Nachricht" 
-                        className="min-h-[120px] bg-white/5 border border-white/10 text-white placeholder:text-gray-500" 
-                        {...field} 
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              
-              <Button 
-                type="submit" 
-                disabled={isSubmitting} 
-                className="w-full bg-white/10 hover:bg-white/15 text-white border border-white transition-all"
-              >
-                {isSubmitting ? (
-                  <span className="flex items-center gap-2">
-                    <div className="h-4 w-4 border-2 border-t-transparent rounded-full animate-spin" />
-                    Wird gesendet...
-                  </span>
-                ) : (
-                  <span className="flex items-center gap-2">
-                    <Send size={16} />
-                    Nachricht senden
-                  </span>
-                )}
-              </Button>
-            </form>
+            
           </Form>
           
           {/* Contact Info with Image */}
@@ -196,11 +119,7 @@ const ContactSection: React.FC = () => {
               <div className="relative mt-6">
                 <div className="relative overflow-hidden rounded-lg border border-white">
                   <div className="absolute inset-0 bg-gradient-to-tr from-white/5 to-transparent"></div>
-                  <img 
-                    src="/lovable-uploads/8284c56f-16e0-4dd6-b3a6-353a106bc9cf.png" 
-                    alt="Maxim Keibel" 
-                    className="w-full h-auto object-cover aspect-square filter grayscale"
-                  />
+                  <img src="/lovable-uploads/8284c56f-16e0-4dd6-b3a6-353a106bc9cf.png" alt="Maxim Keibel" className="w-full h-auto object-cover aspect-square filter grayscale" />
                   <div className="absolute top-0 left-0 w-full h-full bg-black/10 backdrop-blur-[1px]"></div>
                   <div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-black/70 to-transparent"></div>
                 </div>
@@ -215,5 +134,4 @@ const ContactSection: React.FC = () => {
       </div>
     </section>;
 };
-
 export default ContactSection;
