@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -10,8 +11,30 @@ const Resume = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [activeSection, setActiveSection] = useState('education');
   const [isDownloading, setIsDownloading] = useState(false);
+  const [resumeData, setResumeData] = useState(null);
 
+  // Fetch resume file information from database
   useEffect(() => {
+    const fetchResumeData = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('resume_files')
+          .select('*')
+          .eq('active', true)
+          .single();
+        
+        if (error) {
+          console.error('Error fetching resume data:', error);
+        } else {
+          setResumeData(data);
+        }
+      } catch (err) {
+        console.error('Failed to fetch resume data:', err);
+      }
+    };
+    
+    fetchResumeData();
+    
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 400); // Reduced loading time
@@ -22,11 +45,15 @@ const Resume = () => {
     try {
       setIsDownloading(true);
       
-      // Assuming there's a file named 'lebenslauf.pdf' in the 'resumes' bucket
+      if (!resumeData) {
+        throw new Error('Resume data not available');
+      }
+      
+      // Download file from storage
       const { data, error } = await supabase
         .storage
         .from('resumes')
-        .download('lebenslauf.pdf');
+        .download(resumeData.storage_path);
       
       if (error) {
         throw error;
@@ -36,7 +63,7 @@ const Resume = () => {
       const url = URL.createObjectURL(data);
       const a = document.createElement('a');
       a.href = url;
-      a.download = 'Lebenslauf_Maxim_Keibel.pdf';
+      a.download = resumeData.filename;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
