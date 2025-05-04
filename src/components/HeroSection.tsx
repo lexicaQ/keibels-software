@@ -51,7 +51,23 @@ const HeroSection: React.FC = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-black text-white overflow-hidden">
-      {/* Fewer, larger, more blurry background elements */}
+      {/* Enhanced soft-blurred white circle elements */}
+      <div className="absolute w-full h-full overflow-hidden">
+        {/* Larger, more prominent blurry elements */}
+        <div className="absolute top-[10%] left-[15%] w-[500px] h-[500px] rounded-full bg-white/3 blur-[120px] opacity-50"></div>
+        <div className="absolute top-[30%] right-[10%] w-[600px] h-[600px] rounded-full bg-white/3 blur-[150px] opacity-50"></div>
+        <div className="absolute bottom-[5%] left-[25%] w-[450px] h-[450px] rounded-full bg-white/2 blur-[100px] opacity-40"></div>
+        
+        {/* Medium-sized elements for depth */}
+        <div className="absolute top-[45%] left-[60%] w-[300px] h-[300px] rounded-full bg-white/4 blur-[80px] opacity-60"></div>
+        <div className="absolute bottom-[20%] right-[20%] w-[350px] h-[350px] rounded-full bg-white/3 blur-[90px] opacity-50"></div>
+        
+        {/* Smaller accent elements */}
+        <div className="absolute top-[15%] right-[30%] w-[200px] h-[200px] rounded-full bg-white/5 blur-[60px] opacity-70"></div>
+        <div className="absolute bottom-[35%] left-[10%] w-[250px] h-[250px] rounded-full bg-white/4 blur-[70px] opacity-60"></div>
+      </div>
+
+      {/* Interactive elements with mouse movement */}
       {[...Array(5)].map((_, i) => (
         <div 
           key={i} 
@@ -85,8 +101,16 @@ const HeroSection: React.FC = () => {
                 <ArrowRight size={18} className="ml-2 transition-transform duration-300 group-hover:translate-x-1" />
               </span>
             </Link>
-            <Link to="/contact" className="modern-button">
-              <span className="relative z-10">Kontakt</span>
+            {/* New, more visually appealing contact button with rounded border and elegant hover effect */}
+            <Link 
+              to="#contact" 
+              className="relative overflow-hidden px-8 py-3 rounded-full border border-white/30 
+                       text-white font-medium transition-all duration-300 
+                       hover:bg-white hover:text-black hover:border-white 
+                       hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] group"
+            >
+              <span className="relative z-10">Kontaktieren</span>
+              <div className="absolute inset-0 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left bg-gradient-to-r from-white via-white to-white"></div>
             </Link>
           </div>
         </div>

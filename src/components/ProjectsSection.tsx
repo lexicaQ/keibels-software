@@ -112,7 +112,7 @@ const ProjectsSection: React.FC = () => {
         </motion.div>
         
         <motion.div 
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -133,41 +133,49 @@ const ProjectsSection: React.FC = () => {
                 <div className={`backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl overflow-hidden transition-all duration-500 h-full flex flex-col hover:shadow-[0_10px_40px_rgba(255,255,255,0.1)] ${
                   hoveredProject === project.id ? 'transform scale-[1.03]' : ''
                 }`}>
-                  {/* Updated image container with ProjectImage component */}
-                  <div className="relative aspect-video overflow-hidden bg-transparent">
-                    <div className="absolute inset-0 backdrop-blur-xl bg-white/5 -z-10"></div>
-                    <div className="w-full h-full p-3 flex items-center justify-center">
-                      <ProjectImage 
-                        imageUrl={project.image} 
-                        alt={project.title}
-                        className="max-h-full transition-all duration-500 group-hover:scale-105"
-                      />
-                    </div>
-                    <div className="absolute bottom-3 right-3 bg-white text-black p-1 rounded-full transform rotate-45 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                      <ArrowUpRight size={16} />
-                    </div>
-                  </div>
-                  
-                  <div className="p-6 flex flex-col h-full">
-                    <div className="flex justify-between items-center mb-3">
-                      <span className="flex items-center text-xs font-medium text-white bg-white/10 px-2.5 py-1 rounded-full border border-white/20">
-                        {project.platform === 'iOS App' ? 
-                          <Smartphone size={14} className="mr-1" /> : 
-                          <Laptop size={14} className="mr-1" />
-                        }
-                        {project.platform}
-                      </span>
-                      <span className="text-xs text-gray-400">{project.year}</span>
+                  <div className="flex flex-col h-full">
+                    {/* Project header */}
+                    <div className="p-5 pb-2">
+                      <div className="flex justify-between items-center mb-2">
+                        <span className="flex items-center text-xs font-medium text-white bg-white/10 px-2.5 py-1 rounded-full border border-white/20">
+                          {project.platform === 'iOS App' ? 
+                            <Smartphone size={14} className="mr-1" /> : 
+                            <Laptop size={14} className="mr-1" />
+                          }
+                          {project.platform}
+                        </span>
+                        <span className="text-xs text-gray-400">{project.year}</span>
+                      </div>
+                      
+                      <h3 className="text-lg font-bold">{project.title}</h3>
+                      <p className="text-sm text-gray-400">{project.slogan}</p>
                     </div>
                     
-                    <h3 className="text-lg font-bold mb-1">{project.title}</h3>
-                    <p className="text-sm text-gray-400 mb-4">{project.slogan}</p>
-                    
-                    <Separator className="my-4 bg-white/5" />
-                    
-                    <div className="mt-auto flex items-center text-sm font-medium text-gray-300 group-hover:text-white transition-colors">
-                      Details
-                      <ArrowRight size={16} className={`ml-1 transition-transform duration-300 ${hoveredProject === project.id ? 'translate-x-1' : ''}`} />
+                    {/* Project content with image right and vertical divider */}
+                    <div className="flex-grow flex flex-row p-3">
+                      <div className="flex-1 pr-3 flex flex-col justify-between">
+                        <div></div> {/* Spacer */}
+                        <div className="flex items-center text-sm font-medium text-gray-300 group-hover:text-white transition-colors">
+                          Details ansehen
+                          <ArrowRight size={16} className={`ml-1 transition-transform duration-300 ${hoveredProject === project.id ? 'translate-x-1' : ''}`} />
+                        </div>
+                      </div>
+                      
+                      {/* Vertical divider */}
+                      <div className="w-px bg-white/20 mx-3"></div>
+                      
+                      {/* Image container (right side) */}
+                      <div className="w-[45%] relative flex items-center justify-center">
+                        <div className="absolute inset-0 backdrop-blur-xl bg-white/5 -z-10 rounded-lg"></div>
+                        <ProjectImage 
+                          imageUrl={project.image} 
+                          alt={project.title}
+                          className="max-h-[120px] transition-all duration-500 group-hover:scale-105 p-2"
+                        />
+                        <div className="absolute bottom-1 right-1 bg-white text-black p-1 rounded-full transform rotate-45 opacity-0 group-hover:opacity-100 transition-all duration-300">
+                          <ArrowUpRight size={14} />
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -176,7 +184,7 @@ const ProjectsSection: React.FC = () => {
           ))}
         </motion.div>
         
-        <div className="mt-16 text-center">
+        <div className="mt-12 text-center">
           <motion.button 
             onClick={() => navigate('/projects')}
             className="relative px-8 py-3 bg-white/10 backdrop-blur-xl border border-white/20 rounded-lg overflow-hidden group"
