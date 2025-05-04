@@ -4,6 +4,7 @@ import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import DeviceFrame from './DeviceFrame';
 import { useIsMobile } from '../hooks/use-mobile';
+import { Separator } from '@/components/ui/separator';
 
 interface ProjectCardProps {
   id: string;
@@ -41,7 +42,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         opacity: 0 
       }}
     >
-      <div className={`grid grid-cols-1 lg:grid-cols-2 gap-8 ${isLeft ? '' : 'lg:flex-row-reverse'}`}>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <div className="p-8">
           <div className="mb-4">
             <div>
@@ -70,10 +71,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           
           <Link 
             to={`/projects/${id}`}
-            className="inline-flex items-center px-6 py-3 bg-black text-white rounded-lg transition-all duration-300 hover:translate-y-[-2px] hover:shadow-lg"
+            className="inline-flex items-center px-6 py-3 bg-black text-white rounded-lg border border-black transition-all duration-300 hover:bg-gray-800 hover:border-gray-800"
             onClick={(e) => {
-              // This prevents the page from reloading
-              // and uses client-side routing instead
               if (isMobile) {
                 e.preventDefault();
                 window.history.pushState({}, '', `/projects/${id}`);
@@ -82,16 +81,19 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             }}
           >
             Mehr Details
-            <ArrowRight size={18} className="ml-2 transition-transform duration-300 group-hover:translate-x-1" />
+            <ArrowRight size={18} className="ml-2" />
           </Link>
         </div>
 
-        <div className={`relative w-full h-[400px] overflow-hidden bg-gray-100 flex items-center justify-center ${isLeft ? 'lg:order-last' : 'lg:order-first'}`}>
-          <div className={`transform ${isLeft ? 'rotate-[-10deg]' : 'rotate-[10deg]'} transition-all duration-500 group-hover:rotate-0 ${isMobile ? 'scale-75' : ''}`}>
+        <div className="relative w-full h-[400px] overflow-hidden bg-gray-100 flex items-center justify-center lg:order-last">
+          {/* Vertical divider visible on large screens */}
+          <div className="absolute top-0 left-0 h-full w-px bg-gray-200 hidden lg:block"></div>
+          
+          <div className="transform transition-all duration-500 group-hover:scale-105">
             <DeviceFrame 
               type={deviceType} 
               imageUrl={appImage}
-              className="shadow-2xl"
+              className="shadow-2xl max-h-[300px]"
             />
           </div>
         </div>

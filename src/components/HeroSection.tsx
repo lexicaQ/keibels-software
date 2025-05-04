@@ -101,17 +101,6 @@ const HeroSection: React.FC = () => {
                 <ArrowRight size={18} className="ml-2 transition-transform duration-300 group-hover:translate-x-1" />
               </span>
             </Link>
-            {/* New, more visually appealing contact button with rounded border and elegant hover effect */}
-            <Link 
-              to="#contact" 
-              className="relative overflow-hidden px-8 py-3 rounded-full border border-white/30 
-                       text-white font-medium transition-all duration-300 
-                       hover:bg-white hover:text-black hover:border-white 
-                       hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] group"
-            >
-              <span className="relative z-10">Kontaktieren</span>
-              <div className="absolute inset-0 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left bg-gradient-to-r from-white via-white to-white"></div>
-            </Link>
           </div>
         </div>
 

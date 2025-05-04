@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowRight, Laptop, Smartphone, ArrowUpRight } from 'lucide-react';
+import { ArrowRight, Laptop, Smartphone } from 'lucide-react';
 import DeviceFrame from './DeviceFrame';
 import { useIsMobile } from '../hooks/use-mobile';
 import { motion } from 'framer-motion';
@@ -157,7 +157,6 @@ const ProjectsSection: React.FC = () => {
                         <div></div> {/* Spacer */}
                         <div className="flex items-center text-sm font-medium text-gray-300 group-hover:text-white transition-colors">
                           Details ansehen
-                          <ArrowRight size={16} className={`ml-1 transition-transform duration-300 ${hoveredProject === project.id ? 'translate-x-1' : ''}`} />
                         </div>
                       </div>
                       
@@ -172,9 +171,6 @@ const ProjectsSection: React.FC = () => {
                           alt={project.title}
                           className="max-h-[120px] transition-all duration-500 group-hover:scale-105 p-2"
                         />
-                        <div className="absolute bottom-1 right-1 bg-white text-black p-1 rounded-full transform rotate-45 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                          <ArrowUpRight size={14} />
-                        </div>
                       </div>
                     </div>
                   </div>
@@ -187,15 +183,14 @@ const ProjectsSection: React.FC = () => {
         <div className="mt-12 text-center">
           <motion.button 
             onClick={() => navigate('/projects')}
-            className="relative px-8 py-3 bg-white/10 backdrop-blur-xl border border-white/20 rounded-lg overflow-hidden group"
+            className="relative px-8 py-3 bg-white/10 backdrop-blur-xl border border-white/20 rounded-lg overflow-hidden group transition-all duration-300 hover:bg-white/15"
             whileHover={{ y: -2, boxShadow: "0 10px 25px rgba(255,255,255,0.1)" }}
             transition={{ duration: 0.2 }}
           >
             <span className="relative z-10 flex items-center font-medium">
               Alle Projekte ansehen
-              <ArrowRight size={18} className="ml-2 transition-transform duration-300 group-hover:translate-x-1" />
+              <ArrowRight size={18} className="ml-2" />
             </span>
-            <div className="absolute inset-0 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left bg-gradient-to-r from-white/20 to-white/5"></div>
           </motion.button>
         </div>
       </div>

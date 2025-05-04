@@ -97,18 +97,6 @@ const Projects = () => {
                         hoveredProject === project.id ? 'transform scale-[1.03] shadow-lg' : ''
                       }`}
                     >
-                      {/* Updated image container with ProjectImage component */}
-                      <div className="relative aspect-video overflow-hidden backdrop-blur-sm bg-white/3">
-                        <div className="w-full h-full p-3 flex items-center justify-center">
-                          <ProjectImage 
-                            imageUrl={projectImage} 
-                            alt={project.title}
-                            className="max-h-full transition-all duration-500 group-hover:scale-105"
-                          />
-                        </div>
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
-                      </div>
-                      
                       <div className="p-6 flex flex-col h-full relative z-10">
                         <div className="flex justify-between items-center mb-3">
                           <Badge variant="outline" className={`${project.platform === 'iOS App' ? 'bg-white text-black' : 'bg-white text-black'} border-none`}>
@@ -121,29 +109,39 @@ const Projects = () => {
                         <h2 className="text-xl font-bold mb-1 text-white">{project.title}</h2>
                         <p className="text-gray-300 text-sm italic mb-3">{project.slogan}</p>
                         
-                        <div className="mb-4 flex-grow">
-                          <p className="text-sm text-gray-400 line-clamp-2 mb-2">
-                            {project.description?.substring(0, 80)}...
-                          </p>
-                          <div className="mt-3 flex flex-wrap gap-2">
-                            {project.highlights?.slice(0, 2).map((highlight, idx) => (
-                              <span key={idx} className="inline-block text-xs bg-white/10 px-2 py-1 rounded-full text-gray-300">
-                                {highlight.substring(0, 25)}{highlight.length > 25 ? '...' : ''}
-                              </span>
-                            ))}
+                        <div className="flex-grow flex">
+                          <div className="flex-1 pr-4">
+                            <p className="text-sm text-gray-400 line-clamp-2 mb-2">
+                              {project.description?.substring(0, 80)}...
+                            </p>
+                            <div className="mt-3 flex flex-wrap gap-2">
+                              {project.highlights?.slice(0, 2).map((highlight, idx) => (
+                                <span key={idx} className="inline-block text-xs bg-white/10 px-2 py-1 rounded-full text-gray-300">
+                                  {highlight.substring(0, 25)}{highlight.length > 25 ? '...' : ''}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                          
+                          {/* Vertical divider */}
+                          <div className="w-px bg-white/20 mx-3"></div>
+                          
+                          {/* Image container (right side) */}
+                          <div className="w-24 flex items-center justify-center">
+                            <ProjectImage 
+                              imageUrl={projectImage} 
+                              alt={project.title}
+                              className="max-h-[80px] transition-all duration-500"
+                            />
                           </div>
                         </div>
                         
                         <Separator className="my-4 bg-white/5" />
                         
                         <div className="mt-auto">
-                          <div className={`
-                            flex items-center justify-center w-full px-4 py-2 
-                            bg-white/10 hover:bg-white/15
-                            text-white text-sm rounded-lg transition-all duration-300`
-                          }>
+                          <div className="border border-white/20 rounded-lg px-4 py-2 text-white text-sm text-center transition-all duration-300 hover:bg-white/15">
                             Details ansehen
-                            <ArrowRight size={14} className={`ml-2 transition-transform duration-300 ${hoveredProject === project.id ? 'translate-x-1' : ''}`} />
+                            <ArrowRight size={14} className="ml-2 inline-block" />
                           </div>
                         </div>
                       </div>
