@@ -28,25 +28,25 @@ const AboutSection: React.FC = () => {
   };
   
   return (
-    <section id="about" className="py-24 bg-white">
+    <section id="about" className="py-16 bg-white">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
+        <div className="text-center mb-8">
           <h2 className="text-3xl md:text-4xl font-bold mb-2">ÜBER MICH</h2>
           <div className="w-16 h-1 bg-black mx-auto"></div>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-stretch max-w-5xl mx-auto">
           <motion.div 
             ref={ref}
             variants={containerVariants}
             initial="hidden"
             animate={controls}
-            className="relative"
+            className="relative h-full"
           >
             <img 
               src="/lovable-uploads/8284c56f-16e0-4dd6-b3a6-353a106bc9cf.png" 
               alt="Maxim Keibel" 
-              className="rounded-lg shadow-lg w-full h-full object-cover"
+              className="rounded-lg shadow-lg w-full h-full object-cover max-h-[400px]"
             />
           </motion.div>
           
@@ -54,19 +54,18 @@ const AboutSection: React.FC = () => {
             variants={containerVariants}
             initial="hidden"
             animate={controls}
-            className="bg-white rounded-lg shadow-lg p-8 border border-black h-full flex flex-col justify-between"
-            style={{ minHeight: '100%' }}
+            className="bg-white rounded-lg shadow-lg p-6 border border-black h-full flex flex-col justify-between"
           >
             <div>
-              <h3 className="text-2xl font-bold mb-4">Maxim Keibel</h3>
-              <p className="text-lg text-gray-700 mb-4">
+              <h3 className="text-2xl font-bold mb-3">Maxim Keibel</h3>
+              <p className="text-lg text-gray-700 mb-3">
                 Ich bin ein leidenschaftlicher Software-Entwickler mit Schwerpunkt auf modernen Web- und App-Technologien.
               </p>
-              <p className="text-gray-700 mb-6">
-                Mit mehr als 5 Jahren Erfahrung entwickle ich digitale Lösungen, die nicht nur funktional, sondern auch ästhetisch ansprechend sind. Mein Fokus liegt auf der Schaffung von benutzerfreundlichen Anwendungen und intuitiven Benutzeroberflächen, die ein hervorragendes Nutzererlebnis bieten.
+              <p className="text-gray-700 mb-4">
+                Mit mehr als 5 Jahren Erfahrung entwickle ich digitale Lösungen, die nicht nur funktional, sondern auch ästhetisch ansprechend sind. Mein Fokus liegt auf der Schaffung von benutzerfreundlichen Anwendungen und intuitiven Benutzeroberflächen.
               </p>
               
-              <div className="mb-6">
+              <div className="mb-4">
                 <h4 className="text-lg font-semibold mb-2">Meine Fähigkeiten:</h4>
                 <ul className="grid grid-cols-2 gap-2">
                   <li className="flex items-center"><span className="w-2 h-2 bg-black rounded-full mr-2"></span>App-Entwicklung</li>
@@ -79,9 +78,9 @@ const AboutSection: React.FC = () => {
               </div>
             </div>
             
-            <div className="mt-auto">
+            <div>
               <Link to="/about">
-                <Button variant="outline" className="border-2 border-black px-6 py-3 hover:bg-black hover:text-white transition-all duration-300">
+                <Button variant="outline" className="border-2 border-black px-4 py-2 hover:bg-black hover:text-white transition-all duration-300">
                   Mehr über mich erfahren
                 </Button>
               </Link>
