@@ -17,8 +17,6 @@ const ProjectImage: React.FC<ProjectImageProps> = ({ imageUrl, alt, className = 
     const variant = getCustomImageType(imageUrl);
     return (
       <div className="relative flex items-center justify-center">
-        {/* Modern blurry background circle */}
-        <div className="absolute w-4/5 h-4/5 bg-white/10 rounded-full blur-3xl opacity-40"></div>
         <motion.div 
           initial={{ scale: 0.95, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
@@ -33,8 +31,6 @@ const ProjectImage: React.FC<ProjectImageProps> = ({ imageUrl, alt, className = 
   
   return (
     <div className="relative flex items-center justify-center">
-      {/* Modern blurry background circle */}
-      <div className="absolute w-4/5 h-4/5 bg-white/10 rounded-full blur-3xl opacity-40"></div>
       <motion.div 
         initial={{ scale: 0.95, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}

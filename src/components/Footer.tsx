@@ -1,4 +1,3 @@
-
 import React, { useRef, useEffect } from 'react';
 import { Linkedin, Github, Mail, Phone, MapPin } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -109,29 +108,29 @@ const Footer: React.FC = () => {
               <h3 className="text-lg font-bold mb-6 uppercase tracking-wider">Navigation</h3>
               <ul className="space-y-3">
                 <li>
-                  <a href="/" onClick={e => handleNavClick(e, '/')} className="text-white/70 hover:text-white transition-colors">
+                  <Link to="/" className="text-white/70 hover:text-white transition-colors">
                     Startseite
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="/projects" onClick={e => handleNavClick(e, '/projects')} className="text-white/70 hover:text-white transition-colors">
+                  <Link to="/projects" className="text-white/70 hover:text-white transition-colors">
                     Projekte
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="/resume" onClick={e => handleNavClick(e, '/resume')} className="text-white/70 hover:text-white transition-colors">
+                  <Link to="/resume" className="text-white/70 hover:text-white transition-colors">
                     Lebenslauf
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="/about" onClick={e => handleNavClick(e, '/about')} className="text-white/70 hover:text-white transition-colors">
+                  <Link to="/about" className="text-white/70 hover:text-white transition-colors">
                     Über mich
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="/contact" onClick={e => handleNavClick(e, '/contact')} className="text-white/70 hover:text-white transition-colors">
+                  <Link to="/contact" className="text-white/70 hover:text-white transition-colors">
                     Kontakt
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -169,12 +168,12 @@ const Footer: React.FC = () => {
             <div className="flex flex-col md:flex-row justify-between items-center">
               <p className="text-sm text-white/50">&copy; {new Date().getFullYear()} KEIBEL SOFTWARE. Alle Rechte vorbehalten.</p>
               <div className="flex space-x-6 mt-4 md:mt-0">
-                <a href="/privacy" onClick={e => handleNavClick(e, '/privacy')} className="text-sm text-white/50 hover:text-white transition-colors">
+                <Link to="/privacy" className="text-sm text-white/50 hover:text-white transition-colors">
                   Datenschutz
-                </a>
-                <a href="/imprint" onClick={e => handleNavClick(e, '/imprint')} className="text-sm text-white/50 hover:text-white transition-colors">
+                </Link>
+                <Link to="/imprint" className="text-sm text-white/50 hover:text-white transition-colors">
                   Impressum
-                </a>
+                </Link>
               </div>
             </div>
           </div>

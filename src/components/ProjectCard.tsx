@@ -80,8 +80,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
               }
             }}
           >
-            Mehr Details
-            <ArrowRight size={18} className="ml-2" />
+            Details ansehen
           </Link>
         </div>
 
@@ -89,11 +88,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           {/* Vertical divider visible on large screens */}
           <div className="absolute top-0 left-0 h-full w-px bg-gray-200 hidden lg:block"></div>
           
-          <div className="transform transition-all duration-500 group-hover:scale-105">
+          <div className="transform transition-all duration-500 group-hover:scale-105 px-8 py-4 w-full h-full flex items-center justify-center">
             <DeviceFrame 
               type={deviceType} 
               imageUrl={appImage}
-              className="shadow-2xl max-h-[300px]"
+              className="shadow-2xl max-h-[350px] w-auto"
             />
           </div>
         </div>

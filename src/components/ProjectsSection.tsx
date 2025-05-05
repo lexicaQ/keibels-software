@@ -130,7 +130,7 @@ const ProjectsSection: React.FC = () => {
                 onClick={(e) => handleProjectClick(e, project.id)}
                 className="cursor-pointer h-full"
               >
-                <div className={`backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl overflow-hidden transition-all duration-500 h-full flex flex-col hover:shadow-[0_10px_40px_rgba(255,255,255,0.1)] ${
+                <div className={`bg-white/5 border border-white/10 rounded-xl overflow-hidden transition-all duration-500 h-full flex flex-col hover:shadow-[0_10px_40px_rgba(255,255,255,0.1)] ${
                   hoveredProject === project.id ? 'transform scale-[1.03]' : ''
                 }`}>
                   <div className="flex flex-col h-full">
@@ -156,7 +156,7 @@ const ProjectsSection: React.FC = () => {
                       <div className="flex-1 pr-3 flex flex-col justify-between">
                         <div></div> {/* Spacer */}
                         <div className="flex items-center text-sm font-medium text-gray-300 group-hover:text-white transition-colors">
-                          Details ansehen
+                          Details
                         </div>
                       </div>
                       
@@ -165,12 +165,19 @@ const ProjectsSection: React.FC = () => {
                       
                       {/* Image container (right side) */}
                       <div className="w-[45%] relative flex items-center justify-center">
-                        <div className="absolute inset-0 backdrop-blur-xl bg-white/5 -z-10 rounded-lg"></div>
-                        <ProjectImage 
-                          imageUrl={project.image} 
-                          alt={project.title}
-                          className="max-h-[120px] transition-all duration-500 group-hover:scale-105 p-2"
-                        />
+                        <div className="w-full h-full flex items-center justify-center p-2">
+                          {project.platform === 'macOS App' ? (
+                            <div className="w-full h-[120px] aspect-video bg-gradient-to-br from-gray-800 to-black rounded-lg overflow-hidden shadow-xl border border-white/10 flex items-center justify-center">
+                              <div className="text-white text-center text-sm font-medium">{project.title}</div>
+                            </div>
+                          ) : (
+                            <img 
+                              src={project.image} 
+                              alt={project.title}
+                              className="max-h-[120px] object-contain transition-all duration-500 group-hover:scale-105"
+                            />
+                          )}
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -183,7 +190,7 @@ const ProjectsSection: React.FC = () => {
         <div className="mt-12 text-center">
           <motion.button 
             onClick={() => navigate('/projects')}
-            className="relative px-8 py-3 bg-white/10 backdrop-blur-xl border border-white/20 rounded-lg overflow-hidden group transition-all duration-300 hover:bg-white/15"
+            className="relative px-8 py-3 border border-white/20 rounded-lg overflow-hidden group transition-all duration-300 hover:bg-white/15"
             whileHover={{ y: -2, boxShadow: "0 10px 25px rgba(255,255,255,0.1)" }}
             transition={{ duration: 0.2 }}
           >

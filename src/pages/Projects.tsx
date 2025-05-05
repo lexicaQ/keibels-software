@@ -93,7 +93,7 @@ const Projects = () => {
                 >
                   <Link to={`/projects/${project.id}`} className="block h-full">
                     <div 
-                      className={`backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl overflow-hidden transition-all duration-500 h-full flex flex-col hover:shadow-[0_10px_40px_rgba(255,255,255,0.1)] ${
+                      className={`bg-white/5 border border-white/10 rounded-xl overflow-hidden transition-all duration-500 h-full flex flex-col hover:shadow-[0_10px_40px_rgba(255,255,255,0.1)] ${
                         hoveredProject === project.id ? 'transform scale-[1.03] shadow-lg' : ''
                       }`}
                     >
@@ -117,7 +117,7 @@ const Projects = () => {
                             <div className="mt-3 flex flex-wrap gap-2">
                               {project.highlights?.slice(0, 2).map((highlight, idx) => (
                                 <span key={idx} className="inline-block text-xs bg-white/10 px-2 py-1 rounded-full text-gray-300">
-                                  {highlight.substring(0, 25)}{highlight.length > 25 ? '...' : ''}
+                                  {highlight.substring(0, 20)}{highlight.length > 20 ? '...' : ''}
                                 </span>
                               ))}
                             </div>
@@ -128,11 +128,17 @@ const Projects = () => {
                           
                           {/* Image container (right side) */}
                           <div className="w-24 flex items-center justify-center">
-                            <ProjectImage 
-                              imageUrl={projectImage} 
-                              alt={project.title}
-                              className="max-h-[80px] transition-all duration-500"
-                            />
+                            {project.platform === 'macOS App' ? (
+                              <div className="h-[80px] aspect-video bg-gradient-to-br from-gray-800 to-black rounded-lg overflow-hidden shadow-xl border border-white/10 flex items-center justify-center p-1">
+                                <div className="text-white text-center text-xs font-medium">{project.title}</div>
+                              </div>
+                            ) : (
+                              <img 
+                                src={projectImage} 
+                                alt={project.title}
+                                className="max-h-[80px] object-contain transition-all duration-500 group-hover:scale-105"
+                              />
+                            )}
                           </div>
                         </div>
                         
@@ -140,8 +146,7 @@ const Projects = () => {
                         
                         <div className="mt-auto">
                           <div className="border border-white/20 rounded-lg px-4 py-2 text-white text-sm text-center transition-all duration-300 hover:bg-white/15">
-                            Details ansehen
-                            <ArrowRight size={14} className="ml-2 inline-block" />
+                            Details
                           </div>
                         </div>
                       </div>
