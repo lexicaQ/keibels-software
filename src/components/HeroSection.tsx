@@ -101,6 +101,9 @@ const HeroSection: React.FC = () => {
                 <ArrowRight size={18} className="ml-2 transition-transform duration-300 group-hover:translate-x-1" />
               </span>
             </Link>
+            <Link to="/contact" className="border border-white/30 backdrop-blur-md px-6 py-3 rounded-lg text-white hover:bg-white/10 transition-all duration-300 flex items-center">
+              Kontakt aufnehmen
+            </Link>
           </div>
         </div>
 
