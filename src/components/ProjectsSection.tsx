@@ -122,7 +122,7 @@ const ProjectsSection: React.FC = () => {
             <motion.div 
               key={index}
               variants={itemVariants}
-              className="group h-full"
+              className="h-full"
               onMouseEnter={() => setHoveredProject(project.id)}
               onMouseLeave={() => setHoveredProject(null)}
             >
@@ -130,55 +130,48 @@ const ProjectsSection: React.FC = () => {
                 onClick={(e) => handleProjectClick(e, project.id)}
                 className="cursor-pointer h-full"
               >
-                <div className={`bg-white/5 border border-white/10 rounded-xl overflow-hidden transition-all duration-500 h-full flex flex-col hover:shadow-[0_10px_40px_rgba(255,255,255,0.1)] ${
-                  hoveredProject === project.id ? 'transform scale-[1.03]' : ''
+                <div className={`bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl overflow-hidden transition-all duration-500 h-full flex flex-col hover:shadow-[0_10px_40px_rgba(255,255,255,0.1)] ${
+                  hoveredProject === project.id ? 'transform scale-[1.02]' : ''
                 }`}>
-                  <div className="flex flex-col h-full">
-                    {/* Project header */}
-                    <div className="p-5 pb-2">
-                      <div className="flex justify-between items-center mb-2">
-                        <span className="flex items-center text-xs font-medium text-white bg-white/10 px-2.5 py-1 rounded-full border border-white/20">
-                          {project.platform === 'iOS App' ? 
-                            <Smartphone size={14} className="mr-1" /> : 
-                            <Laptop size={14} className="mr-1" />
-                          }
-                          {project.platform}
-                        </span>
-                        <span className="text-xs text-gray-400">{project.year}</span>
-                      </div>
-                      
-                      <h3 className="text-lg font-bold">{project.title}</h3>
-                      <p className="text-sm text-gray-400">{project.slogan}</p>
+                  <div className="p-5 flex flex-col h-full">
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="flex items-center text-xs font-medium text-white bg-white/10 px-2.5 py-1 rounded-full border border-white/20">
+                        {project.platform === 'iOS App' ? 
+                          <Smartphone size={14} className="mr-1" /> : 
+                          <Laptop size={14} className="mr-1" />
+                        }
+                        {project.platform}
+                      </span>
+                      <span className="text-xs text-gray-400">{project.year}</span>
                     </div>
                     
-                    {/* Project content with image right and vertical divider */}
-                    <div className="flex-grow flex flex-row p-3">
-                      <div className="flex-1 pr-3 flex flex-col justify-between">
-                        <div></div> {/* Spacer */}
-                        <div className="flex items-center text-sm font-medium text-gray-300 group-hover:text-white transition-colors">
-                          Details
-                        </div>
-                      </div>
-                      
-                      {/* Vertical divider */}
-                      <div className="w-px bg-white/20 mx-3"></div>
-                      
-                      {/* Image container (right side) */}
-                      <div className="w-[45%] relative flex items-center justify-center">
-                        <div className="w-full h-full flex items-center justify-center p-2">
-                          {project.platform === 'macOS App' ? (
-                            <div className="w-full h-[120px] aspect-video bg-gradient-to-br from-gray-800 to-black rounded-lg overflow-hidden shadow-xl border border-white/10 flex items-center justify-center">
-                              <div className="text-white text-center text-sm font-medium">{project.title}</div>
-                            </div>
-                          ) : (
+                    <h3 className="text-lg font-bold mb-1">{project.title}</h3>
+                    <p className="text-sm text-gray-400 mb-3">{project.slogan}</p>
+                    
+                    {/* Image section - larger and more prominent */}
+                    <div className="mt-1 mb-3">
+                      <div className="w-full h-28 rounded-lg overflow-hidden bg-gradient-to-br from-white/5 to-black/50 p-1.5 border border-white/10">
+                        {project.platform === 'macOS App' ? (
+                          <div className="h-full w-full rounded-md bg-gradient-to-br from-gray-800 to-black flex items-center justify-center">
+                            <div className="text-white text-center font-medium">{project.title}</div>
+                          </div>
+                        ) : (
+                          <div className="h-full w-full flex items-center justify-center">
                             <img 
                               src={project.image} 
                               alt={project.title}
-                              className="max-h-[120px] object-contain transition-all duration-500 group-hover:scale-105"
+                              className="h-full object-contain transition-all duration-500"
                             />
-                          )}
-                        </div>
+                          </div>
+                        )}
                       </div>
+                    </div>
+                    
+                    <Separator className="mt-auto mb-3 bg-white/5" />
+                    
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs text-white/70">Details ansehen</span>
+                      <ArrowRight size={16} className="text-white/70" />
                     </div>
                   </div>
                 </div>

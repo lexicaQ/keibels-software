@@ -93,13 +93,13 @@ const Projects = () => {
                 >
                   <Link to={`/projects/${project.id}`} className="block h-full">
                     <div 
-                      className={`bg-white/5 border border-white/10 rounded-xl overflow-hidden transition-all duration-500 h-full flex flex-col hover:shadow-[0_10px_40px_rgba(255,255,255,0.1)] ${
+                      className={`bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl overflow-hidden transition-all duration-500 h-full flex flex-col hover:shadow-[0_10px_40px_rgba(255,255,255,0.1)] ${
                         hoveredProject === project.id ? 'transform scale-[1.03] shadow-lg' : ''
                       }`}
                     >
                       <div className="p-6 flex flex-col h-full relative z-10">
                         <div className="flex justify-between items-center mb-3">
-                          <Badge variant="outline" className={`${project.platform === 'iOS App' ? 'bg-white text-black' : 'bg-white text-black'} border-none`}>
+                          <Badge variant="outline" className="bg-white/10 text-white border-none py-1.5">
                             {project.platform === 'iOS App' ? <Smartphone size={14} className="mr-1" /> : <Laptop size={14} className="mr-1" />}
                             {project.platform}
                           </Badge>
@@ -109,44 +109,45 @@ const Projects = () => {
                         <h2 className="text-xl font-bold mb-1 text-white">{project.title}</h2>
                         <p className="text-gray-300 text-sm italic mb-3">{project.slogan}</p>
                         
-                        <div className="flex-grow flex">
-                          <div className="flex-1 pr-4">
-                            <p className="text-sm text-gray-400 line-clamp-2 mb-2">
-                              {project.description?.substring(0, 80)}...
-                            </p>
-                            <div className="mt-3 flex flex-wrap gap-2">
-                              {project.highlights?.slice(0, 2).map((highlight, idx) => (
-                                <span key={idx} className="inline-block text-xs bg-white/10 px-2 py-1 rounded-full text-gray-300">
-                                  {highlight.substring(0, 20)}{highlight.length > 20 ? '...' : ''}
-                                </span>
-                              ))}
-                            </div>
-                          </div>
-                          
-                          {/* Vertical divider */}
-                          <div className="w-px bg-white/20 mx-3"></div>
-                          
-                          {/* Image container (right side) */}
-                          <div className="w-24 flex items-center justify-center">
+                        {/* Image section - larger and more prominent */}
+                        <div className="mt-3 mb-4 flex items-center justify-center">
+                          <div className="w-full h-36 rounded-lg overflow-hidden bg-gradient-to-br from-white/5 to-black/50 p-1.5 border border-white/10">
                             {project.platform === 'macOS App' ? (
-                              <div className="h-[80px] aspect-video bg-gradient-to-br from-gray-800 to-black rounded-lg overflow-hidden shadow-xl border border-white/10 flex items-center justify-center p-1">
-                                <div className="text-white text-center text-xs font-medium">{project.title}</div>
+                              <div className="h-full w-full rounded-md bg-gradient-to-br from-gray-800 to-black flex items-center justify-center">
+                                <div className="text-white text-lg font-medium p-2">{project.title}</div>
                               </div>
                             ) : (
-                              <img 
-                                src={projectImage} 
-                                alt={project.title}
-                                className="max-h-[80px] object-contain transition-all duration-500 group-hover:scale-105"
-                              />
+                              <div className="h-full w-full flex items-center justify-center">
+                                <img 
+                                  src={projectImage} 
+                                  alt={project.title}
+                                  className="h-full object-contain transition-all duration-500"
+                                />
+                              </div>
                             )}
                           </div>
+                        </div>
+                        
+                        <div className="mt-2">
+                          <p className="text-sm text-gray-400 line-clamp-2 mb-4">
+                            {project.description?.substring(0, 100)}...
+                          </p>
+                        </div>
+                        
+                        <div className="flex flex-wrap gap-2 mb-4">
+                          {project.highlights?.slice(0, 2).map((highlight, idx) => (
+                            <span key={idx} className="inline-block text-xs bg-white/10 px-2 py-1 rounded-full text-gray-300">
+                              {highlight.substring(0, 18)}{highlight.length > 18 ? '...' : ''}
+                            </span>
+                          ))}
                         </div>
                         
                         <Separator className="my-4 bg-white/5" />
                         
                         <div className="mt-auto">
-                          <div className="border border-white/20 rounded-lg px-4 py-2 text-white text-sm text-center transition-all duration-300 hover:bg-white/15">
-                            Details
+                          <div className="flex items-center justify-between">
+                            <span className="text-sm text-white/70">Details</span>
+                            <ArrowRight size={16} className="text-white/70" />
                           </div>
                         </div>
                       </div>
