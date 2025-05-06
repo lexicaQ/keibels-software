@@ -1,11 +1,10 @@
-
 import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { ArrowRight, DownloadIcon, UploadIcon } from 'lucide-react';
 import { toast } from '@/components/ui/use-toast';
-import { supabase } from '@/integrations/supabase/client';
+import { supabase, RESUME_BUCKET } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
@@ -76,16 +75,17 @@ const Resume = () => {
       const fileName = `resume-${Date.now()}.${fileExt}`;
       const filePath = `${fileName}`;
 
-      // Upload file to Supabase Storage
+      // Upload file to Supabase Storage - no authentication required now
       const { data: uploadData, error: uploadError } = await supabase
         .storage
-        .from('resumes')
+        .from(RESUME_BUCKET)
         .upload(filePath, file, {
           cacheControl: '3600',
           upsert: false
         });
 
       if (uploadError) {
+        console.error('Storage upload error:', uploadError);
         throw uploadError;
       }
 
@@ -131,7 +131,7 @@ const Resume = () => {
       console.error('Error uploading resume:', error);
       toast({
         title: "Fehler",
-        description: "Beim Hochladen des Lebenslaufs ist ein Fehler aufgetreten.",
+        description: "Beim Hochladen des Lebenslaufs ist ein Fehler aufgetreten: " + (error.message || 'Unbekannter Fehler'),
         variant: "destructive",
       });
     } finally {
@@ -147,13 +147,14 @@ const Resume = () => {
         throw new Error('Resume data not available');
       }
       
-      // Download file from storage
+      // Download file from storage - no authentication required now
       const { data, error } = await supabase
         .storage
-        .from('resumes')
+        .from(RESUME_BUCKET)
         .download(resumeData.storage_path);
       
       if (error) {
+        console.error('Storage download error:', error);
         throw error;
       }
       
@@ -174,7 +175,7 @@ const Resume = () => {
       console.error('Error downloading resume:', error);
       toast({
         title: "Fehler",
-        description: "Beim Herunterladen des Lebenslaufs ist ein Fehler aufgetreten.",
+        description: "Beim Herunterladen des Lebenslaufs ist ein Fehler aufgetreten: " + (error.message || 'Unbekannter Fehler'),
         variant: "destructive",
       });
     } finally {
