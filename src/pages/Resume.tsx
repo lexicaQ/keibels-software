@@ -117,8 +117,8 @@ const Resume = () => {
       setResumeData(insertData);
       setFile(null);
 
-      // Reset file input
-      const fileInput = document.getElementById('resume-file');
+      // Reset file input - Fixed the TypeScript error here
+      const fileInput = document.getElementById('resume-file') as HTMLInputElement;
       if (fileInput) {
         fileInput.value = '';
       }
