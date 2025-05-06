@@ -3,15 +3,26 @@ import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import LoadingSpinner from '../components/LoadingSpinner';
-import { ArrowRight, DownloadIcon } from 'lucide-react';
+import { ArrowRight, DownloadIcon, UploadIcon } from 'lucide-react';
 import { toast } from '@/components/ui/use-toast';
 import { supabase } from '@/integrations/supabase/client';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 
 const Resume = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [activeSection, setActiveSection] = useState('education');
   const [isDownloading, setIsDownloading] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
   const [resumeData, setResumeData] = useState(null);
+  const [file, setFile] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  // Check if the user is an admin - in a real app, this would be based on user roles
+  // For demo purposes, we're setting it to true to allow resume upload
+  useEffect(() => {
+    setIsAdmin(true);
+  }, []);
 
   // Fetch resume file information from database
   useEffect(() => {
@@ -40,6 +51,93 @@ const Resume = () => {
     }, 400); // Reduced loading time
     return () => clearTimeout(timer);
   }, []);
+
+  const handleFileChange = (e) => {
+    const selectedFile = e.target.files[0];
+    if (selectedFile) {
+      setFile(selectedFile);
+    }
+  };
+
+  const handleUploadResume = async () => {
+    if (!file) {
+      toast({
+        title: "Fehler",
+        description: "Bitte wählen Sie eine Datei aus.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsUploading(true);
+    try {
+      // Generate a unique filename
+      const fileExt = file.name.split('.').pop();
+      const fileName = `resume-${Date.now()}.${fileExt}`;
+      const filePath = `${fileName}`;
+
+      // Upload file to Supabase Storage
+      const { data: uploadData, error: uploadError } = await supabase
+        .storage
+        .from('resumes')
+        .upload(filePath, file, {
+          cacheControl: '3600',
+          upsert: false
+        });
+
+      if (uploadError) {
+        throw uploadError;
+      }
+
+      // Save file metadata to the database
+      const { data: insertData, error: insertError } = await supabase
+        .from('resume_files')
+        .insert({
+          filename: file.name,
+          file_type: file.type,
+          storage_path: filePath,
+          active: true
+        })
+        .select()
+        .single();
+
+      if (insertError) {
+        throw insertError;
+      }
+
+      // Set previous active file to inactive
+      if (resumeData) {
+        await supabase
+          .from('resume_files')
+          .update({ active: false })
+          .eq('id', resumeData.id);
+      }
+
+      // Update local state
+      setResumeData(insertData);
+      setFile(null);
+
+      // Reset file input
+      const fileInput = document.getElementById('resume-file');
+      if (fileInput) {
+        fileInput.value = '';
+      }
+
+      toast({
+        title: "Erfolg!",
+        description: "Lebenslauf wurde hochgeladen.",
+      });
+    } catch (error) {
+      console.error('Error uploading resume:', error);
+      toast({
+        title: "Fehler",
+        description: "Beim Hochladen des Lebenslaufs ist ein Fehler aufgetreten.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsUploading(false);
+    }
+  };
 
   const handleDownloadResume = async () => {
     try {
@@ -135,12 +233,40 @@ const Resume = () => {
                     <button 
                       className={`flex items-center justify-center w-full bg-black text-white py-3 rounded-lg transition-colors ${isDownloading ? 'opacity-75 cursor-wait' : 'hover:bg-gray-800'}`}
                       onClick={handleDownloadResume}
-                      disabled={isDownloading}
+                      disabled={isDownloading || !resumeData}
                     >
                       <DownloadIcon size={18} className={`mr-2 ${isDownloading ? 'animate-bounce' : ''}`} />
                       {isDownloading ? 'Wird heruntergeladen...' : 'Lebenslauf herunterladen'}
                     </button>
                   </div>
+
+                  {isAdmin && (
+                    <div className="mt-4 border-t pt-4">
+                      <h3 className="text-sm text-gray-500 uppercase mb-2">Admin-Bereich</h3>
+                      <div className="space-y-3">
+                        <Input
+                          id="resume-file"
+                          type="file"
+                          accept=".pdf,.doc,.docx"
+                          onChange={handleFileChange}
+                          disabled={isUploading}
+                        />
+                        <Button
+                          className={`flex items-center justify-center w-full bg-gray-800 text-white hover:bg-gray-700`}
+                          onClick={handleUploadResume}
+                          disabled={isUploading || !file}
+                        >
+                          <UploadIcon size={16} className={`mr-2 ${isUploading ? 'animate-bounce' : ''}`} />
+                          {isUploading ? 'Wird hochgeladen...' : 'Lebenslauf hochladen'}
+                        </Button>
+                      </div>
+                      {resumeData && (
+                        <div className="mt-2">
+                          <p className="text-xs text-gray-500">Aktueller Lebenslauf: {resumeData.filename}</p>
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </div>
                 
                 <div className="bg-white/90 backdrop-blur-md rounded-xl shadow-lg p-6 border border-gray-200">
