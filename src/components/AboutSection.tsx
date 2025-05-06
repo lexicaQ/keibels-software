@@ -41,13 +41,15 @@ const AboutSection: React.FC = () => {
             variants={containerVariants}
             initial="hidden"
             animate={controls}
-            className="relative h-full"
+            className="h-full"
           >
-            <img 
-              src="/lovable-uploads/8284c56f-16e0-4dd6-b3a6-353a106bc9cf.png" 
-              alt="Maxim Keibel" 
-              className="rounded-lg shadow-lg w-full h-full object-cover max-h-[400px]"
-            />
+            <div className="h-full w-full border border-black overflow-hidden rounded-lg shadow-lg">
+              <img 
+                src="/lovable-uploads/8284c56f-16e0-4dd6-b3a6-353a106bc9cf.png" 
+                alt="Maxim Keibel" 
+                className="w-full h-full object-cover"
+              />
+            </div>
           </motion.div>
           
           <motion.div 

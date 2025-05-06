@@ -62,9 +62,9 @@ const ContactSection: React.FC = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="flex items-center justify-center"
+            className="flex items-center justify-center h-full"
           >
-            <div className="rounded-lg shadow-lg overflow-hidden border border-black max-w-[200px] max-h-[200px]">
+            <div className="h-full w-full border border-black overflow-hidden rounded-lg shadow-lg">
               <img 
                 src="/lovable-uploads/8284c56f-16e0-4dd6-b3a6-353a106bc9cf.png" 
                 alt="Maxim Keibel" 

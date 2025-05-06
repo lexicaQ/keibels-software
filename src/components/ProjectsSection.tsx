@@ -1,13 +1,10 @@
 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowRight, Laptop, Smartphone } from 'lucide-react';
-import DeviceFrame from './DeviceFrame';
+import { ArrowRight, Laptop, Smartphone, Zap, Code, CheckCircle, Clock, Star } from 'lucide-react';
 import { useIsMobile } from '../hooks/use-mobile';
 import { motion } from 'framer-motion';
 import { Separator } from '@/components/ui/separator';
-import ProjectImage from './ProjectImage';
-import { getProjectImage } from '../utils/projectImages';
 
 const projects = [
   {
@@ -16,7 +13,8 @@ const projects = [
     slogan: "Dein smarter Clipboard-Manager",
     platform: "macOS App",
     year: "2025",
-    image: getProjectImage("copyclipcloud")
+    icon: <Code size={18} />,
+    highlights: ["Cloud-Sync", "Kategorisierung"]
   },
   {
     id: "apptimer",
@@ -24,7 +22,8 @@ const projects = [
     slogan: "Lokale Kontrolle. Sicher testen.",
     platform: "iOS App",
     year: "2023",
-    image: getProjectImage("apptimer")
+    icon: <Clock size={18} />,
+    highlights: ["Echtzeit-Timer", "Visuelle Warnungen"]
   },
   {
     id: "zentro",
@@ -32,7 +31,8 @@ const projects = [
     slogan: "Dein Lieferfokus – punktgenau",
     platform: "iOS App",
     year: "2023",
-    image: getProjectImage("zentro")
+    icon: <Zap size={18} />,
+    highlights: ["Präzise Navigation", "Echtzeit-Updates"]
   },
   {
     id: "nightmanager",
@@ -40,7 +40,8 @@ const projects = [
     slogan: "Einschlafen mit Klang",
     platform: "iOS App",
     year: "2024",
-    image: getProjectImage("nightmanager")
+    icon: <Star size={18} />,
+    highlights: ["Automatische Steuerung", "Schlaf-Tracking"]
   },
   {
     id: "todomanager",
@@ -48,7 +49,8 @@ const projects = [
     slogan: "Klar organisiert. Schnell erledigt.",
     platform: "macOS App",
     year: "2025",
-    image: getProjectImage("todomanager")
+    icon: <CheckCircle size={18} />,
+    highlights: ["Smarte Listen", "Zeitplanung"]
   },
   {
     id: "copychecker",
@@ -56,7 +58,8 @@ const projects = [
     slogan: "Wissen, was du kopiert hast",
     platform: "iOS App",
     year: "2024",
-    image: getProjectImage("copychecker")
+    icon: <Code size={18} />,
+    highlights: ["Echtzeit-Overlay", "Datensicherheit"]
   },
 ];
 
@@ -134,7 +137,8 @@ const ProjectsSection: React.FC = () => {
                   hoveredProject === project.id ? 'transform scale-[1.02]' : ''
                 }`}>
                   <div className="p-5 flex flex-col h-full">
-                    <div className="flex justify-between items-center mb-2">
+                    {/* Platform badge and year */}
+                    <div className="flex justify-between items-center mb-4">
                       <span className="flex items-center text-xs font-medium text-white bg-white/10 px-2.5 py-1 rounded-full border border-white/20">
                         {project.platform === 'iOS App' ? 
                           <Smartphone size={14} className="mr-1" /> : 
@@ -145,33 +149,34 @@ const ProjectsSection: React.FC = () => {
                       <span className="text-xs text-gray-400">{project.year}</span>
                     </div>
                     
-                    <h3 className="text-lg font-bold mb-1">{project.title}</h3>
-                    <p className="text-sm text-gray-400 mb-3">{project.slogan}</p>
-                    
-                    {/* Image section - larger and more prominent */}
-                    <div className="mt-1 mb-3">
-                      <div className="w-full h-28 rounded-lg overflow-hidden bg-gradient-to-br from-white/5 to-black/50 p-1.5 border border-white/10">
-                        {project.platform === 'macOS App' ? (
-                          <div className="h-full w-full rounded-md bg-gradient-to-br from-gray-800 to-black flex items-center justify-center">
-                            <div className="text-white text-center font-medium">{project.title}</div>
-                          </div>
-                        ) : (
-                          <div className="h-full w-full flex items-center justify-center">
-                            <img 
-                              src={project.image} 
-                              alt={project.title}
-                              className="h-full object-contain transition-all duration-500"
-                            />
-                          </div>
-                        )}
+                    {/* Project icon - new elegant feature */}
+                    <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mb-4 backdrop-blur-sm">
+                      <div className="text-white">
+                        {project.icon}
                       </div>
                     </div>
                     
-                    <Separator className="mt-auto mb-3 bg-white/5" />
+                    {/* Project title and slogan */}
+                    <h3 className="text-lg font-bold mb-1">{project.title}</h3>
+                    <p className="text-sm text-gray-400 mb-4">{project.slogan}</p>
                     
-                    <div className="flex items-center justify-between">
-                      <span className="text-xs text-white/70">Details ansehen</span>
-                      <ArrowRight size={16} className="text-white/70" />
+                    {/* Elegant bullet points - new feature */}
+                    <div className="space-y-3 mb-6">
+                      {project.highlights.map((highlight, i) => (
+                        <div key={i} className="flex items-center">
+                          <div className="w-1.5 h-1.5 rounded-full bg-white/60 mr-2"></div>
+                          <span className="text-sm text-gray-300">{highlight}</span>
+                        </div>
+                      ))}
+                    </div>
+                    
+                    <Separator className="mt-auto mb-4 bg-white/10" />
+                    
+                    <div className="border-t border-white/10 pt-3 mt-auto">
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs text-white/70">Projekt ansehen</span>
+                        <ArrowRight size={16} className="text-white/70" />
+                      </div>
                     </div>
                   </div>
                 </div>

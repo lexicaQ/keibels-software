@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import LoadingSpinner from '../components/LoadingSpinner';
-import { ArrowRight, Laptop, Smartphone } from 'lucide-react';
+import { ArrowRight, Laptop, Smartphone, Code, Star } from 'lucide-react';
 import projectsData from '../data/projectsData';
 import { motion } from 'framer-motion';
 import { Badge } from '@/components/ui/badge';
@@ -75,7 +75,7 @@ const Projects = () => {
           </header>
           
           <motion.div 
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" 
+            className="space-y-8" 
             variants={containerVariants} 
             initial="hidden" 
             animate="visible"
@@ -91,13 +91,13 @@ const Projects = () => {
                   onMouseEnter={() => setHoveredProject(project.id)} 
                   onMouseLeave={() => setHoveredProject(null)}
                 >
-                  <Link to={`/projects/${project.id}`} className="block h-full">
-                    <div 
-                      className={`bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl overflow-hidden transition-all duration-500 h-full flex flex-col hover:shadow-[0_10px_40px_rgba(255,255,255,0.1)] ${
-                        hoveredProject === project.id ? 'transform scale-[1.03] shadow-lg' : ''
-                      }`}
-                    >
-                      <div className="p-6 flex flex-col h-full relative z-10">
+                  <div 
+                    className={`bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl overflow-hidden transition-all duration-500 hover:shadow-[0_10px_40px_rgba(255,255,255,0.1)] ${
+                      hoveredProject === project.id ? 'transform scale-[1.01] shadow-lg' : ''
+                    }`}
+                  >
+                    <div className="grid grid-cols-1 md:grid-cols-5 gap-6 p-6">
+                      <div className="md:col-span-3 flex flex-col">
                         <div className="flex justify-between items-center mb-3">
                           <Badge variant="outline" className="bg-white/10 text-white border-none py-1.5">
                             {project.platform === 'iOS App' ? <Smartphone size={14} className="mr-1" /> : <Laptop size={14} className="mr-1" />}
@@ -109,50 +109,53 @@ const Projects = () => {
                         <h2 className="text-xl font-bold mb-1 text-white">{project.title}</h2>
                         <p className="text-gray-300 text-sm italic mb-3">{project.slogan}</p>
                         
-                        {/* Image section - larger and more prominent */}
-                        <div className="mt-3 mb-4 flex items-center justify-center">
-                          <div className="w-full h-36 rounded-lg overflow-hidden bg-gradient-to-br from-white/5 to-black/50 p-1.5 border border-white/10">
-                            {project.platform === 'macOS App' ? (
-                              <div className="h-full w-full rounded-md bg-gradient-to-br from-gray-800 to-black flex items-center justify-center">
-                                <div className="text-white text-lg font-medium p-2">{project.title}</div>
-                              </div>
-                            ) : (
-                              <div className="h-full w-full flex items-center justify-center">
-                                <img 
-                                  src={projectImage} 
-                                  alt={project.title}
-                                  className="h-full object-contain transition-all duration-500"
-                                />
-                              </div>
-                            )}
-                          </div>
-                        </div>
-                        
                         <div className="mt-2">
-                          <p className="text-sm text-gray-400 line-clamp-2 mb-4">
-                            {project.description?.substring(0, 100)}...
+                          <p className="text-sm text-gray-400 mb-4">
+                            {project.description?.substring(0, 150)}...
                           </p>
                         </div>
                         
-                        <div className="flex flex-wrap gap-2 mb-4">
-                          {project.highlights?.slice(0, 2).map((highlight, idx) => (
-                            <span key={idx} className="inline-block text-xs bg-white/10 px-2 py-1 rounded-full text-gray-300">
-                              {highlight.substring(0, 18)}{highlight.length > 18 ? '...' : ''}
-                            </span>
+                        <div className="space-y-3 mb-4">
+                          {project.highlights?.slice(0, 3).map((highlight, idx) => (
+                            <div key={idx} className="flex items-center">
+                              <Star className="w-4 h-4 text-white/40 mr-2" />
+                              <span className="text-sm text-gray-300">{highlight}</span>
+                            </div>
                           ))}
                         </div>
                         
-                        <Separator className="my-4 bg-white/5" />
-                        
                         <div className="mt-auto">
-                          <div className="flex items-center justify-between">
-                            <span className="text-sm text-white/70">Details</span>
-                            <ArrowRight size={16} className="text-white/70" />
-                          </div>
+                          <Link to={`/projects/${project.id}`} className="inline-block">
+                            <div className="border-t border-white/10 pt-3 w-full">
+                              <div className="flex items-center text-white hover:text-white/80 transition-colors">
+                                <span className="font-medium">Projekt ansehen</span>
+                                <ArrowRight size={16} className="ml-2" />
+                              </div>
+                            </div>
+                          </Link>
+                        </div>
+                      </div>
+                      
+                      <div className="md:col-span-2 flex items-center justify-center">
+                        <div className="w-full h-full max-h-48 md:max-h-none rounded-lg overflow-hidden bg-gradient-to-br from-white/5 to-black/50 p-1.5 border border-white/10">
+                          {project.platform === 'macOS App' ? (
+                            <div className="h-full w-full rounded-md bg-gradient-to-br from-gray-800 to-black flex items-center justify-center p-4">
+                              <div className="flex flex-col items-center justify-center">
+                                <Code size={36} className="text-white/60 mb-3" />
+                                <div className="text-white text-lg font-medium">{project.title}</div>
+                              </div>
+                            </div>
+                          ) : (
+                            <img 
+                              src={projectImage} 
+                              alt={project.title}
+                              className="h-full w-full object-contain transition-all duration-500"
+                            />
+                          )}
                         </div>
                       </div>
                     </div>
-                  </Link>
+                  </div>
                 </motion.div>
               );
             })}
