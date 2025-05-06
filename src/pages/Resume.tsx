@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -48,24 +49,35 @@ const Resume = () => {
       if (!resumeData) {
         throw new Error('Kein Lebenslauf verfügbar');
       }
-      
-      // Get file URL from storage - using public bucket
-      const { data: fileUrl } = supabase
+
+      // Get file data directly using download method
+      const { data: fileData, error } = await supabase
         .storage
         .from(RESUME_BUCKET)
-        .getPublicUrl(resumeData.storage_path);
+        .download(resumeData.storage_path);
       
-      if (!fileUrl || !fileUrl.publicUrl) {
-        throw new Error('Fehler beim Abrufen der Datei');
+      if (error) {
+        console.error('Error downloading file:', error);
+        throw new Error('Fehler beim Herunterladen der Datei: ' + error.message);
       }
+      
+      if (!fileData) {
+        throw new Error('Keine Datei gefunden');
+      }
+      
+      // Create blob URL from file data
+      const url = URL.createObjectURL(fileData);
       
       // Create a temporary link element to trigger download
       const link = document.createElement('a');
-      link.href = fileUrl.publicUrl;
+      link.href = url;
       link.download = resumeData.filename || 'lebenslauf.pdf';
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
+      
+      // Clean up blob URL after download
+      setTimeout(() => URL.revokeObjectURL(url), 100);
       
       toast({
         title: "Erfolg!",
