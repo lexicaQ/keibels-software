@@ -16,12 +16,12 @@ const ProjectImage: React.FC<ProjectImageProps> = ({ imageUrl, alt, className = 
   if (isCustomImage(imageUrl)) {
     const variant = getCustomImageType(imageUrl);
     return (
-      <div className="relative flex items-center justify-center">
+      <div className="relative flex items-center justify-center py-4">
         <motion.div 
           initial={{ scale: 0.95, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.6 }}
-          className="relative z-10 w-11/12 md:w-4/5 lg:w-3/4"
+          className="relative z-10 w-11/12 md:w-5/6 lg:w-4/5"
         >
           <MacOSAppImage appName={alt} variant={variant} className={className} />
         </motion.div>
@@ -30,17 +30,17 @@ const ProjectImage: React.FC<ProjectImageProps> = ({ imageUrl, alt, className = 
   }
   
   return (
-    <div className="relative flex items-center justify-center">
+    <div className="relative flex items-center justify-center py-4">
       <motion.div 
-        initial={{ scale: 0.95, opacity: 0 }}
+        initial={{ scale: 0.97, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className="relative z-10 w-11/12 md:w-4/5 lg:w-3/4"
+        className="relative z-10 w-11/12 md:w-5/6 lg:w-4/5"
       >
         <img 
           src={imageUrl} 
           alt={alt} 
-          className={`w-full h-full object-contain ${className}`}
+          className={`w-full h-full object-contain shadow-xl ${className}`}
         />
       </motion.div>
     </div>

@@ -22,12 +22,12 @@ const Resume = () => {
           .from('resume_files')
           .select('*')
           .eq('active', true)
-          .single();
+          .limit(1);
         
         if (error) {
           console.error('Error fetching resume data:', error);
-        } else {
-          setResumeData(data);
+        } else if (data && data.length > 0) {
+          setResumeData(data[0]);
         }
       } catch (err) {
         console.error('Failed to fetch resume data:', err);
@@ -118,7 +118,7 @@ const Resume = () => {
               <div className="sticky top-28">
                 <div className="bg-white/90 backdrop-blur-md rounded-xl shadow-lg p-6 mb-8 border border-gray-200">
                   <div className="flex flex-col items-center mb-6">
-                    <div className="w-40 h-40 rounded-full overflow-hidden mb-4 border-4 border-gray-200">
+                    <div className="w-32 h-32 rounded-full overflow-hidden mb-4 border-4 border-gray-200">
                       <img alt="Maxim Keibel" className="w-full h-full object-cover" src="/lovable-uploads/7c16e384-680f-43a0-8341-43bfb6b519e5.jpg" />
                     </div>
                     <h2 className="text-2xl font-bold">Maxim Keibel</h2>

@@ -5,11 +5,16 @@ import type { Database } from './types';
 
 const SUPABASE_URL = "https://pkxzblfqcsebqgvuhizh.supabase.co";
 const SUPABASE_PUBLISHABLE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBreHpibGZxY3NlYnFndnVoaXpoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU3NjUwNTYsImV4cCI6MjA2MTM0MTA1Nn0.Ia9SprOFy2B7EmVHJrnwTkvaiGAovAdZu9kXr6WDUbU";
+const SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || SUPABASE_PUBLISHABLE_KEY;
 
 // Import the supabase client like this:
 // import { supabase } from "@/integrations/supabase/client";
 
 export const supabase = createClient<Database>(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+
+// For admin operations we use a separate client with service role permissions
+// This should only be used in protected contexts like admin functions
+export const supabaseAdmin = createClient<Database>(SUPABASE_URL, SERVICE_ROLE_KEY);
 
 // Define storage bucket name as a constant for consistency
 export const RESUME_BUCKET = 'resumes';
