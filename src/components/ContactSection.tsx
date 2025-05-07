@@ -20,7 +20,7 @@ const ContactSection: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="bg-white rounded-lg shadow-lg p-5 border border-black h-full"
+            className="bg-white rounded-lg shadow-md p-5 border border-gray-200 h-full"
           >
             <h3 className="text-xl font-bold mb-3">Lassen Sie uns zusammenarbeiten</h3>
             <p className="text-gray-700 mb-4 text-sm">
@@ -62,9 +62,9 @@ const ContactSection: React.FC = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="flex items-center justify-center h-full"
+            className="flex items-center justify-center h-64 md:h-full"
           >
-            <div className="h-full w-full border border-black overflow-hidden rounded-lg shadow-lg">
+            <div className="h-full w-full border border-gray-200 overflow-hidden rounded-lg shadow-md">
               <img 
                 src="/lovable-uploads/8284c56f-16e0-4dd6-b3a6-353a106bc9cf.png" 
                 alt="Maxim Keibel" 
