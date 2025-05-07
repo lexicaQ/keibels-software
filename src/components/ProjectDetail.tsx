@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Navbar from './Navbar';
@@ -156,10 +157,10 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects }) => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="backdrop-blur-xl bg-white/8 border border-white/10 rounded-2xl p-8 z-10 relative overflow-hidden"
+              className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8 z-10 relative overflow-hidden"
             >
               <div className="flex flex-col md:flex-row gap-10 z-10 relative">
-                <div className="w-full md:w-1/2 z-10">
+                <div className="w-full md:w-2/3 z-10">
                   <div className="flex items-center mb-4">
                     <motion.span 
                       initial={{ opacity: 0, scale: 0.8 }}
@@ -217,9 +218,12 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects }) => {
                   </motion.p>
                 </div>
                 
-                <div className="w-full md:w-1/2 flex items-center justify-center">                  
+                <div className="w-full md:w-1/3 flex items-center justify-center">
+                  {/* Vertical divider visible on medium and larger screens */}
+                  <div className="absolute top-0 left-2/3 h-full w-px bg-white/10 hidden md:block"></div>
+                  
                   <motion.div 
-                    className="relative w-full"
+                    className="relative w-full px-6"
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
@@ -227,7 +231,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects }) => {
                     <ProjectImage 
                       imageUrl={projectImage} 
                       alt={project.title}
-                      className="rounded-xl max-h-[350px] mx-auto"
+                      className="rounded-xl max-h-[250px] mx-auto"
                     />
                   </motion.div>
                 </div>

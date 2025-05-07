@@ -36,14 +36,14 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   return (
     <div 
       ref={cardRef}
-      className="group bg-white border border-gray-200 rounded-lg shadow-md overflow-hidden transition-all duration-500 animate-fade-in hover:shadow-xl"
+      className="group bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden transition-all duration-500 animate-fade-in hover:shadow-2xl"
       style={{ 
         animationDelay: `${delay}ms`,
         opacity: 0 
       }}
     >
-      <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
-        <div className={`p-6 lg:col-span-3 ${!isLeft ? 'lg:order-last' : ''}`}>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="p-8">
           <div className="mb-4">
             <div>
               <h3 className="text-2xl font-bold tracking-tight mb-2">{title}</h3>
@@ -65,13 +65,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             )}
           </div>
           
-          <p className="text-gray-700 mb-6 line-clamp-3">
+          <p className="text-gray-700 mb-6 line-clamp-4">
             {description}
           </p>
           
           <Link 
             to={`/projects/${id}`}
-            className="inline-flex items-center px-5 py-2.5 bg-black text-white rounded-md transition-all duration-300 hover:bg-gray-800 relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-full after:translate-y-1 after:bg-transparent"
+            className="inline-flex items-center px-6 py-3 bg-black text-white rounded-lg border border-black transition-all duration-300 hover:bg-gray-800 hover:border-gray-800"
             onClick={(e) => {
               if (isMobile) {
                 e.preventDefault();
@@ -80,18 +80,19 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
               }
             }}
           >
-            <span>Projekt ansehen</span>
-            <ArrowRight size={16} className="ml-2" />
+            Details ansehen
           </Link>
         </div>
 
-        <div className="lg:col-span-2 relative w-full h-[350px] bg-gray-50 flex items-center justify-center">
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent to-gray-50 opacity-20"></div>
-          <div className="transform transition-all duration-500 group-hover:scale-105 px-6 py-4 w-full h-full flex items-center justify-center">
+        <div className="relative w-full h-[400px] overflow-hidden bg-gray-100 flex items-center justify-center lg:order-last">
+          {/* Vertical divider visible on large screens */}
+          <div className="absolute top-0 left-0 h-full w-px bg-gray-200 hidden lg:block"></div>
+          
+          <div className="transform transition-all duration-500 group-hover:scale-105 px-8 py-4 w-full h-full flex items-center justify-center">
             <DeviceFrame 
               type={deviceType} 
               imageUrl={appImage}
-              className="shadow-xl max-h-[300px] w-auto"
+              className="shadow-2xl max-h-[350px] w-auto"
             />
           </div>
         </div>
