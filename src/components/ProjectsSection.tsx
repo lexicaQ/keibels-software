@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowRight, Laptop, Smartphone, Zap, Code, CheckCircle, Clock, Star } from 'lucide-react';
-import { useIsMobile } from '../hooks/use-mobile';
 import { motion } from 'framer-motion';
 import { Separator } from '@/components/ui/separator';
 
@@ -9,65 +9,52 @@ const projects = [
   {
     id: "copyclipcloud",
     title: "CopyClipCloud",
-    slogan: "Dein smarter Clipboard-Manager",
     platform: "macOS App",
     year: "2025",
-    icon: <Code size={18} />,
-    highlights: ["Cloud-Sync", "Kategorisierung"]
+    icon: <Code size={18} />
   },
   {
     id: "apptimer",
     title: "AppTimer",
-    slogan: "Lokale Kontrolle. Sicher testen.",
     platform: "iOS App",
     year: "2023",
-    icon: <Clock size={18} />,
-    highlights: ["Echtzeit-Timer", "Visuelle Warnungen"]
+    icon: <Clock size={18} />
   },
   {
     id: "zentro",
     title: "Zentro",
-    slogan: "Dein Lieferfokus – punktgenau",
     platform: "iOS App",
     year: "2023",
-    icon: <Zap size={18} />,
-    highlights: ["Präzise Navigation", "Echtzeit-Updates"]
+    icon: <Zap size={18} />
   },
   {
     id: "nightmanager",
     title: "NightManager",
-    slogan: "Einschlafen mit Klang",
     platform: "iOS App",
     year: "2024",
-    icon: <Star size={18} />,
-    highlights: ["Automatische Steuerung", "Schlaf-Tracking"]
+    icon: <Star size={18} />
   },
   {
     id: "todomanager",
     title: "ToDoManager",
-    slogan: "Klar organisiert. Schnell erledigt.",
     platform: "macOS App",
     year: "2025",
-    icon: <CheckCircle size={18} />,
-    highlights: ["Smarte Listen", "Zeitplanung"]
+    icon: <CheckCircle size={18} />
   },
   {
     id: "copychecker",
     title: "CopyChecker",
-    slogan: "Wissen, was du kopiert hast",
     platform: "iOS App",
     year: "2024",
-    icon: <Code size={18} />,
-    highlights: ["Echtzeit-Overlay", "Datensicherheit"]
+    icon: <Code size={18} />
   },
 ];
 
 const ProjectsSection: React.FC = () => {
-  const isMobile = useIsMobile();
   const navigate = useNavigate();
   const [hoveredProject, setHoveredProject] = useState<string | null>(null);
 
-  const handleProjectClick = (e: React.MouseEvent<HTMLDivElement>, projectId: string) => {
+  const handleProjectClick = (projectId: string) => {
     navigate(`/projects/${projectId}`);
   };
 
@@ -128,53 +115,42 @@ const ProjectsSection: React.FC = () => {
               onMouseLeave={() => setHoveredProject(null)}
             >
               <div 
-                onClick={(e) => handleProjectClick(e, project.id)}
+                onClick={() => handleProjectClick(project.id)}
                 className="cursor-pointer h-full"
               >
                 <div className={`bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg overflow-hidden transition-all duration-400 h-full flex flex-col hover:shadow-[0_8px_30px_rgba(255,255,255,0.1)] ${
                   hoveredProject === project.id ? 'transform scale-[1.02]' : ''
                 }`}>
-                  <div className="p-4 flex flex-col h-full">
+                  <div className="p-5 flex flex-col h-full">
                     {/* Platform badge and year */}
-                    <div className="flex justify-between items-center mb-3">
-                      <span className="flex items-center text-xs font-medium text-white bg-white/8 px-2 py-0.5 rounded-full border border-white/15">
+                    <div className="flex justify-between items-center mb-5">
+                      <span className="flex items-center text-xs font-medium text-white bg-white/8 px-2.5 py-1 rounded-full border border-white/15">
                         {project.platform === 'iOS App' ? 
-                          <Smartphone size={12} className="mr-1" /> : 
-                          <Laptop size={12} className="mr-1" />
+                          <Smartphone size={12} className="mr-1.5" /> : 
+                          <Laptop size={12} className="mr-1.5" />
                         }
                         {project.platform}
                       </span>
                       <span className="text-xs text-gray-400">{project.year}</span>
                     </div>
                     
-                    {/* Project icon */}
-                    <div className="w-10 h-10 bg-white/8 rounded-full flex items-center justify-center mb-3 backdrop-blur-sm">
-                      <div className="text-white">
-                        {project.icon}
-                      </div>
-                    </div>
-                    
-                    {/* Project title and slogan */}
-                    <h3 className="text-base font-bold mb-1">{project.title}</h3>
-                    <p className="text-xs text-gray-400 mb-3">{project.slogan}</p>
-                    
-                    {/* Bullet points */}
-                    <div className="space-y-2 mb-4">
-                      {project.highlights.map((highlight, i) => (
-                        <div key={i} className="flex items-center">
-                          <div className="w-1 h-1 rounded-full bg-white/50 mr-2"></div>
-                          <span className="text-xs text-gray-300">{highlight}</span>
+                    <div className="flex items-center mb-3">
+                      {/* Project icon */}
+                      <div className="w-10 h-10 bg-white/8 rounded-full flex items-center justify-center mr-3 backdrop-blur-sm">
+                        <div className="text-white">
+                          {project.icon}
                         </div>
-                      ))}
+                      </div>
+                      
+                      {/* Project title */}
+                      <h3 className="text-lg font-bold">{project.title}</h3>
                     </div>
                     
-                    <Separator className="mt-auto mb-3 bg-white/10" />
+                    <Separator className="bg-white/10 my-3" />
                     
-                    <div className="pt-2 mt-auto">
-                      <div className="flex items-center justify-between">
-                        <span className="text-xs text-white/60">Projekt ansehen</span>
-                        <ArrowRight size={14} className="text-white/60" />
-                      </div>
+                    <div className="pt-2 mt-auto flex items-center justify-between">
+                      <span className="text-xs text-white/70">Details anzeigen</span>
+                      <ArrowRight size={14} className="text-white/70" />
                     </div>
                   </div>
                 </div>

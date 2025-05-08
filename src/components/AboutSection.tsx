@@ -35,15 +35,15 @@ const AboutSection: React.FC = () => {
           <div className="w-16 h-1 bg-black mx-auto"></div>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch max-w-4xl mx-auto">
           <motion.div 
             ref={ref}
             variants={containerVariants}
             initial="hidden"
             animate={controls}
-            className="h-full"
+            className="h-full flex"
           >
-            <div className="h-64 md:h-80 w-full border border-gray-300 overflow-hidden rounded-lg shadow-lg">
+            <div className="h-full w-full border border-gray-300 overflow-hidden rounded-lg shadow-lg flex-grow">
               <img 
                 src="/lovable-uploads/8284c56f-16e0-4dd6-b3a6-353a106bc9cf.png" 
                 alt="Maxim Keibel" 
