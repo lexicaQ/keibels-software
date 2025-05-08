@@ -121,7 +121,7 @@ const About = () => {
                   </div>
                 </div>
                 
-                {/* Personal Information */}
+                {/* Personal Information - Updated with correct contact information */}
                 <Card className="p-6 bg-white shadow-lg border-none rounded-2xl animate-fade-in">
                   <h2 className="text-2xl font-bold mb-4 flex items-center">
                     <User className="mr-2" size={20} />
@@ -131,15 +131,15 @@ const About = () => {
                   <div className="space-y-4">
                     <div className="flex items-center space-x-3">
                       <Mail size={18} className="text-gray-600" />
-                      <span className="text-gray-800">maxim@example.com</span>
+                      <span className="text-gray-800">maxim.keibel@icloud.com</span>
                     </div>
                     <div className="flex items-center space-x-3">
                       <Phone size={18} className="text-gray-600" />
-                      <span className="text-gray-800">+49 (123) 456-7890</span>
+                      <span className="text-gray-800">+49 173 4429624</span>
                     </div>
                     <div className="flex items-center space-x-3">
                       <MapPin size={18} className="text-gray-600" />
-                      <span className="text-gray-800">München, Deutschland</span>
+                      <span className="text-gray-800">Am Ring 3, Ismaning</span>
                     </div>
                   </div>
                   
@@ -354,49 +354,49 @@ const About = () => {
                   >
                     <h2 className="text-3xl font-bold mb-8">Meine Werte</h2>
                     
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                      <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-100 transition-transform duration-300 hover:-translate-y-2 h-full">
-                        <div className="flex items-center mb-4">
-                          <div className="w-12 h-12 bg-black rounded-full flex items-center justify-center mr-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                      <div className="bg-white rounded-xl shadow-md p-8 border border-gray-100 transition-all duration-300 hover:shadow-lg hover:border-gray-200 h-full flex flex-col">
+                        <div className="flex items-center mb-6">
+                          <div className="w-12 h-12 bg-black rounded-full flex items-center justify-center mr-4 shadow-md">
                             <span className="text-white font-bold text-xl">1</span>
                           </div>
                           <h3 className="text-xl font-bold">Ehrlichkeit</h3>
                         </div>
-                        <p className="text-gray-700">
+                        <p className="text-gray-700 flex-grow">
                           Transparenz und Aufrichtigkeit bilden die Grundlage meiner Arbeit und meiner Beziehungen. 
-                          Ich kommuniziere klar und direkt, um Vertrauen aufzubauen und langfristige Zusammenarbeit zu ermöglichen.
+                          Ich kommuniziere klar und direkt, um Vertrauen aufzubauen.
                         </p>
                       </div>
                       
-                      <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-100 transition-transform duration-300 hover:-translate-y-2 h-full">
-                        <div className="flex items-center mb-4">
-                          <div className="w-12 h-12 bg-black rounded-full flex items-center justify-center mr-4">
+                      <div className="bg-white rounded-xl shadow-md p-8 border border-gray-100 transition-all duration-300 hover:shadow-lg hover:border-gray-200 h-full flex flex-col">
+                        <div className="flex items-center mb-6">
+                          <div className="w-12 h-12 bg-black rounded-full flex items-center justify-center mr-4 shadow-md">
                             <span className="text-white font-bold text-xl">2</span>
                           </div>
                           <h3 className="text-xl font-bold">Hilfsbereitschaft</h3>
                         </div>
-                        <p className="text-gray-700">
+                        <p className="text-gray-700 flex-grow">
                           Ich glaube daran, mein Wissen zu teilen und anderen zu helfen, ihre Ziele zu erreichen. 
-                          Gemeinsam können wir mehr erreichen als allein, und die Unterstützung anderer bereichert auch meine eigene Erfahrung.
+                          Gemeinsam können wir mehr erreichen als allein.
                         </p>
                       </div>
                       
-                      <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-100 transition-transform duration-300 hover:-translate-y-2 h-full">
-                        <div className="flex items-center mb-4">
-                          <div className="w-12 h-12 bg-black rounded-full flex items-center justify-center mr-4">
+                      <div className="bg-white rounded-xl shadow-md p-8 border border-gray-100 transition-all duration-300 hover:shadow-lg hover:border-gray-200 h-full flex flex-col">
+                        <div className="flex items-center mb-6">
+                          <div className="w-12 h-12 bg-black rounded-full flex items-center justify-center mr-4 shadow-md">
                             <span className="text-white font-bold text-xl">3</span>
                           </div>
                           <h3 className="text-xl font-bold">Einsatzbereitschaft</h3>
                         </div>
-                        <p className="text-gray-700">
+                        <p className="text-gray-700 flex-grow">
                           Wenn ich von einer Idee überzeugt bin, setze ich mich mit vollem Einsatz dafür ein. 
-                          Ich scheue keine Herausforderungen und arbeite beharrlich, um nachhaltige und messbare Ergebnisse zu erzielen.
+                          Ich scheue keine Herausforderungen und arbeite beharrlich.
                         </p>
                       </div>
                     </div>
                   </section>
                   
-                  {/* Passions Section */}
+                  {/* Passions Section - Redesigned in modern black & white style */}
                   <section 
                     ref={(el) => {
                       sectionRefs.current['passions'] = el;
@@ -407,78 +407,81 @@ const About = () => {
                     <h2 className="text-3xl font-bold mb-8">Meine Leidenschaften</h2>
                     
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                      <div className="bg-black text-white rounded-xl shadow-lg p-8 h-full">
-                        <div className="flex items-center mb-4">
-                          <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mr-4">
-                            <Briefcase className="h-6 w-6 text-black" />
+                      <div className="group bg-white rounded-2xl p-8 border-2 border-black transition-all duration-300 hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-4px] hover:translate-y-[-4px] h-full">
+                        <div className="flex items-center mb-6">
+                          <div className="w-14 h-14 bg-black rounded-full flex items-center justify-center mr-5 shadow-md group-hover:scale-110 transition-transform duration-300">
+                            <Briefcase className="h-7 w-7 text-white" />
                           </div>
-                          <h3 className="text-xl font-bold">Software Development</h3>
+                          <h3 className="text-2xl font-bold">Software Development</h3>
                         </div>
-                        <p className="mb-6">
-                          Meine Leidenschaft für die Entwicklung von Software geht über das reine Programmieren hinaus. 
-                          Es ist die Kunst, komplexe Probleme in elegante Lösungen zu verwandeln und Anwendungen zu schaffen, 
-                          die das Leben der Nutzer bereichern und vereinfachen.
-                        </p>
-                        <p>
-                          Besonders fasziniert bin ich von der iOS- und macOS-Entwicklung, wo ich meine Ideen in 
-                          intuitive, leistungsstarke Apps umsetzen kann. Die Verbindung von technischer Exzellenz 
-                          mit nutzerorientierten Designs ist mein ständiges Ziel.
-                        </p>
+                        <div className="space-y-4">
+                          <p className="text-gray-800">
+                            Meine Leidenschaft für die Entwicklung von Software geht über das reine Programmieren hinaus. 
+                            Es ist die Kunst, komplexe Probleme in elegante Lösungen zu verwandeln.
+                          </p>
+                          <p className="text-gray-800">
+                            Besonders fasziniert bin ich von der iOS- und macOS-Entwicklung, wo ich meine Ideen in 
+                            intuitive, leistungsstarke Apps umsetzen kann.
+                          </p>
+                        </div>
                       </div>
                       
-                      <div className="bg-white rounded-xl shadow-lg p-8 border border-black h-full">
-                        <div className="flex items-center mb-4">
-                          <div className="w-12 h-12 bg-black rounded-full flex items-center justify-center mr-4">
-                            <User className="h-6 w-6 text-white" />
+                      <div className="group bg-black text-white rounded-2xl p-8 transition-all duration-300 hover:shadow-[8px_8px_0px_0px_rgba(255,255,255,1)] hover:translate-x-[-4px] hover:translate-y-[-4px] h-full">
+                        <div className="flex items-center mb-6">
+                          <div className="w-14 h-14 bg-white rounded-full flex items-center justify-center mr-5 shadow-md group-hover:scale-110 transition-transform duration-300">
+                            <User className="h-7 w-7 text-black" />
                           </div>
-                          <h3 className="text-xl font-bold">UI/UX Design</h3>
+                          <h3 className="text-2xl font-bold">UI/UX Design</h3>
                         </div>
-                        <p className="mb-6">
-                          Das Design von Benutzeroberflächen ist für mich eine perfekte Kombination aus Kreativität und 
-                          Funktionalität. Ich strebe danach, Interfaces zu erschaffen, die nicht nur ästhetisch ansprechend, 
-                          sondern auch intuitiv und effizient sind.
-                        </p>
-                        <p>
-                          Mein minimalistischer, schwarz-weißer Designansatz betont Klarheit und Fokus, während er 
-                          gleichzeitig eine zeitlose Eleganz verkörpert. Jedes Element hat einen Zweck, jede Interaktion 
-                          ist durchdacht gestaltet.
-                        </p>
+                        <div className="space-y-4">
+                          <p>
+                            Das Design von Benutzeroberflächen ist für mich eine perfekte Kombination aus Kreativität und 
+                            Funktionalität. Ich strebe nach Interfaces, die intuitiv und effizient sind.
+                          </p>
+                          <p>
+                            Mein minimalistischer, schwarz-weißer Designansatz betont Klarheit und Fokus, während er 
+                            gleichzeitig eine zeitlose Eleganz verkörpert.
+                          </p>
+                        </div>
                       </div>
                       
-                      <div className="bg-white rounded-xl shadow-lg p-8 border border-black h-full">
-                        <div className="flex items-center mb-4">
-                          <div className="w-12 h-12 bg-black rounded-full flex items-center justify-center mr-4">
-                            <Heart className="h-6 w-6 text-white" />
+                      <div className="group bg-black text-white rounded-2xl p-8 transition-all duration-300 hover:shadow-[8px_8px_0px_0px_rgba(255,255,255,1)] hover:translate-x-[-4px] hover:translate-y-[-4px] h-full">
+                        <div className="flex items-center mb-6">
+                          <div className="w-14 h-14 bg-white rounded-full flex items-center justify-center mr-5 shadow-md group-hover:scale-110 transition-transform duration-300">
+                            <BookOpen className="h-7 w-7 text-black" />
                           </div>
-                          <h3 className="text-xl font-bold">Fitness & Sport</h3>
+                          <h3 className="text-2xl font-bold">Künstliche Intelligenz</h3>
                         </div>
-                        <p className="mb-6">
-                          Sport und körperliche Fitness sind wesentliche Teile meines Lebens. Als langjähriges Mitglied 
-                          im Tennisclub habe ich nicht nur sportliche Erfolge erzielt, sondern auch wertvolle Lektionen 
-                          in Disziplin, Ausdauer und Teamarbeit gelernt.
-                        </p>
-                        <p>
-                          Die Balance zwischen geistiger und körperlicher Aktivität hilft mir, meine Produktivität 
-                          und Kreativität zu steigern und neue Perspektiven zu gewinnen.
-                        </p>
+                        <div className="space-y-4">
+                          <p>
+                            Die Entwicklung und Anwendung von KI-Technologien begeistert mich besonders im Kontext 
+                            der Softwareentwicklung. Ich sehe enormes Potenzial in der Integration intelligenter 
+                            Systeme.
+                          </p>
+                          <p>
+                            Mein Ziel ist es, KI-Lösungen zu entwickeln, die nicht nur technisch beeindruckend sind, 
+                            sondern auch echten Mehrwert für Nutzer schaffen.
+                          </p>
+                        </div>
                       </div>
                       
-                      <div className="bg-black text-white rounded-xl shadow-lg p-8 h-full">
-                        <div className="flex items-center mb-4">
-                          <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center mr-4">
-                            <BookOpen className="h-6 w-6 text-black" />
+                      <div className="group bg-white rounded-2xl p-8 border-2 border-black transition-all duration-300 hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[-4px] hover:translate-y-[-4px] h-full">
+                        <div className="flex items-center mb-6">
+                          <div className="w-14 h-14 bg-black rounded-full flex items-center justify-center mr-5 shadow-md group-hover:scale-110 transition-transform duration-300">
+                            <Heart className="h-7 w-7 text-white" />
                           </div>
-                          <h3 className="text-xl font-bold">Künstliche Intelligenz</h3>
+                          <h3 className="text-2xl font-bold">Fitness & Sport</h3>
                         </div>
-                        <p className="mb-6">
-                          Die Entwicklung und Anwendung von KI-Technologien begeistert mich besonders im Kontext 
-                          der Softwareentwicklung. Ich sehe enormes Potenzial in der Integration intelligenter 
-                          Systeme in Alltagsanwendungen.
-                        </p>
-                        <p>
-                          Mein Ziel ist es, KI-Lösungen zu entwickeln, die nicht nur technisch beeindruckend sind, 
-                          sondern auch echten Mehrwert für Nutzer schaffen und dabei ethische Grundsätze respektieren.
-                        </p>
+                        <div className="space-y-4">
+                          <p className="text-gray-800">
+                            Sport und körperliche Fitness sind wesentliche Teile meines Lebens. Als langjähriges Mitglied 
+                            im Tennisclub habe ich wertvolle Lektionen in Disziplin und Ausdauer gelernt.
+                          </p>
+                          <p className="text-gray-800">
+                            Die Balance zwischen geistiger und körperlicher Aktivität hilft mir, meine Produktivität 
+                            und Kreativität zu steigern und neue Perspektiven zu gewinnen.
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </section>
