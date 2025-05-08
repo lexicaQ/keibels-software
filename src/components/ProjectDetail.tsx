@@ -4,7 +4,7 @@ import { useParams, Link } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import LoadingSpinner from './LoadingSpinner';
-import { ArrowLeft, Star, Check, Link as LinkIcon, ExternalLink, Code, Laptop, Smartphone } from 'lucide-react';
+import { ArrowLeft, Star, Check, Link as LinkIcon, ExternalLink, Code, Laptop, Smartphone, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Progress } from '@/components/ui/progress';
 import ProjectImage from './ProjectImage';
