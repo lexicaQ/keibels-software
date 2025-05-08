@@ -377,7 +377,35 @@ export const projectsData = [
     appContent: CopyClipCloudContent,
     backgroundColor: "#000000",
     textColor: "#000000",
-    techStack: ["Swift", "SwiftUI", "Core Data", "CloudKit", "Vision API", "Combine"]
+    techStack: ["Swift", "SwiftUI", "Core Data", "CloudKit", "Vision API", "Combine"],
+    releaseStatus: "In Entwicklung",
+    userRating: 4.7,
+    useCases: [
+      "Effizientes Copy & Paste bei der Webentwicklung",
+      "Organisation von Code-Snippets und Design-Patterns",
+      "Recherche und Sammlung von Informationen",
+      "Sicherer Austausch sensibler Daten"
+    ],
+    updates: [
+      {
+        version: "0.9.5 Beta",
+        date: "April 2025",
+        changes: [
+          "Implementierung der Cloud-Synchronisierung zwischen Geräten",
+          "Optimierung der Suchfunktion",
+          "Leistungsverbesserungen und Fehlerbehebungen"
+        ]
+      },
+      {
+        version: "0.9.0 Beta",
+        date: "März 2025",
+        changes: [
+          "Erste öffentliche Beta-Version",
+          "Grundlegende Funktionalität implementiert",
+          "Design und UI finalisiert"
+        ]
+      }
+    ]
   },
   {
     id: "apptimer",
@@ -418,7 +446,35 @@ export const projectsData = [
     appContent: AppTimerContent,
     backgroundColor: "#333333",
     textColor: "#000000",
-    techStack: ["Swift", "UIKit", "UserNotifications", "WidgetKit"]
+    techStack: ["Swift", "UIKit", "UserNotifications", "WidgetKit"],
+    releaseStatus: "Veröffentlicht",
+    userRating: 4.5,
+    useCases: [
+      "Entwickler-Testsitzungen mit zeitkritischer Planung",
+      "QA-Teams mit variierenden Testzyklen",
+      "Beta-Tester mit mehreren Testversionen",
+      "App-Demonstrationen für Kunden"
+    ],
+    updates: [
+      {
+        version: "1.2.0",
+        date: "November 2023",
+        changes: [
+          "Widget-Support für iOS 16+",
+          "Automatische Backup-Erinnerungen vor Ablauf",
+          "Dark Mode Optimierungen"
+        ]
+      },
+      {
+        version: "1.0.0",
+        date: "August 2023",
+        changes: [
+          "Initiale App-Store Release",
+          "Unterstützung für mehrere Zertifikate",
+          "Integration mit Apple Calendar"
+        ]
+      }
+    ]
   },
   {
     id: "zentro",
@@ -464,7 +520,35 @@ export const projectsData = [
     appContent: ZentroContent,
     backgroundColor: "#f5f5f7",
     textColor: "#000000",
-    techStack: ["Swift", "MapKit", "CoreLocation", "GeoJSON", "UIKit", "SwiftUI"]
+    techStack: ["Swift", "MapKit", "CoreLocation", "GeoJSON", "UIKit", "SwiftUI"],
+    releaseStatus: "Veröffentlicht",
+    userRating: 4.8,
+    useCases: [
+      "Lieferfahrer mit festgelegten Lieferzonen",
+      "Flottenmanager für mehrere Liefergebiete",
+      "Restaurant-Teams zur Optimierung des Lieferbereichs",
+      "Kurierdienste mit zentralen Abholpunkten"
+    ],
+    updates: [
+      {
+        version: "2.1.0",
+        date: "Dezember 2023",
+        changes: [
+          "Multi-Zonen Support für komplexe Liefergebiete",
+          "Neue Statistikfunktion für zurückgelegte Strecken",
+          "Optimierte Batterielaufzeit"
+        ]
+      },
+      {
+        version: "1.0.0",
+        date: "Mai 2023",
+        changes: [
+          "Initiale Version mit Grundfunktionen",
+          "Einfache Zonenüberwachung",
+          "Entfernungsberechnung"
+        ]
+      }
+    ]
   },
   {
     id: "nightmanager",
@@ -510,7 +594,35 @@ export const projectsData = [
     appContent: NightManagerContent,
     backgroundColor: "#222222",
     textColor: "#ffffff",
-    techStack: ["Swift", "UIKit", "AVFoundation", "UserNotifications", "CoreHaptics"]
+    techStack: ["Swift", "UIKit", "AVFoundation", "UserNotifications", "CoreHaptics"],
+    releaseStatus: "Veröffentlicht",
+    userRating: 4.6,
+    useCases: [
+      "Entspanntes Einschlafen mit Musik oder Podcasts",
+      "Kontrollierte Mediennutzung für Kinder am Abend",
+      "Meditation und Achtsamkeitsübungen",
+      "Audiobuch-Hören vor dem Schlafengehen"
+    ],
+    updates: [
+      {
+        version: "1.1.0",
+        date: "Februar 2024",
+        changes: [
+          "Integration mit Apple Music und Spotify",
+          "Verbessertes Preset-Management",
+          "Neue Einschlaf-Soundscapes"
+        ]
+      },
+      {
+        version: "1.0.0",
+        date: "Januar 2024",
+        changes: [
+          "Initiale App Store Release",
+          "Grundlegende Timer-Funktionalität",
+          "Lautstärkesteuerung"
+        ]
+      }
+    ]
   },
   {
     id: "todomanager",
@@ -561,7 +673,35 @@ export const projectsData = [
     appContent: ToDoManagerContent,
     backgroundColor: "#ffffff",
     textColor: "#000000",
-    techStack: ["Swift", "SwiftUI", "Core Data", "CloudKit", "Combine", "AppKit"]
+    techStack: ["Swift", "SwiftUI", "Core Data", "CloudKit", "Combine", "AppKit"],
+    releaseStatus: "In Entwicklung",
+    userRating: 4.9,
+    useCases: [
+      "Tägliches Task-Management für Unternehmer",
+      "Projektmanagement für kleine Teams",
+      "Akademische Aufgabenverwaltung für Studierende",
+      "GTD-Methodik (Getting Things Done) Umsetzung"
+    ],
+    updates: [
+      {
+        version: "0.8.5 Beta",
+        date: "Mai 2025",
+        changes: [
+          "Cloud-Synchronisierung zwischen Geräten",
+          "Smart-Tags für automatische Klassifikation",
+          "Natürliche Sprachverarbeitung für schnelle Eingabe"
+        ]
+      },
+      {
+        version: "0.7.0 Beta",
+        date: "März 2025",
+        changes: [
+          "Erste Beta-Version für Tester",
+          "Grundlegende Listen- und Aufgabenfunktionen",
+          "Minimalistisches Design implementiert"
+        ]
+      }
+    ]
   },
   {
     id: "copychecker",
@@ -607,7 +747,35 @@ export const projectsData = [
     appContent: CopyCheckerContent,
     backgroundColor: "#f5f5f7",
     textColor: "#000000",
-    techStack: ["Swift", "UIPasteboard", "NotificationCenter", "UIKit", "CoreImage"]
+    techStack: ["Swift", "UIPasteboard", "NotificationCenter", "UIKit", "CoreImage"],
+    releaseStatus: "Veröffentlicht",
+    userRating: 4.4,
+    useCases: [
+      "Professionelles Recherchieren mit vielen Quellen",
+      "Effizientes Kopieren von Informationen in Meetings",
+      "Sicheres Übertragen von sensiblen Informationen",
+      "Kontextbewusste Datenerfassung im Multitasking"
+    ],
+    updates: [
+      {
+        version: "1.2.0",
+        date: "April 2024",
+        changes: [
+          "Verbesserte Format-Erkennung für spezielle Datentypen",
+          "Historie-Funktion mit Suchfunktion",
+          "Anpassbare Overlay-Position"
+        ]
+      },
+      {
+        version: "1.0.0",
+        date: "Februar 2024",
+        changes: [
+          "Initiale App Store Release",
+          "Grundlegende Überwachung der Zwischenablage",
+          "Minimalistische Benachrichtigungen"
+        ]
+      }
+    ]
   }
 ];
 

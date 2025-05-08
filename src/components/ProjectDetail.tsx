@@ -31,6 +31,14 @@ interface Project {
   backgroundColor?: string;
   textColor?: string;
   techStack?: string[];
+  releaseStatus?: string;
+  userRating?: number;
+  useCases?: string[];
+  updates?: {
+    version: string;
+    date: string;
+    changes: string[];
+  }[];
 }
 
 interface ProjectDetailProps {
@@ -160,7 +168,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects }) => {
               className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8 z-10 relative overflow-hidden"
             >
               <div className="flex flex-col md:flex-row gap-10 z-10 relative">
-                <div className="w-full md:w-2/3 z-10">
+                <div className="w-full md:w-3/5 z-10">
                   <div className="flex items-center mb-4">
                     <motion.span 
                       initial={{ opacity: 0, scale: 0.8 }}
@@ -216,14 +224,25 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects }) => {
                   >
                     {project.description}
                   </motion.p>
+
+                  {project.releaseStatus && (
+                    <motion.div 
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.5 }}
+                      className="mt-6 flex items-center"
+                    >
+                      <span className="text-sm font-medium text-gray-300 mr-2">Status:</span>
+                      <span className={`px-3 py-1 text-xs font-medium rounded-full ${project.releaseStatus === 'Veröffentlicht' ? 'bg-green-900/40 text-green-400' : 'bg-yellow-900/40 text-yellow-400'}`}>
+                        {project.releaseStatus || 'In Entwicklung'}
+                      </span>
+                    </motion.div>
+                  )}
                 </div>
                 
-                <div className="w-full md:w-1/3 flex items-center justify-center">
-                  {/* Vertical divider visible on medium and larger screens */}
-                  <div className="absolute top-0 left-2/3 h-full w-px bg-white/10 hidden md:block"></div>
-                  
+                <div className="w-full md:w-2/5 flex items-start justify-center">
                   <motion.div 
-                    className="relative w-full px-6"
+                    className="relative w-full"
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
@@ -231,7 +250,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects }) => {
                     <ProjectImage 
                       imageUrl={projectImage} 
                       alt={project.title}
-                      className="rounded-xl max-h-[250px] mx-auto"
+                      className="rounded-xl max-h-[300px] mx-auto" // Increased from 250px to 300px
                     />
                   </motion.div>
                 </div>
@@ -317,6 +336,90 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects }) => {
               </Card>
             </motion.section>
           )}
+
+          {/* Use Cases section (new) */}
+          {project.useCases && (
+            <motion.section
+              className="mb-16"
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+            >
+              <motion.h2
+                variants={itemVariants}
+                className="text-2xl font-bold mb-6 flex items-center"
+              >
+                <Laptop className="mr-3 text-white" size={20} />
+                Anwendungsfälle
+              </motion.h2>
+              
+              <Card className="bg-white/5 border-white/10 text-white">
+                <CardContent className="p-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {project.useCases.map((useCase, index) => (
+                      <motion.div 
+                        key={index}
+                        variants={itemVariants}
+                        className="p-4 border border-white/10 rounded-lg bg-white/5"
+                      >
+                        <div className="flex items-center mb-2">
+                          <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center mr-3">
+                            <span className="text-white font-medium">{index + 1}</span>
+                          </div>
+                          <p className="text-gray-300">{useCase}</p>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.section>
+          )}
+
+          {/* Updates section (new) */}
+          {project.updates && (
+            <motion.section
+              className="mb-16"
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+            >
+              <motion.h2
+                variants={itemVariants}
+                className="text-2xl font-bold mb-6 flex items-center"
+              >
+                <ArrowRight className="mr-3 text-white" size={20} />
+                Updates
+              </motion.h2>
+              
+              <Card className="bg-white/5 border-white/10 text-white">
+                <CardContent className="p-6">
+                  <div className="space-y-6">
+                    {project.updates.map((update, index) => (
+                      <motion.div 
+                        key={index}
+                        variants={itemVariants}
+                        className="p-4 border border-white/10 rounded-lg bg-white/5"
+                      >
+                        <div className="flex justify-between items-center mb-3">
+                          <span className="font-bold text-lg">Version {update.version}</span>
+                          <span className="text-xs text-gray-400">{update.date}</span>
+                        </div>
+                        <div className="space-y-2">
+                          {update.changes.map((change, idx) => (
+                            <div key={idx} className="flex items-start">
+                              <div className="w-1.5 h-1.5 rounded-full bg-white mt-1.5 mr-2"></div>
+                              <p className="text-sm text-gray-300">{change}</p>
+                            </div>
+                          ))}
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.section>
+          )}
           
           {/* Tech Stack section - Modernized presentation */}
           {project.techStack && (
@@ -371,6 +474,23 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects }) => {
                       <div>
                         <h4 className="text-lg font-medium mb-1">macOS Version</h4>
                         <p className="text-sm text-gray-400">12.0+</p>
+                      </div>
+                    )}
+                    {project.userRating && (
+                      <div>
+                        <h4 className="text-lg font-medium mb-1">Nutzerbewertung</h4>
+                        <div className="flex items-center">
+                          <div className="flex">
+                            {[...Array(5)].map((_, i) => (
+                              <Star 
+                                key={i} 
+                                size={16} 
+                                className={i < Math.floor(project.userRating!) ? "text-white fill-white" : "text-gray-500"}
+                              />
+                            ))}
+                          </div>
+                          <span className="ml-2 text-sm text-gray-400">{project.userRating}/5</span>
+                        </div>
                       </div>
                     )}
                   </div>
