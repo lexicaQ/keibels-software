@@ -1,14 +1,16 @@
 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowRight, Laptop, Smartphone, Zap, Code, CheckCircle, Clock, Star } from 'lucide-react';
+import { ArrowRight, Laptop, Smartphone, Zap, Code, CheckCircle, Clock, Star, Tag, Bookmark } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Separator } from '@/components/ui/separator';
+import { Badge } from '@/components/ui/badge';
 
 const projects = [
   {
     id: "copyclipcloud",
     title: "CopyClipCloud",
+    description: "Eine Cloud-basierte Lösung für das einfache Teilen von Texten zwischen Geräten",
     platform: "macOS App",
     year: "2025",
     icon: <Code size={18} />
@@ -16,6 +18,7 @@ const projects = [
   {
     id: "apptimer",
     title: "AppTimer",
+    description: "Verfolge deine App-Nutzung und bleibe produktiv",
     platform: "iOS App",
     year: "2023",
     icon: <Clock size={18} />
@@ -23,6 +26,7 @@ const projects = [
   {
     id: "zentro",
     title: "Zentro",
+    description: "Eine Produktivitäts-App für bewusstes und fokussiertes Arbeiten",
     platform: "iOS App",
     year: "2023",
     icon: <Zap size={18} />
@@ -30,6 +34,7 @@ const projects = [
   {
     id: "nightmanager",
     title: "NightManager",
+    description: "Optimiere deinen Schlaf mit dieser intelligenten Sleep-Tracking App",
     platform: "iOS App",
     year: "2024",
     icon: <Star size={18} />
@@ -37,6 +42,7 @@ const projects = [
   {
     id: "todomanager",
     title: "ToDoManager",
+    description: "Aufgaben effizient verwalten und priorisieren mit moderner Technik",
     platform: "macOS App",
     year: "2025",
     icon: <CheckCircle size={18} />
@@ -44,6 +50,7 @@ const projects = [
   {
     id: "copychecker",
     title: "CopyChecker",
+    description: "Überprüfe und optimiere deine Texte auf Stil und Grammatik",
     platform: "iOS App",
     year: "2024",
     icon: <Code size={18} />
@@ -96,11 +103,14 @@ const ProjectsSection: React.FC = () => {
           viewport={{ once: true, margin: "-80px" }}
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-3 text-center">MEINE PROJEKTE</h2>
-          <div className="w-16 h-1 bg-white mx-auto mb-10"></div>
+          <div className="w-16 h-1 bg-white mx-auto mb-6"></div>
+          <p className="text-center text-gray-300 max-w-2xl mx-auto mb-10">
+            Entdecken Sie meine Sammlung an Premium-Software-Projekten. Jedes Projekt wurde mit besonderem Fokus auf Benutzerfreundlichkeit und technische Innovation entwickelt.
+          </p>
         </motion.div>
         
         <motion.div 
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -124,14 +134,17 @@ const ProjectsSection: React.FC = () => {
                   <div className="p-5 flex flex-col h-full">
                     {/* Platform badge and year */}
                     <div className="flex justify-between items-center mb-5">
-                      <span className="flex items-center text-xs font-medium text-white bg-white/8 px-2.5 py-1 rounded-full border border-white/15">
+                      <Badge variant="outline" className="flex items-center gap-1 text-xs font-medium text-white bg-white/8 border-white/15">
                         {project.platform === 'iOS App' ? 
-                          <Smartphone size={12} className="mr-1.5" /> : 
-                          <Laptop size={12} className="mr-1.5" />
+                          <Smartphone size={12} /> : 
+                          <Laptop size={12} />
                         }
                         {project.platform}
+                      </Badge>
+                      <span className="text-xs text-gray-400 flex items-center gap-1">
+                        <Tag size={12} />
+                        {project.year}
                       </span>
-                      <span className="text-xs text-gray-400">{project.year}</span>
                     </div>
                     
                     <div className="flex items-center mb-3">
@@ -144,6 +157,25 @@ const ProjectsSection: React.FC = () => {
                       
                       {/* Project title */}
                       <h3 className="text-lg font-bold">{project.title}</h3>
+                    </div>
+                    
+                    {/* Project description - new addition */}
+                    <p className="text-sm text-white/70 mb-4">{project.description}</p>
+                    
+                    {/* Features list - new addition */}
+                    <div className="space-y-2 mb-4">
+                      <div className="flex items-center text-xs text-white/60">
+                        <Bookmark size={12} className="mr-2" />
+                        <span>Moderne Benutzeroberfläche</span>
+                      </div>
+                      <div className="flex items-center text-xs text-white/60">
+                        <Bookmark size={12} className="mr-2" />
+                        <span>Cloud-Synchronisierung</span>
+                      </div>
+                      <div className="flex items-center text-xs text-white/60">
+                        <Bookmark size={12} className="mr-2" />
+                        <span>Regelmäßige Updates</span>
+                      </div>
                     </div>
                     
                     <Separator className="bg-white/10 my-3" />

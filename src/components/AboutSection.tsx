@@ -35,7 +35,7 @@ const AboutSection: React.FC = () => {
           <div className="w-16 h-1 bg-black mx-auto"></div>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center max-w-3xl mx-auto">
           <motion.div 
             ref={ref}
             variants={containerVariants}
@@ -43,7 +43,7 @@ const AboutSection: React.FC = () => {
             animate={controls}
             className="h-full flex"
           >
-            <div className="h-full w-full border border-gray-300 overflow-hidden rounded-lg shadow-lg flex-grow">
+            <div className="h-64 w-full border border-gray-300 overflow-hidden rounded-lg shadow-md">
               <img 
                 src="/lovable-uploads/8284c56f-16e0-4dd6-b3a6-353a106bc9cf.png" 
                 alt="Maxim Keibel" 
@@ -56,7 +56,7 @@ const AboutSection: React.FC = () => {
             variants={containerVariants}
             initial="hidden"
             animate={controls}
-            className="bg-white rounded-lg shadow-lg p-5 border border-gray-300 h-full flex flex-col justify-between"
+            className="bg-white rounded-lg shadow-md p-5 border border-gray-300 h-auto"
           >
             <div>
               <h3 className="text-xl font-bold mb-2">Maxim Keibel</h3>
