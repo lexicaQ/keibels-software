@@ -5,7 +5,8 @@ import type { Database } from './types';
 
 const SUPABASE_URL = "https://pkxzblfqcsebqgvuhizh.supabase.co";
 const SUPABASE_PUBLISHABLE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBreHpibGZxY3NlYnFndnVoaXpoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU3NjUwNTYsImV4cCI6MjA2MTM0MTA1Nn0.Ia9SprOFy2B7EmVHJrnwTkvaiGAovAdZu9kXr6WDUbU";
-const SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || SUPABASE_PUBLISHABLE_KEY;
+// Use a default value for SERVICE_ROLE_KEY since process.env isn't available in browser
+const SERVICE_ROLE_KEY = SUPABASE_PUBLISHABLE_KEY;
 
 // Import the supabase client like this:
 // import { supabase } from "@/integrations/supabase/client";
