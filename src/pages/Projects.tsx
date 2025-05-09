@@ -55,7 +55,9 @@ const Projects = () => {
 
   // Function to get icon based on platform
   const getPlatformIcon = (platform: string) => {
-    return platform === 'iOS App' ? <Smartphone className="w-4 h-4" /> : <Laptop className="w-4 h-4" />;
+    return platform === 'iOS App' ? 
+      <Smartphone className="w-5 h-5 text-white" /> : 
+      <Laptop className="w-5 h-5 text-white" />;
   };
 
   return (
@@ -80,7 +82,7 @@ const Projects = () => {
           </header>
           
           <motion.div 
-            className="space-y-8" 
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" 
             variants={containerVariants} 
             initial="hidden" 
             animate="visible"
@@ -93,60 +95,68 @@ const Projects = () => {
                 onMouseEnter={() => setHoveredProject(project.id)} 
                 onMouseLeave={() => setHoveredProject(null)}
               >
-                <Card className={`bg-white/5 backdrop-blur-sm border border-white/10 overflow-hidden transition-all duration-500 hover:shadow-[0_10px_40px_rgba(255,255,255,0.1)] ${
-                  hoveredProject === project.id ? 'transform scale-[1.01] shadow-lg' : ''
-                }`}>
-                  <CardContent className="p-6">
-                    <div className="space-y-6">
-                      <div className="flex justify-between items-center">
-                        <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center">
-                            {getPlatformIcon(project.platform)}
-                          </div>
-                          <div>
-                            <h2 className="text-xl font-bold text-white">{project.title}</h2>
-                            <p className="text-sm text-gray-300">{project.slogan}</p>
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-3">
-                          <Badge variant="outline" className="bg-white/10 text-white border-none">
-                            {project.platform}
-                          </Badge>
-                          <div className="text-xs font-medium text-gray-400 flex items-center gap-1">
-                            <Calendar size={12} />
-                            {project.year}
-                          </div>
-                        </div>
-                      </div>
-                      
-                      <Separator className="bg-white/10" />
-                      
-                      <div className="space-y-4">
-                        <p className="text-gray-300">
-                          {project.description?.substring(0, 200)}...
-                        </p>
-                        
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                          {project.highlights?.slice(0, 4).map((highlight, idx) => (
-                            <div key={idx} className="flex items-center gap-2">
-                              <Star className="w-4 h-4 text-white/40" />
-                              <span className="text-sm text-gray-300">{highlight}</span>
+                <Link to={`/projects/${project.id}`}>
+                  <Card className={`bg-white/5 backdrop-blur-sm border border-white/10 overflow-hidden transition-all duration-500 hover:bg-white/10 hover:border-white/20 ${
+                    hoveredProject === project.id ? 'transform scale-[1.02] shadow-xl shadow-white/5' : ''
+                  }`}>
+                    <CardContent className="p-6">
+                      <div className="space-y-6">
+                        <div className="flex justify-between items-center">
+                          <div className="flex items-center gap-3">
+                            {/* Larger, white icon with better styling */}
+                            <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center backdrop-blur-sm p-2 border border-white/20">
+                              {getPlatformIcon(project.platform)}
                             </div>
-                          ))}
+                            <div>
+                              <h2 className="text-xl font-bold text-white">{project.title}</h2>
+                              <p className="text-sm text-gray-300">{project.slogan}</p>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-3">
+                            <Badge variant="outline" className="bg-white/10 text-white border-none">
+                              {project.platform}
+                            </Badge>
+                            <div className="text-xs font-medium text-gray-400 flex items-center gap-1">
+                              <Calendar size={12} />
+                              {project.year}
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <Separator className="bg-white/10" />
+                        
+                        <div className="space-y-4">
+                          <p className="text-gray-300 leading-relaxed">
+                            {project.description?.substring(0, 200)}...
+                          </p>
+                          
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            {project.highlights?.slice(0, 4).map((highlight, idx) => (
+                              <div key={idx} className="flex items-center gap-2">
+                                <Star className="w-4 h-4 text-white" />
+                                <span className="text-sm text-gray-300">{highlight}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                        
+                        <div className="flex justify-end">
+                          <Button 
+                            variant="outline" 
+                            className={`flex items-center gap-2 bg-white/5 border-white/20 transition-all duration-300 ${
+                              hoveredProject === project.id ? 'text-white bg-white/15' : 'text-gray-300'
+                            }`}
+                          >
+                            Projekt ansehen
+                            <ArrowRight size={16} className={`transition-transform duration-300 ${
+                              hoveredProject === project.id ? 'transform translate-x-1' : ''
+                            }`} />
+                          </Button>
                         </div>
                       </div>
-                      
-                      <div className="flex justify-end">
-                        <Link to={`/projects/${project.id}`}>
-                          <Button variant="outline" className="flex items-center gap-2 bg-white/5 hover:bg-white/10 text-white border-white/20">
-                            Projekt ansehen
-                            <ArrowRight size={16} />
-                          </Button>
-                        </Link>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
+                    </CardContent>
+                  </Card>
+                </Link>
               </motion.div>
             ))}
           </motion.div>
