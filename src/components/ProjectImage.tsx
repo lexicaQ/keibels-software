@@ -23,9 +23,8 @@ const ProjectImage: React.FC<ProjectImageProps> = ({ imageUrl, alt, className = 
           transition={{ duration: 0.7, ease: "easeOut" }}
           className="relative z-10 w-full mx-auto"
         >
-          <div className="relative rounded-xl overflow-hidden">
-            {/* Improved background effect with gradient and better positioning */}
-            <div className="absolute -inset-[15%] bg-gradient-to-b from-white/10 to-transparent rounded-full blur-[60px] opacity-30 z-0"></div>
+          <div className="relative">
+            <div className="absolute -inset-0 bg-white/10 rounded-full blur-[40px] opacity-50 z-0"></div>
             <MacOSAppImage appName={alt} variant={variant} className={className} />
           </div>
         </motion.div>
@@ -41,15 +40,13 @@ const ProjectImage: React.FC<ProjectImageProps> = ({ imageUrl, alt, className = 
         transition={{ duration: 0.7 }}
         className="relative z-10 w-full mx-auto"
       >
-        {/* Added proper shadow and border styling */}
-        <div className="relative rounded-xl overflow-hidden">
-          {/* Improved background glow with better positioning and opacity */}
-          <div className="absolute -inset-[15%] bg-gradient-to-b from-white/10 to-transparent rounded-full blur-[60px] opacity-30 z-0"></div>
+        <div className="relative">
+          <div className="absolute -inset-0 bg-white/10 rounded-full blur-[40px] opacity-50 z-0"></div>
           <img 
             src={imageUrl} 
             alt={alt} 
-            className={`w-full h-full object-contain rounded-xl ${className}`}
-            style={{ maxHeight: '400px' }} 
+            className={`w-full h-full object-contain shadow-xl rounded-md ${className}`}
+            style={{ maxHeight: '400px' }} // Increased height
           />
         </div>
       </motion.div>
