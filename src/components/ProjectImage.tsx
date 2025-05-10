@@ -24,7 +24,7 @@ const ProjectImage: React.FC<ProjectImageProps> = ({ imageUrl, alt, className = 
           className="relative z-10 w-full mx-auto"
         >
           <div className="relative">
-            <div className="absolute -inset-4 bg-white/20 rounded-full blur-[60px] opacity-60 z-0"></div>
+            <div className="absolute -inset-0 bg-white/10 rounded-full blur-[40px] opacity-50 z-0"></div>
             <MacOSAppImage appName={alt} variant={variant} className={className} />
           </div>
         </motion.div>
@@ -41,12 +41,12 @@ const ProjectImage: React.FC<ProjectImageProps> = ({ imageUrl, alt, className = 
         className="relative z-10 w-full mx-auto"
       >
         <div className="relative">
-          <div className="absolute -inset-4 bg-white/20 rounded-full blur-[60px] opacity-60 z-0"></div>
+          <div className="absolute -inset-0 bg-white/10 rounded-full blur-[40px] opacity-50 z-0"></div>
           <img 
             src={imageUrl} 
             alt={alt} 
             className={`w-full h-full object-contain shadow-xl rounded-md ${className}`}
-            style={{ maxHeight: '350px' }} // Increased height
+            style={{ maxHeight: '400px' }} // Increased height
           />
         </div>
       </motion.div>

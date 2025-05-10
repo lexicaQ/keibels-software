@@ -128,28 +128,28 @@ const ProjectsSection: React.FC = () => {
                 onClick={() => handleProjectClick(project.id)}
                 className="cursor-pointer h-full"
               >
-                <div className={`bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg overflow-hidden transition-all duration-400 h-full flex flex-col hover:shadow-[0_8px_30px_rgba(255,255,255,0.1)] ${
-                  hoveredProject === project.id ? 'transform scale-[1.02]' : ''
+                <div className={`h-full bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg overflow-hidden transition-all duration-400 flex flex-col hover:shadow-[0_8px_30px_rgba(255,255,255,0.1)] ${
+                  hoveredProject === project.id ? 'transform scale-[1.02] bg-white/8' : ''
                 }`}>
                   <div className="p-5 flex flex-col h-full">
                     {/* Platform badge and year */}
                     <div className="flex justify-between items-center mb-5">
-                      <Badge variant="outline" className="flex items-center gap-1 text-xs font-medium text-white bg-white/8 border-white/15">
+                      <Badge variant="outline" className="flex items-center gap-1 text-xs font-medium text-white bg-white/8 border-white/15 shadow-inner">
                         {project.platform === 'iOS App' ? 
-                          <Smartphone size={12} /> : 
-                          <Laptop size={12} />
+                          <Smartphone size={12} className="text-white" /> : 
+                          <Laptop size={12} className="text-white" />
                         }
                         {project.platform}
                       </Badge>
-                      <span className="text-xs text-gray-400 flex items-center gap-1">
-                        <Tag size={12} />
+                      <span className="text-xs text-gray-400 flex items-center gap-1 border border-white/10 px-2 py-0.5 rounded-full">
+                        <Tag size={12} className="text-white" />
                         {project.year}
                       </span>
                     </div>
                     
                     <div className="flex items-center mb-3">
                       {/* Project icon */}
-                      <div className="w-10 h-10 bg-white/8 rounded-full flex items-center justify-center mr-3 backdrop-blur-sm">
+                      <div className="w-10 h-10 bg-white/8 rounded-full flex items-center justify-center mr-3 backdrop-blur-sm border border-white/10 shadow-inner">
                         <div className="text-white">
                           {project.icon}
                         </div>
@@ -159,21 +159,27 @@ const ProjectsSection: React.FC = () => {
                       <h3 className="text-lg font-bold">{project.title}</h3>
                     </div>
                     
-                    {/* Project description - new addition */}
+                    {/* Project description */}
                     <p className="text-sm text-white/70 mb-4">{project.description}</p>
                     
-                    {/* Features list - new addition */}
+                    {/* Features list */}
                     <div className="space-y-2 mb-4">
                       <div className="flex items-center text-xs text-white/60">
-                        <Bookmark size={12} className="mr-2" />
+                        <div className="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center mr-2">
+                          <Bookmark size={10} className="text-white" />
+                        </div>
                         <span>Moderne Benutzeroberfläche</span>
                       </div>
                       <div className="flex items-center text-xs text-white/60">
-                        <Bookmark size={12} className="mr-2" />
+                        <div className="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center mr-2">
+                          <Bookmark size={10} className="text-white" />
+                        </div>
                         <span>Cloud-Synchronisierung</span>
                       </div>
                       <div className="flex items-center text-xs text-white/60">
-                        <Bookmark size={12} className="mr-2" />
+                        <div className="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center mr-2">
+                          <Bookmark size={10} className="text-white" />
+                        </div>
                         <span>Regelmäßige Updates</span>
                       </div>
                     </div>
@@ -181,8 +187,13 @@ const ProjectsSection: React.FC = () => {
                     <Separator className="bg-white/10 my-3" />
                     
                     <div className="pt-2 mt-auto flex items-center justify-between">
-                      <span className="text-xs text-white/70">Details anzeigen</span>
-                      <ArrowRight size={14} className="text-white/70" />
+                      <span className={`text-xs ${hoveredProject === project.id ? 'text-white' : 'text-white/70'}`}>
+                        Details anzeigen
+                      </span>
+                      <ArrowRight 
+                        size={14} 
+                        className={`${hoveredProject === project.id ? 'text-white transform translate-x-1' : 'text-white/70'} transition-all duration-300`} 
+                      />
                     </div>
                   </div>
                 </div>
@@ -194,13 +205,13 @@ const ProjectsSection: React.FC = () => {
         <div className="mt-10 text-center">
           <motion.button 
             onClick={() => navigate('/projects')}
-            className="relative px-6 py-2 border border-white/20 rounded-lg overflow-hidden group transition-all duration-300 hover:bg-white/10 text-sm"
+            className="relative px-6 py-2 border border-white/20 rounded-lg overflow-hidden group transition-all duration-300 hover:bg-white/10 text-sm shadow-lg"
             whileHover={{ y: -2, boxShadow: "0 8px 20px rgba(255,255,255,0.08)" }}
             transition={{ duration: 0.2 }}
           >
             <span className="relative z-10 flex items-center font-medium">
               Alle Projekte ansehen
-              <ArrowRight size={16} className="ml-2" />
+              <ArrowRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform duration-300" />
             </span>
           </motion.button>
         </div>

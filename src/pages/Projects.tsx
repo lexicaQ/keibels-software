@@ -96,7 +96,7 @@ const Projects = () => {
                 onMouseLeave={() => setHoveredProject(null)}
               >
                 <Link to={`/projects/${project.id}`}>
-                  <Card className={`bg-white/5 backdrop-blur-sm border border-white/10 overflow-hidden transition-all duration-500 hover:bg-white/10 hover:border-white/20 ${
+                  <Card className={`h-full bg-white/5 backdrop-blur-sm border border-white/10 overflow-hidden transition-all duration-500 hover:bg-white/10 hover:border-white/20 shadow-lg ${
                     hoveredProject === project.id ? 'transform scale-[1.02] shadow-xl shadow-white/5' : ''
                   }`}>
                     <CardContent className="p-6">
@@ -104,7 +104,7 @@ const Projects = () => {
                         <div className="flex justify-between items-center">
                           <div className="flex items-center gap-3">
                             {/* Larger, white icon with better styling */}
-                            <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center backdrop-blur-sm p-2 border border-white/20">
+                            <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center backdrop-blur-sm p-2 border border-white/20 shadow-inner">
                               {getPlatformIcon(project.platform)}
                             </div>
                             <div>
@@ -112,8 +112,8 @@ const Projects = () => {
                               <p className="text-sm text-gray-300">{project.slogan}</p>
                             </div>
                           </div>
-                          <div className="flex items-center gap-3">
-                            <Badge variant="outline" className="bg-white/10 text-white border-none">
+                          <div className="flex flex-col items-end gap-2">
+                            <Badge variant="outline" className="bg-white/10 text-white border-none shadow-inner">
                               {project.platform}
                             </Badge>
                             <div className="text-xs font-medium text-gray-400 flex items-center gap-1">
@@ -126,15 +126,17 @@ const Projects = () => {
                         <Separator className="bg-white/10" />
                         
                         <div className="space-y-4">
-                          <p className="text-gray-300 leading-relaxed">
+                          <p className="text-gray-300 leading-relaxed line-clamp-3">
                             {project.description?.substring(0, 200)}...
                           </p>
                           
                           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                             {project.highlights?.slice(0, 4).map((highlight, idx) => (
                               <div key={idx} className="flex items-center gap-2">
-                                <Star className="w-4 h-4 text-white" />
-                                <span className="text-sm text-gray-300">{highlight}</span>
+                                <div className="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center">
+                                  <Star className="w-3 h-3 text-white" />
+                                </div>
+                                <span className="text-sm text-gray-300 line-clamp-1">{highlight}</span>
                               </div>
                             ))}
                           </div>

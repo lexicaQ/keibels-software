@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Navbar from './Navbar';
@@ -165,7 +164,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects }) => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8 z-10 relative overflow-hidden"
+              className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8 z-10 relative overflow-hidden shadow-[0_0_25px_rgba(255,255,255,0.05)]"
             >
               <div className="flex flex-col md:flex-row gap-10 z-10 relative">
                 <div className="w-full md:w-3/5 z-10">
@@ -174,7 +173,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects }) => {
                       initial={{ opacity: 0, scale: 0.8 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ delay: 0.3 }}
-                      className={`px-3 py-1 ${isMacOSApp ? 'bg-white' : 'bg-white'} text-black text-sm font-medium rounded-full mr-3`}
+                      className="px-3 py-1 bg-white text-black text-sm font-medium rounded-full mr-3 shadow-md flex items-center"
                     >
                       {project.platform === 'iOS App' ? (
                         <span className="flex items-center">
@@ -192,7 +191,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects }) => {
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       transition={{ delay: 0.4 }}
-                      className="text-gray-400"
+                      className="text-gray-400 border border-gray-800 px-2 py-0.5 rounded-full text-xs"
                     >
                       {project.year}
                     </motion.span>
@@ -233,7 +232,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects }) => {
                       className="mt-6 flex items-center"
                     >
                       <span className="text-sm font-medium text-gray-300 mr-2">Status:</span>
-                      <span className={`px-3 py-1 text-xs font-medium rounded-full ${project.releaseStatus === 'Veröffentlicht' ? 'bg-green-900/40 text-green-400' : 'bg-yellow-900/40 text-yellow-400'}`}>
+                      <span className={`px-3 py-1 text-xs font-medium rounded-full shadow-inner ${project.releaseStatus === 'Veröffentlicht' ? 'bg-green-900/40 text-green-400 border border-green-500/30' : 'bg-yellow-900/40 text-yellow-400 border border-yellow-500/30'}`}>
                         {project.releaseStatus || 'In Entwicklung'}
                       </span>
                     </motion.div>
@@ -250,7 +249,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects }) => {
                     <ProjectImage 
                       imageUrl={projectImage} 
                       alt={project.title}
-                      className="rounded-xl max-h-[300px] mx-auto" // Increased from 250px to 300px
+                      className="rounded-xl max-h-[400px] mx-auto shadow-2xl" 
                     />
                   </motion.div>
                 </div>
