@@ -5,8 +5,12 @@ import { Mail, Phone, MapPin, Linkedin, Clock, ExternalLink, Calendar, Headphone
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
+import WorkOSAuth from './WorkOSAuth';
+import { useAuth } from '../context/AuthContext';
 
 const ContactSection: React.FC = () => {
+  const { isAuthenticated } = useAuth();
+
   return (
     <section id="contact" className="py-12 bg-white">
       <div className="container mx-auto px-4">
@@ -30,49 +34,88 @@ const ContactSection: React.FC = () => {
             </p>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-6">
+              {/* Phone information */}
               <div className="flex items-start">
                 <div className="w-8 h-8 rounded-full bg-black flex items-center justify-center mr-3 shrink-0">
                   <Phone className="text-white" size={15} />
                 </div>
                 <div>
                   <p className="font-semibold text-sm">Telefon</p>
-                  <a href="tel:+491734429624" className="text-gray-700 hover:text-black transition-colors">+49 173 4429624</a>
+                  {isAuthenticated ? (
+                    <a href="tel:+491734429624" className="text-gray-700 hover:text-black transition-colors">+49 173 4429624</a>
+                  ) : (
+                    <WorkOSAuth>
+                      <button className="text-gray-700 hover:text-black transition-colors">
+                        Anmelden zum Anzeigen
+                      </button>
+                    </WorkOSAuth>
+                  )}
                   <p className="text-xs text-gray-500 mt-1">Montag - Freitag: 09:00 - 18:00 Uhr</p>
                 </div>
               </div>
               
+              {/* Email information */}
               <div className="flex items-start">
                 <div className="w-8 h-8 rounded-full bg-black flex items-center justify-center mr-3 shrink-0">
                   <Mail className="text-white" size={15} />
                 </div>
                 <div>
                   <p className="font-semibold text-sm">E-Mail</p>
-                  <a href="mailto:maxim.keibel@icloud.com" className="text-gray-700 hover:text-black transition-colors">maxim.keibel@icloud.com</a>
+                  {isAuthenticated ? (
+                    <a href="mailto:maxim.keibel@icloud.com" className="text-gray-700 hover:text-black transition-colors">
+                      maxim.keibel@icloud.com
+                    </a>
+                  ) : (
+                    <WorkOSAuth>
+                      <button className="text-gray-700 hover:text-black transition-colors">
+                        Anmelden zum Anzeigen
+                      </button>
+                    </WorkOSAuth>
+                  )}
                   <p className="text-xs text-gray-500 mt-1">Antwort innerhalb von 24 Stunden</p>
                 </div>
               </div>
               
+              {/* Address information */}
               <div className="flex items-start">
                 <div className="w-8 h-8 rounded-full bg-black flex items-center justify-center mr-3 shrink-0">
                   <MapPin className="text-white" size={15} />
                 </div>
                 <div>
                   <p className="font-semibold text-sm">Adresse</p>
-                  <p className="text-gray-700">Am Ring 3, 85737 Ismaning</p>
+                  {isAuthenticated ? (
+                    <p className="text-gray-700">Am Ring 3, 85737 Ismaning</p>
+                  ) : (
+                    <WorkOSAuth>
+                      <button className="text-gray-700 hover:text-black transition-colors">
+                        Anmelden zum Anzeigen
+                      </button>
+                    </WorkOSAuth>
+                  )}
                   <p className="text-xs text-gray-500 mt-1">München, Deutschland</p>
                 </div>
               </div>
               
+              {/* LinkedIn information */}
               <div className="flex items-start">
                 <div className="w-8 h-8 rounded-full bg-black flex items-center justify-center mr-3 shrink-0">
                   <Linkedin className="text-white" size={15} />
                 </div>
                 <div>
                   <p className="font-semibold text-sm">LinkedIn</p>
-                  <a href="#" className="text-gray-700 hover:text-black transition-colors flex items-center">
-                    Profil ansehen
-                    <ExternalLink size={12} className="ml-1" />
-                  </a>
+                  {isAuthenticated ? (
+                    <a href="#" className="text-gray-700 hover:text-black transition-colors flex items-center">
+                      Profil ansehen
+                      <ExternalLink size={12} className="ml-1" />
+                    </a>
+                  ) : (
+                    <WorkOSAuth>
+                      <button className="text-gray-700 hover:text-black transition-colors flex items-center">
+                        Anmelden zum Anzeigen
+                        <ExternalLink size={12} className="ml-1" />
+                      </button>
+                    </WorkOSAuth>
+                  )}
                   <p className="text-xs text-gray-500 mt-1">Für berufliche Anfragen</p>
                 </div>
               </div>
@@ -96,11 +139,19 @@ const ContactSection: React.FC = () => {
               </div>
             </div>
             
-            <Link to="/contact" className="inline-block">
-              <Button className="bg-black text-white border border-black hover:bg-white hover:text-black transition-all duration-300 px-5">
-                Details ansehen
-              </Button>
-            </Link>
+            {isAuthenticated ? (
+              <Link to="/contact" className="inline-block">
+                <Button className="bg-black text-white border border-black hover:bg-white hover:text-black transition-all duration-300 px-5">
+                  Details ansehen
+                </Button>
+              </Link>
+            ) : (
+              <WorkOSAuth>
+                <Button className="bg-black text-white border border-black hover:bg-white hover:text-black transition-all duration-300 px-5">
+                  Details ansehen
+                </Button>
+              </WorkOSAuth>
+            )}
           </motion.div>
           
           <motion.div 

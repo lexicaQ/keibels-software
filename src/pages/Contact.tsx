@@ -4,9 +4,13 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { Phone, Mail, MapPin, Linkedin, Clock } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
+import WorkOSAuth from '../components/WorkOSAuth';
+import { Button } from '@/components/ui/button';
 
 const Contact = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const { isAuthenticated, user } = useAuth();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -20,6 +24,36 @@ const Contact = () => {
     return <LoadingSpinner />;
   }
 
+  // Content to show if user is not authenticated
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen flex flex-col">
+        <Navbar />
+        
+        <div className="pt-24 pb-20 flex-grow flex flex-col items-center justify-center">
+          <div className="container mx-auto px-4 max-w-md">
+            <div className="bg-white rounded-xl shadow-lg p-8 text-center">
+              <h1 className="text-3xl font-bold mb-4">Anmeldung erforderlich</h1>
+              <p className="text-gray-700 mb-8">
+                Um alle Kontaktinformationen zu sehen und mit Maxim Keibel in Kontakt zu treten, 
+                müssen Sie sich anmelden oder registrieren.
+              </p>
+              
+              <WorkOSAuth>
+                <Button className="bg-black text-white hover:bg-gray-800 transition-colors px-6 py-2">
+                  Anmelden / Registrieren
+                </Button>
+              </WorkOSAuth>
+            </div>
+          </div>
+        </div>
+        
+        <Footer />
+      </div>
+    );
+  }
+
+  // Content to show if user is authenticated
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
