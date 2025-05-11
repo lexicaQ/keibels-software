@@ -6,7 +6,8 @@ import {
   DialogContent, 
   DialogHeader, 
   DialogTitle, 
-  DialogTrigger 
+  DialogTrigger,
+  DialogDescription
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { X } from 'lucide-react';
@@ -20,12 +21,21 @@ const WorkOSAuth: React.FC<WorkOSAuthProps> = ({ children }) => {
   
   // Function to redirect user to WorkOS authentication page
   const handleSignIn = () => {
-    // Get the current URL for the redirect
-    const redirectURI = `${window.location.origin}/auth/callback`;
-    
-    // Generate WorkOS authorization URL and redirect the user
-    const authURL = getAuthorizationURL(redirectURI);
-    window.location.href = authURL;
+    try {
+      // Use the absolute URL for the redirect to prevent issues
+      const baseUrl = window.location.origin;
+      const redirectURI = `${baseUrl}/auth/callback`;
+      
+      console.log("Using redirect URI:", redirectURI);
+      
+      // Generate WorkOS authorization URL and redirect the user
+      const authURL = getAuthorizationURL(redirectURI);
+      console.log("Generated auth URL:", authURL);
+      
+      window.location.href = authURL;
+    } catch (error) {
+      console.error("Error generating auth URL:", error);
+    }
   };
 
   return (
@@ -36,6 +46,9 @@ const WorkOSAuth: React.FC<WorkOSAuthProps> = ({ children }) => {
       <DialogContent className="sm:max-w-md bg-white">
         <DialogHeader>
           <DialogTitle className="text-xl font-bold text-center">Authentifizierung erforderlich</DialogTitle>
+          <DialogDescription className="text-center text-sm">
+            Anmelden oder registrieren Sie sich, um fortzufahren.
+          </DialogDescription>
           <button
             className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none"
             onClick={() => setOpen(false)}

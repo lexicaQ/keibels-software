@@ -2,12 +2,14 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LoadingSpinner from '../components/LoadingSpinner';
-import { workos, CLIENT_ID } from '../utils/workosClient';
+import { workos } from '../utils/workosClient';
 import { toast } from "@/components/ui/use-toast";
+import { useAuth } from '../context/AuthContext';
 
 const AuthCallback = () => {
   const navigate = useNavigate();
   const [error, setError] = useState<string | null>(null);
+  const { user, setUser } = useAuth();
 
   useEffect(() => {
     const handleAuthCallback = async () => {
@@ -20,15 +22,12 @@ const AuthCallback = () => {
           throw new Error('No authorization code found in the URL');
         }
         
-        // Exchange the code for a token (simplified for client-side)
-        // Note: In a production app, you would typically do this server-side
-        // This is a simplified example for demonstration purposes
+        console.log("Auth code received:", code);
         
-        // Mock the authentication response
-        // In a real app, you'd make an API call to your backend
-        // which would then use WorkOS SDK to exchange the code for a token
+        // For demonstration purposes until server integration is complete
+        // In production, this exchange should happen server-side
         setTimeout(() => {
-          // Store mock user in localStorage
+          // Mock successful authentication
           const mockUser = {
             id: 'usr_' + Math.random().toString(36).substr(2, 9),
             email: 'user@example.com',
@@ -36,7 +35,11 @@ const AuthCallback = () => {
             lastName: 'User'
           };
           
+          // Store user in localStorage
           localStorage.setItem('user', JSON.stringify(mockUser));
+          
+          // Update authentication context
+          setUser(mockUser);
           
           // Show success message
           toast({
@@ -44,8 +47,8 @@ const AuthCallback = () => {
             description: "Sie sind jetzt authentifiziert und können mit Maxim Keibel in Kontakt treten.",
           });
           
-          // Redirect to the home page
-          navigate('/');
+          // Redirect to the home page or the page they were trying to access
+          navigate('/contact');
         }, 1500);
         
       } catch (err) {
@@ -55,7 +58,7 @@ const AuthCallback = () => {
     };
     
     handleAuthCallback();
-  }, [navigate]);
+  }, [navigate, setUser]);
 
   if (error) {
     return (
