@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Navbar from './Navbar';
@@ -11,6 +10,7 @@ import ProjectImage from './ProjectImage';
 import { getProjectImage } from '../utils/projectImages';
 import { Card, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
+import { Button } from '@/components/ui/button';
 
 interface Feature {
   icon: string;
