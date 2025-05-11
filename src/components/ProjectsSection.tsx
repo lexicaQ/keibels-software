@@ -128,13 +128,13 @@ const ProjectsSection: React.FC = () => {
                 onClick={() => handleProjectClick(project.id)}
                 className="cursor-pointer h-full"
               >
-                <div className={`h-full bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg overflow-hidden transition-all duration-400 flex flex-col hover:shadow-[0_8px_30px_rgba(255,255,255,0.1)] ${
+                <div className={`h-full bg-white/5 backdrop-blur-sm border border-black rounded-lg overflow-hidden transition-all duration-400 flex flex-col hover:shadow-[0_8px_30px_rgba(255,255,255,0.05)] ${
                   hoveredProject === project.id ? 'transform scale-[1.02] bg-white/8' : ''
                 }`}>
                   <div className="p-5 flex flex-col h-full">
                     {/* Platform badge and year */}
                     <div className="flex justify-between items-center mb-5">
-                      <Badge variant="outline" className="flex items-center gap-1 text-xs font-medium text-white bg-white/8 border-white/15 shadow-inner">
+                      <Badge variant="outline" className="flex items-center gap-1 text-xs font-medium text-white bg-white/8 border-white/15">
                         {project.platform === 'iOS App' ? 
                           <Smartphone size={12} className="text-white" /> : 
                           <Laptop size={12} className="text-white" />
@@ -149,7 +149,7 @@ const ProjectsSection: React.FC = () => {
                     
                     <div className="flex items-center mb-3">
                       {/* Project icon */}
-                      <div className="w-10 h-10 bg-white/8 rounded-full flex items-center justify-center mr-3 backdrop-blur-sm border border-white/10 shadow-inner">
+                      <div className="w-10 h-10 bg-white/8 rounded-full flex items-center justify-center mr-3 backdrop-blur-sm border border-white/10">
                         <div className="text-white">
                           {project.icon}
                         </div>
@@ -205,8 +205,8 @@ const ProjectsSection: React.FC = () => {
         <div className="mt-10 text-center">
           <motion.button 
             onClick={() => navigate('/projects')}
-            className="relative px-6 py-2 border border-white/20 rounded-lg overflow-hidden group transition-all duration-300 hover:bg-white/10 text-sm shadow-lg"
-            whileHover={{ y: -2, boxShadow: "0 8px 20px rgba(255,255,255,0.08)" }}
+            className="relative px-6 py-2 border border-black rounded-lg overflow-hidden group transition-all duration-300 hover:bg-white/10 text-sm"
+            whileHover={{ y: -2, boxShadow: "0 8px 20px rgba(255,255,255,0.05)" }}
             transition={{ duration: 0.2 }}
           >
             <span className="relative z-10 flex items-center font-medium">

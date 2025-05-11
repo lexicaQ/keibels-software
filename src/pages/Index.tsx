@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import HeroSection from '../components/HeroSection';
-import AboutSection from '../components/AboutSection';
+import ModernAboutSection from '../components/ModernAboutSection';
 import ProjectsSection from '../components/ProjectsSection';
 import ContactSection from '../components/ContactSection';
 import Navbar from '../components/Navbar';
@@ -79,7 +79,7 @@ const Index = () => {
     <div className="min-h-screen overflow-x-hidden bg-white" ref={contentRef}>
       <Navbar />
       <HeroSection />
-      <AboutSection />
+      <ModernAboutSection />
       <ProjectsSection />
       <ContactSection />
       <Footer />

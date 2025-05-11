@@ -96,15 +96,15 @@ const Projects = () => {
                 onMouseLeave={() => setHoveredProject(null)}
               >
                 <Link to={`/projects/${project.id}`}>
-                  <Card className={`h-full bg-white/5 backdrop-blur-sm border border-white/10 overflow-hidden transition-all duration-500 hover:bg-white/10 hover:border-white/20 shadow-lg ${
-                    hoveredProject === project.id ? 'transform scale-[1.02] shadow-xl shadow-white/5' : ''
+                  <Card className={`h-full bg-white/5 backdrop-blur-sm border border-white/20 overflow-hidden transition-all duration-500 hover:bg-white/10 hover:border-white/30 shadow-xl ${
+                    hoveredProject === project.id ? 'transform scale-[1.02] shadow-2xl shadow-white/5' : ''
                   }`}>
                     <CardContent className="p-6">
                       <div className="space-y-6">
                         <div className="flex justify-between items-center">
                           <div className="flex items-center gap-3">
                             {/* Larger, white icon with better styling */}
-                            <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center backdrop-blur-sm p-2 border border-white/20 shadow-inner">
+                            <div className="w-12 h-12 bg-white/15 rounded-full flex items-center justify-center backdrop-blur-sm p-2 border border-white/20">
                               {getPlatformIcon(project.platform)}
                             </div>
                             <div>
@@ -113,7 +113,7 @@ const Projects = () => {
                             </div>
                           </div>
                           <div className="flex flex-col items-end gap-2">
-                            <Badge variant="outline" className="bg-white/10 text-white border-none shadow-inner">
+                            <Badge variant="outline" className="bg-white/15 text-white border-white/20">
                               {project.platform}
                             </Badge>
                             <div className="text-xs font-medium text-gray-400 flex items-center gap-1">
@@ -123,30 +123,37 @@ const Projects = () => {
                           </div>
                         </div>
                         
-                        <Separator className="bg-white/10" />
+                        <Separator className="bg-white/20" />
                         
                         <div className="space-y-4">
-                          <p className="text-gray-300 leading-relaxed line-clamp-3">
-                            {project.description?.substring(0, 200)}...
+                          <p className="text-gray-300 leading-relaxed">
+                            {project.description?.substring(0, 180)}
+                            {project.description && project.description.length > 180 ? '...' : ''}
                           </p>
                           
                           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            {project.highlights?.slice(0, 4).map((highlight, idx) => (
-                              <div key={idx} className="flex items-center gap-2">
-                                <div className="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center">
-                                  <Star className="w-3 h-3 text-white" />
+                            {project.highlights?.slice(0, 4).map((highlight, idx) => {
+                              // Trim the highlight if it's too long
+                              const trimmedHighlight = highlight.length > 30 ? 
+                                highlight.substring(0, 30) : highlight;
+                              
+                              return (
+                                <div key={idx} className="flex items-center gap-2">
+                                  <div className="w-5 h-5 rounded-full bg-white/15 flex items-center justify-center">
+                                    <Star className="w-3 h-3 text-white" />
+                                  </div>
+                                  <span className="text-sm text-gray-300">{trimmedHighlight}</span>
                                 </div>
-                                <span className="text-sm text-gray-300 line-clamp-1">{highlight}</span>
-                              </div>
-                            ))}
+                              );
+                            })}
                           </div>
                         </div>
                         
                         <div className="flex justify-end">
                           <Button 
                             variant="outline" 
-                            className={`flex items-center gap-2 bg-white/5 border-white/20 transition-all duration-300 ${
-                              hoveredProject === project.id ? 'text-white bg-white/15' : 'text-gray-300'
+                            className={`flex items-center gap-2 bg-white/10 border-white/20 transition-all duration-300 ${
+                              hoveredProject === project.id ? 'text-white bg-white/20' : 'text-gray-300'
                             }`}
                           >
                             Projekt ansehen

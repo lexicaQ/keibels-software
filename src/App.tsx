@@ -14,6 +14,7 @@ import ProjectDetail from "./components/ProjectDetail";
 import projectsData from "./data/projectsData";
 import Imprint from "./pages/Imprint";
 import Privacy from "./pages/Privacy";
+import Documentation from "./pages/Documentation";
 
 const queryClient = new QueryClient();
 
@@ -27,6 +28,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/projects/:projectId" element={<ProjectDetail projects={projectsData} />} />
+          <Route path="/docs/:projectId" element={<Documentation />} />
           <Route path="/resume" element={<Resume />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />

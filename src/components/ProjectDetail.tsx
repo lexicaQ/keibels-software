@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Navbar from './Navbar';
@@ -164,7 +165,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects }) => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8 z-10 relative overflow-hidden shadow-[0_0_25px_rgba(255,255,255,0.05)]"
+              className="backdrop-blur-xl bg-white/5 border border-white/20 rounded-2xl p-8 z-10 relative overflow-hidden shadow-[0_0_25px_rgba(255,255,255,0.05)]"
             >
               <div className="flex flex-col md:flex-row gap-10 z-10 relative">
                 <div className="w-full md:w-3/5 z-10">
@@ -191,7 +192,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects }) => {
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       transition={{ delay: 0.4 }}
-                      className="text-gray-400 border border-gray-800 px-2 py-0.5 rounded-full text-xs"
+                      className="text-gray-400 border border-gray-600 px-2 py-0.5 rounded-full text-xs"
                     >
                       {project.year}
                     </motion.span>
@@ -239,7 +240,10 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects }) => {
                   )}
                 </div>
                 
-                <div className="w-full md:w-2/5 flex items-start justify-center">
+                <div className="w-full md:w-2/5 flex items-start justify-center relative">
+                  {/* Fixing the visual bug with an overlay that covers the line */}
+                  <div className="absolute bottom-0 left-0 right-0 h-1 bg-white/5"></div>
+                  
                   <motion.div 
                     className="relative w-full"
                     initial={{ opacity: 0, scale: 0.9 }}
@@ -281,7 +285,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects }) => {
                 <motion.div 
                   key={index}
                   variants={itemVariants}
-                  className="backdrop-blur-lg bg-white/5 border border-white/10 rounded-lg p-5 hover:bg-white/10 transition-all duration-300"
+                  className="backdrop-blur-lg bg-white/5 border border-white/20 rounded-lg p-5 hover:bg-white/10 transition-all duration-300"
                 >
                   <div className="flex gap-4">
                     <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center text-black shrink-0">
@@ -310,14 +314,14 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects }) => {
                 Funktionen
               </motion.h2>
               
-              <Card className="bg-white/5 border-white/10 text-white">
+              <Card className="bg-white/5 border-white/20 text-white">
                 <CardContent className="p-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {project.features.map((feature, index) => (
                       <motion.div 
                         key={index}
                         variants={itemVariants}
-                        className="flex gap-4 p-4 border border-white/10 rounded-lg bg-white/5"
+                        className="flex gap-4 p-4 border border-white/20 rounded-lg bg-white/5"
                       >
                         <div className="flex-shrink-0">
                           <div className="w-10 h-10 rounded-full bg-gradient-to-br from-white/20 to-white/5 flex items-center justify-center shadow-inner">
@@ -352,17 +356,17 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects }) => {
                 Anwendungsfälle
               </motion.h2>
               
-              <Card className="bg-white/5 border-white/10 text-white">
+              <Card className="bg-white/5 border-white/20 text-white">
                 <CardContent className="p-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {project.useCases.map((useCase, index) => (
                       <motion.div 
                         key={index}
                         variants={itemVariants}
-                        className="p-4 border border-white/10 rounded-lg bg-white/5"
+                        className="p-4 border border-white/20 rounded-lg bg-white/5"
                       >
                         <div className="flex items-center mb-2">
-                          <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center mr-3">
+                          <div className="w-8 h-8 rounded-full bg-white/15 flex items-center justify-center mr-3">
                             <span className="text-white font-medium">{index + 1}</span>
                           </div>
                           <p className="text-gray-300">{useCase}</p>
@@ -375,7 +379,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects }) => {
             </motion.section>
           )}
 
-          {/* Updates section (new) */}
+          {/* Updates section */}
           {project.updates && (
             <motion.section
               className="mb-16"
@@ -391,14 +395,14 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects }) => {
                 Updates
               </motion.h2>
               
-              <Card className="bg-white/5 border-white/10 text-white">
+              <Card className="bg-white/5 border-white/20 text-white">
                 <CardContent className="p-6">
                   <div className="space-y-6">
                     {project.updates.map((update, index) => (
                       <motion.div 
                         key={index}
                         variants={itemVariants}
-                        className="p-4 border border-white/10 rounded-lg bg-white/5"
+                        className="p-4 border border-white/20 rounded-lg bg-white/5"
                       >
                         <div className="flex justify-between items-center mb-3">
                           <span className="font-bold text-lg">Version {update.version}</span>
@@ -420,7 +424,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects }) => {
             </motion.section>
           )}
           
-          {/* Tech Stack section - Modernized presentation */}
+          {/* Tech Stack section */}
           {project.techStack && (
             <motion.section
               className="mb-16"
@@ -436,7 +440,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects }) => {
                 Technologien
               </motion.h2>
               
-              <Card className="bg-white/5 border-white/10 text-white">
+              <Card className="bg-white/5 border-white/20 text-white">
                 <CardContent className="p-6">
                   <div className="flex flex-wrap gap-3 mb-6">
                     {project.techStack.map((tech, index) => (
@@ -452,7 +456,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects }) => {
                     ))}
                   </div>
                   
-                  <Separator className="my-6 bg-white/10" />
+                  <Separator className="my-6 bg-white/20" />
                   
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div>
@@ -497,6 +501,68 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects }) => {
               </Card>
             </motion.section>
           )}
+          
+          {/* Neu: Dokumentation / Spezifikationen */}
+          <motion.section
+            className="mb-16"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            <motion.h2
+              variants={itemVariants}
+              className="text-2xl font-bold mb-6 flex items-center"
+            >
+              <ExternalLink className="mr-3 text-white" size={20} />
+              Dokumentation
+            </motion.h2>
+            
+            <Card className="bg-white/5 border-white/20 text-white">
+              <CardContent className="p-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <motion.div 
+                    variants={itemVariants}
+                    className="p-4 border border-white/20 rounded-lg bg-white/5"
+                  >
+                    <h3 className="text-lg font-bold mb-3 text-white">Benutzerhandbuch</h3>
+                    <p className="text-sm text-gray-400 mb-4">
+                      Eine vollständige Anleitung zur Verwendung aller Funktionen dieser Anwendung.
+                      Enthält Tipps zur Optimierung Ihres Workflows.
+                    </p>
+                    <div className="flex justify-end">
+                      <Button 
+                        variant="outline" 
+                        className="flex items-center gap-2 bg-white/10 border-white/20 text-gray-300 hover:bg-white/15"
+                      >
+                        PDF herunterladen
+                        <ArrowRight size={14} />
+                      </Button>
+                    </div>
+                  </motion.div>
+                  
+                  <motion.div 
+                    variants={itemVariants}
+                    className="p-4 border border-white/20 rounded-lg bg-white/5"
+                  >
+                    <h3 className="text-lg font-bold mb-3 text-white">Technische Spezifikation</h3>
+                    <p className="text-sm text-gray-400 mb-4">
+                      Detaillierte technische Informationen zur Architektur und implementierten Features.
+                      Ideal für Entwickler und technisch versierte Benutzer.
+                    </p>
+                    <div className="flex justify-end">
+                      <Button 
+                        variant="outline" 
+                        className="flex items-center gap-2 bg-white/10 border-white/20 text-gray-300 hover:bg-white/15"
+                      >
+                        Spezifikation ansehen
+                        <ArrowRight size={14} />
+                      </Button>
+                    </div>
+                  </motion.div>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.section>
         </div>
       </div>
       
