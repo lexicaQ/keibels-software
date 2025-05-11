@@ -27,9 +27,9 @@ const ModernAboutSection = () => {
               className="relative"
             >
               <img 
-                src="/lovable-uploads/7c16e384-680f-43a0-8341-43bfb6b519e5.jpg" 
+                src="/lovable-uploads/8284c56f-16e0-4dd6-b3a6-353a106bc9cf.png" 
                 alt="Maxim Keibel" 
-                className="rounded-lg shadow-xl w-full max-w-md mx-auto"
+                className="rounded-lg w-full max-w-md mx-auto"
               />
               <div className="absolute -bottom-6 -right-6 w-64 h-64 bg-gray-100 rounded-full blur-3xl opacity-50 -z-10"></div>
               <div className="absolute -top-6 -left-6 w-32 h-32 bg-gray-200 rounded-full blur-2xl opacity-50 -z-10"></div>
@@ -46,7 +46,7 @@ const ModernAboutSection = () => {
               <h2 className="text-3xl lg:text-4xl font-bold mb-3">ÜBER MICH</h2>
               <div className="w-16 h-1 bg-black mb-6"></div>
               
-              <Card className="border-black border shadow-none bg-transparent p-6 mb-8">
+              <Card className="border-black border-2 shadow-none bg-transparent p-6 mb-8">
                 <p className="text-gray-700 mb-4">
                   Hallo, ich bin Maxim Keibel, ein leidenschaftlicher Softwareentwickler mit Fokus auf iOS und macOS Anwendungen. 
                   Mit einer Kombination aus technischem Know-how und Liebe zum Detail erschaffe ich digitale Lösungen, die nicht 
@@ -84,7 +84,7 @@ const ModernAboutSection = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, delay: 0.5 }}
                     viewport={{ once: true }}
-                    className="group inline-flex items-center text-sm font-medium text-black border border-black px-5 py-2.5 rounded-lg hover:bg-black hover:text-white transition-all duration-300"
+                    className="group inline-flex items-center text-sm font-medium text-black border-2 border-black px-5 py-2.5 rounded-lg hover:bg-black hover:text-white transition-all duration-300"
                   >
                     Mehr über mich erfahren
                     <ArrowRight 

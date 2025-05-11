@@ -8,6 +8,7 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { useIsMobile } from '../hooks/use-mobile';
+import { Helmet } from 'react-helmet-async';
 
 const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -22,30 +23,6 @@ const Index = () => {
     }, 800);
 
     return () => clearTimeout(timer);
-  }, []);
-
-  // Update meta tags for SEO optimization
-  useEffect(() => {
-    document.title = "KEIBEL SOFTWARE | Premium Web & App Entwicklung";
-    
-    const metaTags = [
-      { name: "description", content: "Professionelle Software-Entwicklung von Maxim Keibel. Moderne Webanwendungen, Apps und kreative digitale Lösungen für Ihr Unternehmen." },
-      { property: "og:title", content: "KEIBEL SOFTWARE | Premium Web & App Entwicklung" },
-      { property: "og:description", content: "Innovative digitale Lösungen, moderne Webanwendungen und App-Entwicklung von Maxim Keibel." },
-      { property: "og:image", content: "/lovable-uploads/40fa92db-30b5-4792-8cc6-583ca4e26aa0.png" }
-    ];
-
-    metaTags.forEach(tag => {
-      let metaTag = document.querySelector(`meta[${Object.keys(tag)[0]}="${Object.values(tag)[0]}"]`);
-      if (metaTag) {
-        metaTag.setAttribute('content', tag.content as string);
-      } else {
-        metaTag = document.createElement('meta');
-        metaTag.setAttribute(Object.keys(tag)[0], Object.values(tag)[0] as string);
-        metaTag.setAttribute('content', tag.content as string);
-        document.head.appendChild(metaTag);
-      }
-    });
   }, []);
 
   // Fix for mobile scroll issues
@@ -77,6 +54,22 @@ const Index = () => {
 
   return (
     <div className="min-h-screen overflow-x-hidden bg-white" ref={contentRef}>
+      <Helmet>
+        <title>KEIBEL SOFTWARE | Premium Web & App Entwicklung</title>
+        <meta name="description" content="Professionelle Software-Entwicklung von Maxim Keibel. Moderne Webanwendungen, innovative iOS und macOS Apps und kreative digitale Lösungen für Ihr Unternehmen." />
+        <meta name="keywords" content="App Entwicklung, iOS, macOS, Software, Web Development, Programmierung, Mobile Apps" />
+        <meta property="og:title" content="KEIBEL SOFTWARE | Premium Web & App Entwicklung" />
+        <meta property="og:description" content="Innovative digitale Lösungen, moderne Webanwendungen und App-Entwicklung von Maxim Keibel." />
+        <meta property="og:image" content="/lovable-uploads/40fa92db-30b5-4792-8cc6-583ca4e26aa0.png" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={window.location.href} />
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:title" content="KEIBEL SOFTWARE | Premium Web & App Entwicklung" />
+        <meta property="twitter:description" content="Innovative digitale Lösungen, moderne Webanwendungen und App-Entwicklung von Maxim Keibel." />
+        <meta property="twitter:image" content="/lovable-uploads/40fa92db-30b5-4792-8cc6-583ca4e26aa0.png" />
+        <link rel="canonical" href={window.location.href} />
+      </Helmet>
+      
       <Navbar />
       <HeroSection />
       <ModernAboutSection />

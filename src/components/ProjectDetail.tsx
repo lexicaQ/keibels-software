@@ -11,6 +11,7 @@ import { getProjectImage } from '../utils/projectImages';
 import { Card, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { Button } from '@/components/ui/button';
+import { Helmet } from 'react-helmet-async';
 
 interface Feature {
   icon: string;
@@ -85,6 +86,10 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects }) => {
     );
   }
 
+  // Add SEO metadata for the specific project
+  const metaTitle = `${project.title} | KEIBEL SOFTWARE`;
+  const metaDescription = project.description.substring(0, 160);
+
   // Custom icon mapping function
   const getFeatureIcon = (iconName: string) => {
     switch(iconName) {
@@ -127,6 +132,19 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects }) => {
 
   return (
     <div className="min-h-screen flex flex-col bg-black text-white overflow-x-hidden">
+      <Helmet>
+        <title>{metaTitle}</title>
+        <meta name="description" content={metaDescription} />
+        <meta property="og:title" content={metaTitle} />
+        <meta property="og:description" content={metaDescription} />
+        <meta property="og:image" content={projectImage || "/lovable-uploads/40fa92db-30b5-4792-8cc6-583ca4e26aa0.png"} />
+        <meta property="og:type" content="article" />
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:title" content={metaTitle} />
+        <meta property="twitter:description" content={metaDescription} />
+        <meta property="twitter:image" content={projectImage || "/lovable-uploads/40fa92db-30b5-4792-8cc6-583ca4e26aa0.png"} />
+      </Helmet>
+
       <Navbar />
       
       <div className="pt-24 pb-20 flex-grow">
@@ -241,8 +259,8 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects }) => {
                 </div>
                 
                 <div className="w-full md:w-2/5 flex items-start justify-center relative">
-                  {/* Fixing the visual bug with an overlay that covers the line */}
-                  <div className="absolute bottom-0 left-0 right-0 h-1 bg-white/5"></div>
+                  {/* Fix for the visual bug - add proper overlay to cover the line */}
+                  <div className="absolute inset-x-0 bottom-0 h-4 bg-white/5 backdrop-blur-xl z-10"></div>
                   
                   <motion.div 
                     className="relative w-full"
@@ -532,7 +550,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects }) => {
                     <div className="flex justify-end">
                       <Button 
                         variant="outline" 
-                        className="flex items-center gap-2 bg-white/10 border-white/20 text-gray-300 hover:bg-white/15"
+                        className="flex items-center gap-2 bg-white/20 border-white/30 text-white hover:bg-white/30"
                       >
                         PDF herunterladen
                         <ArrowRight size={14} />
@@ -552,7 +570,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ projects }) => {
                     <div className="flex justify-end">
                       <Button 
                         variant="outline" 
-                        className="flex items-center gap-2 bg-white/10 border-white/20 text-gray-300 hover:bg-white/15"
+                        className="flex items-center gap-2 bg-white/20 border-white/30 text-white hover:bg-white/30"
                       >
                         Spezifikation ansehen
                         <ArrowRight size={14} />

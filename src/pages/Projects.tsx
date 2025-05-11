@@ -11,6 +11,7 @@ import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardContent, CardFooter } from '@/components/ui/card';
+import { Helmet } from 'react-helmet-async';
 
 const Projects = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -62,6 +63,19 @@ const Projects = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-black text-white">
+      <Helmet>
+        <title>KEIBEL SOFTWARE | Innovative Projekte & App Entwicklung</title>
+        <meta name="description" content="Entdecken Sie meine Softwareprojekte für iOS und macOS. Innovative Apps mit modernster Technologie und benutzerfreundlichem Design." />
+        <meta property="og:title" content="KEIBEL SOFTWARE | Premium App Entwicklung" />
+        <meta property="og:description" content="Innovative App- und Software-Lösungen für iOS und macOS. Moderne Projekte mit Fokus auf Benutzerfreundlichkeit und Design." />
+        <meta property="og:image" content="/lovable-uploads/40fa92db-30b5-4792-8cc6-583ca4e26aa0.png" />
+        <meta property="og:type" content="website" />
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:title" content="KEIBEL SOFTWARE | Premium App Entwicklung" />
+        <meta property="twitter:description" content="Innovative App- und Software-Lösungen für iOS und macOS. Moderne Projekte mit Fokus auf Benutzerfreundlichkeit und Design." />
+        <meta property="twitter:image" content="/lovable-uploads/40fa92db-30b5-4792-8cc6-583ca4e26aa0.png" />
+      </Helmet>
+      
       <Navbar />
       
       <div className="pt-24 pb-20 flex-grow">
@@ -104,7 +118,7 @@ const Projects = () => {
                         <div className="flex justify-between items-center">
                           <div className="flex items-center gap-3">
                             {/* Larger, white icon with better styling */}
-                            <div className="w-12 h-12 bg-white/15 rounded-full flex items-center justify-center backdrop-blur-sm p-2 border border-white/20">
+                            <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm p-2 border border-white/30">
                               {getPlatformIcon(project.platform)}
                             </div>
                             <div>
@@ -113,7 +127,7 @@ const Projects = () => {
                             </div>
                           </div>
                           <div className="flex flex-col items-end gap-2">
-                            <Badge variant="outline" className="bg-white/15 text-white border-white/20">
+                            <Badge variant="outline" className="bg-white/20 text-white border-white/30 px-3 py-1 font-medium">
                               {project.platform}
                             </Badge>
                             <div className="text-xs font-medium text-gray-400 flex items-center gap-1">
@@ -133,16 +147,13 @@ const Projects = () => {
                           
                           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                             {project.highlights?.slice(0, 4).map((highlight, idx) => {
-                              // Trim the highlight if it's too long
-                              const trimmedHighlight = highlight.length > 30 ? 
-                                highlight.substring(0, 30) : highlight;
-                              
+                              // Show full highlights without truncation
                               return (
                                 <div key={idx} className="flex items-center gap-2">
-                                  <div className="w-5 h-5 rounded-full bg-white/15 flex items-center justify-center">
+                                  <div className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center">
                                     <Star className="w-3 h-3 text-white" />
                                   </div>
-                                  <span className="text-sm text-gray-300">{trimmedHighlight}</span>
+                                  <span className="text-sm text-gray-300">{highlight}</span>
                                 </div>
                               );
                             })}
@@ -152,9 +163,7 @@ const Projects = () => {
                         <div className="flex justify-end">
                           <Button 
                             variant="outline" 
-                            className={`flex items-center gap-2 bg-white/10 border-white/20 transition-all duration-300 ${
-                              hoveredProject === project.id ? 'text-white bg-white/20' : 'text-gray-300'
-                            }`}
+                            className="flex items-center gap-2 bg-white/20 border-white/30 text-white hover:bg-white/30 transition-all duration-300"
                           >
                             Projekt ansehen
                             <ArrowRight size={16} className={`transition-transform duration-300 ${
