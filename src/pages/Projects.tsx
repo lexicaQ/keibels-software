@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
@@ -12,18 +11,15 @@ import { Separator } from '@/components/ui/separator';
 import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardContent, CardFooter } from '@/components/ui/card';
 import { Helmet } from 'react-helmet-async';
-
 const Projects = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [hoveredProject, setHoveredProject] = useState<string | null>(null);
-  
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 400);
     return () => clearTimeout(timer);
   }, []);
-  
   if (isLoading) {
     return <LoadingSpinner />;
   }
@@ -56,13 +52,9 @@ const Projects = () => {
 
   // Function to get icon based on platform
   const getPlatformIcon = (platform: string) => {
-    return platform === 'iOS App' ? 
-      <Smartphone className="w-5 h-5 text-white" /> : 
-      <Laptop className="w-5 h-5 text-white" />;
+    return platform === 'iOS App' ? <Smartphone className="w-5 h-5 text-white" /> : <Laptop className="w-5 h-5 text-white" />;
   };
-
-  return (
-    <div className="min-h-screen flex flex-col bg-black text-white">
+  return <div className="min-h-screen flex flex-col bg-black text-white">
       <Helmet>
         <title>KEIBEL SOFTWARE | Innovative Projekte & App Entwicklung</title>
         <meta name="description" content="Entdecken Sie meine Softwareprojekte für iOS und macOS. Innovative Apps mit modernster Technologie und benutzerfreundlichem Design." />
@@ -95,24 +87,10 @@ const Projects = () => {
             <div className="absolute top-20 -left-10 w-60 h-60 bg-white/5 rounded-full blur-[150px] opacity-50"></div>
           </header>
           
-          <motion.div 
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" 
-            variants={containerVariants} 
-            initial="hidden" 
-            animate="visible"
-          >
-            {projectsData.map((project, index) => (
-              <motion.div 
-                key={index} 
-                variants={itemVariants} 
-                className="relative" 
-                onMouseEnter={() => setHoveredProject(project.id)} 
-                onMouseLeave={() => setHoveredProject(null)}
-              >
+          <motion.div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" variants={containerVariants} initial="hidden" animate="visible">
+            {projectsData.map((project, index) => <motion.div key={index} variants={itemVariants} className="relative" onMouseEnter={() => setHoveredProject(project.id)} onMouseLeave={() => setHoveredProject(null)}>
                 <Link to={`/projects/${project.id}`}>
-                  <Card className={`h-full bg-white/5 backdrop-blur-sm border border-white/20 overflow-hidden transition-all duration-500 hover:bg-white/10 hover:border-white/30 shadow-xl ${
-                    hoveredProject === project.id ? 'transform scale-[1.02] shadow-2xl shadow-white/5' : ''
-                  }`}>
+                  <Card className={`h-full bg-white/5 backdrop-blur-sm border border-white/20 overflow-hidden transition-all duration-500 hover:bg-white/10 hover:border-white/30 shadow-xl ${hoveredProject === project.id ? 'transform scale-[1.02] shadow-2xl shadow-white/5' : ''}`}>
                     <CardContent className="p-6">
                       <div className="space-y-6">
                         <div className="flex justify-between items-center">
@@ -127,9 +105,7 @@ const Projects = () => {
                             </div>
                           </div>
                           <div className="flex flex-col items-end gap-2">
-                            <Badge variant="outline" className="bg-white/20 text-white border-white/30 px-3 py-1 font-medium">
-                              {project.platform}
-                            </Badge>
+                            
                             <div className="text-xs font-medium text-gray-400 flex items-center gap-1">
                               <Calendar size={12} />
                               {project.year}
@@ -147,43 +123,33 @@ const Projects = () => {
                           
                           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                             {project.highlights?.slice(0, 4).map((highlight, idx) => {
-                              // Show full highlights without truncation
-                              return (
-                                <div key={idx} className="flex items-center gap-2">
+                          // Show full highlights without truncation
+                          return <div key={idx} className="flex items-center gap-2">
                                   <div className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center">
                                     <Star className="w-3 h-3 text-white" />
                                   </div>
                                   <span className="text-sm text-gray-300">{highlight}</span>
-                                </div>
-                              );
-                            })}
+                                </div>;
+                        })}
                           </div>
                         </div>
                         
                         <div className="flex justify-end">
-                          <Button 
-                            variant="outline" 
-                            className="flex items-center gap-2 bg-white/20 border-white/30 text-white hover:bg-white/30 transition-all duration-300"
-                          >
+                          <Button variant="outline" className="flex items-center gap-2 bg-white/20 border-white/30 text-white hover:bg-white/30 transition-all duration-300">
                             Projekt ansehen
-                            <ArrowRight size={16} className={`transition-transform duration-300 ${
-                              hoveredProject === project.id ? 'transform translate-x-1' : ''
-                            }`} />
+                            <ArrowRight size={16} className={`transition-transform duration-300 ${hoveredProject === project.id ? 'transform translate-x-1' : ''}`} />
                           </Button>
                         </div>
                       </div>
                     </CardContent>
                   </Card>
                 </Link>
-              </motion.div>
-            ))}
+              </motion.div>)}
           </motion.div>
         </div>
       </div>
       
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Projects;
