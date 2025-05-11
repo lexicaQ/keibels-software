@@ -11,7 +11,8 @@ export const CLIENT_ID =
 
 // Function to generate authentication URL
 export const getAuthorizationURL = (redirectURI: string): string => {
-  const authorizationURL = workos.userManagement.getAuthorizationURL({
+  // Updated to use the correct API for authentication URL generation
+  const authorizationURL = workos.sso.getAuthorizationURL({
     clientID: CLIENT_ID,
     provider: 'authkit',
     redirectURI,
