@@ -36,40 +36,38 @@ const Navbar: React.FC = () => {
 
   return (
     <>
-      {/* Logo über der Navbar - zentriert und kompakter */}
-      <div className="w-full flex justify-center bg-black pt-6 pb-3">
+      {/* Logo über der Navbar - zentriert und größer */}
+      <div className="w-full flex justify-center bg-black pt-10 pb-6">
         <Link to="/">
           <img 
             src="/lovable-uploads/40fa92db-30b5-4792-8cc6-583ca4e26aa0.png" 
             alt="KEIBEL SOFTWARE Logo" 
-            className="h-20 w-auto transition-all duration-300 hover:opacity-80"
+            className="h-24 w-auto transition-all duration-300 hover:opacity-80"
           />
         </Link>
       </div>
       
       {/* Navbar mit schwarzem Hintergrund */}
       <nav className="w-full bg-black shadow-lg shadow-black/10 sticky top-0 z-40 border-b border-white/10">
-        <div className="container mx-auto px-4 md:px-6 py-3 flex justify-between items-center">
+        <div className="container mx-auto px-4 md:px-6 py-4 flex justify-center">
           {/* Desktop Menu - zentriert */}
-          <div className="hidden md:flex justify-center w-full">
-            <ul className="flex space-x-16">
-              {navItems.map((item, index) => (
-                <li key={index} className="relative group">
-                  <Link 
-                    to={item.path} 
-                    className="text-white/90 font-medium text-sm uppercase tracking-wider transition-colors duration-300 hover:text-white"
-                  >
-                    {item.title}
-                    <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <ul className="hidden md:flex space-x-16">
+            {navItems.map((item, index) => (
+              <li key={index} className="relative group">
+                <Link 
+                  to={item.path} 
+                  className="text-white/90 font-medium text-sm uppercase tracking-wider transition-colors duration-300 hover:text-white"
+                >
+                  {item.title}
+                  <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
+                </Link>
+              </li>
+            ))}
+          </ul>
 
-          {/* Mobile Menu Button - moved to the right */}
+          {/* Mobile Menu Button */}
           <button 
-            className="md:hidden text-white ml-auto" 
+            className="md:hidden flex items-center text-white"
             onClick={toggleMenu}
             aria-label="Toggle Menu"
           >

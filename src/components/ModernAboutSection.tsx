@@ -1,7 +1,8 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Check, ArrowRight } from 'lucide-react';
+import { Card } from '@/components/ui/card';
+import { Check, Code, Laptop, ArrowRight } from 'lucide-react';
 
 const ModernAboutSection = () => {
   const skills = [
@@ -14,7 +15,7 @@ const ModernAboutSection = () => {
   ];
 
   return (
-    <section id="about" className="py-16 lg:py-20 bg-white">
+    <section id="about" className="py-16 lg:py-24 bg-white">
       <div className="container mx-auto px-4">
         <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 items-center">
           <div className="w-full lg:w-1/2">
@@ -26,7 +27,7 @@ const ModernAboutSection = () => {
               className="relative"
             >
               <img 
-                src="/lovable-uploads/bbb0c50f-bc0c-4cfe-aeff-8b5c288801fd.png" 
+                src="/lovable-uploads/8284c56f-16e0-4dd6-b3a6-353a106bc9cf.png" 
                 alt="Maxim Keibel" 
                 className="rounded-lg w-full max-w-md mx-auto"
               />
@@ -45,7 +46,7 @@ const ModernAboutSection = () => {
               <h2 className="text-3xl lg:text-4xl font-bold mb-3">ÜBER MICH</h2>
               <div className="w-16 h-1 bg-black mb-6"></div>
               
-              <div className="border-2 border-black p-6 mb-8 rounded-lg">
+              <Card className="border-black border-2 shadow-none bg-transparent p-6 mb-8">
                 <p className="text-gray-700 mb-4">
                   Hallo, ich bin Maxim Keibel, ein leidenschaftlicher Softwareentwickler mit Fokus auf iOS und macOS Anwendungen. 
                   Mit einer Kombination aus technischem Know-how und Liebe zum Detail erschaffe ich digitale Lösungen, die nicht 
@@ -56,7 +57,7 @@ const ModernAboutSection = () => {
                   Fähigkeiten erweitert und verfeinert. Ich arbeite mit modernsten Technologien und halte mich stets über neue 
                   Entwicklungen auf dem Laufenden.
                 </p>
-              </div>
+              </Card>
               
               <div className="space-y-5">
                 <h3 className="text-xl font-bold mb-4">Meine Fähigkeiten</h3>
@@ -78,8 +79,7 @@ const ModernAboutSection = () => {
                 </div>
                 
                 <div className="pt-6">
-                  <motion.a
-                    href="/about"
+                  <motion.button
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, delay: 0.5 }}
@@ -91,7 +91,7 @@ const ModernAboutSection = () => {
                       size={16} 
                       className="ml-2 transition-transform duration-300 group-hover:translate-x-1" 
                     />
-                  </motion.a>
+                  </motion.button>
                 </div>
               </div>
             </motion.div>

@@ -87,17 +87,6 @@ const ProjectsSection: React.FC = () => {
     }
   };
 
-  // Function to get platform icon
-  const getPlatformIcon = (platform: string) => {
-    return platform === 'iOS App' ? 
-      <div className="w-6 h-6 bg-white/10 flex items-center justify-center rounded-full">
-        <Smartphone size={12} className="text-white" />
-      </div> : 
-      <div className="w-6 h-6 bg-white/10 flex items-center justify-center rounded-full">
-        <Laptop size={12} className="text-white" />
-      </div>;
-  };
-
   return (
     <section id="projects" className="py-16 bg-black text-white relative overflow-hidden">
       {/* Background effects */}
@@ -112,9 +101,8 @@ const ProjectsSection: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true, margin: "-80px" }}
-          className="text-center"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-3">MEINE PROJEKTE</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-3 text-center">MEINE PROJEKTE</h2>
           <div className="w-16 h-1 bg-white mx-auto mb-6"></div>
           <p className="text-center text-gray-300 max-w-2xl mx-auto mb-10">
             Entdecken Sie meine Sammlung an Premium-Software-Projekten. Jedes Projekt wurde mit besonderem Fokus auf Benutzerfreundlichkeit und technische Innovation entwickelt.
@@ -140,57 +128,67 @@ const ProjectsSection: React.FC = () => {
                 onClick={() => handleProjectClick(project.id)}
                 className="cursor-pointer h-full"
               >
-                <div className={`h-full bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg overflow-hidden transition-all duration-400 flex flex-col hover:shadow-[0_8px_30px_rgba(255,255,255,0.05)] ${
-                  hoveredProject === project.id ? 'transform scale-[1.02] bg-white/8 border-white/20' : ''
+                <div className={`h-full bg-white/5 backdrop-blur-sm border border-black rounded-lg overflow-hidden transition-all duration-400 flex flex-col hover:shadow-[0_8px_30px_rgba(255,255,255,0.05)] ${
+                  hoveredProject === project.id ? 'transform scale-[1.02] bg-white/8' : ''
                 }`}>
                   <div className="p-5 flex flex-col h-full">
                     {/* Platform badge and year */}
                     <div className="flex justify-between items-center mb-5">
-                      <div className="flex items-center gap-2">
-                        {getPlatformIcon(project.platform)}
-                        <span className="text-xs font-medium text-white/80">
-                          {project.platform}
-                        </span>
-                      </div>
-                      <span className="text-xs text-white/60 flex items-center gap-1 border border-white/10 px-2 py-0.5 rounded-full">
-                        <Tag size={10} />
+                      <Badge variant="outline" className="flex items-center gap-1 text-xs font-medium text-white bg-white/8 border-white/15">
+                        {project.platform === 'iOS App' ? 
+                          <Smartphone size={12} className="text-white" /> : 
+                          <Laptop size={12} className="text-white" />
+                        }
+                        {project.platform}
+                      </Badge>
+                      <span className="text-xs text-gray-400 flex items-center gap-1 border border-white/10 px-2 py-0.5 rounded-full">
+                        <Tag size={12} className="text-white" />
                         {project.year}
                       </span>
                     </div>
                     
-                    {/* Project title and icon */}
-                    <div className="mb-3">
-                      <div className="flex items-center gap-2 mb-1">
-                        <div className="w-8 h-8 bg-white/8 rounded-full flex items-center justify-center backdrop-blur-sm border border-white/10">
+                    <div className="flex items-center mb-3">
+                      {/* Project icon */}
+                      <div className="w-10 h-10 bg-white/8 rounded-full flex items-center justify-center mr-3 backdrop-blur-sm border border-white/10">
+                        <div className="text-white">
                           {project.icon}
                         </div>
-                        <h3 className="text-lg font-bold">{project.title}</h3>
                       </div>
-                      <p className="text-sm text-white/70">{project.description}</p>
+                      
+                      {/* Project title */}
+                      <h3 className="text-lg font-bold">{project.title}</h3>
                     </div>
                     
-                    <Separator className="bg-white/10 my-3" />
+                    {/* Project description */}
+                    <p className="text-sm text-white/70 mb-4">{project.description}</p>
                     
-                    {/* Features list - more compact */}
-                    <div className="space-y-2 mb-auto">
+                    {/* Features list */}
+                    <div className="space-y-2 mb-4">
                       <div className="flex items-center text-xs text-white/60">
-                        <div className="w-4 h-4 rounded-full bg-white/10 flex items-center justify-center mr-2">
-                          <Star size={9} className="text-white" />
+                        <div className="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center mr-2">
+                          <Bookmark size={10} className="text-white" />
                         </div>
                         <span>Moderne Benutzeroberfläche</span>
                       </div>
                       <div className="flex items-center text-xs text-white/60">
-                        <div className="w-4 h-4 rounded-full bg-white/10 flex items-center justify-center mr-2">
-                          <Star size={9} className="text-white" />
+                        <div className="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center mr-2">
+                          <Bookmark size={10} className="text-white" />
                         </div>
                         <span>Cloud-Synchronisierung</span>
                       </div>
+                      <div className="flex items-center text-xs text-white/60">
+                        <div className="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center mr-2">
+                          <Bookmark size={10} className="text-white" />
+                        </div>
+                        <span>Regelmäßige Updates</span>
+                      </div>
                     </div>
                     
-                    {/* View details button */}
-                    <div className="pt-4 mt-2 flex items-center justify-between">
+                    <Separator className="bg-white/10 my-3" />
+                    
+                    <div className="pt-2 mt-auto flex items-center justify-between">
                       <span className={`text-xs ${hoveredProject === project.id ? 'text-white' : 'text-white/70'}`}>
-                        Details ansehen
+                        Details anzeigen
                       </span>
                       <ArrowRight 
                         size={14} 
@@ -207,12 +205,14 @@ const ProjectsSection: React.FC = () => {
         <div className="mt-10 text-center">
           <motion.button 
             onClick={() => navigate('/projects')}
-            className="inline-flex items-center px-6 py-2 border border-white/20 rounded-lg transition-all duration-300 hover:bg-white/10 text-sm text-white group"
-            whileHover={{ y: -2 }}
+            className="relative px-6 py-2 border border-black rounded-lg overflow-hidden group transition-all duration-300 hover:bg-white/10 text-sm"
+            whileHover={{ y: -2, boxShadow: "0 8px 20px rgba(255,255,255,0.05)" }}
             transition={{ duration: 0.2 }}
           >
-            Alle Projekte ansehen
-            <ArrowRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform duration-300" />
+            <span className="relative z-10 flex items-center font-medium">
+              Alle Projekte ansehen
+              <ArrowRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform duration-300" />
+            </span>
           </motion.button>
         </div>
       </div>
