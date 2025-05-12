@@ -63,7 +63,7 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <footer ref={containerRef} className="relative bg-black text-white py-20 overflow-hidden">
+    <footer ref={containerRef} className="relative bg-black text-white py-12 md:py-20 overflow-hidden">
       {/* Add subtle separator line */}
       <Separator className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-white/5 via-white/15 to-white/5" />
       
@@ -87,8 +87,8 @@ const Footer: React.FC = () => {
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-5xl mx-auto">
           {/* Logo & Social Links */}
-          <div className="flex flex-col items-center mb-16">
-            <Link to="/" className="mb-10 transition-transform hover:scale-105 duration-300">
+          <div className="flex flex-col items-center mb-10 md:mb-16">
+            <Link to="/" className="mb-8 md:mb-10 transition-transform hover:scale-105 duration-300">
               <img alt="KEIBEL SOFTWARE Logo" className="h-24 w-auto" src="/lovable-uploads/ac1ecae5-610b-48f0-8d7e-3799fd748ceb.png" />
             </Link>
             
@@ -104,7 +104,7 @@ const Footer: React.FC = () => {
           </div>
           
           {/* Navigation Links */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 mb-10 md:mb-16">
             <div className="text-center md:text-left">
               <h3 className="text-lg font-bold mb-6 uppercase tracking-wider">Navigation</h3>
               <ul className="space-y-3">
@@ -164,18 +164,20 @@ const Footer: React.FC = () => {
             </div>
           </div>
           
-          {/* Copyright - now centered on mobile */}
-          <div className="border-t border-white/10 pt-8 pb-4">
-            <div className="flex flex-col md:flex-row justify-between items-center">
-              <p className="text-sm text-white/50 text-center md:text-left">&copy; {new Date().getFullYear()} KEIBEL SOFTWARE. Alle Rechte vorbehalten.</p>
-              <div className="flex space-x-6 mt-4 md:mt-0">
-                <Link to="/privacy" className="text-sm text-white/50 hover:text-white transition-colors">
-                  Datenschutz
-                </Link>
-                <Link to="/imprint" className="text-sm text-white/50 hover:text-white transition-colors">
-                  Impressum
-                </Link>
-              </div>
+          {/* Links before copyright */}
+          <div className="flex justify-center space-x-6 mb-6">
+            <Link to="/privacy" className="text-sm text-white/50 hover:text-white transition-colors">
+              Datenschutz
+            </Link>
+            <Link to="/imprint" className="text-sm text-white/50 hover:text-white transition-colors">
+              Impressum
+            </Link>
+          </div>
+          
+          {/* Copyright - now at the very bottom and smaller */}
+          <div className="border-t border-white/10 pt-4 pb-1">
+            <div className="flex justify-center">
+              <p className="text-xs text-white/40 text-center">&copy; {new Date().getFullYear()} KEIBEL SOFTWARE. Alle Rechte vorbehalten.</p>
             </div>
           </div>
         </div>

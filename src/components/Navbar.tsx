@@ -37,18 +37,17 @@ const Navbar: React.FC = () => {
   return (
     <>
       {/* Logo über der Navbar - zentriert und größer */}
-      <div className="w-full flex justify-between items-center bg-black pt-6 md:pt-10 pb-4 md:pb-6 px-4">
-        <div className="flex-1"></div> {/* Empty div for flex spacing */}
+      <div className="w-full flex justify-between items-center bg-black pt-4 md:pt-10 pb-3 md:pb-6 px-4">
         <Link to="/" className="flex-1 flex justify-center">
           <img 
             src="/lovable-uploads/40fa92db-30b5-4792-8cc6-583ca4e26aa0.png" 
             alt="KEIBEL SOFTWARE Logo" 
-            className="h-16 md:h-24 w-auto transition-all duration-300 hover:opacity-80"
+            className="h-20 md:h-24 w-auto transition-all duration-300 hover:opacity-80"
           />
         </Link>
         
         {/* Mobile Menu Button positioned to the right of the logo */}
-        <div className="flex-1 flex justify-end md:hidden">
+        <div className="absolute right-4 top-1/2 transform -translate-y-1/2 md:hidden">
           <button 
             className="text-white"
             onClick={toggleMenu}

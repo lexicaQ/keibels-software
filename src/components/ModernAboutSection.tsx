@@ -27,7 +27,7 @@ const ModernAboutSection = () => {
               className="relative"
             >
               <img 
-                src="/lovable-uploads/14220a20-ae1e-47f2-89b6-c96175fb0a0b.png" 
+                src="/lovable-uploads/94ada1fe-ff4b-4067-a64a-b203ec86cabd.png" 
                 alt="Maxim Keibel" 
                 className="rounded-lg w-full max-w-md mx-auto object-cover aspect-[4/3]"
               />
