@@ -5,6 +5,7 @@ import Footer from '../components/Footer';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { motion } from 'framer-motion';
 import { Separator } from '@/components/ui/separator';
+import { Helmet } from 'react-helmet-async';
 
 const Privacy = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -22,28 +23,34 @@ const Privacy = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-black text-white">
+      <Helmet>
+        <title>Datenschutzerklärung | KEIBEL SOFTWARE</title>
+        <meta name="description" content="Datenschutzerklärung von KEIBEL SOFTWARE. Erfahren Sie, wie wir mit Ihren Daten umgehen." />
+      </Helmet>
+      
       <Navbar />
       
-      <div className="pt-24 pb-20 flex-grow">
+      <div className="pt-16 md:pt-24 pb-20 flex-grow">
         <div className="container mx-auto px-4 max-w-4xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
+            className="mt-8 md:mt-0"
           >
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">Datenschutzerklärung</h1>
+            <h1 className="text-3xl md:text-5xl font-bold mb-6 hyphens-auto break-words">Datenschutzerklärung</h1>
             
-            <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8 mb-8">
-              <h2 className="text-2xl font-bold mb-4">1. Datenschutz auf einen Blick</h2>
+            <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-4 md:p-8 mb-8">
+              <h2 className="text-xl md:text-2xl font-bold mb-4">1. Datenschutz auf einen Blick</h2>
               
-              <h3 className="text-xl font-bold mb-2">Allgemeine Hinweise</h3>
+              <h3 className="text-lg md:text-xl font-bold mb-2">Allgemeine Hinweise</h3>
               <p className="mb-6">
                 Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen 
                 Daten passiert, wenn Sie diese Website besuchen. Personenbezogene Daten sind alle Daten, mit 
                 denen Sie persönlich identifiziert werden können.
               </p>
               
-              <h3 className="text-xl font-bold mb-2">Datenerfassung auf dieser Website</h3>
+              <h3 className="text-lg md:text-xl font-bold mb-2">Datenerfassung auf dieser Website</h3>
               <p className="mb-6">
                 <strong>Wer ist verantwortlich für die Datenerfassung auf dieser Website?</strong><br />
                 Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. Dessen 
@@ -52,16 +59,16 @@ const Privacy = () => {
               
               <Separator className="my-6 bg-white/10" />
               
-              <h2 className="text-2xl font-bold mb-4">2. Allgemeine Hinweise und Pflichtinformationen</h2>
+              <h2 className="text-xl md:text-2xl font-bold mb-4">2. Allgemeine Hinweise und Pflichtinformationen</h2>
               
-              <h3 className="text-xl font-bold mb-2">Datenschutz</h3>
+              <h3 className="text-lg md:text-xl font-bold mb-2">Datenschutz</h3>
               <p className="mb-6">
                 Die Betreiber dieser Seiten nehmen den Schutz Ihrer persönlichen Daten sehr ernst. Wir behandeln 
                 Ihre personenbezogenen Daten vertraulich und entsprechend der gesetzlichen Datenschutzvorschriften 
                 sowie dieser Datenschutzerklärung.
               </p>
               
-              <h3 className="text-xl font-bold mb-2">Hinweis zur verantwortlichen Stelle</h3>
+              <h3 className="text-lg md:text-xl font-bold mb-2">Hinweis zur verantwortlichen Stelle</h3>
               <p className="mb-6">
                 Die verantwortliche Stelle für die Datenverarbeitung auf dieser Website ist:<br /><br />
                 
@@ -76,16 +83,16 @@ const Privacy = () => {
               
               <Separator className="my-6 bg-white/10" />
               
-              <h2 className="text-2xl font-bold mb-4">3. Datenerfassung auf dieser Website</h2>
+              <h2 className="text-xl md:text-2xl font-bold mb-4">3. Datenerfassung auf dieser Website</h2>
               
-              <h3 className="text-xl font-bold mb-2">Cookies</h3>
+              <h3 className="text-lg md:text-xl font-bold mb-2">Cookies</h3>
               <p className="mb-6">
                 Unsere Internetseiten verwenden so genannte „Cookies". Cookies sind kleine Textdateien und richten 
                 auf Ihrem Endgerät keinen Schaden an. Sie werden entweder vorübergehend für die Dauer einer Sitzung 
                 (Session-Cookies) oder dauerhaft (permanente Cookies) auf Ihrem Endgerät gespeichert.
               </p>
               
-              <h3 className="text-xl font-bold mb-2">Server-Log-Dateien</h3>
+              <h3 className="text-lg md:text-xl font-bold mb-2">Server-Log-Dateien</h3>
               <p className="mb-6">
                 Der Provider der Seiten erhebt und speichert automatisch Informationen in so genannten 
                 Server-Log-Dateien, die Ihr Browser automatisch an uns übermittelt. Dies sind:
@@ -104,7 +111,7 @@ const Privacy = () => {
               
               <Separator className="my-6 bg-white/10" />
               
-              <h2 className="text-2xl font-bold mb-4">4. Kontaktformular</h2>
+              <h2 className="text-xl md:text-2xl font-bold mb-4">4. Kontaktformular</h2>
               <p className="mb-6">
                 Wenn Sie uns per Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben aus dem 
                 Anfrageformular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der 
@@ -112,7 +119,7 @@ const Privacy = () => {
                 ohne Ihre Einwilligung weiter.
               </p>
               
-              <h2 className="text-2xl font-bold mb-4">5. Ihre Rechte</h2>
+              <h2 className="text-xl md:text-2xl font-bold mb-4">5. Ihre Rechte</h2>
               <p className="mb-6">
                 Sie haben das Recht, jederzeit Auskunft über Ihre bei uns gespeicherten personenbezogenen 
                 Daten zu erhalten. Ebenso haben Sie das Recht auf Berichtigung, Sperrung oder, abgesehen von 

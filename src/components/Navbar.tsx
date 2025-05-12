@@ -37,17 +37,29 @@ const Navbar: React.FC = () => {
   return (
     <>
       {/* Logo über der Navbar - zentriert und größer */}
-      <div className="w-full flex justify-center bg-black pt-6 md:pt-10 pb-4 md:pb-6">
-        <Link to="/">
+      <div className="w-full flex justify-between items-center bg-black pt-6 md:pt-10 pb-4 md:pb-6 px-4">
+        <div className="flex-1"></div> {/* Empty div for flex spacing */}
+        <Link to="/" className="flex-1 flex justify-center">
           <img 
             src="/lovable-uploads/40fa92db-30b5-4792-8cc6-583ca4e26aa0.png" 
             alt="KEIBEL SOFTWARE Logo" 
             className="h-16 md:h-24 w-auto transition-all duration-300 hover:opacity-80"
           />
         </Link>
+        
+        {/* Mobile Menu Button positioned to the right of the logo */}
+        <div className="flex-1 flex justify-end md:hidden">
+          <button 
+            className="text-white"
+            onClick={toggleMenu}
+            aria-label="Toggle Menu"
+          >
+            {isOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
       
-      {/* Navbar mit schwarzem Hintergrund */}
+      {/* Navbar with black background */}
       <nav className="w-full bg-black shadow-lg shadow-black/10 sticky top-0 z-40 border-b border-white/10">
         <div className="container mx-auto px-4 md:px-6 py-4 flex justify-between md:justify-center">
           {/* Desktop Menu - zentriert */}
@@ -64,15 +76,6 @@ const Navbar: React.FC = () => {
               </li>
             ))}
           </ul>
-
-          {/* Mobile Menu Button */}
-          <button 
-            className="md:hidden flex items-center text-white"
-            onClick={toggleMenu}
-            aria-label="Toggle Menu"
-          >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
         </div>
       </nav>
       

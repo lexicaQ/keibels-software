@@ -18,7 +18,7 @@ const ModernAboutSection = () => {
     <section id="about" className="py-16 lg:py-24 bg-white">
       <div className="container mx-auto px-4">
         <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 items-center">
-          <div className="w-full lg:w-1/2">
+          <div className="w-full lg:w-1/2 hidden md:block">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
