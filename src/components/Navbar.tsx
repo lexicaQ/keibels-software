@@ -37,19 +37,19 @@ const Navbar: React.FC = () => {
   return (
     <>
       {/* Logo über der Navbar - zentriert und größer */}
-      <div className="w-full flex justify-center bg-black pt-10 pb-6">
+      <div className="w-full flex justify-center bg-black pt-6 md:pt-10 pb-4 md:pb-6">
         <Link to="/">
           <img 
             src="/lovable-uploads/40fa92db-30b5-4792-8cc6-583ca4e26aa0.png" 
             alt="KEIBEL SOFTWARE Logo" 
-            className="h-24 w-auto transition-all duration-300 hover:opacity-80"
+            className="h-16 md:h-24 w-auto transition-all duration-300 hover:opacity-80"
           />
         </Link>
       </div>
       
       {/* Navbar mit schwarzem Hintergrund */}
       <nav className="w-full bg-black shadow-lg shadow-black/10 sticky top-0 z-40 border-b border-white/10">
-        <div className="container mx-auto px-4 md:px-6 py-4 flex justify-center">
+        <div className="container mx-auto px-4 md:px-6 py-4 flex justify-between md:justify-center">
           {/* Desktop Menu - zentriert */}
           <ul className="hidden md:flex space-x-16">
             {navItems.map((item, index) => (

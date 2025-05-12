@@ -50,7 +50,7 @@ const HeroSection: React.FC = () => {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-black text-white overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center bg-black text-white overflow-hidden pt-4 md:pt-10">
       {/* Enhanced soft-blurred white circle elements */}
       <div className="absolute w-full h-full overflow-hidden">
         {/* Larger, more prominent blurry elements */}
@@ -83,18 +83,18 @@ const HeroSection: React.FC = () => {
         />
       ))}
 
-      <div ref={containerRef} className="relative w-full max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-16 items-center">
+      <div ref={containerRef} className="relative w-full max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-12 md:gap-16 items-center mt-8 md:mt-16">
         <div className="relative z-10">
-          <h1 className="text-5xl md:text-7xl font-bold mb-8 animate-fade-in tracking-tight">
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 md:mb-8 animate-fade-in tracking-tight">
             MAXIM KEIBEL
           </h1>
-          <p className="text-xl md:text-2xl mb-4 text-gray-300 animate-fade-in-delayed tracking-wide">
+          <p className="text-xl md:text-2xl mb-3 md:mb-4 text-gray-300 animate-fade-in-delayed tracking-wide">
             Software Developer | UI/UX Designer | App Creator
           </p>
-          <p className="text-gray-400 mb-10 animate-fade-in-delayed">
+          <p className="text-gray-400 mb-8 md:mb-10 animate-fade-in-delayed">
             Kreative Lösungen für moderne Herausforderungen
           </p>
-          <div className="flex flex-wrap gap-6 animate-fade-in-delayed">
+          <div className="flex flex-wrap gap-4 md:gap-6 animate-fade-in-delayed">
             <Link to="#projects" className="glass-button group">
               <span className="relative z-10 flex items-center">
                 Projekte ansehen

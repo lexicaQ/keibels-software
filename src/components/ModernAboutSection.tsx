@@ -27,9 +27,9 @@ const ModernAboutSection = () => {
               className="relative"
             >
               <img 
-                src="/lovable-uploads/8284c56f-16e0-4dd6-b3a6-353a106bc9cf.png" 
+                src="/lovable-uploads/14220a20-ae1e-47f2-89b6-c96175fb0a0b.png" 
                 alt="Maxim Keibel" 
-                className="rounded-lg w-full max-w-md mx-auto"
+                className="rounded-lg w-full max-w-md mx-auto object-cover aspect-[4/3]"
               />
               <div className="absolute -bottom-6 -right-6 w-64 h-64 bg-gray-100 rounded-full blur-3xl opacity-50 -z-10"></div>
               <div className="absolute -top-6 -left-6 w-32 h-32 bg-gray-200 rounded-full blur-2xl opacity-50 -z-10"></div>

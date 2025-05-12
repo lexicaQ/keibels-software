@@ -1,3 +1,4 @@
+
 import React, { useRef, useEffect } from 'react';
 import { Linkedin, Github, Mail, Phone, MapPin } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -163,10 +164,10 @@ const Footer: React.FC = () => {
             </div>
           </div>
           
-          {/* Copyright */}
+          {/* Copyright - now centered on mobile */}
           <div className="border-t border-white/10 pt-8 pb-4">
             <div className="flex flex-col md:flex-row justify-between items-center">
-              <p className="text-sm text-white/50">&copy; {new Date().getFullYear()} KEIBEL SOFTWARE. Alle Rechte vorbehalten.</p>
+              <p className="text-sm text-white/50 text-center md:text-left">&copy; {new Date().getFullYear()} KEIBEL SOFTWARE. Alle Rechte vorbehalten.</p>
               <div className="flex space-x-6 mt-4 md:mt-0">
                 <Link to="/privacy" className="text-sm text-white/50 hover:text-white transition-colors">
                   Datenschutz
