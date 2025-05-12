@@ -42,20 +42,18 @@ const Navbar: React.FC = () => {
           <img 
             src="/lovable-uploads/40fa92db-30b5-4792-8cc6-583ca4e26aa0.png" 
             alt="KEIBEL SOFTWARE Logo" 
-            className="h-20 md:h-24 w-auto transition-all duration-300 hover:opacity-80"
+            className="h-24 md:h-24 w-auto transition-all duration-300 hover:opacity-80"
           />
         </Link>
         
-        {/* Mobile Menu Button positioned to the right of the logo */}
-        <div className="absolute right-4 top-1/2 transform -translate-y-1/2 md:hidden">
-          <button 
-            className="text-white"
-            onClick={toggleMenu}
-            aria-label="Toggle Menu"
-          >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
+        {/* Mobile Menu Button positioned on the right side aligned with logo */}
+        <button 
+          className="absolute right-4 top-[36px] md:hidden text-white"
+          onClick={toggleMenu}
+          aria-label="Toggle Menu"
+        >
+          {isOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
       </div>
       
       {/* Navbar with black background */}
