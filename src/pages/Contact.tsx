@@ -1,9 +1,10 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { Phone, Mail, MapPin, Linkedin, Clock } from 'lucide-react';
+import Spline from '@splinetool/react-spline';
 
 const Contact = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -125,6 +126,13 @@ const Contact = () => {
                 E-Mail schreiben
               </a>
             </div>
+          </div>
+          
+          {/* Spline 3D Animation */}
+          <div className="mt-12 h-[500px] w-full">
+            <Suspense fallback={<div className="w-full h-full flex items-center justify-center">Loading 3D model...</div>}>
+              <Spline scene="https://prod.spline.design/6eTbloMTV9rUOp0o/scene.splinecode" />
+            </Suspense>
           </div>
         </div>
       </div>

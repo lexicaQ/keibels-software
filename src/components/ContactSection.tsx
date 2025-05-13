@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, Phone, MapPin, Linkedin, Clock, ExternalLink, Calendar, Headphones } from 'lucide-react';
+import { Mail, Phone, MapPin, Linkedin, Clock, ExternalLink, Calendar, Headphones, Model } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
@@ -96,11 +96,16 @@ const ContactSection: React.FC = () => {
               </div>
             </div>
             
-            <Link to="/contact" className="inline-block">
-              <Button className="bg-black text-white border border-black hover:bg-white hover:text-black transition-all duration-300 px-5">
-                Details ansehen
-              </Button>
-            </Link>
+            <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+              <Link to="/contact" className="inline-block">
+                <Button className="bg-black text-white border border-black hover:bg-white hover:text-black transition-all duration-300 px-5">
+                  Details ansehen
+                </Button>
+              </Link>
+              <p className="text-sm text-gray-600 italic">
+                <span className="hidden sm:inline">•</span> Interaktives 3D-Modell auf der Kontaktseite verfügbar
+              </p>
+            </div>
           </motion.div>
           
           <motion.div 
