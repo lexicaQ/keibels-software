@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, Suspense } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -109,8 +110,14 @@ const Contact = () => {
               </div>
             </div>
           </div>
-          
-          <div className="bg-white rounded-xl p-8 shadow-lg border border-black">
+        </div>
+      </div>
+      
+      {/* New black background section */}
+      <div className="bg-black py-12">
+        <div className="container mx-auto px-4">
+          {/* White container with padding */}
+          <div className="bg-white rounded-xl p-8 shadow-lg border border-black mb-12">
             <h2 className="text-2xl font-bold mb-4">Lass uns zusammenarbeiten!</h2>
             <p className="text-gray-700 mb-4">
               Ich freue mich auf spannende Projekte und neue Herausforderungen. 
@@ -128,7 +135,7 @@ const Contact = () => {
           </div>
           
           {/* Spline 3D Animation with black background */}
-          <div className="mt-12 h-[500px] w-full bg-black rounded-xl overflow-hidden">
+          <div className="h-[500px] w-full rounded-xl overflow-hidden">
             <Suspense fallback={<div className="w-full h-full flex items-center justify-center bg-black text-white">Loading 3D model...</div>}>
               <Spline scene="https://prod.spline.design/6eTbloMTV9rUOp0o/scene.splinecode" />
             </Suspense>
