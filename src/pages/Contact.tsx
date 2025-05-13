@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, Suspense } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -128,9 +127,9 @@ const Contact = () => {
             </div>
           </div>
           
-          {/* Spline 3D Animation */}
-          <div className="mt-12 h-[500px] w-full">
-            <Suspense fallback={<div className="w-full h-full flex items-center justify-center">Loading 3D model...</div>}>
+          {/* Spline 3D Animation with black background */}
+          <div className="mt-12 h-[500px] w-full bg-black rounded-xl overflow-hidden">
+            <Suspense fallback={<div className="w-full h-full flex items-center justify-center bg-black text-white">Loading 3D model...</div>}>
               <Spline scene="https://prod.spline.design/6eTbloMTV9rUOp0o/scene.splinecode" />
             </Suspense>
           </div>

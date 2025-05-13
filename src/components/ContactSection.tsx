@@ -103,7 +103,7 @@ const ContactSection: React.FC = () => {
                 </Button>
               </Link>
               <p className="text-sm text-gray-600 italic">
-                <span className="hidden sm:inline">•</span> Interaktives 3D-Modell auf der Kontaktseite verfügbar
+                <span className="hidden sm:inline">•</span> Interaktives 3D-Modell mit schwarzem Hintergrund auf der Kontaktseite verfügbar
               </p>
             </div>
           </motion.div>
