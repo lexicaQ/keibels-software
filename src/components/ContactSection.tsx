@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, Phone, MapPin, Linkedin, Clock, ExternalLink, Calendar, Headphones, Model } from 'lucide-react';
+import { Mail, Phone, MapPin, Linkedin, Clock, ExternalLink, Calendar, Headphones } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
